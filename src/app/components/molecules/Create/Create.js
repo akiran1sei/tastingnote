@@ -241,7 +241,7 @@ export function BeansCreate(context) {
             </div>
             <div className={styles.edit_item_value_box}>
               <label htmlFor="group-name" className={styles.edit_item_title}>
-                Group Name:
+                Group
               </label>
               <select
                 name="group-name"
@@ -259,7 +259,7 @@ export function BeansCreate(context) {
             {/* 選択式 */}
             <div className={`${styles.edit_item} ${styles.edit_username}`}>
               <label htmlFor="username" className={styles.edit_item_title}>
-                username
+                user
               </label>
               <div className={styles.edit_item_value_box}>
                 <input
