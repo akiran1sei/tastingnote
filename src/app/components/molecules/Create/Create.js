@@ -278,9 +278,7 @@ export function BeansCreate(context) {
             </div>
             <div className={`${styles.edit_item} ${styles.edit_coffee}`}>
               <label htmlFor="coffee" className={styles.edit_item_title}>
-                1：coffee beans <br />
-                or <br />
-                numbers
+                1：beans
                 {/* 珈琲豆 or 番号 */}
               </label>
               <div className={styles.edit_item_value_box}>
@@ -1462,7 +1460,7 @@ export function BeansCreate(context) {
             </div>
             <div className={`${styles.edit_item} ${styles.edit_impression}`}>
               <label htmlFor="impression" className={styles.edit_item_title}>
-                14：味の印象
+                14：Impression
               </label>
               <div
                 className={
