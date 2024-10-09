@@ -945,10 +945,10 @@ span.select_checkbox {
 }
 .edit_list_header {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
 }
 .edit_date {
   display: block;
