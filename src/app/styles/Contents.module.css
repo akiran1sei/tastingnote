@@ -970,7 +970,9 @@ span.select_checkbox {
   margin-top: 3rem;
 }
 .edit_item_message {
-  width: 100%;
+  width: 95%;
+  /*　field-sizing: content; は、未対応のブラウザーがある為コメントアウト  */
+  /* field-sizing: content; */
 }
 .edit_input_date {
   width: 150px;

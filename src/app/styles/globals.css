@@ -179,6 +179,7 @@ label {
   font-size: inherit;
   display: inline-block;
   vertical-align: middle;
+  font-weight: bold;
 }
 textarea {
   font-size: inherit;

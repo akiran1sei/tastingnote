@@ -234,7 +234,9 @@ export function BeansCreateTable(context) {
         <form onSubmit={handleSubmit}>
           <div className={styles.edit_table}>
             <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>Date</div>
+              <div className={styles.edit_table_data_header}>
+                <label>Date</label>
+              </div>
               <div className={styles.edit_table_data}>{date}</div>
             </div>
             <div className={styles.edit_table_row}>
@@ -866,7 +868,9 @@ export function BeansCreateTable(context) {
               </div>
             </div>
             <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>Impression</div>
+              <div className={styles.edit_table_data_header}>
+                <label htmlFor="impression">Impression</label>
+              </div>
               <div className={styles.edit_table_data}>
                 <textarea
                   className={styles.edit_item_message}
