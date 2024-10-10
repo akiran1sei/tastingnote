@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
-import { cookies } from "next/headers";
-
-//middlewareファイルを使用するときは、ファイル名を”middleware.js”に修正すること！
+// import { cookies } from "next/headers";
 
 export async function middleware(request) {
   const token = request.cookies.get("token")?.value;
@@ -20,15 +18,14 @@ export async function middleware(request) {
 
     // トークンの有効期限が切れている場合
     if (payload.exp && payload.exp < currentTimestamp) {
-      // console.log("tokenが切れてますよ＿");
-      // トークンの有効期限が切れている場合
-      cookies().delete("token", {
-        httpOnly: true,
-        secure: true,
-        sameSite: "strict",
-      });
+      console.log("Token has expired");
 
-      return NextResponse.redirect(redirectToLogout(request));
+      // トークンの削除をここで行う
+      const response = NextResponse.redirect(
+        new URL("/pages/auth/signout", request.url)
+      );
+      response.cookies.delete("token");
+      return response;
     }
 
     // トークンが有効な場合、リクエストを続行
@@ -39,10 +36,9 @@ export async function middleware(request) {
     return redirectToLogout(request);
   }
 }
-async function redirectToLogout(request) {
-  const logoutUrl = new URL("/pages/auth/signout", request.url);
 
-  return NextResponse.redirect(logoutUrl);
+function redirectToLogout(request) {
+  return NextResponse.redirect(new URL("/pages/auth/signout", request.url));
 }
 
 // このミドルウェアを適用するパスを指定
@@ -53,9 +49,5 @@ export const config = {
     `/pages/create/:path*`,
     `/pages/update/:path*`,
     `/pages/auth/profile`,
-    /*
-     * 認証が必要なルートをここに追加
-     * 例: '/dashboard', '/profile/:path*'
-     */
   ],
 };
