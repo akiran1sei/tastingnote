@@ -232,7 +232,6 @@ export function BeansCreate(context) {
   return (
     <>
       <h1 className={styles.contents_title}>CREATE</h1>
-
       <div className={styles.edit_contents}>
         <form onSubmit={handleSubmit}>
           <div className={styles.edit_list_header}>

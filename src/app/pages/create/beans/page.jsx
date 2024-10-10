@@ -4,6 +4,7 @@ import styles from "@/app/styles/Contents.module.css";
 import { BeansCreate } from "@/app/components/molecules/Create/Create";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
+import { BeansCreateTable } from "@/app/components/molecules/Create/Create_table";
 const tags = ["group-choice"]; // データソースのタグ
 const BeansCreatePage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -32,7 +33,8 @@ const BeansCreatePage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <BeansCreate data={data} />
+      {/* <BeansCreate data={data} /> */}
+      <BeansCreateTable data={data} />
     </>
   ) : (
     <div className={styles.sign_off_page}>

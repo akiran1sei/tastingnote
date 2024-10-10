@@ -901,6 +901,7 @@ span.select_checkbox {
 }
 
 .edit_contents {
+  width: 100%;
   display: block;
 }
 .edit_list {
@@ -1042,6 +1043,7 @@ span.select_checkbox {
   height: auto;
   border: 1px solid;
   vertical-align: baseline;
+  border: none;
 }
 .edit_basic {
   color: var(--color-black);
@@ -1090,6 +1092,7 @@ span.select_checkbox {
   text-align: center;
   margin: 0.5rem;
   background: var(--color-white);
+  border: none;
 }
 
 .edit_btn_box {
@@ -1124,6 +1127,74 @@ span.select_checkbox {
   padding: 0;
 }
 
+/* ----------edit_table---------- */
+.edit_table {
+  width: 100%;
+  max-width: 500px;
+  min-width: 300px;
+  margin: 0 auto;
+}
+.edit_table_thead {
+}
+.edit_table_row {
+}
+.edit_table_header {
+}
+.edit_table_header_item {
+  background: #c47817;
+  color: var(--color-white);
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.edit_table_header_value {
+  background: #c47817;
+  color: var(--color-white);
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.edit_table_tbody {
+}
+.edit_table_row {
+  line-height: 3rem;
+}
+
+.edit_table_data {
+  text-align: center;
+  color: var(--color-black);
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 2px solid #808080;
+}
+.table_aroma {
+  width: 100%;
+}
+.table_aroma_row {
+}
+.table_aroma_data {
+  padding: 0;
+  border: none;
+}
+.table_aroma_data select {
+  width: 100%;
+}
+.edit_table_data_header {
+  width: auto;
+  max-width: 150px;
+  min-width: auto;
+  text-align: center;
+  background: #f4a460;
+  color: var(--color-white);
+  padding: 0.5rem;
+  border-radius: 10px;
+}
+.edit_table_data_header label {
+}
+.edit_table_data input {
+  max-width: 180px;
+}
+.edit_table_data select {
+  max-width: 180px;
+}
 /* 
 
 
