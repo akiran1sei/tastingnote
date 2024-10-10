@@ -1033,9 +1033,9 @@ span.select_checkbox {
 }
 .edit_defects_calc {
   width: 90%;
-  margin: 0 auto;
+  margin: 1rem auto;
   border: 2px solid var(--color-black);
-  padding: 0 1rem 1rem;
+  padding: 1rem;
 }
 
 .edit_defects_answer {
@@ -1130,18 +1130,19 @@ span.select_checkbox {
 /* ----------edit_table---------- */
 .edit_table {
   width: 100%;
-  max-width: 500px;
+  max-width: 768px;
   min-width: 300px;
   margin: 0 auto;
   background: var(--color-white);
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-yellow-10);
 }
-.edit_table_thead {
-}
-.edit_table_row {
-}
-.edit_table_header {
-}
+
 .edit_table_header_item {
   background: #c47817;
   color: var(--color-white);
@@ -1154,39 +1155,64 @@ span.select_checkbox {
   padding: 0.5rem;
   border-radius: 10px;
 }
-.edit_table_tbody {
-}
+
 .edit_table_row {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
   line-height: 3rem;
+  margin: 2rem 0;
+  border-radius: 10px;
+  background: var(--color-white);
 }
 
 .edit_table_data {
+  width: 100%;
   text-align: center;
   color: var(--color-black);
-  padding: 0.5rem;
+  padding: 1rem 0;
   border-radius: 10px;
-  border: 2px solid #808080;
 }
 .table_aroma {
   width: 100%;
 }
-.table_aroma_row {
-}
+
 .table_aroma_data {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   border: none;
+  margin: 0.5rem;
+}
+.table_aroma_row {
+  display: flex;
+  flex-direction: row;
+}
+.table_aroma_data label {
+  width: 100%;
 }
 .table_aroma_data select {
   padding: 0.5rem;
   width: 100%;
 }
+.table_aroma_data_header {
+  width: 100%;
+  height: 1.5em;
+}
 .edit_table_data_header {
-  width: auto;
-  max-width: 150px;
-  min-width: auto;
+  width: 100%;
+  max-width: 100px;
+  min-width: 100px;
   text-align: center;
-  background: #f4a460;
-  color: var(--color-white);
+
+  color: var(--color-black);
   padding: 0.5rem;
   border-radius: 10px;
 }
