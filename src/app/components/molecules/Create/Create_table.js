@@ -47,34 +47,31 @@ export function BeansCreateTable(context) {
   const [coffee, setCoffee] = useState("");
   const [roast, setRoast] = useState("50");
   const [roastDegree, setRoastDegree] = useState();
-  const [roastMessage, setRoastMessage] = useState("");
+
   const [aromaDryStrength, setAromaDryStrength] = useState("");
   const [aromaCrustStrength, setAromaCrustStrength] = useState("");
   const [aromaBreakStrength, setAromaBreakStrength] = useState("");
   const [aromaDryQuality, setAromaDryQuality] = useState("");
   const [aromaCrustQuality, setAromaCrustQuality] = useState("");
   const [aromaBreakQuality, setAromaBreakQuality] = useState("");
-  const [aromaMessage, setAromaMessage] = useState("");
   const [defects, setDefects] = useState("0");
   const [point, setPoint] = useState("0");
   const [score, setScore] = useState("0");
-  const [defectsMessage, setDefectsMessage] = useState("");
+
   const [cleancap, setCleancap] = useState("");
-  const [cleancapMessage, setCleancapMessage] = useState("");
   const [sweet, setSweet] = useState("");
-  const [sweetMessage, setSweetMessage] = useState("");
   const [acidity, setAcidity] = useState("");
-  const [acidityMessage, setAcidityMessage] = useState("");
+
   const [acidityStrength, setAcidityStrength] = useState("");
   const [mouthfeel, setMouthfeel] = useState("");
-  const [mouthfeelMessage, setMouthfeelMessage] = useState("");
+
   const [bodyStrength, setBodyStrength] = useState("");
   const [flavor, setFlavor] = useState("");
-  const [flavorMessage, setFlavorMessage] = useState("");
+
   const [after, setAfter] = useState("");
   const [afterMessage, setAfterMessage] = useState("");
   const [balance, setBalance] = useState("");
-  const [balanceMessage, setBalanceMessage] = useState("");
+  const [Memo, setMemo] = useState("");
   const [overall, setOverall] = useState("");
   const [error, setError] = useState("");
   const [impression, setImpression] = useState("");
@@ -174,32 +171,32 @@ export function BeansCreateTable(context) {
             coffee: coffee,
             roast: roast,
             roastDegree: roastDegree,
-            roastMessage: roastMessage,
+
             aromaDryStrength: aromaDryStrength,
             aromaCrustStrength: aromaCrustStrength,
             aromaBreakStrength: aromaBreakStrength,
             aromaDryQuality: aromaDryQuality,
             aromaCrustQuality: aromaCrustQuality,
             aromaBreakQuality: aromaBreakQuality,
-            aromaMessage: aromaMessage,
+
             defects: point * score * 4,
-            defectsMessage: defectsMessage,
+
             cleancap: cleancap,
-            cleancapMessage: cleancapMessage,
+
             sweet: sweet,
-            sweetMessage: sweetMessage,
+
             acidity: acidity,
-            acidityMessage: acidityMessage,
+
             acidityStrength: acidityStrength,
             mouthfeel: mouthfeel,
-            mouthfeelMessage: mouthfeelMessage,
+
             bodyStrength: bodyStrength,
             flavor: flavor,
-            flavorMessage: flavorMessage,
+            Memo: Memo,
             after: after,
             afterMessage: afterMessage,
             balance: balance,
-            balanceMessage: balanceMessage,
+
             overall: overall,
             total: Number(sum) + Number(36),
             result: sum,
@@ -877,6 +874,18 @@ export function BeansCreateTable(context) {
                   id="impression"
                   value={impression}
                   onChange={(e) => setImpression(e.target.value)}
+                ></textarea>
+              </div>
+            </div>
+            <div className={styles.edit_table_row}>
+              <div className={styles.edit_table_data}>
+                <textarea
+                  className={styles.edit_item_message}
+                  name="memo"
+                  id="memo"
+                  value={Memo}
+                  placeholder="ご自由にご記入ください。"
+                  onChange={(e) => setMemo(e.target.value)}
                 ></textarea>
               </div>
             </div>
