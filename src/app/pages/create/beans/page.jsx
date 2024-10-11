@@ -4,7 +4,7 @@ import styles from "@/app/styles/Contents.module.css";
 import { BeansCreate } from "@/app/components/molecules/Create/Create";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
-import { BeansCreateTable } from "@/app/components/molecules/Create/Create_table";
+import { BeansCreateTable } from "@/app/components/molecules/Create/Create_ver-2";
 const tags = ["group-choice"]; // データソースのタグ
 const BeansCreatePage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
