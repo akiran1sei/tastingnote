@@ -12,32 +12,24 @@ export async function POST(request) {
     coffee: body.coffee,
     roast: body.roast,
     roastDegree: body.roastDegree,
-    roastMessage: body.roastMessage,
+
     aromaDryStrength: body.aromaDryStrength,
     aromaCrustStrength: body.aromaCrustStrength,
     aromaBreakStrength: body.aromaBreakStrength,
     aromaDryQuality: body.aromaDryQuality,
     aromaCrustQuality: body.aromaCrustQuality,
     aromaBreakQuality: body.aromaBreakQuality,
-    aromaMessage: body.aromaMessage,
     defects: body.defects,
-    defectsMessage: body.defectsMessage,
     cleancap: body.cleancap,
-    cleancapMessage: body.cleancapMessage,
     sweet: body.sweet,
-    sweetMessage: body.sweetMessage,
     acidity: body.acidity,
-    acidityMessage: body.acidityMessage,
     acidityStrength: body.acidityStrength,
     mouthfeel: body.mouthfeel,
-    mouthfeelMessage: body.mouthfeelMessage,
     bodyStrength: body.bodyStrength,
     flavor: body.flavor,
-    flavorMessage: body.flavorMessage,
     after: body.after,
-    afterMessage: body.afterMessage,
     balance: body.balance,
-    balanceMessage: body.balanceMessage,
+    memo: body.memo,
     overall: body.overall,
     impression: body.impression,
     result: body.result,
@@ -48,7 +40,7 @@ export async function POST(request) {
   };
   try {
     await connectDB();
-
+    console.log(createBody);
     await BeansModel.create(createBody);
 
     return NextResponse.json({

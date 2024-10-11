@@ -26,7 +26,7 @@ const BeansSchema = new Schema(
     flavor: Number,
     after: Number,
     balance: Number,
-    Memo: String,
+    memo: String,
     overall: Number,
     impression: String,
     result: Number,

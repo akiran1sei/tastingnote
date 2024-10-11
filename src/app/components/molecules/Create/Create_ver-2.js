@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { CreateBtn } from "@/app/components/buttons/CreateBtn";
 import dotenv from "dotenv";
-import Image from "next/image";
+
 import { jwtDecode } from "jwt-decode";
+
 export function BeansCreateTable(context) {
   dotenv.config();
   useEffect(() => {
@@ -78,44 +79,7 @@ export function BeansCreateTable(context) {
   const [date, setDate] = useState(Today);
   const [groupName, setGroupName] = useState("");
   const [isUser, setIsUser] = useState("");
-  const [isPointVisible, setIsPointVisible] = useState({
-    CoffeeName: false,
-    Roast: false,
-    Aroma: false,
-    Defects: false,
-    Cleancap: false,
-    Sweet: false,
-    Acidity: false,
-    Mouthfeel: false,
-    Flavor: false,
-    After: false,
-    Total: false,
-    Balance: false,
-    Overall: false,
-    Impression: false,
-  });
 
-  //   const handlePointBtn = (pointName) => {
-  //     setIsPointVisible((prevState) => ({
-  //       ...prevState,
-  //       [pointName]: !prevState[pointName],
-  //     }));
-  //   };
-
-  //   const handlePointCoffeeNameBtn = () => handlePointBtn("CoffeeName");
-  //   const handlePointRoastBtn = () => handlePointBtn("Roast");
-  //   const handlePointAromaBtn = () => handlePointBtn("Aroma");
-  //   const handlePointDefectsBtn = () => handlePointBtn("Defects");
-  //   const handlePointCleancapBtn = () => handlePointBtn("Cleancap");
-  //   const handlePointSweetBtn = () => handlePointBtn("Sweet");
-  //   const handlePointAcidityBtn = () => handlePointBtn("Acidity");
-  //   const handlePointMouthfeelBtn = () => handlePointBtn("Mouthfeel");
-  //   const handlePointFlavorBtn = () => handlePointBtn("Flavor");
-  //   const handlePointAfterBtn = () => handlePointBtn("After");
-  //   const handlePointBalanceBtn = () => handlePointBtn("Balance");
-  //   const handlePointOverallBtn = () => handlePointBtn("Overall");
-  //   const handlePointTotalBtn = () => handlePointBtn("Total");
-  //   const handlePointImpressionBtn = () => handlePointBtn("Impression");
   const router = useRouter();
 
   const data = context.data.groups;
@@ -171,32 +135,24 @@ export function BeansCreateTable(context) {
             coffee: coffee,
             roast: roast,
             roastDegree: roastDegree,
-
             aromaDryStrength: aromaDryStrength,
             aromaCrustStrength: aromaCrustStrength,
             aromaBreakStrength: aromaBreakStrength,
             aromaDryQuality: aromaDryQuality,
             aromaCrustQuality: aromaCrustQuality,
             aromaBreakQuality: aromaBreakQuality,
-
             defects: point * score * 4,
-
             cleancap: cleancap,
-
             sweet: sweet,
-
             acidity: acidity,
-
             acidityStrength: acidityStrength,
             mouthfeel: mouthfeel,
-
             bodyStrength: bodyStrength,
             flavor: flavor,
-            Memo: Memo,
+            memo: Memo,
             after: after,
             afterMessage: afterMessage,
             balance: balance,
-
             overall: overall,
             total: Number(sum) + Number(36),
             result: sum,
@@ -232,18 +188,18 @@ export function BeansCreateTable(context) {
 
       <div className={styles.edit_contents}>
         <form onSubmit={handleSubmit}>
-          <div className={styles.edit_table}>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+          <div className={styles.edit_wrap}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label>Date</label>
               </div>
-              <div className={styles.edit_table_data}>{date}</div>
+              <div className={styles.edit_contents_data}>{date}</div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="group-name">Group</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   name="group-name"
                   id="group-name"
@@ -256,11 +212,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="username">User</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <input
                   className={styles.edit_input_name}
                   type="text"
@@ -275,11 +231,11 @@ export function BeansCreateTable(context) {
                 />
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="coffee">Beans</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <input
                   className={styles.edit_input_name}
                   type="text"
@@ -294,11 +250,11 @@ export function BeansCreateTable(context) {
                 />
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="roast">Roast</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <input
                   type="range"
                   min="0"
@@ -347,24 +303,28 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label>Aroma</label>
               </div>
-              <div className={styles.edit_table_data}>
-                <div border="0" className={styles.table_aroma}>
-                  <div className={styles.table_aroma_row}>
-                    <div className={styles.table_aroma_data_header}></div>
-                    <div className={styles.table_aroma_data_header}>Strong</div>
-                    <div className={styles.table_aroma_data_header}>
+              <div className={styles.edit_contents_data}>
+                <div border="0" className={styles.edit_contents_aroma}>
+                  <div className={styles.edit_contents_aroma_row}>
+                    <div
+                      className={styles.edit_contents_aroma_data_header}
+                    ></div>
+                    <div className={styles.edit_contents_aroma_data_header}>
+                      Strong
+                    </div>
+                    <div className={styles.edit_contents_aroma_data_header}>
                       Quality
                     </div>
                   </div>
 
-                  <div className={styles.table_aroma_data}>
+                  <div className={styles.edit_contents_aroma_data}>
                     <label>Dry</label>
 
-                    <div className={styles.table_aroma_data}>
+                    <div className={styles.edit_contents_aroma_data}>
                       <select
                         name="aroma-dry-strength"
                         id="aroma-dry-strength"
@@ -382,7 +342,7 @@ export function BeansCreateTable(context) {
                         <option value={3}>3</option>
                       </select>
                     </div>
-                    <div className={styles.table_aroma_data}>
+                    <div className={styles.edit_contents_aroma_data}>
                       <select
                         name="aroma-dry-quality"
                         id="aroma-dry-quality"
@@ -402,10 +362,10 @@ export function BeansCreateTable(context) {
                     </div>
                   </div>
 
-                  <div className={styles.table_aroma_data}>
+                  <div className={styles.edit_contents_aroma_data}>
                     <label>Crust</label>
 
-                    <div className={styles.table_aroma_data}>
+                    <div className={styles.edit_contents_aroma_data}>
                       <select
                         name="aroma_crust-strength"
                         id="aroma_crust-strength"
@@ -423,7 +383,7 @@ export function BeansCreateTable(context) {
                         <option value={3}>3</option>
                       </select>
                     </div>
-                    <div className={styles.table_aroma_data}>
+                    <div className={styles.edit_contents_aroma_data}>
                       <select
                         name="aroma_crust-quality"
                         id="aroma_crust-quality"
@@ -443,9 +403,9 @@ export function BeansCreateTable(context) {
                     </div>
                   </div>
 
-                  <div className={styles.table_aroma_data}>
+                  <div className={styles.edit_contents_aroma_data}>
                     <label>Break</label>
-                    <div className={styles.table_aroma_data}>
+                    <div className={styles.edit_contents_aroma_data}>
                       <select
                         name="aroma_break-strength"
                         id="aroma_break-strength"
@@ -463,7 +423,7 @@ export function BeansCreateTable(context) {
                         <option value={3}>3</option>
                       </select>
                     </div>
-                    <div className={styles.table_aroma_data}>
+                    <div className={styles.edit_contents_aroma_data}>
                       <select
                         name="aroma_break-quality"
                         id="aroma_break-quality"
@@ -485,11 +445,11 @@ export function BeansCreateTable(context) {
                 </div>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="defects">Defects</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <div className={styles.edit_defects_calc}>
                   <input
                     type="number"
@@ -533,11 +493,11 @@ export function BeansCreateTable(context) {
                 />
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="cleancap">CleanCap</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   type="number"
                   name="cleancap"
@@ -562,11 +522,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="sweet">Sweet</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   type="number"
                   name="sweet"
@@ -591,11 +551,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="acidity">Acidity</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   type="number"
                   name="acidity"
@@ -620,11 +580,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label>AcidityStrength</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   name="acidity"
                   value={acidityStrength}
@@ -654,11 +614,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="mouthfeel">Mouthfeel</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   type="number"
                   name="mouthfeel"
@@ -684,11 +644,11 @@ export function BeansCreateTable(context) {
               </div>
             </div>
 
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label>BodyStrength</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   name="body"
                   value={bodyStrength}
@@ -710,11 +670,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="flavor">Flavor</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   name="flavor"
                   type="number"
@@ -739,11 +699,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="after">After</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   name="after"
                   type="number"
@@ -768,11 +728,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="balance">Balance</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   name="balance"
                   type="number"
@@ -797,11 +757,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="overall">OverAll</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <select
                   name="overall"
                   type="number"
@@ -826,11 +786,11 @@ export function BeansCreateTable(context) {
                 </select>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label>Result</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <output className={styles.edit_sub_value}>
                   {-Number(defects) +
                     Number(cleancap) +
@@ -844,15 +804,15 @@ export function BeansCreateTable(context) {
                 </output>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label>
                   TOTAL
                   <br />
                   (+36点)
                 </label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <output className={styles.edit_sub_value}>
                   {Number(cleancap) +
                     Number(sweet) +
@@ -867,11 +827,11 @@ export function BeansCreateTable(context) {
                 </output>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data_header}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
                 <label htmlFor="impression">Impression</label>
               </div>
-              <div className={styles.edit_table_data}>
+              <div className={styles.edit_contents_data}>
                 <textarea
                   className={styles.edit_item_message}
                   name="impression"
@@ -881,8 +841,8 @@ export function BeansCreateTable(context) {
                 ></textarea>
               </div>
             </div>
-            <div className={styles.edit_table_row}>
-              <div className={styles.edit_table_data}>
+            <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data}>
                 <textarea
                   className={styles.edit_item_message}
                   name="memo"
