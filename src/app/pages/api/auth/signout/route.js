@@ -11,11 +11,23 @@ export async function DELETE(req) {
       path: "/",
     });
 
-    // ログアウト成功
-    return NextResponse.json(
+    // レスポンスオブジェクトを作成
+    const response = NextResponse.json(
       { message: "ログアウトしました" },
       { status: 200 }
     );
+
+    // キャッシュ関連のヘッダーを設定
+    response.headers.set(
+      "Cache-Control",
+      "no-store, no-cache, must-revalidate, proxy-revalidate"
+    );
+    response.headers.set("Pragma", "no-cache");
+    response.headers.set("Expires", "0");
+    response.headers.set("Surrogate-Control", "no-store");
+
+    // ログアウト成功
+    return response;
   } catch (error) {
     console.error("ログアウト処理中にエラーが発生しました:", error);
 
