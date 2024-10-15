@@ -201,13 +201,19 @@ export function Update(data) {
           <div className={styles.edit_wrap}>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label>Date</label>
+                <label>
+                  <span className={styles.edit_contents_item_number}>1</span>
+                  日付
+                </label>
               </div>
               <div className={styles.edit_contents_data}>{date}</div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="group-name">Group</label>
+                <label htmlFor="group-name">
+                  <span className={styles.edit_contents_item_number}>2</span>
+                  グループ名
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 {singleData.groupname}
@@ -215,7 +221,10 @@ export function Update(data) {
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="username">User</label>
+                <label htmlFor="username">
+                  <span className={styles.edit_contents_item_number}>3</span>
+                  ユーザー
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <input
@@ -234,7 +243,10 @@ export function Update(data) {
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="coffee">Beans</label>
+                <label htmlFor="coffee">
+                  <span className={styles.edit_contents_item_number}>4</span>
+                  コーヒー豆
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <input
@@ -250,10 +262,16 @@ export function Update(data) {
                   required
                 />
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>豆の名前、又は、番号</p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="roast">Roast</label>
+                <label htmlFor="roast">
+                  <span className={styles.edit_contents_item_number}>5</span>
+                  ロースト
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <input
@@ -303,10 +321,20 @@ export function Update(data) {
                   <option value="italian">italian</option>
                 </select>
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  焙煎具合、パーセンテージによって焙煎度名が変化するので、
+                  <wbr />
+                  それに合わせて焙煎度の中から選んでください。
+                </p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label>Aroma</label>
+                <label>
+                  <span className={styles.edit_contents_item_number}>6</span>
+                  アロマ
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <div border="0" className={styles.edit_contents_aroma}>
@@ -315,15 +343,15 @@ export function Update(data) {
                       className={styles.edit_contents_aroma_data_header}
                     ></div>
                     <div className={styles.edit_contents_aroma_data_header}>
-                      Strong
+                      強さ
                     </div>
                     <div className={styles.edit_contents_aroma_data_header}>
-                      Quality
+                      質
                     </div>
                   </div>
 
                   <div className={styles.edit_contents_aroma_data}>
-                    <label>Dry</label>
+                    <label>ドライ</label>
 
                     <div className={styles.edit_contents_aroma_data}>
                       <select
@@ -364,7 +392,7 @@ export function Update(data) {
                   </div>
 
                   <div className={styles.edit_contents_aroma_data}>
-                    <label>Crust</label>
+                    <label>クラスト</label>
 
                     <div className={styles.edit_contents_aroma_data}>
                       <select
@@ -405,7 +433,7 @@ export function Update(data) {
                   </div>
 
                   <div className={styles.edit_contents_aroma_data}>
-                    <label>Break</label>
+                    <label>ブレーク</label>
                     <div className={styles.edit_contents_aroma_data}>
                       <select
                         name="aroma_break-strength"
@@ -445,10 +473,43 @@ export function Update(data) {
                   </div>
                 </div>
               </div>
+              <div className={styles.edit_point_memo}>
+                <ul className={styles.edit_point_txtBox}>
+                  <li className={styles.edit_point_text}>
+                    <span className={styles.edit_yellow}>『dry』</span>
+                    <br /> 粉の状態からaroma
+                  </li>
+                  <li className={styles.edit_point_text}>
+                    <span className={styles.edit_yellow}>『crust』</span>
+                    <br />
+                    湯を注いだ直後のaroma
+                  </li>
+                  <li className={styles.edit_point_text}>
+                    <span className={styles.edit_yellow}>『break』</span>
+                    <br />
+                    混ぜた後のaroma
+                  </li>
+                </ul>
+                <p className={styles.edit_point_text}>
+                  の３つで香りの強さ（左）と質（右）を評価
+                </p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="defects">Defects</label>
+                <label htmlFor="defects">
+                  <span className={styles.edit_contents_item_number}>7</span>
+                  欠点・瑕疵
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <div className={styles.edit_defects_calc}>
@@ -493,10 +554,27 @@ export function Update(data) {
                   required
                 />
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  スペシャルティコーヒーなどは、欠点・瑕疵がないことが多く『０』で進めることが多い
+                </p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="cleancap">CleanCap</label>
+                <label htmlFor="cleancap">
+                  <span className={styles.edit_contents_item_number}>8</span>
+                  カップの綺麗さ
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -522,10 +600,25 @@ export function Update(data) {
                   <option value={8}>8</option>
                 </select>
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>味わいの透明度</p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="sweet">Sweet</label>
+                <label htmlFor="sweet">
+                  <span className={styles.edit_contents_item_number}>9</span>
+                  甘さ
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -551,10 +644,27 @@ export function Update(data) {
                   <option value={8}>8</option>
                 </select>
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  味わいに甘味の印象が強ければ強い程よいとされる
+                </p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="acidity">Acidity</label>
+                <label htmlFor="acidity">
+                  <span className={styles.edit_contents_item_number}>10</span>
+                  酸の質
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -583,7 +693,10 @@ export function Update(data) {
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label>AcidityStrength</label>
+                <label>
+                  <span className={styles.edit_contents_item_number}>10-1</span>
+                  酸の強さ
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -594,30 +707,45 @@ export function Update(data) {
                 >
                   <option defaultValue={null}>{null}</option>
                   <optgroup label="High">
-                    <option value={"Level:5"}>
-                      {"Lv.5：Extremely High Acidity"}
-                    </option>
-                    <option value={"Level:4"}>
-                      {"Lv.4：Very High Acidity"}
-                    </option>
+                    <option value={"High２"}>{"High２"}</option>
+                    <option value={"High１"}>{"High１"}</option>
                   </optgroup>
                   <optgroup label="Middle">
-                    <option value={"level:3"}>{"Lv.3：Middle Acidity"}</option>
+                    <option value={"Middle"}>{"Middle"}</option>
                   </optgroup>
-                  <optgroup label="Low">
-                    <option value={"Level:2"}>
-                      {"Lv.2：Moderately Low Acidity"}
-                    </option>
-                    <option value={"Level:1"}>
-                      {"Lv.1：Very Low Acidity"}
-                    </option>
+                  <optgroup label="Light">
+                    <option value={"Light2"}>{"Light2"}</option>
+                    <option value={"Light1"}>{"Light1"}</option>
                   </optgroup>
                 </select>
+              </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  強い順から、
+                  <br />
+                  High2→High1→Middle
+                  <br />
+                  →Light2→Light1、
+                  <br />
+                  酸の強さを計る
+                </p>
               </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="mouthfeel">Mouthfeel</label>
+                <label htmlFor="mouthfeel">
+                  <span className={styles.edit_contents_item_number}>11</span>
+                  口に含んだ質感
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -647,7 +775,10 @@ export function Update(data) {
 
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label>BodyStrength</label>
+                <label>
+                  <span className={styles.edit_contents_item_number}>11-1</span>
+                  ボディの強さ
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -658,22 +789,43 @@ export function Update(data) {
                 >
                   <option defaultValue={null}>{null}</option>
                   <optgroup label="High">
-                    <option value={"Level:5"}>{"Lv.5：Heavy Body"}</option>
-                    <option value={"Level:4"}>{"Lv.4：Full Body"}</option>
+                    <option value={"High２"}>{"High２"}</option>
+                    <option value={"High１"}>{"High１"}</option>
                   </optgroup>
                   <optgroup label="Middle">
-                    <option value={"level:3"}>{"Lv.3：Medium Body"}</option>
+                    <option value={"Middle"}>{"Middle"}</option>
                   </optgroup>
-                  <optgroup label="Low">
-                    <option value={"Level:2"}>{"Lv.2：Light Body"}</option>
-                    <option value={"Level:1"}>{"Lv.1：Very Light Body"}</option>
+                  <optgroup label="Light">
+                    <option value={"Light2"}>{"Light2"}</option>
+                    <option value={"Light1"}>{"Light1"}</option>
                   </optgroup>
                 </select>
+              </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  舌触りの滑らかさ強い順から,
+                  <br />
+                  High2→High1→Middle
+                  <br />
+                  →Light2→Light1である。
+                </p>
               </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="flavor">Flavor</label>
+                <label htmlFor="flavor">
+                  <span className={styles.edit_contents_item_number}>12</span>
+                  フレーバー
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -699,10 +851,25 @@ export function Update(data) {
                   <option value={8}>8</option>
                 </select>
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>風味の質を評価する</p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="after">After</label>
+                <label htmlFor="after">
+                  <span className={styles.edit_contents_item_number}>13</span>
+                  後味の印象度
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -728,10 +895,27 @@ export function Update(data) {
                   <option value={8}>8</option>
                 </select>
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  後味は心地よいか、そうでないか評価。
+                </p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="balance">Balance</label>
+                <label htmlFor="balance">
+                  <span className={styles.edit_contents_item_number}>14</span>
+                  ハーモニーの均衝性
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -757,10 +941,29 @@ export function Update(data) {
                   <option value={8}>8</option>
                 </select>
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  「7～13」の要素に悪目立ちしているものがなく、
+                  <wbr />
+                  全体のバランスが良い程加点。
+                </p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="overall">OverAll</label>
+                <label htmlFor="overall">
+                  <span className={styles.edit_contents_item_number}>15</span>
+                  総合評価
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <select
@@ -786,10 +989,18 @@ export function Update(data) {
                   <option value={8}>8</option>
                 </select>
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  味わいの奥行など項目にない点にも着目し、ここまでの評価に囚われず、主観で付ける。
+                </p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label>Result</label>
+                <label>
+                  <span className={styles.edit_contents_item_number}>16</span>
+                  小計
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <output className={styles.edit_sub_value}>
@@ -804,13 +1015,26 @@ export function Update(data) {
                     Number(overall)}
                 </output>
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  <span className={styles.edit_contents_item_mark}>
+                    <Image
+                      src="/images/priority_high_img.svg"
+                      alt="エクスクラメーションボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </span>
+                  がついた項目の得点を足して算出した数字
+                </p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
                 <label>
-                  TOTAL
-                  <br />
-                  (+36点)
+                  <span className={styles.edit_contents_item_number}>17</span>
+                  TOTAL (+36点)
                 </label>
               </div>
               <div className={styles.edit_contents_data}>
@@ -827,10 +1051,20 @@ export function Update(data) {
                     Number(36)}
                 </output>
               </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  小計項目の得点に定数３６点を足して出た数字。
+                  <br />
+                  １００点満点で評価。
+                </p>
+              </div>
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="impression">Impression</label>
+                <label htmlFor="impression">
+                  <span className={styles.edit_contents_item_number}>18</span>
+                  味の印象度
+                </label>
               </div>
               <div className={styles.edit_contents_data}>
                 <textarea
@@ -840,6 +1074,13 @@ export function Update(data) {
                   value={impression}
                   onChange={(e) => setImpression(e.target.value)}
                 ></textarea>
+              </div>
+              <div className={styles.edit_point_memo}>
+                <p className={styles.edit_point_text}>
+                  具体的な味の印象を記入。フレーバーの表現もカッピングの重要な目的。
+                  <br />
+                  冷めていく過程で、味わいがどのように変化したかも都度メモしておくとよい。
+                </p>
               </div>
             </div>
             <div className={styles.edit_contents_item}>
