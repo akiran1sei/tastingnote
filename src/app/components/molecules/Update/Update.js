@@ -338,7 +338,7 @@ export function Update(data) {
                 <p className={styles.edit_point_text}>
                   焙煎具合、パーセンテージによって焙煎度名が変化するので、
                   <wbr />
-                  それに合わせて焙煎度の中から選んでください。
+                  それに合わせて焙煎度の中から選んでください。なお、パーセンテージは目安になっています。
                 </p>
               </div>
             </div>
