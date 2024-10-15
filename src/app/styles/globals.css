@@ -130,8 +130,8 @@ input {
   border-radius: 2px;
 }
 input[type="range"] {
-  width: 90%;
-  height: 100%;
+  width: 100%;
+
   -webkit-appearance: none;
   appearance: none;
   /* background: var(--color-linear-gradient-linear); */
