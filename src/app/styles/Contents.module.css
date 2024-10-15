@@ -6,11 +6,13 @@
 .container {
   width: 95%;
   margin: 0 auto;
+  padding-bottom: 1rem;
   max-width: var(--width-content);
 }
 .container-s {
   width: 95%;
   margin: 0 auto;
+  padding-bottom: 1rem;
   max-width: var(--width-content-s);
 }
 /* 
@@ -108,11 +110,6 @@
 .home_nav_item:nth-child(2) {
   margin: 0 0.5rem;
 }
-/* 
-
-----------home_img----------
-
-*/
 
 .home_bg {
   width: 100%;
@@ -131,10 +128,6 @@
 .home_img {
   object-fit: cover;
 }
-/* 
-----------home_start_btn---------- 
-
-*/
 
 .home_start_btn {
   width: 100%;
@@ -663,115 +656,6 @@ span.select_checkbox {
 
 
 
-----------browse----------
-
-
-
-
-*/
-
-.browse_data {
-  display: block;
-}
-.browse_contents {
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  gap: 1rem;
-  justify-content: center;
-  justify-items: center;
-  margin: 2rem auto;
-  text-align: center;
-  align-items: center;
-}
-@media screen and (min-width: 768px) {
-  .browse_contents {
-    min-width: 768px;
-  }
-}
-@media screen and (min-width: 1000px) {
-  .browse_contents {
-    max-width: 1000px;
-  }
-}
-.browse_img_box {
-  height: 24px;
-  width: 24px;
-  margin-top: 0;
-}
-.browse_date {
-  width: 100%;
-}
-.browse_item {
-  width: 100%;
-  font-size: var(--font-size-base);
-}
-.browse_item_box {
-  width: 100%;
-}
-.browse_item_title {
-  width: 100%;
-  border-bottom: 2px dashed var(--color-yellow);
-}
-.browse_item_value {
-  width: 100%;
-  padding: 3rem 0;
-}
-.browse_item_memo {
-  width: 100%;
-}
-
-.browse_item_message {
-  width: 100%;
-  height: 100%;
-  min-height: 50px;
-  max-height: 150px;
-  background: var(--color-yellow-10);
-}
-.browse_aroma_table {
-  width: 100%;
-}
-.browse_aroma_tableHeader {
-  font-weight: 600;
-  color: var(--color-yellow);
-}
-.browse_aroma_tableRow {
-}
-.browse_aroma_tableData {
-}
-.browse_totalBox {
-  width: 100px;
-  height: auto;
-  padding: 2rem;
-  margin: 2rem auto;
-  border-radius: 10px;
-  background: var(--color-yellow-10);
-}
-.browse_total_subTitle {
-  color: var(--color-yellow);
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  padding-bottom: 1rem;
-}
-.browse_btn_box {
-  width: auto;
-  display: flex;
-  align-items: flex-end;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: space-evenly;
-  position: fixed;
-  top: 110px;
-  right: 5%;
-}
-
-/* 
-
-
-
-
 ----------edit----------
 
 
@@ -814,6 +698,7 @@ span.select_checkbox {
 .edit_point_text {
   width: 100%;
   text-align: center;
+  color: var(--color-yellow-80);
 }
 .edit_point_txtBox {
   width: 100%;
@@ -921,14 +806,12 @@ span.select_checkbox {
   text-align: center;
 }
 @media screen and (min-width: 768px) {
-  .edit_list,
-  .browse_list {
+  .edit_list {
     min-width: 768px;
   }
 }
 @media screen and (min-width: 1000px) {
-  .edit_list,
-  .browse_list {
+  .edit_list {
     max-width: 1000px;
   }
 }
@@ -975,32 +858,215 @@ span.select_checkbox {
   /*　field-sizing: content; は、未対応のブラウザーがある為コメントアウト  */
   /* field-sizing: content; */
 }
-.edit_input_date {
-  width: 150px;
-  text-align: center;
-}
-.edit_item_date {
-}
-.edit_item_groupname {
-}
+
 .edit_output_name {
   width: 100%;
 }
-
-.edit_input_roast::-webkit-slider-thumb {
-  background-color: yellow;
+.slider-container {
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  height: 40px;
+}
+.edit_output_value {
+  position: absolute;
+  bottom: 15%;
+  left: 0;
+  right: 0;
+}
+.edit_select_value {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  max-width: 180px;
+  margin: 0 auto;
 }
 .edit_input_roast {
-  width: 90%;
-  border-radius: 10px;
+  width: 100%;
+  height: 30px;
   -webkit-appearance: none;
   appearance: none;
-  background: var(--color-linear-gradient-linear);
+  background: linear-gradient(to right, #f5d0a9, #8b4513);
+  outline: none;
+  border-radius: 10px;
 }
-.edit_roast_value {
+.edit_input_roast::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 30px;
+  background-color: yellow;
+  cursor: pointer;
+  border-radius: 5%;
 }
-.edit_overall,
-.browse_overall {
+.ticks {
+  position: absolute;
+  top: calc(1rem + 30px);
+  left: 0;
+  width: 100%;
+  height: 5px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  box-sizing: border-box;
+}
+.tick {
+  width: 3px;
+  height: 10px;
+  background-color: var(--color-black);
+}
+.tick:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.tick:first-child::before {
+  content: "ライト";
+  font-size: var(--font-size-small);
+  letter-spacing: 0;
+  position: absolute;
+  top: 10px;
+}
+.tick:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 16%;
+}
+.tick:nth-child(2)::before {
+  content: "シナモン";
+  font-size: var(--font-size-small);
+  position: absolute;
+  top: 10px;
+  right: -5px;
+}
+.tick:nth-child(3) {
+  position: absolute;
+  top: 0;
+  left: 31%;
+}
+.tick:nth-child(3)::before {
+  content: "ミディアム";
+  font-size: var(--font-size-small);
+  position: absolute;
+  top: 10px;
+  right: -5px;
+}
+.tick:nth-child(4) {
+  position: absolute;
+  top: 0;
+  left: 46%;
+}
+.tick:nth-child(4)::before {
+  content: "ハイ";
+  font-size: var(--font-size-small);
+  position: absolute;
+  top: 10px;
+  right: -5px;
+}
+.tick:nth-child(5) {
+  position: absolute;
+  top: 0;
+  right: 39%;
+}
+.tick:nth-child(5)::before {
+  content: "シティ";
+  font-size: var(--font-size-small);
+  position: absolute;
+  top: 10px;
+  right: -5px;
+}
+.tick:nth-child(6) {
+  position: absolute;
+  top: 0;
+  right: 24%;
+}
+.tick:nth-child(6)::before {
+  content: "フルシティ";
+  font-size: var(--font-size-small);
+  position: absolute;
+  top: 10px;
+  right: -5px;
+}
+.tick:nth-child(7) {
+  position: absolute;
+  top: 0;
+  right: 9%;
+}
+.tick:nth-child(7)::before {
+  content: "フレンチ";
+  font-size: var(--font-size-small);
+  position: absolute;
+  top: 10px;
+  right: -5px;
+}
+.tick:last-child {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.tick:last-child::before {
+  content: "イタリアン";
+  font-size: var(--font-size-small);
+  position: absolute;
+  top: 10px;
+  right: 0;
+}
+.labels {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+
+  box-sizing: border-box;
+  font-size: 10px;
+  color: #888;
+}
+
+.labels span:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.labels span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  left: 16%;
+}
+.labels span:nth-child(3) {
+  position: absolute;
+  top: 0;
+  left: 30%;
+}
+.labels span:nth-child(4) {
+  position: absolute;
+  top: 0;
+  left: 45%;
+}
+.labels span:nth-child(5) {
+  position: absolute;
+  top: 0;
+  right: 40%;
+}
+.labels span:nth-child(6) {
+  position: absolute;
+  top: 0;
+  right: 25%;
+}
+.labels span:nth-child(7) {
+  position: absolute;
+  top: 0;
+  right: 10%;
+}
+.labels span:last-child {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.edit_overall {
   justify-content: flex-start !important;
 }
 .edit_item_value {
@@ -1017,9 +1083,7 @@ span.select_checkbox {
 }
 
 .edit_item.mouthfeel,
-.edit_item.acidity,
-.browse_item.mouthfeel,
-.browse_item.acidity {
+.edit_item.acidity {
   justify-content: flex-start !important;
 }
 
@@ -1079,12 +1143,15 @@ span.select_checkbox {
   font-weight: 900;
 }
 
-.edit_input_answer {
+.edit_input_small {
   width: 50px;
   height: 50px;
   border: 2px solid var(--color-yellow);
 }
-
+.edit_input_medium {
+  width: 100%;
+  max-width: 180px;
+}
 .edit_sub_value {
   min-width: 50px;
   height: 50px;
@@ -1099,12 +1166,15 @@ span.select_checkbox {
 }
 
 .edit_btn_box {
-  width: 100%;
+  width: auto;
   display: flex;
+  align-items: flex-end;
   flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: fixed;
+  top: 110px;
+  right: 5%;
 }
 
 .edit_error {
@@ -1130,7 +1200,6 @@ span.select_checkbox {
   padding: 0;
 }
 
-/* ----------edit_table---------- */
 .edit_wrap {
   width: 100%;
   max-width: 768px;
@@ -1172,11 +1241,17 @@ span.select_checkbox {
 }
 
 .edit_contents_data {
+  position: relative;
   width: 100%;
   text-align: center;
   color: var(--color-black);
   padding: 1rem 0;
   border-radius: 10px;
+}
+.edit_contents_roast select {
+}
+.edit_contents_roast {
+  height: 300px;
 }
 .edit_contents_aroma {
   width: 100%;
@@ -1221,20 +1296,17 @@ span.select_checkbox {
   color: var(--color-yellow);
   border-bottom: 3px solid var(--color-yellow);
 }
+
 .edit_contents_data input {
-  max-width: 180px;
-  border-radius: 10px;
-  padding: 0.5rem;
+  border-radius: 5px;
+  /* padding: 0.5rem; */
 }
 .edit_contents_data select {
-  max-width: 180px;
-  border-radius: 10px;
-  padding: 0.5rem;
+  /* max-width: 180px; */
+  border-radius: 5px;
+  /* padding: 0.5rem; */
 }
-.edit_point_range_box {
-}
-.edit_point_range {
-}
+
 .edit_point_range input {
   transform: rotate(90deg);
 }
@@ -1414,84 +1486,6 @@ span.select_checkbox {
   transform: translateY(calc(50vh - 50px));
 }
 
-/* 横向き */
-.meter_box_landscape {
-  width: 100px;
-  height: 15px;
-  /* border: 1px solid var(--color-black); */
-  /* border-radius: 5px; */
-  margin-top: 0;
-}
-.meter_landscape_txt {
-  position: absolute;
-  top: 10%;
-  left: 0;
-  right: 0;
-}
-
-/* 縦向き */
-
-.meter_box_portrait {
-  width: 15px;
-  height: 100px;
-  background: linear-gradient(
-    to bottom,
-    #fff 0%,
-    #fff 20%,
-    #333 20%,
-    #333 21%,
-    #fff 21%,
-    #fff 40%,
-    #333 40%,
-    #333 41%,
-    #d9d9d9 41%,
-    #d9d9d9 60%,
-    #333 60%,
-    #333 61%,
-    #fff 60%,
-    #fff 80%,
-    #333 80%,
-    #333 81%,
-    #fff 80%,
-    #fff 100%
-  );
-  border: 1px solid var(--color-black);
-  border-radius: 5px;
-  margin-top: 0;
-}
-.meter_portrait_txt {
-  position: absolute;
-  top: calc(50% - 10px);
-  left: 10%;
-}
-
-/* meter (メーターボックス) */
-.meter_beans {
-  background: var(--color-linear-gradient-linear);
-  position: relative;
-}
-
-.meter_strength {
-  position: absolute;
-  top: 0;
-  right: 10%;
-}
-.meter_landscape_rod {
-  position: absolute;
-  width: 4px;
-  height: 100%;
-  background: var(--color-black);
-  margin-top: 0;
-}
-.meter_portrait_rod {
-  position: absolute;
-  top: 90px;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: var(--color-black);
-  margin-top: 0;
-}
 /* 
 
 

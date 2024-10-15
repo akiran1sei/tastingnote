@@ -210,7 +210,7 @@ export function Update(data) {
             </div>
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label htmlFor="group-name">
+                <label>
                   <span className={styles.edit_contents_item_number}>2</span>
                   グループ名
                 </label>
@@ -228,7 +228,7 @@ export function Update(data) {
               </div>
               <div className={styles.edit_contents_data}>
                 <input
-                  className={styles.edit_input_name}
+                  className={styles.edit_input_medium}
                   type="text"
                   name="username"
                   id="username"
@@ -250,7 +250,7 @@ export function Update(data) {
               </div>
               <div className={styles.edit_contents_data}>
                 <input
-                  className={styles.edit_input_name}
+                  className={styles.edit_input_medium}
                   type="text"
                   name="coffee"
                   id="coffee"
@@ -273,7 +273,9 @@ export function Update(data) {
                   ロースト
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>
+              <div
+                className={`${styles.edit_contents_data} ${styles.edit_contents_roast}`}
+              >
                 <input
                   type="range"
                   min="0"
@@ -286,17 +288,27 @@ export function Update(data) {
                   onChange={(e) => setRoast(e.target.value)}
                   required
                 />
+                <div className={styles.ticks}>
+                  <div className={styles.tick}></div>
+                  <div className={styles.tick}></div>
+                  <div className={styles.tick}></div>
+                  <div className={styles.tick}></div>
+                  <div className={styles.tick}></div>
+                  <div className={styles.tick}></div>
+                  <div className={styles.tick}></div>
+                  <div className={styles.tick}></div>
+                </div>
                 <datalist id="roast_value">
-                  <option value="0">light</option>
-                  <option value="15">cinnamon</option>
-                  <option value="30">medium</option>
-                  <option value="45">hight</option>
-                  <option value="60">city</option>
-                  <option value="75">full city</option>
-                  <option value="90">french</option>
-                  <option value="100">italian</option>
+                  <option value="0">ライト</option>
+                  <option value="15">シナモン</option>
+                  <option value="30">ミディアム</option>
+                  <option value="45">ハイ</option>
+                  <option value="60">シティ</option>
+                  <option value="75">フルシティ</option>
+                  <option value="90">フレンチ</option>
+                  <option value="100">イタリアン</option>
                 </datalist>
-                <p className={styles.edit_roast_value}>
+                <p className={styles.edit_output_value}>
                   <output>
                     <span className={styles.smallFont}>{RoastSelect}</span>
                   </output>
@@ -306,19 +318,20 @@ export function Update(data) {
                 <select
                   name="roast-degree"
                   id="roast-degree"
+                  className={styles.edit_select_value}
                   value={roastDegree}
                   onChange={(e) => setRoastDegree(e.target.value)}
                   required
                 >
                   <option></option>
-                  <option value="light">light</option>
-                  <option value="cinnamon">cinnamon</option>
-                  <option value="medium">medium</option>
-                  <option value="hight">hight</option>
-                  <option value="city">city</option>
-                  <option value="full city">full city</option>
-                  <option value="french">french</option>
-                  <option value="italian">italian</option>
+                  <option value="ライト">ライト</option>
+                  <option value="シナモン">シナモン</option>
+                  <option value="ミディアム">ミディアム</option>
+                  <option value="ハイ">ハイ</option>
+                  <option value="シティ">シティ</option>
+                  <option value="フルシティ">フルシティ</option>
+                  <option value="フレンチ">フレンチ</option>
+                  <option value="イタリアン">イタリアン</option>
                 </select>
               </div>
               <div className={styles.edit_point_memo}>
@@ -515,7 +528,7 @@ export function Update(data) {
                 <div className={styles.edit_defects_calc}>
                   <input
                     type="number"
-                    className={styles.edit_input_defects}
+                    className={styles.edit_input_small}
                     value={point}
                     onChange={(e) => setPoint(e.target.value)}
                     name="point"
@@ -548,7 +561,7 @@ export function Update(data) {
                   type="number"
                   name="defects"
                   id="defects"
-                  className={styles.edit_input_answer}
+                  className={styles.edit_input_small}
                   value={defects}
                   onChange={(e) => setDefects(e.target.value)}
                   required
@@ -1084,6 +1097,12 @@ export function Update(data) {
               </div>
             </div>
             <div className={styles.edit_contents_item}>
+              <div className={styles.edit_contents_data_header}>
+                <label htmlFor="memo">
+                  <span className={styles.edit_contents_item_number}>19</span>
+                  memo
+                </label>
+              </div>
               <div className={styles.edit_contents_data}>
                 <textarea
                   className={styles.edit_item_message}
