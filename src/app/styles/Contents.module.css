@@ -236,20 +236,30 @@
 .select_header_list_item {
   width: 100px;
   height: 100%;
-
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   padding-top: 1rem;
 }
 .select_header_list_item:not(
     :nth-child(3),
+    :nth-child(4),
     :nth-child(6),
     :nth-child(9),
+    :nth-child(11),
+    :nth-child(12),
     :nth-child(14)
   ),
 .select_item_list:not(
     :nth-child(3),
+    :nth-child(4),
     :nth-child(6),
     :nth-child(9),
+    :nth-child(11),
+    :nth-child(12),
     :nth-child(14)
   ) {
   min-height: 50px;
@@ -257,8 +267,13 @@
 .select_item_roast {
   min-height: 80px;
 }
+.select_item_aroma {
+  min-height: 100px;
+}
 .select_item_cleancap,
 .select_item_mouthfeel,
+.select_item_after,
+.select_item_balance,
 .select_item_total {
   min-height: 65px;
 }
@@ -325,8 +340,8 @@
 }
 .select_beans {
   width: 100%;
-  min-width: 180px;
-  max-width: 180px;
+  min-width: 200px;
+  max-width: 200px;
   border-left: 5px dashed var(--color-yellow-80);
   display: flex;
   flex-direction: column;
@@ -447,7 +462,11 @@ input[type="range"].select_input_roast {
   line-height: 1em;
   padding: 0.5rem 0;
 }
-.select_item_yellowTxt,
+.select_item_aroma_table_row .select_item_yellowTxt {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
 .select_item_yellowTxt {
   color: var(--color-yellow);
   font-weight: unset;
@@ -500,12 +519,19 @@ span.select_checkbox {
     ) {
     min-height: unset;
   }
+  .select_header_list_item {
+    writing-mode: vertical-rl;
+
+    text-orientation: upright;
+  }
   .select_header_list_item,
   .select_item_list {
     width: 100%;
     max-width: 65px;
     min-width: 65px;
     height: auto;
+  }
+  .select_item_list {
     min-height: 0;
   }
   .select_header_list_item:nth-child(2n-1) {
@@ -599,6 +625,7 @@ span.select_checkbox {
   }
 
   .select_item_title {
+    display: contents;
     padding: 0;
     font-size: var(--font-size-base);
     color: var(--color-yellow);

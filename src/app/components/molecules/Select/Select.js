@@ -209,80 +209,85 @@ export function Select(context) {
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_coffee}`}
             >
-              <span className={styles.select_item_title}>Beans</span>
+              <span className={styles.select_item_title}>コーヒー豆</span>
             </li>
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_roast}`}
             >
-              <span className={styles.select_item_title}>Roast</span>
+              <span className={styles.select_item_title}>ロースト</span>
             </li>
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_aroma}`}
             >
-              <span className={styles.select_item_title}>Aroma</span>
+              <span className={styles.select_item_title}>アロマ</span>
             </li>
-
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_defects}`}
             >
-              <span className={styles.select_item_title}>Defects</span>
+              <span className={styles.select_item_title}>欠点・瑕疵</span>
             </li>
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_cleancap}`}
             >
               <span className={styles.select_item_title}>
-                Clean
+                カップの
                 <br />
-                Cap
+                綺麗さ
               </span>
             </li>
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_sweet}`}
             >
-              <span className={styles.select_item_title}>Sweet</span>
+              <span className={styles.select_item_title}>甘さ</span>
             </li>
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_acidity}`}
             >
-              <span className={styles.select_item_title}>Acidity</span>
+              <span className={styles.select_item_title}>酸の質</span>
             </li>
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_mouthfeel}`}
             >
               <span className={styles.select_item_title}>
-                Mouth
+                口に含んだ
                 <br />
-                feel
+                質感
               </span>
             </li>
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_flavor}`}
             >
-              <span className={styles.select_item_title}>Flavor</span>
+              <span className={styles.select_item_title}>フレーバー</span>
             </li>
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_after}`}
             >
-              <span className={styles.select_item_title}>After</span>
+              <span className={styles.select_item_title}>
+                後味の
+                <br />
+                印象度
+              </span>
             </li>
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_balance}`}
             >
-              <span className={styles.select_item_title}>Balance</span>
+              <span className={styles.select_item_title}>
+                ハーモニーの均衝性
+              </span>
             </li>
+
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_overall}`}
             >
-              <span className={styles.select_item_title}>OverAll</span>
+              <span className={styles.select_item_title}>総合評価</span>
             </li>
-
             <li
               className={`${styles.select_header_list_item} ${styles.select_item_total}`}
             >
               <span className={styles.select_item_title}>
                 TOTAL
                 <br />
-                (+36)
+                +36
               </span>
             </li>
           </ul>
@@ -345,13 +350,13 @@ export function Select(context) {
                                 className={styles.select_item_aroma_table_row}
                               >
                                 <th className={styles.select_item_yellowTxt}>
-                                  Dry
+                                  ドライ
                                 </th>
                                 <th className={styles.select_item_yellowTxt}>
-                                  Crust
+                                  クラスト
                                 </th>
                                 <th className={styles.select_item_yellowTxt}>
-                                  Break
+                                  ブレーク
                                 </th>
                               </tr>
                               <tr
@@ -509,13 +514,13 @@ export function Select(context) {
                                 className={styles.select_item_aroma_table_row}
                               >
                                 <th className={styles.select_item_yellowTxt}>
-                                  Dry
+                                  ドライ
                                 </th>
                                 <th className={styles.select_item_yellowTxt}>
-                                  Crust
+                                  クラスト
                                 </th>
                                 <th className={styles.select_item_yellowTxt}>
-                                  Break
+                                  ブレーク
                                 </th>
                               </tr>
                               <tr
