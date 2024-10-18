@@ -245,22 +245,22 @@
   padding-top: 1rem;
 }
 .select_header_list_item:not(
-    :nth-child(3),
-    :nth-child(4),
-    :nth-child(6),
-    :nth-child(9),
-    :nth-child(11),
-    :nth-child(12),
-    :nth-child(14)
+    .select_roast,
+    .select_aroma,
+    .select_cleancap,
+    .select_mouthfeel,
+    .select_after,
+    .select_balance,
+    .select_total
   ),
 .select_list:not(
-    :nth-child(3),
-    :nth-child(4),
-    :nth-child(6),
-    :nth-child(9),
-    :nth-child(11),
-    :nth-child(12),
-    :nth-child(14)
+    .select_roast,
+    .select_aroma,
+    .select_cleancap,
+    .select_mouthfeel,
+    .select_after,
+    .select_balance,
+    .select_total
   ) {
   min-height: 50px;
 }
@@ -268,7 +268,7 @@
   min-height: 80px;
 }
 .select_aroma {
-  min-height: 100px;
+  min-height: 200px;
 }
 .select_cleancap,
 .select_mouthfeel,
@@ -453,24 +453,53 @@ input[type="range"].select_input_roast {
   align-items: center;
 }
 
-.select_aroma_table {
-  margin: 0 auto;
-  width: auto;
-  height: auto;
+.select_aroma_box {
+  display: grid;
+  align-items: stretch;
+  justify-items: center;
 }
-.select_aroma_table_row {
-  line-height: 1em;
-  padding: 0.5rem 0;
+.select_aroma_header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  grid-area: 1 / 2 / 2 / 5;
 }
-.select_aroma_table_row .select_yellowTxt {
+.select_aroma_headerTitle {
   writing-mode: vertical-rl;
   text-orientation: upright;
-}
-
-.select_yellowTxt {
   color: var(--color-yellow);
   font-weight: unset;
 }
+.select_aroma_valueHeader {
+  width: 3em;
+  grid-area: 1 / 1 / 4 / 2;
+}
+.select_aroma_valueHeader_list {
+}
+.select_aroma_valueHeader_list:first-child {
+  height: 4em;
+}
+.select_aroma_valueListStrength,
+.select_aroma_valueListQuality {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.select_aroma_valueListStrength {
+  grid-area: 2 / 2 / 3 / 5;
+}
+.select_aroma_valueListQuality {
+  grid-area: 3 / 2 / 4 / 5;
+}
+.select_aroma_valueIItem {
+  width: 1em;
+}
+
 .select_largeTxt {
   font-size: var(--font-size-large);
 }
@@ -506,16 +535,16 @@ span.select_checkbox {
     position: unset;
   }
   .select_header_list_item:not(
-      :nth-child(3),
-      :nth-child(6),
-      :nth-child(9),
-      :nth-child(14)
+      .select_roast,
+      .select_cleancap,
+      .select_mouthfeel,
+      .select_total
     ),
   .select_list:not(
-      :nth-child(3),
-      :nth-child(6),
-      :nth-child(9),
-      :nth-child(14)
+      .select_roast,
+      .select_cleancap,
+      .select_mouthfeel,
+      .select_total
     ) {
     min-height: unset;
   }
@@ -531,9 +560,7 @@ span.select_checkbox {
     min-width: 65px;
     height: auto;
   }
-  .select_list {
-    min-height: 0;
-  }
+
   .select_header_list_item:nth-child(2n-1) {
     border-bottom: 2px solid var(--color-white);
   }
@@ -577,13 +604,7 @@ span.select_checkbox {
     flex-direction: column;
     margin-left: auto;
   }
-  .select_index {
-    min-width: 40px;
-    max-width: 40px;
-    width: 100%;
-    /* height: 100%; */
-    text-align: center;
-  }
+
   .select_beans_data {
     width: auto;
     height: auto;
@@ -603,20 +624,15 @@ span.select_checkbox {
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    flex-wrap: nowrap;
+    align-items: center;
     justify-items: stretch;
     margin: 0;
     border: none;
     flex-direction: row;
+    min-height: 0;
   }
 
-  .select_list {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-  }
   .select_list:nth-child(2n-1) {
     border-bottom: 1px solid var(--color-white);
   }
@@ -642,7 +658,13 @@ span.select_checkbox {
     display: inline-block;
     margin-right: 1rem;
   }
+  .select_index {
+    min-width: 40px;
+    max-width: 40px;
+    width: 100%;
 
+    text-align: center;
+  }
   .select_coffee {
     min-width: 80px;
     max-width: 80px;
@@ -654,6 +676,7 @@ span.select_checkbox {
     max-width: 130px;
     min-width: 130px;
     text-align: center;
+    min-height: 100px;
   }
 
   .select_checkbox {
