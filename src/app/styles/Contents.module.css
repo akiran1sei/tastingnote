@@ -253,7 +253,7 @@
     :nth-child(12),
     :nth-child(14)
   ),
-.select_item_list:not(
+.select_list:not(
     :nth-child(3),
     :nth-child(4),
     :nth-child(6),
@@ -264,22 +264,22 @@
   ) {
   min-height: 50px;
 }
-.select_item_roast {
+.select_roast {
   min-height: 80px;
 }
-.select_item_aroma {
+.select_aroma {
   min-height: 100px;
 }
-.select_item_cleancap,
-.select_item_mouthfeel,
-.select_item_after,
-.select_item_balance,
-.select_item_total {
+.select_cleancap,
+.select_mouthfeel,
+.select_after,
+.select_balance,
+.select_total {
   min-height: 65px;
 }
 
 .select_header_list_item:nth-child(2n-1),
-.select_item_list:nth-child(2n-1) {
+.select_list:nth-child(2n-1) {
   background: var(--color-yellow-10);
 }
 
@@ -349,7 +349,7 @@
   align-items: center;
   position: relative;
 }
-.select_beans:hover .select_item_list {
+.select_beans:hover .select_list {
   background: var(--color-yellow-40);
 }
 .select_beans:first-child {
@@ -372,7 +372,7 @@
   align-items: stretch;
   margin-left: 100px;
 }
-.select_item_list {
+.select_list {
   width: 100%;
   height: 100%;
   text-align: center;
@@ -382,7 +382,7 @@
   align-items: center;
 }
 
-.select_item_title {
+.select_title {
   width: 100%;
   display: inline-block;
   padding-bottom: 0.5rem;
@@ -390,7 +390,7 @@
   color: var(--color-yellow);
   margin-top: 0;
 }
-.select_item_total_wrap {
+.select_total_wrap {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -398,14 +398,14 @@
   justify-content: space-between;
   align-items: center;
 }
-.select_item_total_title {
+.select_total_title {
   width: auto;
   display: inline-block;
   padding: 0.5rem;
   font-size: var(--font-size-large);
   color: var(--color-yellow);
 }
-.select_item_value {
+.select_value {
   width: 100%;
   height: auto;
   text-align: center;
@@ -413,13 +413,13 @@
   text-overflow: ellipsis; /* 切り詰められたテキストの末尾に省略記号 (...) を追加 */
 }
 @media screen and (min-width: 1000px) {
-  .select_item_value {
+  .select_value {
     word-wrap: break-word; /* 長い単語やメールアドレスを改行 */
     overflow-wrap: break-word; /* 古いブラウザでのサポート */
   }
 }
 
-.select_item_total_value {
+.select_total_value {
   width: 100%;
   height: auto;
 }
@@ -453,28 +453,28 @@ input[type="range"].select_input_roast {
   align-items: center;
 }
 
-.select_item_aroma_table {
+.select_aroma_table {
   margin: 0 auto;
   width: auto;
   height: auto;
 }
-.select_item_aroma_table_row {
+.select_aroma_table_row {
   line-height: 1em;
   padding: 0.5rem 0;
 }
-.select_item_aroma_table_row .select_item_yellowTxt {
+.select_aroma_table_row .select_yellowTxt {
   writing-mode: vertical-rl;
   text-orientation: upright;
 }
 
-.select_item_yellowTxt {
+.select_yellowTxt {
   color: var(--color-yellow);
   font-weight: unset;
 }
-.select_item_largeTxt {
+.select_largeTxt {
   font-size: var(--font-size-large);
 }
-.select_item_smallTxt:nth-child(2) {
+.select_smallTxt:nth-child(2) {
   padding: 0 0.5rem;
 }
 .select_aroma_value {
@@ -488,14 +488,14 @@ span.select_checkbox {
   left: 0; */
 }
 
-.select_item_resultTxt {
+.select_resultTxt {
   font-weight: bold;
 }
-.select_item_totalTxt {
+.select_totalTxt {
   font-size: var(--font-size-large);
   color: var(--color-yellow);
 }
-.select_item_checkbox {
+.select_checkbox {
   width: 100%;
   height: 100%;
   max-height: 50px;
@@ -511,7 +511,7 @@ span.select_checkbox {
       :nth-child(9),
       :nth-child(14)
     ),
-  .select_item_list:not(
+  .select_list:not(
       :nth-child(3),
       :nth-child(6),
       :nth-child(9),
@@ -525,13 +525,13 @@ span.select_checkbox {
     text-orientation: upright;
   }
   .select_header_list_item,
-  .select_item_list {
+  .select_list {
     width: 100%;
     max-width: 65px;
     min-width: 65px;
     height: auto;
   }
-  .select_item_list {
+  .select_list {
     min-height: 0;
   }
   .select_header_list_item:nth-child(2n-1) {
@@ -577,7 +577,7 @@ span.select_checkbox {
     flex-direction: column;
     margin-left: auto;
   }
-  .select_item_index {
+  .select_index {
     min-width: 40px;
     max-width: 40px;
     width: 100%;
@@ -610,21 +610,21 @@ span.select_checkbox {
     flex-direction: row;
   }
 
-  .select_item_list {
+  .select_list {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
   }
-  .select_item_list:nth-child(2n-1) {
+  .select_list:nth-child(2n-1) {
     border-bottom: 1px solid var(--color-white);
   }
-  .select_item_list:nth-child(2n) {
+  .select_list:nth-child(2n) {
     border-bottom: 2px solid var(--color-yellow-10);
   }
 
-  .select_item_title {
+  .select_title {
     display: contents;
     padding: 0;
     font-size: var(--font-size-base);
@@ -632,7 +632,7 @@ span.select_checkbox {
     letter-spacing: -0.01em;
   }
 
-  .select_item_value {
+  .select_value {
     width: 100%;
     height: auto;
     padding: 0;
@@ -643,32 +643,32 @@ span.select_checkbox {
     margin-right: 1rem;
   }
 
-  .select_item_coffee {
+  .select_coffee {
     min-width: 80px;
     max-width: 80px;
     width: 100%;
   }
 
-  .select_item_aroma {
+  .select_aroma {
     width: 100%;
     max-width: 130px;
     min-width: 130px;
     text-align: center;
   }
 
-  .select_item_checkbox {
+  .select_checkbox {
     width: 100%;
     max-height: none;
     min-width: 24px;
     max-width: 24px;
   }
-  .select_item_smallTxt {
+  .select_smallTxt {
     color: var(--color-yellow);
     font-weight: bold;
     font-size: var(--font-size-xsmall);
   }
 
-  .select_item_largeTxt {
+  .select_largeTxt {
     font-size: var(--font-size-large);
   }
 
