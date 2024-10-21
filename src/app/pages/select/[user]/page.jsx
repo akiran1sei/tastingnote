@@ -5,9 +5,11 @@ import { Select } from "@/app/components/molecules/Select/Select";
 import useSWR from "swr";
 import styles from "@/app/styles/Contents.module.css";
 import { jwtDecode } from "jwt-decode";
+import dotenv from "dotenv";
 const SelectPage = (params) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUser, setIsUser] = useState("");
+  dotenv.config();
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
