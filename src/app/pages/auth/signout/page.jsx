@@ -7,7 +7,11 @@ import styles from "@/app/styles/Contents.module.css";
 const Signout = () => {
   const router = useRouter();
   const [error, setError] = useState(null);
-
+  useEffect(() => {
+    // サインインページを事前に読み込む
+    router.prefetch("/pages/auth/signin");
+  }, [router]);
+  const signInBtn = router.replace("/pages/auth/signin");
   useEffect(() => {
     async function handleSignout() {
       setError(null);
@@ -44,7 +48,7 @@ const Signout = () => {
         {error && <p className={styles.error_message}>{error}</p>}
         <div className={styles.sign_btn}>
           <button className={styles.sign_out_btn}>
-            <Link href="/pages/auth/signin" scroll={false} passHref>
+            <Link href={signInBtn} scroll={false} passHref>
               サインインへ
             </Link>
           </button>
