@@ -58,7 +58,7 @@ const SelectPage = (params) => {
 
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
-
+  console.log(data);
   return isLoggedIn ? (
     <>
       <Head>

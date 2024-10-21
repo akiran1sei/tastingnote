@@ -10,7 +10,11 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const router = useRouter();
-
+  useEffect(() => {
+    // サインインページを事前に読み込む
+    router.prefetch("/pages/auth/signin");
+    router.prefetch("/pages/auth/signup");
+  }, [router]);
   useEffect(() => {
     const checkAuth = () => {
       if (typeof window !== "undefined") {
