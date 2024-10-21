@@ -11,7 +11,6 @@ export async function GET(req, res) {
     revalidatePath(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
 
     const userData = await UserModel.findById(res.params.user);
-
     if (user === null || user === undefined || user === "") {
       const allItems = await BeansModel.find({
         userEmail: userData.email,
@@ -20,6 +19,7 @@ export async function GET(req, res) {
         .sort({ createdAt: 1 })
         .limit(100)
         .exec();
+      console.log("allItems(ALL):", allItems);
       return NextResponse.json({
         message: "読み取り成功（オール）",
         allItems: allItems,
@@ -33,6 +33,7 @@ export async function GET(req, res) {
         .sort({ createdAt: 1 })
         .limit(100)
         .exec();
+      console.log("allItems:", allItems);
       return NextResponse.json({
         message: "読み取り成功（オール）",
         allItems: allItems,
