@@ -49,10 +49,14 @@ export function Select(context) {
     setIsUserEmail(UserInformation.email);
   }, []);
 
-  const { data, error } = useSWR(`/pages/api/group/chioce`, fetcher, {
-    initial: true, // 初回レンダリング時に必ず更新
-    onBackgroundUpdate: true, // バックグラウンドで再読み込み
-  });
+  const { data, error } = useSWR(
+    `${process.env.NEXT_PUBLIC_URL}/pages/api/group/chioce`,
+    fetcher,
+    {
+      initial: true, // 初回レンダリング時に必ず更新
+      onBackgroundUpdate: true, // バックグラウンドで再読み込み
+    }
+  );
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
 
