@@ -305,11 +305,14 @@
 }
 .select_list {
   width: 100%;
+  height: 100%;
   display: flex;
+
   flex-direction: column;
   flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
+  text-align: center;
 }
 
 .select_wrap::-webkit-scrollbar {
@@ -357,7 +360,7 @@
 }
 .select_delete_list {
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 .select_beans_link {
   width: 100%;
@@ -371,15 +374,6 @@
   flex-wrap: nowrap;
   align-items: stretch;
   margin-left: 100px;
-}
-.select_list {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .select_title {
@@ -510,13 +504,6 @@ input[type="range"].select_input_roast {
   font-size: var(--font-size-small);
 }
 
-span.select_checkbox {
-  margin-top: 0;
-  /* position: absolute;
-  top: 0;
-  left: 0; */
-}
-
 .select_resultTxt {
   font-weight: bold;
 }
@@ -527,7 +514,8 @@ span.select_checkbox {
 .select_checkbox {
   width: 100%;
   height: 100%;
-  max-height: 50px;
+}
+.select_checkbox_input {
 }
 @media screen and (min-width: 1000px) {
   .select_header_list {
@@ -583,7 +571,6 @@ span.select_checkbox {
   }
 
   .select_beans {
-    width: auto;
     min-width: auto;
     max-width: none;
     height: 100%;
@@ -664,7 +651,6 @@ span.select_checkbox {
   .select_index {
     min-width: 40px;
     max-width: 40px;
-    width: 100%;
 
     text-align: center;
   }
@@ -727,8 +713,8 @@ span.select_checkbox {
   .select_checkbox {
     width: 100%;
     max-height: none;
-    min-width: 24px;
-    max-width: 24px;
+    /* min-width: 24px;
+    max-width: 24px; */
   }
   .select_smallTxt {
     color: var(--color-yellow);
