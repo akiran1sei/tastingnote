@@ -45,7 +45,7 @@ const SelectPage = (params) => {
   const search = params.searchParams.user;
 
   const { data, error } = useSWR(
-    `/pages/api/readall/${isUser}?user=${search}`,
+    `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}?user=${search}`,
     // `/pages/api/readall/${isUser}?user=${search}`,
     fetcher,
     {
