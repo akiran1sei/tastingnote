@@ -339,38 +339,64 @@ export function Select(context) {
                         className={`${styles.select_list} ${styles.select_aroma}`}
                       >
                         <div className={styles.select_value}>
-                          <table
-                            border="0"
-                            className={styles.select_aroma_table}
-                          >
-                            <tbody>
-                              <tr className={styles.select_aroma_table_row}>
-                                <th className={styles.select_yellowTxt}>
-                                  ドライ
-                                </th>
-                                <th className={styles.select_yellowTxt}>
-                                  クラスト
-                                </th>
-                                <th className={styles.select_yellowTxt}>
-                                  ブレーク
-                                </th>
-                              </tr>
-                              <tr className={styles.select_aroma_table_row}>
-                                <td>
-                                  {beans.aromaDryStrength}|
-                                  {beans.aromaDryQuality}
-                                </td>
-                                <td>
-                                  {beans.aromaCrustStrength}|
-                                  {beans.aromaCrustQuality}
-                                </td>
-                                <td>
-                                  {beans.aromaBreakStrength}|
-                                  {beans.aromaBreakQuality}
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
+                          <div className={styles.select_aroma_box}>
+                            <div className={styles.select_aroma_header}>
+                              <div className={styles.select_aroma_headerTitle}>
+                                ドライ
+                              </div>
+                              <div className={styles.select_aroma_headerTitle}>
+                                クラスト
+                              </div>
+                              <div className={styles.select_aroma_headerTitle}>
+                                ブレーク
+                              </div>
+                            </div>
+                            <div className={styles.select_aroma_valueHeader}>
+                              <div
+                                className={styles.select_aroma_valueHeader_list}
+                              ></div>
+                              <div
+                                className={styles.select_aroma_valueHeader_list}
+                              >
+                                強さ：
+                              </div>
+                              <div
+                                className={styles.select_aroma_valueHeader_list}
+                              >
+                                質　：
+                              </div>
+                            </div>
+                            <div
+                              className={styles.select_aroma_valueListStrength}
+                            >
+                              <div className={styles.select_aroma_valueIItem}>
+                                {beans.aromaDryStrength}
+                              </div>
+
+                              <div className={styles.select_aroma_valueIItem}>
+                                {beans.aromaCrustStrength}
+                              </div>
+
+                              <div className={styles.select_aroma_valueIItem}>
+                                {beans.aromaBreakStrength}
+                              </div>
+                            </div>
+                            <div
+                              className={styles.select_aroma_valueListQuality}
+                            >
+                              <div className={styles.select_aroma_valueIItem}>
+                                {beans.aromaDryQuality}
+                              </div>
+
+                              <div className={styles.select_aroma_valueIItem}>
+                                {beans.aromaCrustQuality}
+                              </div>
+
+                              <div className={styles.select_aroma_valueIItem}>
+                                {beans.aromaBreakQuality}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </li>
                       <li
