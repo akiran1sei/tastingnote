@@ -112,6 +112,7 @@ export function Select(context) {
           <ul className={styles.select_menu_list}>
             <li className={styles.select_header_menu_item}>
               <button
+                type="button"
                 className={styles.select_header_menu_btn}
                 onClick={handleDeleteClick}
               >
@@ -124,17 +125,20 @@ export function Select(context) {
                 />
               </button>
             </li>
-            <li
-              className={styles.select_header_menu_item}
-              onClick={handleSearchClick}
-            >
-              <Image
-                src="/images/search_img.svg"
-                alt="検索ボタン"
-                width={24}
-                height={24}
-                priority
-              />
+            <li className={styles.select_header_menu_item}>
+              <button
+                type="button"
+                className={styles.select_header_menu_btn}
+                onClick={handleSearchClick}
+              >
+                <Image
+                  src="/images/search_img.svg"
+                  alt="検索ボタン"
+                  width={24}
+                  height={24}
+                  priority
+                />
+              </button>
             </li>
           </ul>
         </nav>
