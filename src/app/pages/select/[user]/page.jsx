@@ -6,9 +6,10 @@ import useSWR from "swr";
 import styles from "@/app/styles/Contents.module.css";
 import { jwtDecode } from "jwt-decode";
 import dotenv from "dotenv";
-const SelectPage = (params, searchParams) => {
+const SelectPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUser, setIsUser] = useState("");
+  const [isItem, setIsItem] = useState("");
   dotenv.config();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -38,15 +39,16 @@ const SelectPage = (params, searchParams) => {
           return null;
         }
       };
+      const urlParams = new URLSearchParams(window.location.search);
+      const ItemId = urlParams.get("user");
+      setIsItem(ItemId);
       const UserInformation = getUser();
       setIsUser(UserInformation.id);
     }
   }, []);
 
-  const search = params.searchParams.user;
-
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}?user=${search}`,
+    `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}?user=${isItem}`,
     // `/pages/api/readall/${isUser}?user=${search}`,
     fetcher,
     {
