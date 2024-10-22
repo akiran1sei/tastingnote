@@ -6,7 +6,7 @@ import useSWR from "swr";
 import styles from "@/app/styles/Contents.module.css";
 import { jwtDecode } from "jwt-decode";
 import dotenv from "dotenv";
-const SelectPage = (params) => {
+const SelectPage = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUser, setIsUser] = useState("");
   dotenv.config();
@@ -42,7 +42,8 @@ const SelectPage = (params) => {
       setIsUser(UserInformation.id);
     }
   }, []);
-  const search = params.searchParams.user;
+
+  const search = props.searchParams.user;
 
   const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}?user=${search}`,
@@ -58,7 +59,7 @@ const SelectPage = (params) => {
 
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
-  console.log(data);
+
   return isLoggedIn ? (
     <>
       <Head>
