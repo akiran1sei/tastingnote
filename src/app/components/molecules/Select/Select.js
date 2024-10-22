@@ -12,12 +12,12 @@ export function Select(context) {
   dotenv.config();
   const limitedData = context.data.allItems;
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const [showSearchButton, setShowSearchButton] = useState(false);
+  // const [showSearchButton, setShowSearchButton] = useState(false);
   const [isUserEmail, setIsUserEmail] = useState("");
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
   const ReadGroups = useReadGroups();
-  const [SearchData, setSearchData] = useState(ReadGroups);
+  // const [SearchData, setSearchData] = useState(ReadGroups);
   const [isUser, setIsUser] = useState("");
   useEffect(() => {
     const getUser = () => {
