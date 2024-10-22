@@ -19,7 +19,7 @@ export async function GET(req, res) {
         .sort({ createdAt: 1 })
         .limit(100)
         .exec();
-      console.log("allItems(ALL):", allItems);
+
       return NextResponse.json({
         message: "読み取り成功（オール）",
         allItems: allItems,
@@ -33,7 +33,7 @@ export async function GET(req, res) {
         .sort({ createdAt: 1 })
         .limit(100)
         .exec();
-      console.log("allItems:", allItems);
+
       return NextResponse.json({
         message: "読み取り成功（オール）",
         allItems: allItems,
