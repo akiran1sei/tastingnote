@@ -69,16 +69,16 @@ export function Select(context) {
     );
   });
 
-  const handleSearch = async (value) => {
-    return router.replace(
-      `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
-    );
-  };
+  // const handleSearch = async (value) => {
+  //   return router.replace(
+  //     `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
+  //   );
+  // };
 
-  const handleSearchClick = () => {
-    // 親コンポーネントにメッセージを送信
-    setShowSearchButton(!showSearchButton);
-  };
+  // const handleSearchClick = () => {
+  //   // 親コンポーネントにメッセージを送信
+  //   setShowSearchButton(!showSearchButton);
+  // };
   const handleDeleteClick = () => {
     // 親コンポーネントにメッセージを送信
     setShowDeleteButton(!showDeleteButton);
@@ -129,7 +129,7 @@ export function Select(context) {
                 />
               </button>
             </li>
-            <li className={styles.select_header_menu_item}>
+            {/* <li className={styles.select_header_menu_item}>
               <button
                 type="button"
                 className={styles.select_header_menu_btn}
@@ -143,7 +143,7 @@ export function Select(context) {
                   priority
                 />
               </button>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </header>
@@ -164,7 +164,7 @@ export function Select(context) {
               </button>
             </li>
           )}
-          {showSearchButton && (
+          {/* {showSearchButton && (
             <li
               className={styles.select_header_active_menu_item}
               hidden={!showSearchButton}
@@ -202,7 +202,7 @@ export function Select(context) {
                 </div>
               </div>
             </li>
-          )}
+          )} */}
         </ul>
       </div>
 
