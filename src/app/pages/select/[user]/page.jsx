@@ -6,7 +6,7 @@ import useSWR from "swr";
 import styles from "@/app/styles/Contents.module.css";
 import { jwtDecode } from "jwt-decode";
 import dotenv from "dotenv";
-const SelectPage = (props) => {
+const SelectPage = (params, searchParams) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUser, setIsUser] = useState("");
   dotenv.config();
@@ -43,7 +43,7 @@ const SelectPage = (props) => {
     }
   }, []);
 
-  const search = props.searchParams.user;
+  const search = params.searchParams.user;
 
   const { data, error } = useSWR(
     `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}?user=${search}`,
