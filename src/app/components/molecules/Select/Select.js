@@ -10,7 +10,6 @@ import dotenv from "dotenv";
 import { jwtDecode } from "jwt-decode";
 dotenv.config();
 export function Select(context) {
-  console.log(context.data.searchParams.user);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
@@ -20,8 +19,8 @@ export function Select(context) {
   const [SearchData, setSearchData] = useState(context.data.searchParams.user);
   const ReadGroups = useReadGroups();
   const [SearchGroup, setSearchGroup] = useState("");
-  const [isGroupLink, setGroupLink] = useState();
   const [isUser, setIsUser] = useState("");
+  const [isGroup, setIsGroup] = useState("");
   useEffect(() => {
     const token = localStorage.getItem("token");
     const getUser = () => {
@@ -49,6 +48,7 @@ export function Select(context) {
       }
     };
     const UserInformation = getUser();
+
     setIsLoggedIn(!!token);
     setIsUser(UserInformation.id);
     setIsUserEmail(UserInformation.email);
@@ -68,19 +68,17 @@ export function Select(context) {
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
 
-  const GroupOptions = [];
-
-  data.allItems.map((group) => {
-    GroupOptions.push(
-      <option key={group._id} value={group.groupname}>
-        {group.groupname}
-      </option>
-    );
-  });
+  // ReadGroups.map((group) => {
+  //   setIsGroup(
+  //     <option key={group._id} value={group.groupname}>
+  //       {group.groupname}
+  //     </option>
+  //   );
+  // });
   async function handleSearch(value) {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}`,
+        `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}?user=${SearchGroup}`,
         {
           method: "GET",
           headers: {
@@ -100,14 +98,6 @@ export function Select(context) {
       return alert("失敗");
     }
   }
-  // const handleSearch = async (value) => {
-  //   setSearchData(value); // ここでSearchDataを更新
-
-  //   // データが更新された後にルーティングを実行
-  //   router.replace(
-  //     `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
-  //   );
-  // };
 
   const handleSearchClick = () => {
     // 親コンポーネントにメッセージを送信
@@ -218,7 +208,14 @@ export function Select(context) {
                   >
                     <optgroup label="Group">
                       <option value={""}>All</option>
-                      {GroupOptions}
+
+                      {ReadGroups.map((group) => {
+                        return (
+                          <option key={group._id} value={group.groupname}>
+                            {group.groupname}
+                          </option>
+                        );
+                      })}
                     </optgroup>
                   </select>
                   <button
