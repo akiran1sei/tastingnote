@@ -8,18 +8,22 @@ import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import dotenv from "dotenv";
 import { jwtDecode } from "jwt-decode";
+dotenv.config();
 export function Select(context) {
-  dotenv.config();
-  const limitedData = context.data.allItems;
+  console.log(context.data.searchParams.user);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  // const [showSearchButton, setShowSearchButton] = useState(false);
+  const [showSearchButton, setShowSearchButton] = useState(false);
   const [isUserEmail, setIsUserEmail] = useState("");
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
+  const [SearchData, setSearchData] = useState(context.data.searchParams.user);
   const ReadGroups = useReadGroups();
-  // const [SearchData, setSearchData] = useState(ReadGroups);
+  const [SearchGroup, setSearchGroup] = useState("");
+  const [isGroupLink, setGroupLink] = useState();
   const [isUser, setIsUser] = useState("");
   useEffect(() => {
+    const token = localStorage.getItem("token");
     const getUser = () => {
       const token = localStorage.getItem("token");
 
@@ -45,40 +49,70 @@ export function Select(context) {
       }
     };
     const UserInformation = getUser();
+    setIsLoggedIn(!!token);
     setIsUser(UserInformation.id);
     setIsUserEmail(UserInformation.email);
   }, []);
 
   const { data, error } = useSWR(
-    `${process.env.NEXT_PUBLIC_URL}/pages/api/group/chioce`,
+    `/pages/api/readall/${isUser}?user=${SearchData}`,
     fetcher,
     {
       initial: true, // 初回レンダリング時に必ず更新
       onBackgroundUpdate: true, // バックグラウンドで再読み込み
+      revalidateOnMount: true, // マウント時に再検証
+      revalidateOnReconnect: true, // 再接続時に再検証
     }
   );
+
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
 
   const GroupOptions = [];
-  data.groups.map((group) => {
+
+  data.allItems.map((group) => {
     GroupOptions.push(
       <option key={group._id} value={group.groupname}>
         {group.groupname}
       </option>
     );
   });
+  async function handleSearch(value) {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}`,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Cache-Control": "no-store",
+          },
+        }
+      );
+      const jsonData = await response.json();
 
+      alert(jsonData.message);
+      return router.replace(
+        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
+      );
+    } catch (err) {
+      return alert("失敗");
+    }
+  }
   // const handleSearch = async (value) => {
-  //   return router.replace(
+  //   setSearchData(value); // ここでSearchDataを更新
+
+  //   // データが更新された後にルーティングを実行
+  //   router.replace(
   //     `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
   //   );
   // };
 
-  // const handleSearchClick = () => {
-  //   // 親コンポーネントにメッセージを送信
-  //   setShowSearchButton(!showSearchButton);
-  // };
+  const handleSearchClick = () => {
+    // 親コンポーネントにメッセージを送信
+    setShowSearchButton(!showSearchButton);
+  };
   const handleDeleteClick = () => {
     // 親コンポーネントにメッセージを送信
     setShowDeleteButton(!showDeleteButton);
@@ -109,7 +143,7 @@ export function Select(context) {
       return alert("アイテム削除失敗/Select");
     }
   }
-  return (
+  return isLoggedIn ? (
     <>
       <header className={styles.select_header}>
         <nav className={styles.select_header_menu}>
@@ -129,7 +163,7 @@ export function Select(context) {
                 />
               </button>
             </li>
-            {/* <li className={styles.select_header_menu_item}>
+            <li className={styles.select_header_menu_item}>
               <button
                 type="button"
                 className={styles.select_header_menu_btn}
@@ -143,7 +177,7 @@ export function Select(context) {
                   priority
                 />
               </button>
-            </li> */}
+            </li>
           </ul>
         </nav>
       </header>
@@ -164,7 +198,7 @@ export function Select(context) {
               </button>
             </li>
           )}
-          {/* {showSearchButton && (
+          {showSearchButton && (
             <li
               className={styles.select_header_active_menu_item}
               hidden={!showSearchButton}
@@ -178,8 +212,8 @@ export function Select(context) {
                   <select
                     name="search"
                     id="search"
-                    value={SearchData}
-                    onChange={(e) => setSearchData(e.target.value)}
+                    value={SearchGroup}
+                    onChange={(e) => setSearchGroup(e.target.value)}
                     className={styles.searchBar_select}
                   >
                     <optgroup label="Group">
@@ -188,7 +222,8 @@ export function Select(context) {
                     </optgroup>
                   </select>
                   <button
-                    onClick={() => handleSearch(SearchData)}
+                    type="button"
+                    onClick={() => handleSearch(SearchGroup)}
                     className={styles.searchBar_button}
                   >
                     <Image
@@ -202,7 +237,7 @@ export function Select(context) {
                 </div>
               </div>
             </li>
-          )} */}
+          )}
         </ul>
       </div>
 
@@ -298,7 +333,7 @@ export function Select(context) {
             </li>
           </ul>
           <div className={styles.select_beans_box}>
-            {limitedData.map((beans, index) => (
+            {data.allItems.map((beans, index) => (
               <div className={styles.select_beans} key={beans._id}>
                 {showDeleteButton ? (
                   <div className={styles.select_delete_list}>
@@ -643,6 +678,10 @@ export function Select(context) {
         </div>
       </div>
     </>
+  ) : (
+    <div className={styles.sign_off_page}>
+      <p className={styles.sign_off_text}>ログインしてください。</p>
+    </div>
   );
 }
 const fetcher = async (url) => {
