@@ -1,4 +1,5 @@
 //not-found.js
+"use client";
 import styles from "@/app/styles/Error_404.module.css";
 import { useRouter } from "next/navigation";
 export default function NotFound() {

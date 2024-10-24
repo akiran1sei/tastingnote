@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 export async function GET(req, res) {
   try {
     await connectDB();
-
+    console.log("req", req, "res", res);
     const { searchParams } = new URL(req.url);
     const user = searchParams.get("user");
     revalidatePath(`${process.env.NEXT_PUBLIC_URL}/pages/select`);

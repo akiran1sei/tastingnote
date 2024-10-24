@@ -16,11 +16,12 @@ export function Select(context) {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
-  const [SearchData, setSearchData] = useState(context.data.searchParams.user);
+
   const ReadGroups = useReadGroups();
   const [SearchGroup, setSearchGroup] = useState("");
   const [isUser, setIsUser] = useState("");
   const [isGroup, setIsGroup] = useState("");
+  console.log(context);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const getUser = () => {
@@ -55,7 +56,7 @@ export function Select(context) {
   }, []);
 
   const { data, error } = useSWR(
-    `/pages/api/readall/${isUser}?user=${SearchData}`,
+    `/pages/api/readall/${isUser}?user=${context.data.searchParams.user}`,
     fetcher,
     {
       initial: true, // 初回レンダリング時に必ず更新
@@ -68,13 +69,6 @@ export function Select(context) {
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
 
-  // ReadGroups.map((group) => {
-  //   setIsGroup(
-  //     <option key={group._id} value={group.groupname}>
-  //       {group.groupname}
-  //     </option>
-  //   );
-  // });
   async function handleSearch(value) {
     try {
       const response = await fetch(
@@ -91,6 +85,9 @@ export function Select(context) {
       const jsonData = await response.json();
 
       alert(jsonData.message);
+      // router.prefetch(
+      //   `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
+      // );
       return router.replace(
         `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
       );

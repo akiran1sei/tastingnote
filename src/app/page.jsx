@@ -17,11 +17,11 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    // サインインページを事前に読み込む
-    router.prefetch("/pages/auth/signin");
-    router.prefetch("/pages/auth/signup");
-  }, [router]);
+  // useEffect(() => {
+  //   // サインインページを事前に読み込む
+  //   router.prefetch("/pages/auth/signin");
+  //   router.prefetch("/pages/auth/signup");
+  // }, [router]);
   useEffect(() => {
     const checkAuth = () => {
       if (typeof window !== "undefined") {
