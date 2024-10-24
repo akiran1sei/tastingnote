@@ -1560,12 +1560,6 @@ input[type="range"].select_input_roast {
   height: 30px;
   margin: 0 0.5rem;
 }
-.download_HomeBtn {
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transform: translateY(calc(50vh - 50px));
-}
 
 /* 
 

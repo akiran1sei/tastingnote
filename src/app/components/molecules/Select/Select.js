@@ -21,7 +21,6 @@ export function Select(context) {
   const [SearchGroup, setSearchGroup] = useState("");
   const [isUser, setIsUser] = useState("");
   const [isGroup, setIsGroup] = useState("");
-  console.log(context);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const getUser = () => {
@@ -85,9 +84,6 @@ export function Select(context) {
       const jsonData = await response.json();
 
       alert(jsonData.message);
-      // router.prefetch(
-      //   `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
-      // );
       return router.replace(
         `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
       );
@@ -193,42 +189,44 @@ export function Select(context) {
             >
               <div className={styles.searchBarBox}>
                 <div className={styles.searchBar}>
-                  <label htmlFor="search" className={styles.searchBar_label}>
-                    SEARCH
-                  </label>
+                  <form>
+                    <label htmlFor="search" className={styles.searchBar_label}>
+                      SEARCH
+                    </label>
+                    <select
+                      name="search"
+                      id="search"
+                      value={SearchGroup}
+                      onChange={(e) => setSearchGroup(e.target.value)}
+                      className={styles.searchBar_select}
+                    >
+                      <optgroup label="Group">
+                        <option value={""}>All</option>
 
-                  <select
-                    name="search"
-                    id="search"
-                    value={SearchGroup}
-                    onChange={(e) => setSearchGroup(e.target.value)}
-                    className={styles.searchBar_select}
-                  >
-                    <optgroup label="Group">
-                      <option value={""}>All</option>
+                        {ReadGroups.map((group) => {
+                          return (
+                            <option key={group._id} value={group.groupname}>
+                              {group.groupname}
+                            </option>
+                          );
+                        })}
+                      </optgroup>
+                    </select>
 
-                      {ReadGroups.map((group) => {
-                        return (
-                          <option key={group._id} value={group.groupname}>
-                            {group.groupname}
-                          </option>
-                        );
-                      })}
-                    </optgroup>
-                  </select>
-                  <button
-                    type="button"
-                    onClick={() => handleSearch(SearchGroup)}
-                    className={styles.searchBar_button}
-                  >
-                    <Image
-                      src="/images/search_img.svg"
-                      alt="検索ボタン"
-                      width={24}
-                      height={24}
-                      priority
-                    />
-                  </button>
+                    <button
+                      type="button"
+                      onClick={() => handleSearch(SearchGroup)}
+                      className={styles.searchBar_button}
+                    >
+                      <Image
+                        src="/images/search_img.svg"
+                        alt="検索ボタン"
+                        width={24}
+                        height={24}
+                        priority
+                      />
+                    </button>
+                  </form>
                 </div>
               </div>
             </li>

@@ -127,29 +127,23 @@
   color: var(--color-yellow);
   background-color: var(--color-white);
 }
-.create_button,
-.download_button {
+.create_button {
   margin: 0.5rem 0;
 }
-.create_menu,
-.download_menu {
+.create_menu {
   display: none;
   margin: 1rem 0;
   transform: translateY(-50px);
 }
-.active_create > .create_menu,
-.active_download > .download_menu {
+.active_create > .create_menu {
   display: block;
   transform: translateY(0px);
   transition-duration: 1s;
 }
-.create_menu_item:active,
-.download_menu_item:active {
+.create_menu_item:active {
   box-shadow: inset 4px 4px 0px 0px #33333340;
 }
-.create_menu_item:first-child,
-.download_menu_item:nth-child(1),
-.download_menu_item:nth-child(2) {
+.create_menu_item:first-child {
   margin-bottom: 1rem;
 }
 
