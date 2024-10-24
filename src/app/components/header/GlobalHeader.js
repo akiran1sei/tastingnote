@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
+
 export function GlobalHeader() {
   const [isActive, setIsActive] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -104,14 +105,14 @@ export function GlobalHeader() {
             ) : (
               <>
                 <li className={header.menu_item}>
-                  <Link href="/pages/auth/signin" scroll={false}>
-                    <button onClick={toggleMenu}>SignIn</button>
-                  </Link>
+                  <button onClick={() => navigateTo("/pages/auth/signin")}>
+                    SignIn
+                  </button>
                 </li>
                 <li className={header.menu_item}>
-                  <Link href="/pages/auth/signup" scroll={false}>
-                    <button onClick={toggleMenu}>SignUp</button>
-                  </Link>
+                  <button onClick={() => navigateTo("/pages/auth/signup")}>
+                    SignUp
+                  </button>
                 </li>
               </>
             )}

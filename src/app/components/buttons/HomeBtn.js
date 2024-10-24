@@ -36,12 +36,17 @@ export function HomeBtn() {
     const UserInformation = getUser();
     setIsUser(UserInformation.id);
   }, []);
+  const navigateTo = (path) => {
+    if (router.pathname !== path) {
+      router.push(path);
+    }
+  };
 
   return (
     <button
       type="button"
       className={Buttons.icon_btn}
-      onClick={() => router.replace(`/pages/select/${isUser}?user=`)}
+      onClick={() => navigateTo(`/pages/select/${isUser}?user=`)}
     >
       <Image
         src="/images/home_img.svg"

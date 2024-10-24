@@ -47,10 +47,8 @@ const Signout = () => {
         </p>
         {error && <p className={styles.error_message}>{error}</p>}
         <div className={styles.sign_btn}>
-          <button className={styles.sign_out_btn}>
-            <Link href={signInBtn} scroll={false} passHref>
-              サインインへ
-            </Link>
+          <button className={styles.sign_out_btn} onClick={signInBtn}>
+            サインインへ
           </button>
         </div>
       </div>
