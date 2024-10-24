@@ -12,6 +12,11 @@ export function GroupCreate(context) {
   const [groupChoice, setGroupChoice] = useState(ReadGroups);
   const [error, setError] = useState("");
   const router = useRouter();
+  const navigateTo = (path) => {
+    if (router.pathname !== path) {
+      router.push(path);
+    }
+  };
 
   const data = context.data.groups;
 
@@ -83,9 +88,10 @@ export function GroupCreate(context) {
       }
     );
     const jsonData = await response.json();
+    const pathname = router.pathname;
     router.refresh({ shallow: true });
     alert(jsonData.message);
-    return location.reload();
+    return router.push(pathname);
   };
 
   return (
@@ -153,10 +159,11 @@ export function GroupCreate(context) {
                 </form>
               </li>
             </ul>
-            <button className={styles.group_next_btn}>
-              <Link href={"/pages/create/beans"} scroll={false} passHref>
-                New Page
-              </Link>
+            <button
+              className={styles.group_next_btn}
+              onClick={() => navigateTo("/pages/create/beans")}
+            >
+              New Page
             </button>
           </div>
         </div>

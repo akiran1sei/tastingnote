@@ -1,13 +1,13 @@
 import connectDB from "../../../../utils/database";
 import { GroupModel } from "@/app/utils/schemaModels";
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 
 export async function GET() {
   try {
     await connectDB();
     // const groups = await GroupModel.find({ groupname: { $exists: true } });
-    await revalidatePath(`${process.env.NEXT_PUBLIC_URL}/pages/group`);
+    // await revalidatePath(`${process.env.NEXT_PUBLIC_URL}/pages/group`);
     const groups = await GroupModel.aggregate([
       {
         $match: {

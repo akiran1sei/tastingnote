@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
+
 export function GlobalHeader() {
   const [isActive, setIsActive] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,7 +45,7 @@ export function GlobalHeader() {
   }, []);
 
   const toggleMenu = () => setIsActive(!isActive);
-
+  const pathname = router.pathname;
   const navigateTo = (path) => {
     if (router.pathname !== path) {
       router.push(path);
@@ -104,21 +105,21 @@ export function GlobalHeader() {
             ) : (
               <>
                 <li className={header.menu_item}>
-                  <Link href="/pages/auth/signin" scroll={false}>
-                    <button onClick={toggleMenu}>SignIn</button>
-                  </Link>
+                  <button onClick={() => navigateTo("/pages/auth/signin")}>
+                    SignIn
+                  </button>
                 </li>
                 <li className={header.menu_item}>
-                  <Link href="/pages/auth/signup" scroll={false}>
-                    <button onClick={toggleMenu}>SignUp</button>
-                  </Link>
+                  <button onClick={() => navigateTo("/pages/auth/signup")}>
+                    SignUp
+                  </button>
                 </li>
               </>
             )}
             <li className={header.menu_item}>
               <button
                 type="button"
-                onClick={() => location.reload()}
+                onClick={() => navigateTo(pathname)}
                 className={header.reload_btn}
               >
                 <span className={header.reload_img}>
