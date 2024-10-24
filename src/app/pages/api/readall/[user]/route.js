@@ -1,7 +1,7 @@
 import connectDB from "../../../../utils/database";
 import { BeansModel, UserModel } from "../../../../utils/schemaModels";
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 
 export async function GET(req, res) {
   try {
@@ -9,7 +9,7 @@ export async function GET(req, res) {
     console.log("req", req, "res", res);
     const { searchParams } = new URL(req.url);
     const user = searchParams.get("user");
-    revalidatePath(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
+    // revalidatePath(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
 
     const userData = await UserModel.findById(res.params.user);
     if (user === null || user === undefined || user === "") {
