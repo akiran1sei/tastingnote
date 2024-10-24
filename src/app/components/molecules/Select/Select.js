@@ -215,7 +215,7 @@ export function Select(context) {
                       </optgroup>
                     </select>
 
-                    {/* <button
+                    <button
                       type="button"
                       onClick={() => handleSearch(SearchGroup)}
                       className={styles.searchBar_button}
@@ -227,7 +227,7 @@ export function Select(context) {
                         height={24}
                         priority
                       />
-                    </button> */}
+                    </button>
                   </form>
                 </div>
               </div>
