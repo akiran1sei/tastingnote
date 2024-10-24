@@ -12,15 +12,15 @@ dotenv.config();
 export function Select(context) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
-  const [showSearchButton, setShowSearchButton] = useState(false);
+  // const [showSearchButton, setShowSearchButton] = useState(false);
   const [isUserEmail, setIsUserEmail] = useState("");
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
 
   const ReadGroups = useReadGroups();
-  const [SearchGroup, setSearchGroup] = useState("");
+  // const [SearchGroup, setSearchGroup] = useState("");
   const [isUser, setIsUser] = useState("");
-  const [isGroup, setIsGroup] = useState("");
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const getUser = () => {
@@ -55,7 +55,8 @@ export function Select(context) {
   }, []);
 
   const { data, error } = useSWR(
-    `/pages/api/readall/${isUser}?user=${context.data.searchParams.user}`,
+    `/pages/api/readall/${isUser}?user=`,
+    // `/pages/api/readall/${isUser}?user=${context.data.searchParams.user}`,
     fetcher,
     {
       initial: true, // 初回レンダリング時に必ず更新
@@ -68,34 +69,34 @@ export function Select(context) {
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
 
-  async function handleSearch(value) {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}?user=${SearchGroup}`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Cache-Control": "no-store",
-          },
-        }
-      );
-      const jsonData = await response.json();
+  // async function handleSearch(value) {
+  //   try {
+  //     const response = await fetch(
+  //       `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}?user=${SearchGroup}`,
+  //       {
+  //         method: "GET",
+  //         headers: {
+  //           Accept: "application/json",
+  //           "Content-Type": "application/json",
+  //           "Cache-Control": "no-store",
+  //         },
+  //       }
+  //     );
+  //     const jsonData = await response.json();
 
-      alert(jsonData.message);
-      return router.replace(
-        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
-      );
-    } catch (err) {
-      return alert("失敗");
-    }
-  }
+  //     alert(jsonData.message);
+  //     return router.replace(
+  //       `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
+  //     );
+  //   } catch (err) {
+  //     return alert("失敗");
+  //   }
+  // }
 
-  const handleSearchClick = () => {
-    // 親コンポーネントにメッセージを送信
-    setShowSearchButton(!showSearchButton);
-  };
+  // const handleSearchClick = () => {
+  //   // 親コンポーネントにメッセージを送信
+  //   setShowSearchButton(!showSearchButton);
+  // };
   const handleDeleteClick = () => {
     // 親コンポーネントにメッセージを送信
     setShowDeleteButton(!showDeleteButton);
@@ -147,7 +148,7 @@ export function Select(context) {
                 />
               </button>
             </li>
-            <li className={styles.select_header_menu_item}>
+            {/* <li className={styles.select_header_menu_item}>
               <button
                 type="button"
                 className={styles.select_header_menu_btn}
@@ -161,7 +162,7 @@ export function Select(context) {
                   priority
                 />
               </button>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </header>
@@ -182,7 +183,7 @@ export function Select(context) {
               </button>
             </li>
           )}
-          {showSearchButton && (
+          {/* {showSearchButton && (
             <li
               className={styles.select_header_active_menu_item}
               hidden={!showSearchButton}
@@ -230,7 +231,7 @@ export function Select(context) {
                 </div>
               </div>
             </li>
-          )}
+          )} */}
         </ul>
       </div>
 
