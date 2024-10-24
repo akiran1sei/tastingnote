@@ -1,7 +1,7 @@
 "use client";
 import styles from "@/app/styles/Contents.module.css";
 import Image from "next/image";
-import Link from "next/link";
+
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,13 @@ const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(null);
   const router = useRouter();
+
+  const navigateTo = (path) => {
+    if (router.pathname !== path) {
+      router.push(path);
+    }
+  };
+
   useEffect(() => {
     // サインインページを事前に読み込む
     router.prefetch("/pages/auth/signin");
@@ -60,30 +67,32 @@ const Home = () => {
         <ul className={styles.home_nav_list}>
           {isLoggedIn ? (
             <li className={styles.home_nav_item}>
-              <button type="button" className={styles.home_start_btn}>
-                <Link
-                  href={`/pages/select/${userId}?user=`}
-                  scroll={false}
-                  passHref
-                >
-                  START
-                </Link>
+              <button
+                type="button"
+                className={styles.home_start_btn}
+                onClick={() => navigateTo(`/pages/select/${userId}?user=`)}
+              >
+                START
               </button>
             </li>
           ) : (
             <>
               <li className={styles.home_nav_item}>
-                <button type="button" className={styles.home_log_btn}>
-                  <Link href="/pages/auth/signin" scroll={false} passHref>
-                    SignIn
-                  </Link>
+                <button
+                  type="button"
+                  className={styles.home_log_btn}
+                  onClick={() => navigateTo("/pages/auth/signin")}
+                >
+                  SignIn
                 </button>
               </li>
               <li className={styles.home_nav_item}>
-                <button type="button" className={styles.home_log_btn}>
-                  <Link href="/pages/auth/signup" scroll={false} passHref>
-                    SignUp
-                  </Link>
+                <button
+                  type="button"
+                  className={styles.home_log_btn}
+                  onClick={() => navigateTo("/pages/auth/signup")}
+                >
+                  SignUp
                 </button>
               </li>
             </>

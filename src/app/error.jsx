@@ -1,13 +1,16 @@
 "use client"; // Error components must be Client Components
 import styles from "@/app/styles/Error_404.module.css";
 import { useEffect } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 export default function Error({ error, reset }) {
+  const router = useRouter();
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error);
   }, [error]);
-
+  const ClickLink = () => {
+    router.replace("/");
+  };
   return (
     <div className={styles.error_404_page}>
       <h1 className={styles.error_404_title}>
@@ -25,10 +28,12 @@ export default function Error({ error, reset }) {
         >
           Try again
         </button>
-        <button type="button" className={styles.error_404_button}>
-          <Link href={"/"} scroll={false} passHref>
-            Home へ
-          </Link>
+        <button
+          type="button"
+          className={styles.error_404_button}
+          onClick={ClickLink}
+        >
+          Home へ
         </button>
       </div>
     </div>
