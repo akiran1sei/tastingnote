@@ -123,7 +123,8 @@ export function Select(context) {
 
         const json = await response.json();
         setShowDeleteButton(false);
-        await location.reload();
+
+        await router.push(`/pages/select/${isUser}?user=`);
         return alert(json.message);
       }
     } catch (err) {
