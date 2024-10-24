@@ -88,9 +88,10 @@ export function GroupCreate(context) {
       }
     );
     const jsonData = await response.json();
+    const pathname = router.pathname;
     router.refresh({ shallow: true });
     alert(jsonData.message);
-    return location.reload();
+    return router.push(pathname);
   };
 
   return (
