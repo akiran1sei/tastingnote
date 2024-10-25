@@ -219,7 +219,7 @@ export function BeansCreate(context) {
       const jsonData = await response.json();
       alert(jsonData.message);
 
-      return router.replace(`/pages/select/${isUser}?user=`);
+      return router.replace(`/pages/select`);
     } catch (error) {
       return alert("アイテム作成失敗");
     }

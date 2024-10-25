@@ -70,7 +70,7 @@ const Home = () => {
               <button
                 type="button"
                 className={styles.home_start_btn}
-                onClick={() => navigateTo(`/pages/select/${userId}?user=`)}
+                onClick={() => navigateTo(`/pages/select`)}
               >
                 START
               </button>
