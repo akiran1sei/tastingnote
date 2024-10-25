@@ -6,8 +6,8 @@ import React, { useState, useEffect } from "react";
 import useReadGroups from "@/app/utils/useReadGroups";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
-import dotenv from "dotenv";
 import { jwtDecode } from "jwt-decode";
+import dotenv from "dotenv";
 dotenv.config();
 export function Select(context) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,8 +18,8 @@ export function Select(context) {
   const router = useRouter();
 
   const ReadGroups = useReadGroups();
-  console.log(ReadGroups);
-  const [SearchGroup, setSearchGroup] = useState(ReadGroups);
+  const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
+  const [searchQuery, setSearchQuery] = useState(""); // 実際の検索クエリ
   const [isUser, setIsUser] = useState("");
 
   useEffect(() => {
@@ -56,41 +56,26 @@ export function Select(context) {
   }, []);
 
   const { data, error } = useSWR(
-    // `/pages/api/readall/${isUser}?user=`,
-    `/pages/api/readall/${isUser}?user=${SearchGroup}`,
+    `/pages/api/readall/${isUser}?user=${searchQuery}`,
     fetcher,
     {
-      initial: true, // 初回レンダリング時に必ず更新
-      onBackgroundUpdate: true, // バックグラウンドで再読み込み
-      revalidateOnMount: true, // マウント時に再検証
-      revalidateOnReconnect: true, // 再接続時に再検証
+      revalidateOnMount: true,
+      revalidateOnReconnect: true,
     }
   );
 
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
 
-  async function handleSearch(value) {
+  async function handleSearch() {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/readall/${isUser}?user=${SearchGroup}`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            "Cache-Control": "no-store",
-          },
-        }
-      );
-      const jsonData = await response.json();
-
-      alert(jsonData.message);
-      return router.replace(
-        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${value}`
+      setSearchQuery(selectedGroup); // 検索クエリを更新
+      await router.replace(
+        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${selectedGroup}`
       );
     } catch (err) {
-      return alert("失敗");
+      console.error("Error during search:", err);
+      alert("検索に失敗しました");
     }
   }
 
@@ -191,44 +176,39 @@ export function Select(context) {
             >
               <div className={styles.searchBarBox}>
                 <div className={styles.searchBar}>
-                  <form>
-                    <label htmlFor="search" className={styles.searchBar_label}>
-                      SEARCH
-                    </label>
-                    <select
-                      name="search"
-                      id="search"
-                      value={SearchGroup}
-                      onChange={(e) => setSearchGroup(e.target.value)}
-                      className={styles.searchBar_select}
-                    >
-                      <optgroup label="Group">
-                        <option value={""}>All</option>
+                  <label htmlFor="search" className={styles.searchBar_label}>
+                    SEARCH
+                  </label>
+                  <select
+                    name="search"
+                    id="search"
+                    value={selectedGroup}
+                    onChange={(e) => setSelectedGroup(e.target.value)} // selectedGroup を更新
+                    className={styles.searchBar_select}
+                  >
+                    <optgroup label="Group">
+                      <option value="">All</option>
+                      {ReadGroups.map((group) => (
+                        <option key={group._id} value={group.groupname}>
+                          {group.groupname}
+                        </option>
+                      ))}
+                    </optgroup>
+                  </select>
 
-                        {ReadGroups.map((group) => {
-                          return (
-                            <option key={group._id} value={group.groupname}>
-                              {group.groupname}
-                            </option>
-                          );
-                        })}
-                      </optgroup>
-                    </select>
-
-                    <button
-                      type="button"
-                      onClick={() => handleSearch(SearchGroup)}
-                      className={styles.searchBar_button}
-                    >
-                      <Image
-                        src="/images/search_img.svg"
-                        alt="検索ボタン"
-                        width={24}
-                        height={24}
-                        priority
-                      />
-                    </button>
-                  </form>
+                  <button
+                    type="button"
+                    onClick={handleSearch} // 検索ボタンクリック時に handleSearch を実行
+                    className={styles.searchBar_button}
+                  >
+                    <Image
+                      src="/images/search_img.svg"
+                      alt="検索ボタン"
+                      width={24}
+                      height={24}
+                      priority
+                    />
+                  </button>
                 </div>
               </div>
             </li>
