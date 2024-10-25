@@ -57,7 +57,7 @@ export function DeleteBtn(context) {
         const jsonData = await response.json();
 
         alert(jsonData.message);
-        return router.replace(`/pages/select/${isUser}?user=`);
+        return router.replace(`/pages/select`);
       }
     } catch (err) {
       return alert("アイテム削除失敗/DeleteBtn");

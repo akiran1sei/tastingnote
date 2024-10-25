@@ -46,7 +46,7 @@ export function HomeBtn() {
     <button
       type="button"
       className={Buttons.icon_btn}
-      onClick={() => navigateTo(`/pages/select/${isUser}?user=`)}
+      onClick={() => navigateTo(`/pages/select`)}
     >
       <Image
         src="/images/home_img.svg"
