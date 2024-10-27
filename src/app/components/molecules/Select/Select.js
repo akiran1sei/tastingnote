@@ -54,7 +54,11 @@ export function Select(context) {
     setIsUser(UserInformation.id);
     setIsUserEmail(UserInformation.email);
   }, []);
-
+  useEffect(() => {
+    router.prefetch(
+      `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${searchQuery}`
+    );
+  }, [searchQuery]);
   const { data, error } = useSWR(
     `/pages/api/readall/${isUser}?user=${searchQuery}`,
     fetcher,
@@ -70,8 +74,8 @@ export function Select(context) {
   async function handleSearch() {
     try {
       setSearchQuery(selectedGroup); // 検索クエリを更新
-      await router.replace(
-        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${selectedGroup}`
+      await router.push(
+        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${searchQuery}`
       );
     } catch (err) {
       console.error("Error during search:", err);
