@@ -16,7 +16,7 @@ export function Select(context) {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
-
+  console.log("user:", data.searchParams.user);
   const ReadGroups = useReadGroups();
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
   const [searchQuery, setSearchQuery] = useState(""); // 実際の検索クエリ
@@ -59,6 +59,7 @@ export function Select(context) {
       `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${searchQuery}`
     );
   }, [searchQuery]);
+  // await fetch();
   const { data, error } = useSWR(
     `/pages/api/readall/${isUser}?user=${searchQuery}`,
     fetcher,
@@ -67,7 +68,7 @@ export function Select(context) {
       revalidateOnReconnect: true,
     }
   );
-
+  console.log(data);
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
 
