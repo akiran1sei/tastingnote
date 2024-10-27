@@ -7,6 +7,7 @@ import useReadGroups from "@/app/utils/useReadGroups";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
+import { useSearchParams } from "next/router";
 import dotenv from "dotenv";
 dotenv.config();
 export function Select(context) {
@@ -16,7 +17,10 @@ export function Select(context) {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("user");
+  console.log("query", query);
+  // console.log("user:", context.data.searchParams.user);
   const ReadGroups = useReadGroups();
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
   const [searchQuery, setSearchQuery] = useState(""); // 実際の検索クエリ
@@ -59,6 +63,7 @@ export function Select(context) {
       `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${searchQuery}`
     );
   }, [searchQuery]);
+  // await fetch();
   const { data, error } = useSWR(
     `/pages/api/readall/${isUser}?user=${searchQuery}`,
     fetcher,
@@ -67,7 +72,7 @@ export function Select(context) {
       revalidateOnReconnect: true,
     }
   );
-
+  console.log(data);
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
 
