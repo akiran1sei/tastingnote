@@ -16,7 +16,7 @@ export function Select(context) {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
-  console.log("user:", data.searchParams.user);
+  console.log("user:", context.data.searchParams.user);
   const ReadGroups = useReadGroups();
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
   const [searchQuery, setSearchQuery] = useState(""); // 実際の検索クエリ
