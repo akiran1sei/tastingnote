@@ -63,6 +63,7 @@ export function Select(context) {
     }
   );
   useEffect(() => {
+    // if (selectedGroup){}
     mutate(`/pages/api/readall/${isUser}?user=${selectedGroup}`);
   }, [selectedGroup, mutate]); // selectedGroup が変更されたら再フェッチ
 
@@ -73,7 +74,7 @@ export function Select(context) {
     try {
       setSearchQuery(selectedGroup);
       await router.push(
-        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${selectedGroup}`
+        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${searchQuery}`
       );
     } catch (err) {
       console.error("Error during search:", err);
