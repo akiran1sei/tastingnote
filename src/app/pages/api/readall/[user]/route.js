@@ -1,17 +1,15 @@
 import connectDB from "../../../../utils/database";
 import { BeansModel, UserModel } from "../../../../utils/schemaModels";
 import { NextResponse } from "next/server";
-// import { revalidatePath } from "next/cache";
 
 export async function GET(req, res) {
   try {
     await connectDB();
-    console.log("req", req, "res", res);
-    const { searchParams } = new URL(req.url);
-    const user = searchParams.get("user");
+    const url = new URL(req.url, `${process.env.NEXT_PUBLIC_URL}`);
+    const user = url.searchParams.get("user");
 
     const userData = await UserModel.findById(res.params.user);
-    if (user === null || user === undefined || user === "") {
+    if (!user) {
       const allItems = await BeansModel.find({
         userEmail: userData.email,
         groupname: { $exists: true },
