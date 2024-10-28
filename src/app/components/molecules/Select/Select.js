@@ -5,9 +5,9 @@ import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import useReadGroups from "@/app/utils/useReadGroups";
 import useSWR from "swr";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-import { useSearchParams } from "next/router";
+
 import dotenv from "dotenv";
 dotenv.config();
 export function Select(context) {
@@ -17,13 +17,14 @@ export function Select(context) {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get("user");
-  console.log("query", query);
-  // console.log("user:", context.data.searchParams.user);
+  const searchParams = useSearchParams();
+  const search = searchParams.get("user");
+  console.log("search", search);
+
   const ReadGroups = useReadGroups();
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
-  const [searchQuery, setSearchQuery] = useState(""); // 実際の検索クエリ
+  const [searchGroup, setSearchGroup] = useState("");
+
   const [isUser, setIsUser] = useState("");
 
   useEffect(() => {
@@ -58,35 +59,32 @@ export function Select(context) {
     setIsUser(UserInformation.id);
     setIsUserEmail(UserInformation.email);
   }, []);
-  useEffect(() => {
-    router.prefetch(
-      `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${searchQuery}`
-    );
-  }, [searchQuery]);
-  // await fetch();
+
   const { data, error } = useSWR(
-    `/pages/api/readall/${isUser}?user=${searchQuery}`,
+    `/pages/api/readall/${isUser}?user=${searchGroup}`,
     fetcher,
     {
       revalidateOnMount: true,
       revalidateOnReconnect: true,
     }
   );
-  console.log(data);
+
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
 
-  async function handleSearch() {
+  const handleSearch = async (e) => {
+    e.preventDefault();
     try {
-      setSearchQuery(selectedGroup); // 検索クエリを更新
+      setSearchGroup(selectedGroup); // 検索クエリを更新
+      console.log("searchGroup", searchGroup);
       await router.push(
-        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${searchQuery}`
+        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${searchGroup}`
       );
     } catch (err) {
       console.error("Error during search:", err);
       alert("検索に失敗しました");
     }
-  }
+  };
 
   const handleSearchClick = () => {
     // 親コンポーネントにメッセージを送信
