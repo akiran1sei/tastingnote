@@ -54,7 +54,15 @@ export function Select(context) {
       }
     };
     const UserInformation = getUser();
-
+    // クライアントサイドでのみ実行されるようにする
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const userQuery = urlParams.get("user");
+      if (userQuery) {
+        setSearchGroup(userQuery);
+        setSelectedGroup(userQuery);
+      }
+    }
     setIsLoggedIn(!!token);
     setIsUser(UserInformation.id);
     setIsUserEmail(UserInformation.email);
@@ -66,25 +74,32 @@ export function Select(context) {
     {
       revalidateOnMount: true,
       revalidateOnReconnect: true,
+      revalidateOnFocus: true,
+      refreshInterval: 0,
+      dedupingInterval: 0,
     }
   );
-
-  if (error) return <div>エラーが発生しました: {error.message}</div>;
-  if (!data) return <div>データを取得中...</div>;
-
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      setSearchGroup(selectedGroup); // 検索クエリを更新
-      console.log("searchGroup", searchGroup);
-      await router.push(
-        `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${searchGroup}`
-      );
+      const newSearchGroup = selectedGroup;
+      setSearchGroup(newSearchGroup);
+      console.log(searchGroup);
+
+      // データを再フェッチ
+      // await mutate(`/pages/api/readall/${isUser}?user=${searchGroup}`);
+
+      // URLを更新
+      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${newSearchGroup}`;
+      console.log(newUrl);
+      return await router.push(newUrl, undefined, { shallow: true });
     } catch (err) {
       console.error("Error during search:", err);
-      alert("検索に失敗しました");
+      return alert("検索に失敗しました");
     }
   };
+  if (error) return <div>エラーが発生しました: {error.message}</div>;
+  if (!data) return <div>データを取得中...</div>;
 
   const handleSearchClick = () => {
     // 親コンポーネントにメッセージを送信
@@ -190,7 +205,7 @@ export function Select(context) {
                     name="search"
                     id="search"
                     value={selectedGroup}
-                    onChange={(e) => setSelectedGroup(e.target.value)} // selectedGroup を更新
+                    onChange={(e) => setSelectedGroup(e.target.value)}
                     className={styles.searchBar_select}
                   >
                     <optgroup label="Group">
@@ -202,10 +217,9 @@ export function Select(context) {
                       ))}
                     </optgroup>
                   </select>
-
                   <button
                     type="button"
-                    onClick={handleSearch} // 検索ボタンクリック時に handleSearch を実行
+                    onClick={handleSearch}
                     className={styles.searchBar_button}
                   >
                     <Image
