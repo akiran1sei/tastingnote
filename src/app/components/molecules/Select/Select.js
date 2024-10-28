@@ -79,6 +79,7 @@ export function Select(context) {
       dedupingInterval: 0,
     }
   );
+  console.log("data:", data);
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
