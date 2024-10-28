@@ -5,12 +5,13 @@ import { NextResponse } from "next/server";
 export async function GET(req, res) {
   try {
     await connectDB();
-    const url = new URL(req.url, `${process.env.NEXT_PUBLIC_URL}`);
-    const user = url.searchParams.get("user");
-    const userData = await UserModel.findById(res.params.user);
+    const response = res.params.user;
+    console.log(response);
+
+    const userData = await UserModel.findById(response[0]);
     const allItems = await BeansModel.find({
       userEmail: userData.email,
-      groupname: user,
+      groupname: response[1],
     })
       .sort({ createdAt: 1 })
       .limit(100)
