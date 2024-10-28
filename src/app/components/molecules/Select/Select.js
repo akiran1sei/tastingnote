@@ -89,11 +89,12 @@ export function Select(context) {
       if (!selectedGroup) {
         return router.push(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
       }
-      const newSearchGroup = selectedGroup;
-      setSearchGroup(newSearchGroup);
+      console.log(selectedGroup);
+
+      setSearchGroup(selectedGroup);
 
       // URLを更新
-      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${newSearchGroup}`;
+      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${selectedGroup}`;
       console.log(newUrl);
       return await router.push(newUrl, undefined, { shallow: true });
     } catch (err) {
