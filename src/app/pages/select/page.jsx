@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { Select } from "@/app/components/molecules/Select/Select";
 
-const SelectPage = (params, searchParams) => {
+const SelectPage = () => {
   return (
     <>
       <Head>

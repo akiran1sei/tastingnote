@@ -10,7 +10,7 @@ import { jwtDecode } from "jwt-decode";
 
 import dotenv from "dotenv";
 dotenv.config();
-export function Select() {
+export function Search(context) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
@@ -18,14 +18,14 @@ export function Select() {
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
 
-  // console.log("search", context.data.user[0]);
+  console.log("context", context.data);
 
   const ReadGroups = useReadGroups();
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
-  const [searchGroup, setSearchGroup] = useState("");
+  const [searchGroup, setSearchGroup] = useState(context.data[1]);
 
   const [isUser, setIsUser] = useState("");
-  // context.data.user[1];
+  // context.data[1];
   useEffect(() => {
     const token = localStorage.getItem("token");
     const getUser = () => {
@@ -59,13 +59,17 @@ export function Select() {
     setIsUserEmail(UserInformation.email);
   }, []);
   console.log(searchGroup);
-  const { data, error } = useSWR(`/pages/api/readall`, fetcher, {
-    revalidateOnMount: true,
-    revalidateOnReconnect: true,
-    revalidateOnFocus: true,
-    refreshInterval: 0,
-    dedupingInterval: 0,
-  });
+  const { data, error } = useSWR(
+    `/pages/api/readall/${isUser}/${searchGroup}`,
+    fetcher,
+    {
+      revalidateOnMount: true,
+      revalidateOnReconnect: true,
+      revalidateOnFocus: true,
+      refreshInterval: 0,
+      dedupingInterval: 0,
+    }
+  );
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -73,6 +77,7 @@ export function Select() {
       if (!selectedGroup) {
         return router.push(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
       }
+      console.log(selectedGroup);
 
       setSearchGroup(selectedGroup);
 
