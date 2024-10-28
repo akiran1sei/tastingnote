@@ -69,7 +69,10 @@ export function Select(context) {
   }, []);
 
   const { data, error } = useSWR(
-    `/pages/api/readall/${isUser}?user=${searchGroup}`,
+    searchGroup
+      ? `/pages/api/readall/${isUser}?user=${searchGroup}`
+      : `/pages/api/readall`,
+
     fetcher,
     {
       revalidateOnMount: true,
@@ -83,12 +86,11 @@ export function Select(context) {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
+      if (!selectedGroup) {
+        return router.push(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
+      }
       const newSearchGroup = selectedGroup;
       setSearchGroup(newSearchGroup);
-      console.log(searchGroup);
-
-      // データを再フェッチ
-      // await mutate(`/pages/api/readall/${isUser}?user=${searchGroup}`);
 
       // URLを更新
       const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}?user=${newSearchGroup}`;
