@@ -4,12 +4,36 @@ import Head from "next/head";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import styles from "@/app/styles/Contents.module.css";
+import { jwtDecode } from "jwt-decode";
+
 const GroupPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isUser, setIsUser] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("トークンが見つかりません");
+      return null;
+    }
+
+    try {
+      const decodedToken = jwtDecode(token);
+      // デコードされたトークンから必要な情報を取得
+      const userData = {
+        id: decodedToken.id,
+        username: decodedToken.user,
+        email: decodedToken.email,
+        // その他の必要な情報
+      };
+      setIsUser(userData);
+    } catch (error) {
+      console.error("トークンのデコードに失敗しました:", error);
+      return null;
+    }
+
     setIsLoggedIn(!!token);
   }, []);
+  console.log(isUser);
   const { data, error } = useSWR(`/pages/api/group/chioce`, fetcher, {
     initial: true, // 初回レンダリング時に必ず更新
     onBackgroundUpdate: true, // バックグラウンドで再読み込み
@@ -30,7 +54,7 @@ const GroupPage = () => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <GroupCreate data={data} />
+      <GroupCreate data={data} user={isUser} />
     </>
   ) : (
     <div className={styles.sign_off_page}>

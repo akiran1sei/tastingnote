@@ -10,6 +10,7 @@ export function GroupCreate(context) {
   const ReadGroups = useReadGroups();
   const [groupCreate, setGroupCreate] = useState("");
   const [groupChoice, setGroupChoice] = useState(ReadGroups);
+  const [groupEmail, setGroupEmail] = useState(context.user.email);
   const [error, setError] = useState("");
   const router = useRouter();
   const navigateTo = (path) => {
@@ -41,7 +42,10 @@ export function GroupCreate(context) {
           {
             // cache: "no-store",
             method: "POST",
-            body: JSON.stringify({ groupname: groupCreate }),
+            body: JSON.stringify({
+              groupname: groupCreate,
+              email: groupEmail,
+            }),
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
