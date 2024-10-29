@@ -73,11 +73,8 @@ export function Select() {
       if (!selectedGroup) {
         return router.push(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
       }
-
-      setSearchGroup(selectedGroup);
-
       // URLを更新
-      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}/${searchGroup}`;
+      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}/${selectedGroup}`;
 
       return await router.push(newUrl, undefined, { shallow: true });
     } catch (err) {
