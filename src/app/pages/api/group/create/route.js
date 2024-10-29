@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   const body = await request.json();
 
-  const { groupname } = body;
+  const { groupname, email } = body;
   try {
     await connectDB();
 
@@ -17,9 +17,9 @@ export async function POST(request) {
       });
     }
 
-    const existingGroup = await GroupModel.findOne({ groupname });
+    const existingGroup = await GroupModel.findOne({ groupname, email });
 
-    // グループ名が重複していないことを確認
+    // グループ名と作成者が重複していないことを確認
     if (existingGroup) {
       return NextResponse.json({
         message: "同じグループ名は、作成できません。",
@@ -27,7 +27,7 @@ export async function POST(request) {
       });
     }
 
-    const newGroup = new GroupModel({ groupname });
+    const newGroup = new GroupModel({ groupname, email });
     await newGroup.save();
 
     return NextResponse.json({
