@@ -59,7 +59,7 @@ export function Select() {
     setIsUserEmail(UserInformation.email);
   }, []);
   console.log(searchGroup);
-  const { data, error } = useSWR(`/pages/api/readall`, fetcher, {
+  const { data, error } = useSWR(`/pages/api/readall/${isUser}`, fetcher, {
     revalidateOnMount: true,
     revalidateOnReconnect: true,
     revalidateOnFocus: true,
@@ -71,7 +71,9 @@ export function Select() {
     e.preventDefault();
     try {
       if (!selectedGroup) {
-        return router.push(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
+        return router.push(
+          `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}`
+        );
       }
       // URLを更新
       const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}/${selectedGroup}`;

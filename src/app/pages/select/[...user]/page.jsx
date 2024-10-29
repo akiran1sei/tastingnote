@@ -1,9 +1,10 @@
 "use client";
 import Head from "next/head";
 import { Search } from "@/app/components/molecules/Select/Search";
-
+import { use } from "react";
 const SelectPage = ({ params }) => {
-  console.log(params.user);
+  const id = use(params);
+  console.log(id.user);
   return (
     <>
       <Head>
@@ -14,7 +15,7 @@ const SelectPage = ({ params }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <Search data={params.user} />
+      <Search data={id.user} />
     </>
   );
 };

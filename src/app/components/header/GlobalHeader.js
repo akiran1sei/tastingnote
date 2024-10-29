@@ -76,7 +76,7 @@ export function GlobalHeader() {
             {isLoggedIn ? (
               <>
                 <li className={header.menu_item}>
-                  <button onClick={() => navigateTo(`/pages/select`)}>
+                  <button onClick={() => navigateTo(`/pages/select/${isUser}`)}>
                     Select
                   </button>
                 </li>

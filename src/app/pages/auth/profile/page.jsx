@@ -8,7 +8,7 @@ const Profile = () => {
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isAccountDelete, setIsAccountDelete] = useState(false);
-  const [isUserId, setIsUserId] = useState(null);
+  const [isUser, setIsUser] = useState(null);
   const [isUserData, setIsUserData] = useState("");
   const [isToken, setIsToken] = useState("");
   useEffect(() => {
@@ -26,7 +26,7 @@ const Profile = () => {
     if (token) {
       const id = userData.id;
       setIsUserData(userData);
-      return setIsUserId(id);
+      return setIsUser(id);
     }
   }, []);
 
@@ -63,7 +63,7 @@ const Profile = () => {
       if (confirm("作成したデータ全て削除しますがよろしいでしょうか？")) {
         setIsAccountDelete(true);
         try {
-          const res = await fetch(`/pages/api/auth/delete/${isUserId}`, {
+          const res = await fetch(`/pages/api/auth/delete/${isUser}`, {
             method: "DELETE",
             headers: {
               Accept: "application/json",

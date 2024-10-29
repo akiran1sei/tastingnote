@@ -19,10 +19,9 @@ export function Search(context) {
   const router = useRouter();
   const ReadGroups = useReadGroups();
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
-
   const [defaultValue, setDefaultValue] = useState(context.data[1]);
-
-  const [isUser, setIsUser] = useState("");
+  const dataId = context.data[0];
+  const [isUser, setIsUser] = useState(context.data[0]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -58,7 +57,8 @@ export function Search(context) {
   }, []);
 
   const { data, error } = useSWR(
-    `/pages/api/readall/${isUser}/${defaultValue}`,
+    `/pages/api/readall/${dataId}/${defaultValue}`,
+
     fetcher,
     {
       revalidateOnMount: true,
@@ -68,12 +68,14 @@ export function Search(context) {
       dedupingInterval: 0,
     }
   );
-
+  console.log(data);
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
       if (!selectedGroup) {
-        return router.push(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
+        return router.push(
+          `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}`
+        );
       }
       // URLを更新
       const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}/${selectedGroup}`;

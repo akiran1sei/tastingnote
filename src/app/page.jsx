@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const [isUser, setIsUser] = useState(null);
   const router = useRouter();
 
   const navigateTo = (path) => {
@@ -35,7 +35,7 @@ const Home = () => {
 
           const decodedToken = jwtDecode(token);
           setIsLoggedIn(true);
-          setUserId(decodedToken.id);
+          setIsUser(decodedToken.id);
         } catch (error) {
           console.error("認証エラー:", error);
           setIsLoggedIn(false);
@@ -70,7 +70,7 @@ const Home = () => {
               <button
                 type="button"
                 className={styles.home_start_btn}
-                onClick={() => navigateTo(`/pages/select`)}
+                onClick={() => navigateTo(`/pages/select/${isUser}`)}
               >
                 START
               </button>
