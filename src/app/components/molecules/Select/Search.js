@@ -17,15 +17,13 @@ export function Search(context) {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
-
-  console.log("context", context.data);
-
   const ReadGroups = useReadGroups();
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
-  const [searchGroup, setSearchGroup] = useState(context.data[1]);
+
+  const [defaultValue, setDefaultValue] = useState(context.data[1]);
 
   const [isUser, setIsUser] = useState("");
-  // context.data[1];
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const getUser = () => {
@@ -58,9 +56,9 @@ export function Search(context) {
     setIsUser(UserInformation.id);
     setIsUserEmail(UserInformation.email);
   }, []);
-  console.log(searchGroup);
+
   const { data, error } = useSWR(
-    `/pages/api/readall/${isUser}/${searchGroup}`,
+    `/pages/api/readall/${isUser}/${defaultValue}`,
     fetcher,
     {
       revalidateOnMount: true,
@@ -72,19 +70,15 @@ export function Search(context) {
   );
 
   const handleSearch = async (e) => {
-    e.preventDefault();
     try {
+      e.preventDefault();
       if (!selectedGroup) {
         return router.push(`${process.env.NEXT_PUBLIC_URL}/pages/select`);
       }
-      console.log(selectedGroup);
-
-      setSearchGroup(selectedGroup);
-
       // URLを更新
-      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}/${searchGroup}`;
+      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}/${selectedGroup}`;
 
-      return await router.push(newUrl, undefined, { shallow: true });
+      return router.push(newUrl, undefined, { shallow: true });
     } catch (err) {
       console.error("Error during search:", err);
       return alert("検索に失敗しました");
