@@ -173,7 +173,7 @@ export function BeansCreateTable(context) {
       const jsonData = await response.json();
       alert(jsonData.message);
 
-      return router.replace(`/pages/select`);
+      return router.replace(`/pages/select/${isUser}`);
     } catch (error) {
       return alert("アイテム作成失敗");
     }

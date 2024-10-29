@@ -9,19 +9,37 @@ export async function GET(req, res) {
     console.log(response);
 
     const userData = await UserModel.findById(response[0]);
-    const allItems = await BeansModel.find({
-      userEmail: userData.email,
-      groupname: response[1],
-    })
-      .sort({ createdAt: 1 })
-      .limit(100)
-      .exec();
 
-    return NextResponse.json({
-      message: "読み取り成功（オール）",
-      allItems: allItems,
-      status: 200,
-    });
+    if (response[1] === "undefined") {
+      console.log("！");
+      const allItems = await BeansModel.find({
+        userEmail: userData.email,
+      })
+        .sort({ createdAt: 1 })
+        .limit(100)
+        .exec();
+
+      return NextResponse.json({
+        message: "読み取り成功（オール）",
+        allItems: allItems,
+        status: 200,
+      });
+    } else {
+      console.log("ok");
+      const allItems = await BeansModel.find({
+        userEmail: userData.email,
+        groupname: response[1],
+      })
+        .sort({ createdAt: 1 })
+        .limit(100)
+        .exec();
+
+      return NextResponse.json({
+        message: "読み取り成功（サーチ）",
+        allItems: allItems,
+        status: 200,
+      });
+    }
 
     // if (!user) {
     //   const allItems = await BeansModel.find({

@@ -182,7 +182,7 @@ export function Update(data) {
       const jsonData = await res.json();
       router.refresh({ shallow: true });
       alert(jsonData.message);
-      return router.replace(`/pages/select`);
+      return router.replace(`/pages/select/${isUser}`);
     } catch (error) {
       return alert("アイテム編集失敗");
     }
