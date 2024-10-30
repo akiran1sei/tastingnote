@@ -33,7 +33,7 @@ const GroupPage = () => {
 
     setIsLoggedIn(!!token);
   }, []);
-  console.log(isUser);
+
   const { data, error } = useSWR(`/pages/api/group/chioce`, fetcher, {
     initial: true, // 初回レンダリング時に必ず更新
     onBackgroundUpdate: true, // バックグラウンドで再読み込み

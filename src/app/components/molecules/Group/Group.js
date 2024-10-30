@@ -19,15 +19,18 @@ export function GroupCreate(context) {
     }
   };
 
-  const data = context.data.groups;
+  const GroupData = context.data.groups;
+  const UserData = context.user;
 
   const options = [];
-  data.forEach((name) => {
-    options.push(
-      <option key={name._id} value={name._id}>
-        {name.groupname}
-      </option>
-    );
+  GroupData.forEach((e) => {
+    if (e.email === UserData.email) {
+      options.push(
+        <option key={e._id} value={e._id}>
+          {e.groupname}
+        </option>
+      );
+    }
   });
 
   const handleCreateSubmit = async (e) => {
