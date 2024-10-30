@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
   const body = await request.json();
-
   const { groupname, email } = body;
+
   try {
     await connectDB();
 
@@ -17,27 +17,39 @@ export async function POST(request) {
       });
     }
 
-    const existingGroup = await GroupModel.findOne({ groupname, email });
+    // 既存のグループを検索
+    const existingGroup = await GroupModel.findOne({ groupname });
 
-    // グループ名と作成者が重複していないことを確認
+    // 既存のグループが存在する場合
     if (existingGroup) {
+      // 既存のグループにメールアドレスが存在するか確認
+      if (existingGroup.email.includes(email)) {
+        return NextResponse.json({
+          message: "このメールアドレスは既にこのグループに登録されています。",
+          status: 400,
+        });
+      } else {
+        // メールアドレスを追加
+        existingGroup.email.push(email);
+        await existingGroup.save();
+        return NextResponse.json({
+          message: "グループにメールアドレスを追加しました。",
+          status: 200,
+        });
+      }
+    } else {
+      // 新しいグループを作成
+      const newGroup = new GroupModel({ groupname, email: [email] });
+      await newGroup.save();
       return NextResponse.json({
-        message: "同じグループ名は、作成できません。",
-        status: 400,
+        message: "グループを作成しました。",
+        status: 200,
       });
     }
-
-    const newGroup = new GroupModel({ groupname, email });
-    await newGroup.save();
-
-    return NextResponse.json({
-      message: "グループ作成成功",
-      status: 200,
-    });
   } catch (error) {
     console.error(error);
     return NextResponse.json({
-      message: "アクセスできませんでした",
+      message: "グループの作成に失敗しました。",
       status: 500,
     });
   }
