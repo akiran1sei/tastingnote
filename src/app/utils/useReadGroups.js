@@ -14,7 +14,6 @@ const useReadGroups = () => {
     try {
       if (resultGroup.status === 200) {
         setData(resultGroup.groups);
-        console.log(data);
       } else {
         throw new Error(resultGroup.message);
       }

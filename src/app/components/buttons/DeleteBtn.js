@@ -7,17 +7,20 @@ import { jwtDecode } from "jwt-decode";
 export function DeleteBtn(context) {
   const router = useRouter();
   dotenv.config();
-  const [isUser, setIsUser] = useState("");
+  const [isUserId, setIsUserId] = useState("");
+  const [isUserEmail, setIsUserEmail] = useState("");
+  const [isUserName, setIsUserName] = useState("");
   useEffect(() => {
-    const getUser = () => {
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-      if (!token) {
-        console.log("トークンが見つかりません");
-        return null;
-      }
+    if (!token) {
+      console.log("トークンが見つかりません");
+      return null;
+    }
 
-      try {
+    try {
+      const getUser = () => {
+        const token = localStorage.getItem("token");
         const decodedToken = jwtDecode(token);
         // デコードされたトークンから必要な情報を取得
         const userData = {
@@ -26,15 +29,15 @@ export function DeleteBtn(context) {
           email: decodedToken.email,
           // その他の必要な情報
         };
-
-        return userData;
-      } catch (error) {
-        console.error("トークンのデコードに失敗しました:", error);
-        return null;
-      }
-    };
-    const UserInformation = getUser();
-    setIsUser(UserInformation.id);
+        setIsUserId(userData.id);
+        setIsUserEmail(userData.email);
+        setIsUserName(userData.user);
+      };
+      return getUser();
+    } catch (error) {
+      console.error("トークンのデコードに失敗しました:", error);
+      return null;
+    }
   }, []);
 
   async function handleSubmit(e) {
@@ -57,7 +60,7 @@ export function DeleteBtn(context) {
         const jsonData = await response.json();
 
         alert(jsonData.message);
-        return router.replace(`/pages/select/${isUser}`);
+        return router.replace(`/pages/select/${isUserId}`);
       }
     } catch (err) {
       return alert("アイテム削除失敗/DeleteBtn");

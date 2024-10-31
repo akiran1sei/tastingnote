@@ -11,27 +11,30 @@ const GroupPage = () => {
   const [isUser, setIsUser] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) {
+    if (token) {
+      const getUser = () => {
+        try {
+          const decodedToken = jwtDecode(token);
+          // デコードされたトークンから必要な情報を取得
+          const userData = {
+            id: decodedToken.id,
+            username: decodedToken.user,
+            email: decodedToken.email,
+            // その他の必要な情報
+          };
+          setIsUser(userData.id);
+        } catch (error) {
+          console.error("トークンのデコードに失敗しました:", error);
+          return null;
+        }
+
+        setIsLoggedIn(!!token);
+      };
+      return getUser();
+    } else {
       console.log("トークンが見つかりません");
       return null;
     }
-
-    try {
-      const decodedToken = jwtDecode(token);
-      // デコードされたトークンから必要な情報を取得
-      const userData = {
-        id: decodedToken.id,
-        username: decodedToken.user,
-        email: decodedToken.email,
-        // その他の必要な情報
-      };
-      setIsUser(userData);
-    } catch (error) {
-      console.error("トークンのデコードに失敗しました:", error);
-      return null;
-    }
-
-    setIsLoggedIn(!!token);
   }, []);
 
   const { data, error } = useSWR(`/pages/api/group/chioce`, fetcher, {

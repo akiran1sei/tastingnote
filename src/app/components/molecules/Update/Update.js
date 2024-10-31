@@ -60,33 +60,31 @@ export function Update(data) {
   const [isUser, setIsUser] = useState("");
   const [error, setError] = useState("");
   useEffect(() => {
-    const getUser = () => {
-      const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-      if (!token) {
-        console.log("トークンが見つかりません");
-        return null;
-      }
-
-      try {
-        const decodedToken = jwtDecode(token);
-        // デコードされたトークンから必要な情報を取得
-        const userData = {
-          id: decodedToken.id,
-          username: decodedToken.user,
-          email: decodedToken.email,
-          // その他の必要な情報
-        };
-
-        return userData;
-      } catch (error) {
-        console.error("トークンのデコードに失敗しました:", error);
-        return null;
-      }
-    };
-    const UserInformation = getUser();
-
-    setIsUser(UserInformation.id);
+    if (token) {
+      const getUser = () => {
+        try {
+          const decodedToken = jwtDecode(token);
+          // デコードされたトークンから必要な情報を取得
+          const userData = {
+            id: decodedToken.id,
+            username: decodedToken.user,
+            email: decodedToken.email,
+            // その他の必要な情報
+          };
+          setIsUser(userData.id);
+          return;
+        } catch (error) {
+          console.error("トークンのデコードに失敗しました:", error);
+          return null;
+        }
+      };
+      return getUser();
+    } else {
+      console.log("トークンが見つかりません");
+      return null;
+    }
   }, []);
 
   function RoastArticle() {

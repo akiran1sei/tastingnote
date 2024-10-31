@@ -18,8 +18,6 @@ export function Select() {
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
 
-  // console.log("search", context.data.user[0]);
-
   const ReadGroups = useReadGroups();
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
   const [searchGroup, setSearchGroup] = useState("");
@@ -28,37 +26,37 @@ export function Select() {
   // context.data.user[1];
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const getUser = () => {
-      const token = localStorage.getItem("token");
+    if (token) {
+      const getUser = () => {
+        const token = localStorage.getItem("token");
 
-      if (!token) {
-        console.log("トークンが見つかりません");
-        return null;
-      }
+        try {
+          const decodedToken = jwtDecode(token);
+          // デコードされたトークンから必要な情報を取得
+          const userData = {
+            id: decodedToken.id,
+            username: decodedToken.user,
+            email: decodedToken.email,
+            // その他の必要な情報
+          };
+          setIsUser(decodedToken.id);
+          setIsUserEmail(decodedToken.email);
+          return userData;
+        } catch (error) {
+          console.error("トークンのデコードに失敗しました:", error);
+          return null;
+        }
+      };
 
-      try {
-        const decodedToken = jwtDecode(token);
-        // デコードされたトークンから必要な情報を取得
-        const userData = {
-          id: decodedToken.id,
-          username: decodedToken.user,
-          email: decodedToken.email,
-          // その他の必要な情報
-        };
+      setIsLoggedIn(!!token);
 
-        return userData;
-      } catch (error) {
-        console.error("トークンのデコードに失敗しました:", error);
-        return null;
-      }
-    };
-    const UserInformation = getUser();
-
-    setIsLoggedIn(!!token);
-    setIsUser(UserInformation.id);
-    setIsUserEmail(UserInformation.email);
+      return getUser();
+    } else {
+      console.log("トークンが見つかりません");
+      return null;
+    }
   }, []);
-  console.log(searchGroup);
+
   const { data, error } = useSWR(`/pages/api/readall/${isUser}`, fetcher, {
     revalidateOnMount: true,
     revalidateOnReconnect: true,

@@ -9,38 +9,35 @@ import { jwtDecode } from "jwt-decode";
 export function GlobalHeader() {
   const [isActive, setIsActive] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isUser, setIsUser] = useState("");
+  const [isUserId, setIsUserId] = useState("");
+  const [isUserEmail, setIsUserEmail] = useState("");
+  const [isUserName, setIsUserName] = useState("");
   const router = useRouter();
-
   useEffect(() => {
-    setIsLoggedIn(!!localStorage.getItem("token"));
-    if (isLoggedIn) {
-      const getUser = () => {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          console.log("トークンが見つかりません");
-          return null;
-        }
-
-        try {
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const getUser = () => {
           const decodedToken = jwtDecode(token);
-          // デコードされたトークンから必要な情報を取得
           const userData = {
             id: decodedToken.id,
             username: decodedToken.user,
             email: decodedToken.email,
             // その他の必要な情報
           };
-
-          return userData;
-        } catch (error) {
-          console.error("トークンのデコードに失敗しました:", error);
-          return null;
-        }
-      };
-      const UserInformation = getUser();
-      setIsUser(UserInformation.id);
+          setIsUserId(userData.id);
+          setIsUserEmail(userData.email);
+          setIsUserName(userData.user);
+          setIsLoggedIn(!!localStorage.getItem("token"));
+        };
+        return getUser();
+      } else {
+        console.log("トークンが見つかりません");
+        return null;
+      }
+    } catch (error) {
+      console.error("トークンのデコードに失敗しました:", error);
+      return null;
     }
   }, []);
 
@@ -76,7 +73,9 @@ export function GlobalHeader() {
             {isLoggedIn ? (
               <>
                 <li className={header.menu_item}>
-                  <button onClick={() => navigateTo(`/pages/select/${isUser}`)}>
+                  <button
+                    onClick={() => navigateTo(`/pages/select/${isUserId}`)}
+                  >
                     Select
                   </button>
                 </li>

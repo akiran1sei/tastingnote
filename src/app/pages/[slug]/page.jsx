@@ -2,17 +2,16 @@
 import Head from "next/head";
 import { Browse } from "@/app/components/molecules/Browse/Browse";
 import useSWR from "swr";
-const CoffeeSingleItem = (context) => {
-  const { data, error } = useSWR(
-    `/pages/api/singleitem/${context.params.slug}`,
-    fetcher,
-    {
-      initial: true, // 初回レンダリング時に必ず更新
-      onBackgroundUpdate: true, // バックグラウンドで再読み込み
-      revalidateOnMount: true, // マウント時に再検証
-      revalidateOnReconnect: true, // 再接続時に再検証
-    }
-  );
+import { use } from "react";
+const CoffeeSingleItem = ({ params }) => {
+  const id = use(params);
+
+  const { data, error } = useSWR(`/pages/api/singleitem/${id.slug}`, fetcher, {
+    initial: true, // 初回レンダリング時に必ず更新
+    onBackgroundUpdate: true, // バックグラウンドで再読み込み
+    revalidateOnMount: true, // マウント時に再検証
+    revalidateOnReconnect: true, // 再接続時に再検証
+  });
 
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;

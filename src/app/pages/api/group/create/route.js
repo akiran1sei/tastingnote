@@ -25,7 +25,7 @@ export async function POST(request) {
       // 既存のグループにメールアドレスが存在するか確認
       if (existingGroup.email.includes(email)) {
         return NextResponse.json({
-          message: "このメールアドレスは既にこのグループに登録されています。",
+          message: "グループは登録されています。",
           status: 400,
         });
       } else {
@@ -33,7 +33,7 @@ export async function POST(request) {
         existingGroup.email.push(email);
         await existingGroup.save();
         return NextResponse.json({
-          message: "グループにメールアドレスを追加しました。",
+          message: "グループを追加しました。",
           status: 200,
         });
       }

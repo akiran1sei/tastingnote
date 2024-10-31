@@ -13,40 +13,12 @@ import Image from "next/image";
 
 export function BeansCreateTable(context) {
   dotenv.config();
-  useEffect(() => {
-    const getUser = () => {
-      const token = localStorage.getItem("token");
 
-      if (!token) {
-        console.log("トークンが見つかりません");
-        return null;
-      }
-
-      try {
-        const decodedToken = jwtDecode(token);
-        // デコードされたトークンから必要な情報を取得
-        const userData = {
-          id: decodedToken.id,
-          username: decodedToken.user,
-          email: decodedToken.email,
-          // その他の必要な情報
-        };
-
-        return userData;
-      } catch (error) {
-        console.error("トークンのデコードに失敗しました:", error);
-        return null;
-      }
-    };
-    const UserInformation = getUser();
-    setIsUser(UserInformation.id);
-    setUserEmail(UserInformation.email);
-    setUserName(UserInformation.username);
-  }, []);
-
-  const [userEmail, setUserEmail] = useState();
   const [username, setUserName] = useState("");
   const [coffee, setCoffee] = useState("");
+  const [isUserId, setIsUserId] = useState("");
+  const [isUserEmail, setIsUserEmail] = useState("");
+  const [isUserName, setIsUserName] = useState("");
   const [roast, setRoast] = useState("50");
   const [roastDegree, setRoastDegree] = useState();
 
@@ -79,9 +51,42 @@ export function BeansCreateTable(context) {
   const [impression, setImpression] = useState("");
   const [date, setDate] = useState(Today);
   const [groupName, setGroupName] = useState("");
-  const [isUser, setIsUser] = useState("");
 
   const router = useRouter();
+  useEffect(() => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const getUser = () => {
+          const token = localStorage.getItem("token");
+
+          const decodedToken = jwtDecode(token);
+          // デコードされたトークンから必要な情報を取得
+          const userData = {
+            id: decodedToken.id,
+            username: decodedToken.user,
+            email: decodedToken.email,
+            // その他の必要な情報
+          };
+          setIsUserId(userData.id);
+          setIsUserEmail(userData.email);
+          setIsUserName(userData.username);
+          setUserName(userData.username);
+        };
+
+        getUser();
+
+        return getUser();
+      } else {
+        console.log("トークンが見つかりません");
+        return null;
+      }
+    } catch (error) {
+      console.error("トークンのデコードに失敗しました:", error);
+      return null;
+    }
+  }, []);
 
   const data = context.data.groups;
   const options = [];
@@ -161,7 +166,7 @@ export function BeansCreateTable(context) {
             username: username,
             date: date,
             groupname: groupName,
-            userEmail: userEmail,
+            userEmail: isUserEmail,
           }),
           headers: {
             Accept: "application/json",
@@ -173,7 +178,7 @@ export function BeansCreateTable(context) {
       const jsonData = await response.json();
       alert(jsonData.message);
 
-      return router.replace(`/pages/select/${isUser}`);
+      return router.replace(`/pages/select/${isUserId}`);
     } catch (error) {
       return alert("アイテム作成失敗");
     }
