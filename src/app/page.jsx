@@ -8,7 +8,9 @@ import { useRouter } from "next/navigation";
 
 const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isUser, setIsUser] = useState(null);
+  const [isUserId, setIsUserId] = useState("");
+  const [isUserEmail, setIsUserEmail] = useState("");
+  const [isUserName, setIsUserName] = useState("");
   const router = useRouter();
 
   const navigateTo = (path) => {
@@ -17,11 +19,6 @@ const Home = () => {
     }
   };
 
-  // useEffect(() => {
-  //   // サインインページを事前に読み込む
-  //   router.prefetch("/pages/auth/signin");
-  //   router.prefetch("/pages/auth/signup");
-  // }, [router]);
   useEffect(() => {
     const checkAuth = () => {
       if (typeof window !== "undefined") {
@@ -34,8 +31,16 @@ const Home = () => {
           }
 
           const decodedToken = jwtDecode(token);
+          const userData = {
+            id: decodedToken.id,
+            username: decodedToken.user,
+            email: decodedToken.email,
+            // その他の必要な情報
+          };
+          setIsUserId(userData.id);
+          setIsUserEmail(userData.email);
+          setIsUserName(userData.user);
           setIsLoggedIn(true);
-          setIsUser(decodedToken.id);
         } catch (error) {
           console.error("認証エラー:", error);
           setIsLoggedIn(false);
@@ -43,7 +48,7 @@ const Home = () => {
       }
     };
 
-    checkAuth();
+    return checkAuth();
   }, []);
 
   return (
@@ -70,7 +75,7 @@ const Home = () => {
               <button
                 type="button"
                 className={styles.home_start_btn}
-                onClick={() => navigateTo(`/pages/select/${isUser}`)}
+                onClick={() => navigateTo(`/pages/select/${isUserId}`)}
               >
                 START
               </button>

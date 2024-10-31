@@ -14,7 +14,7 @@ export function Search(context) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
-  const [isUserEmail, setIsUserEmail] = useState("");
+
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
   const ReadGroups = useReadGroups();
@@ -23,37 +23,37 @@ export function Search(context) {
   const dataId = context.data[0];
   const [isUser, setIsUser] = useState(context.data[0]);
 
+  const [isUserId, setIsUserId] = useState("");
+  const [isUserEmail, setIsUserEmail] = useState("");
+  const [isUserName, setIsUserName] = useState("");
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const getUser = () => {
+    try {
       const token = localStorage.getItem("token");
-
-      if (!token) {
+      if (token) {
+        const getUser = () => {
+          const token = localStorage.getItem("token");
+          const decodedToken = jwtDecode(token);
+          // デコードされたトークンから必要な情報を取得
+          const userData = {
+            id: decodedToken.id,
+            username: decodedToken.user,
+            email: decodedToken.email,
+            // その他の必要な情報
+          };
+          setIsLoggedIn(!!token);
+          setIsUserId(userData.id);
+          setIsUserEmail(userData.email);
+          setIsUserName(userData.user);
+        };
+        return getUser();
+      } else {
         console.log("トークンが見つかりません");
         return null;
       }
-
-      try {
-        const decodedToken = jwtDecode(token);
-        // デコードされたトークンから必要な情報を取得
-        const userData = {
-          id: decodedToken.id,
-          username: decodedToken.user,
-          email: decodedToken.email,
-          // その他の必要な情報
-        };
-
-        return userData;
-      } catch (error) {
-        console.error("トークンのデコードに失敗しました:", error);
-        return null;
-      }
-    };
-    const UserInformation = getUser();
-
-    setIsLoggedIn(!!token);
-    setIsUser(UserInformation.id);
-    setIsUserEmail(UserInformation.email);
+    } catch (error) {
+      console.error("トークンのデコードに失敗しました:", error);
+      return null;
+    }
   }, []);
 
   const { data, error } = useSWR(
@@ -68,7 +68,7 @@ export function Search(context) {
       dedupingInterval: 0,
     }
   );
-  console.log(data);
+
   const handleSearch = async (e) => {
     try {
       e.preventDefault();

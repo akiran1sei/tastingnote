@@ -37,7 +37,6 @@ export async function POST(request) {
         .setExpirationTime("12h")
         .sign(secretKey);
 
-      console.log(token);
       // クッキーにトークンを設定
       cookies().set({
         name: "token",

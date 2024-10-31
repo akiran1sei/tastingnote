@@ -23,8 +23,8 @@ export function GroupCreate(context) {
   const UserData = context.user;
 
   const options = [];
-  GroupData.forEach((e) => {
-    if (e.email === UserData.email) {
+  GroupData.forEach((e, i, a) => {
+    if (e.email.includes(UserData.email)) {
       options.push(
         <option key={e._id} value={e._id}>
           {e.groupname}

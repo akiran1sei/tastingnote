@@ -29,17 +29,16 @@ export function BeansCreate(context) {
           email: decodedToken.email,
           // その他の必要な情報
         };
-
-        return userData;
+        setIsUser(userData.id);
+        setUserEmail(userData.email);
+        setUserName(userData.username);
       } catch (error) {
         console.error("トークンのデコードに失敗しました:", error);
         return null;
       }
     };
-    const UserInformation = getUser();
-    setIsUser(UserInformation.id);
-    setUserEmail(UserInformation.email);
-    setUserName(UserInformation.username);
+
+    return getUser();
   }, []);
 
   const [userEmail, setUserEmail] = useState();

@@ -40,7 +40,7 @@ export async function POST(request) {
   };
   try {
     await connectDB();
-    console.log(createBody);
+
     await BeansModel.create(createBody);
 
     return NextResponse.json({
