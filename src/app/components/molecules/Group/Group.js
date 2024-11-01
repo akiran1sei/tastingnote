@@ -95,10 +95,11 @@ export function GroupCreate(context) {
       }
     );
     const jsonData = await response.json();
-    const pathname = router.pathname;
-    router.refresh({ shallow: true });
+    // const pathname = router.pathname;
+
+    // router.refresh({ shallow: true });
     alert(jsonData.message);
-    return router.push(pathname);
+    return router.refresh();
   };
 
   return (

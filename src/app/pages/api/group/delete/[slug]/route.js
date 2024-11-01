@@ -24,7 +24,7 @@ export async function DELETE(request) {
         status: 200,
       });
     } else {
-      throw new Error(`グループが見つかりませんでした: ${res.params.slug}`);
+      throw new Error(`グループが見つかりませんでした`);
     }
   } catch (err) {
     console.error(err);
