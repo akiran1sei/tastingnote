@@ -4,13 +4,21 @@ import connectDB from "../../../../../utils/database";
 
 import { NextResponse } from "next/server";
 // import { NextRequest } from "next/server";
-export async function DELETE(req, res) {
+export async function DELETE(request) {
   try {
     await connectDB();
-    const singleItem = await GroupModel.findById(res.params.slug);
+    const body = await request.json();
 
-    if (singleItem) {
-      await GroupModel.deleteOne({ _id: res.params.slug });
+    const singleGroup = await GroupModel.findOne({
+      id: body.id,
+      email: { $in: body.email },
+    });
+
+    if (singleGroup) {
+      await GroupModel.updateOne(singleGroup, {
+        $pull: { email: body.email },
+      });
+
       return NextResponse.json({
         message: "グループ削除成功",
         status: 200,

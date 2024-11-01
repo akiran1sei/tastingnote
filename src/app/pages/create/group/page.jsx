@@ -8,7 +8,10 @@ import { jwtDecode } from "jwt-decode";
 
 const GroupPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isUser, setIsUser] = useState(false);
+  const [isUser, setIsUser] = useState([]);
+  const [isUserId, setIsUserId] = useState("");
+  const [isUserEmail, setIsUserEmail] = useState("");
+  const [isUserName, setIsUserName] = useState("");
   useEffect(() => {
     const getUser = () => {
       const token = localStorage.getItem("token");
@@ -22,6 +25,9 @@ const GroupPage = () => {
             email: decodedToken.email,
             // その他の必要な情報
           };
+          setIsUserId(userData);
+          setIsUserEmail(userData.email);
+          setIsUserName(userData.username);
           setIsUser(userData.id);
         } catch (error) {
           console.error("トークンのデコードに失敗しました:", error);
@@ -57,7 +63,7 @@ const GroupPage = () => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <GroupCreate data={data} user={isUser} />
+      <GroupCreate data={data} user={isUserId} />
     </>
   ) : (
     <div className={styles.sign_off_page}>

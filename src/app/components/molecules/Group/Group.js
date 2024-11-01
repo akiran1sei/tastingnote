@@ -86,7 +86,7 @@ export function GroupCreate(context) {
       `${process.env.NEXT_PUBLIC_URL}/pages/api/group/delete/${groupChoice}`,
       {
         method: "DELETE",
-        body: JSON.stringify({ groupname: groupChoice }),
+        body: JSON.stringify({ id: groupChoice, email: UserData.email }),
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

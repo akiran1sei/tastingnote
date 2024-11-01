@@ -86,14 +86,17 @@ export function BeansCreateTable(context) {
     getUser();
   }, []);
 
-  const data = context.data.groups;
+  const Groups = context.data.groups;
+
   const options = [];
-  data.forEach((name) => {
-    options.push(
-      <option key={name._id} value={name.groupname}>
-        {name.groupname}
-      </option>
-    );
+  Groups.forEach((e) => {
+    if (e.email.includes(isUserEmail)) {
+      options.push(
+        <option key={e._id} value={e.groupname}>
+          {e.groupname}
+        </option>
+      );
+    }
   });
   function RoastArticle() {
     const NumberRoast = Number(roast);
