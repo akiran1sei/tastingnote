@@ -48,7 +48,7 @@ const Home = () => {
       }
     };
 
-    return checkAuth();
+    checkAuth();
   }, []);
 
   return (
