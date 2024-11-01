@@ -8,26 +8,31 @@ const Profile = () => {
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isAccountDelete, setIsAccountDelete] = useState(false);
-  const [isUser, setIsUser] = useState(null);
-  const [isUserData, setIsUserData] = useState("");
+
+  const [isUserId, setIsUserId] = useState("");
+  const [isUserEmail, setIsUserEmail] = useState("");
+  const [isUserName, setIsUserName] = useState("");
   const [isToken, setIsToken] = useState("");
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsToken(token);
-    const decodedToken = jwtDecode(token);
-    // デコードされたトークンから必要な情報を取得
+    const getUser = () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        setIsToken(token);
+        const decodedToken = jwtDecode(token);
+        // デコードされたトークンから必要な情報を取得
+        console.log(decodedToken);
+        const userData = {
+          id: decodedToken.id,
+          username: decodedToken.user,
+          email: decodedToken.email,
+        };
 
-    const userData = {
-      id: decodedToken.id,
-      username: decodedToken.user,
-      email: decodedToken.email,
+        setIsUserId(userData.id);
+        setIsUserEmail(userData.email);
+        setIsUserName(userData.username);
+      }
     };
-
-    if (token) {
-      const id = userData.id;
-      setIsUserData(userData);
-      return setIsUser(id);
-    }
+    getUser();
   }, []);
 
   const handleTokenRemove = async () => {
@@ -63,7 +68,7 @@ const Profile = () => {
       if (confirm("作成したデータ全て削除しますがよろしいでしょうか？")) {
         setIsAccountDelete(true);
         try {
-          const res = await fetch(`/pages/api/auth/delete/${isUser}`, {
+          const res = await fetch(`/pages/api/auth/delete/${isUserId}`, {
             method: "DELETE",
             headers: {
               Accept: "application/json",
@@ -95,15 +100,11 @@ const Profile = () => {
           <ul className={styles.profile_user_list}>
             <li className={styles.profile_user_item}>
               <span className={styles.profile_item_title}>username</span>
-              <span className={styles.profile_item_value}>
-                {isUserData.username}
-              </span>
+              <span className={styles.profile_item_value}>{isUserName}</span>
             </li>
             <li className={styles.profile_user_item}>
               <span className={styles.profile_item_title}>email</span>
-              <span className={styles.profile_item_value}>
-                {isUserData.email}
-              </span>
+              <span className={styles.profile_item_value}>{isUserEmail}</span>
             </li>
           </ul>
         </div>

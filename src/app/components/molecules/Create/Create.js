@@ -15,30 +15,29 @@ export function BeansCreate(context) {
     const getUser = () => {
       const token = localStorage.getItem("token");
 
-      if (!token) {
-        console.log("トークンが見つかりません");
-        return null;
-      }
-
       try {
-        const decodedToken = jwtDecode(token);
-        // デコードされたトークンから必要な情報を取得
-        const userData = {
-          id: decodedToken.id,
-          username: decodedToken.user,
-          email: decodedToken.email,
-          // その他の必要な情報
-        };
-        setIsUser(userData.id);
-        setUserEmail(userData.email);
-        setUserName(userData.username);
+        if (token) {
+          const decodedToken = jwtDecode(token);
+          // デコードされたトークンから必要な情報を取得
+          const userData = {
+            id: decodedToken.id,
+            username: decodedToken.user,
+            email: decodedToken.email,
+            // その他の必要な情報
+          };
+          setIsUser(userData.id);
+          setUserEmail(userData.email);
+          setUserName(userData.username);
+        } else {
+          console.log("トークンが見つかりません");
+          return null;
+        }
       } catch (error) {
         console.error("トークンのデコードに失敗しました:", error);
         return null;
       }
     };
-
-    return getUser();
+    getUser();
   }, []);
 
   const [userEmail, setUserEmail] = useState();

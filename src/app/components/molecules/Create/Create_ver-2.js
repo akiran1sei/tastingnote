@@ -54,11 +54,11 @@ export function BeansCreateTable(context) {
 
   const router = useRouter();
   useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
+    const getUser = () => {
+      try {
+        const token = localStorage.getItem("token");
 
-      if (token) {
-        const getUser = () => {
+        if (token) {
           const token = localStorage.getItem("token");
 
           const decodedToken = jwtDecode(token);
@@ -73,19 +73,17 @@ export function BeansCreateTable(context) {
           setIsUserEmail(userData.email);
           setIsUserName(userData.username);
           setUserName(userData.username);
-        };
-
-        getUser();
-
-        return getUser();
-      } else {
-        console.log("トークンが見つかりません");
+        } else {
+          console.log("トークンが見つかりません");
+          return null;
+        }
+      } catch (error) {
+        console.error("トークンのデコードに失敗しました:", error);
         return null;
       }
-    } catch (error) {
-      console.error("トークンのデコードに失敗しました:", error);
-      return null;
-    }
+    };
+
+    getUser();
   }, []);
 
   const data = context.data.groups;

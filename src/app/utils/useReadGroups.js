@@ -5,7 +5,7 @@ const useReadGroups = () => {
   const [data, setData] = useState("");
 
   const fetchData = async () => {
-    const responseGroup = await fetch("/pages/api/group/chioce", {
+    const responseGroup = await fetch("/pages/api/group/choice", {
       method: "GET",
       header: { "Cache-Control": "no-store" },
     });

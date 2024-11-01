@@ -14,10 +14,10 @@ export function GlobalHeader() {
   const [isUserName, setIsUserName] = useState("");
   const router = useRouter();
   useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        const getUser = () => {
+    const getUser = () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
           const decodedToken = jwtDecode(token);
           const userData = {
             id: decodedToken.id,
@@ -27,18 +27,18 @@ export function GlobalHeader() {
           };
           setIsUserId(userData.id);
           setIsUserEmail(userData.email);
-          setIsUserName(userData.user);
+          setIsUserName(userData.username);
           setIsLoggedIn(!!localStorage.getItem("token"));
-        };
-        return getUser();
-      } else {
-        console.log("トークンが見つかりません");
+        } else {
+          console.log("トークンが見つかりません");
+          return null;
+        }
+      } catch (error) {
+        console.error("トークンのデコードに失敗しました:", error);
         return null;
       }
-    } catch (error) {
-      console.error("トークンのデコードに失敗しました:", error);
-      return null;
-    }
+    };
+    getUser();
   }, []);
 
   const toggleMenu = () => setIsActive(!isActive);

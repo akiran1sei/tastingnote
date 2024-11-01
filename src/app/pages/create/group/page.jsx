@@ -10,9 +10,9 @@ const GroupPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUser, setIsUser] = useState(false);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const getUser = () => {
+    const getUser = () => {
+      const token = localStorage.getItem("token");
+      if (token) {
         try {
           const decodedToken = jwtDecode(token);
           // デコードされたトークンから必要な情報を取得
@@ -29,15 +29,15 @@ const GroupPage = () => {
         }
 
         setIsLoggedIn(!!token);
-      };
-      return getUser();
-    } else {
-      console.log("トークンが見つかりません");
-      return null;
-    }
+      } else {
+        console.log("トークンが見つかりません");
+        return null;
+      }
+    };
+    getUser();
   }, []);
 
-  const { data, error } = useSWR(`/pages/api/group/chioce`, fetcher, {
+  const { data, error } = useSWR(`/pages/api/group/choice`, fetcher, {
     initial: true, // 初回レンダリング時に必ず更新
     onBackgroundUpdate: true, // バックグラウンドで再読み込み
     revalidateOnMount: true, // マウント時に再検証

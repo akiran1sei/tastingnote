@@ -46,6 +46,11 @@
 .contents {
   margin: 0 1rem;
 }
+/* error */
+.error_message {
+  text-align: center;
+}
+
 /* 
 -----contents_title-----
  */

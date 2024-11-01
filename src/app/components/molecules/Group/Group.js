@@ -61,7 +61,7 @@ export function GroupCreate(context) {
 
         if (jsonData.message === "グループ作成成功") {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/pages/api/group/chioce`,
+            `${process.env.NEXT_PUBLIC_URL}/pages/api/group/choice`,
             {
               // method: "GET",
               "Cache-Control": "no-store",

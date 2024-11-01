@@ -39,7 +39,7 @@ const Home = () => {
           };
           setIsUserId(userData.id);
           setIsUserEmail(userData.email);
-          setIsUserName(userData.user);
+          setIsUserName(userData.username);
           setIsLoggedIn(true);
         } catch (error) {
           console.error("認証エラー:", error);

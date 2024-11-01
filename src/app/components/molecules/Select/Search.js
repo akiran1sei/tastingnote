@@ -27,10 +27,10 @@ export function Search(context) {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [isUserName, setIsUserName] = useState("");
   useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        const getUser = () => {
+    const getUser = () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
           const token = localStorage.getItem("token");
           const decodedToken = jwtDecode(token);
           // デコードされたトークンから必要な情報を取得
@@ -43,17 +43,17 @@ export function Search(context) {
           setIsLoggedIn(!!token);
           setIsUserId(userData.id);
           setIsUserEmail(userData.email);
-          setIsUserName(userData.user);
-        };
-        return getUser();
-      } else {
-        console.log("トークンが見つかりません");
+          setIsUserName(userData.username);
+        } else {
+          console.log("トークンが見つかりません");
+          return null;
+        }
+      } catch (error) {
+        console.error("トークンのデコードに失敗しました:", error);
         return null;
       }
-    } catch (error) {
-      console.error("トークンのデコードに失敗しました:", error);
-      return null;
-    }
+    };
+    getUser();
   }, []);
 
   const { data, error } = useSWR(
