@@ -8,20 +8,6 @@ export async function DELETE(request) {
   try {
     await connectDB();
     const body = await request.json();
-    console.log(body);
-    // const singleGroup = await GroupModel.aggregate([
-    //   {
-    //     $match: {
-    //       _id: body.id,
-    //       email: {
-    //         $elemMatch: {
-    //           $in: body.email,
-    //           $size: 1,
-    //         },
-    //       },
-    //     },
-    //   },
-    // ]);
 
     const singleGroup = await GroupModel.findOne({
       _id: body.id,
@@ -33,21 +19,7 @@ export async function DELETE(request) {
         $size: 1,
       },
     });
-    // const multipleGroup = await GroupModel.aggregate([
-    //   {
-    //     $match: {
-    //       _id: body.id,
-    //       email: {
-    //         $elemMatch: {
-    //           $in: body.email,
-    //           $size: { $gte: 1 },
-    //         },
-    //       },
-    //     },
-    //   },
-    // ]);
-    // console.log(Boolean(singleGroup));
-    // console.log(Boolean(multipleGroup));
+
     if (singleGroup) {
       if (emailSizeOne) {
         await GroupModel.deleteOne({ _id: body.id });
