@@ -1,55 +1,91 @@
 "use client";
 
-import Head from "next/head";
+import { useState, useEffect } from "react";
 import styles from "@/app/styles/Contents.module.css";
 import { BeansCreateTable } from "@/app/components/molecules/Create/Create_ver-2";
 import useSWR from "swr";
-import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const tags = ["group-choice"]; // データソースのタグ
 const BeansCreatePage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const router = useRouter();
 
   useEffect(() => {
-    const checkToken = async () => {
-      // トークンの有効性検証（必要であれば追加）
-      setIsLoggedIn(!!token);
+    const checkAuth = () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          router.push("/signin");
+          return;
+        }
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("認証チェックエラー:", error);
+        router.push("/signin");
+      } finally {
+        setIsLoading(false);
+      }
     };
-    checkToken();
-  }, [token]);
 
-  const { data, error } = useSWR(`/pages/api/group/choice`, fetcher, {
-    // initialData: null, // 初期データをnullにする
-    revalidateOnFocus: false, // フォーカス時に再検証しない
-    revalidateOnReconnect: false, // 再接続時に再検証しない
-  });
+    checkAuth();
+  }, [router]);
 
-  if (error) return <div>データの取得に失敗しました。再度お試しください。</div>;
-  if (!data) return <div>データを取得中です...</div>;
+  const fetcher = async (url) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Cache-Control": "no-store",
+        },
+      });
 
-  return isLoggedIn ? (
-    <>
-      <Head>
-        <title>新規作成ページ</title>
-        <meta
-          name="description"
-          content="コーヒーをテイスティングするときに使用するアプリです。"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <BeansCreateTable data={data} />
-    </>
-  ) : (
-    <div className={styles.sign_off_page}>
-      <p className={styles.sign_off_text}>ログインしてください。</p>
-    </div>
+      if (!response.ok) {
+        throw new Error("データの取得に失敗しました");
+      }
+
+      return response.json();
+    } catch (error) {
+      console.error("Fetch error:", error);
+      throw error;
+    }
+  };
+
+  const { data, error } = useSWR(
+    isLoggedIn ? `/pages/api/group/choice` : null,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
-};
 
-const fetcher = async (url) => {
-  const response = await fetch(url);
-  return response.json();
+  if (isLoading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className={styles.error}>
+        データの取得に失敗しました。再度お試しください。
+      </div>
+    );
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <div className={styles.sign_off_page}>
+        <p className={styles.sign_off_text}>ログインが必要です。</p>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return <div className={styles.loading}>データを取得中です...</div>;
+  }
+
+  return <BeansCreateTable data={data} />;
 };
 
 export default BeansCreatePage;
