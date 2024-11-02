@@ -9,6 +9,7 @@ const Signout = () => {
   const [error, setError] = useState(null);
   useEffect(() => {
     // サインインページを事前に読み込む
+
     router.prefetch("/pages/auth/signin");
   }, [router]);
   const signInBtn = router.replace("/pages/auth/signin");

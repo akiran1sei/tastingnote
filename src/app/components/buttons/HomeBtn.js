@@ -10,10 +10,10 @@ export function HomeBtn() {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [isUserName, setIsUserName] = useState("");
   useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        const getUser = () => {
+    const getUser = () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
           const decodedToken = jwtDecode(token);
           // デコードされたトークンから必要な情報を取得
           const userData = {
@@ -24,18 +24,18 @@ export function HomeBtn() {
           };
           setIsUserId(userData.id);
           setIsUserEmail(userData.email);
-          setIsUserName(userData.user);
-        };
-
-        return getUser();
-      } else {
-        console.log("トークンが見つかりません");
+          setIsUserName(userData.username);
+        } else {
+          console.log("トークンが見つかりません");
+          return null;
+        }
+      } catch (error) {
+        console.error("トークンのデコードに失敗しました:", error);
         return null;
       }
-    } catch (error) {
-      console.error("トークンのデコードに失敗しました:", error);
-      return null;
-    }
+    };
+
+    getUser();
   }, []);
   const navigateTo = (path) => {
     if (router.pathname !== path) {

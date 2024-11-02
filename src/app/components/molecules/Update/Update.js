@@ -8,8 +8,8 @@ import { CreateBtn } from "@/app/components/buttons/CreateBtn";
 import Image from "next/image";
 import dotenv from "dotenv";
 import { jwtDecode } from "jwt-decode";
-export function Update(data) {
-  const singleData = data.data;
+export function Update(context) {
+  const singleData = context.item;
   const router = useRouter();
   dotenv.config();
   const [coffee, setCoffee] = useState(singleData.coffee);
@@ -57,13 +57,17 @@ export function Update(data) {
   const [overall, setOverall] = useState(singleData.overall);
   const [impression, setImpression] = useState(singleData.impression);
   const [date, setDate] = useState(singleData.date);
-  const [isUser, setIsUser] = useState("");
+  const [groupName, setGroupName] = useState(singleData.groupname);
+  const [isUser, setIsUser] = useState([]);
+  const [isUserId, setIsUserId] = useState("");
+  const [isUserEmail, setIsUserEmail] = useState("");
+  const [isUserName, setIsUserName] = useState("");
   const [error, setError] = useState("");
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const getUser = () => {
+      const token = localStorage.getItem("token");
 
-    if (token) {
-      const getUser = () => {
+      if (token) {
         try {
           const decodedToken = jwtDecode(token);
           // デコードされたトークンから必要な情報を取得
@@ -73,20 +77,35 @@ export function Update(data) {
             email: decodedToken.email,
             // その他の必要な情報
           };
-          setIsUser(userData.id);
+          setIsUserId(userData.id);
+          setIsUserEmail(userData.email);
+          setIsUserName(userData.username);
+          setIsUser(userData);
           return;
         } catch (error) {
           console.error("トークンのデコードに失敗しました:", error);
           return null;
         }
-      };
-      return getUser();
-    } else {
-      console.log("トークンが見つかりません");
-      return null;
-    }
+      } else {
+        console.log("トークンが見つかりません");
+        return null;
+      }
+    };
+    getUser();
   }, []);
 
+  const GroupsData = context.groups;
+  console.log(GroupsData, singleData);
+  const options = [];
+  GroupsData.forEach((e) => {
+    if (e.email.includes(isUserEmail)) {
+      options.push(
+        <option key={e._id} value={e.groupname}>
+          {e.groupname}
+        </option>
+      );
+    }
+  });
   function RoastArticle() {
     const NumberRoast = Number(roast);
     if (NumberRoast >= 0 && NumberRoast <= 15) {
@@ -153,7 +172,7 @@ export function Update(data) {
     impression: impression,
     username: singleData.username,
     date: date,
-    groupname: singleData.groupname,
+    groupname: groupName,
   });
 
   async function handleSubmit(e) {
@@ -180,7 +199,7 @@ export function Update(data) {
       const jsonData = await res.json();
       router.refresh({ shallow: true });
       alert(jsonData.message);
-      return router.replace(`/pages/select/${isUser}`);
+      return router.replace(`/pages/select/${isUserId}`);
     } catch (error) {
       return alert("アイテム編集失敗");
     }
@@ -206,15 +225,25 @@ export function Update(data) {
               </div>
               <div className={styles.edit_contents_data}>{date}</div>
             </div>
+
             <div className={styles.edit_contents_item}>
               <div className={styles.edit_contents_data_header}>
-                <label>
+                <label htmlFor="group-name">
                   <span className={styles.edit_contents_item_number}>2</span>
                   グループ名
                 </label>
               </div>
               <div className={styles.edit_contents_data}>
-                {singleData.groupname}
+                <select
+                  name="group-name"
+                  id="group-name"
+                  value={groupName}
+                  onChange={(e) => setGroupName(e.target.value)}
+                  required
+                >
+                  <option></option>
+                  {options}
+                </select>
               </div>
             </div>
             <div className={styles.edit_contents_item}>

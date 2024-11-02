@@ -1,22 +1,24 @@
 "use client";
+
 import SignBtn from "@/app/components/buttons/SignBtn";
 import styles from "@/app/styles/Contents.module.css";
 import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import dotenv from "dotenv";
-
+dotenv.config();
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(""); // エラー状態の追加
 
   const router = useRouter();
 
-  dotenv.config();
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(""); // エラー状態をリセット
 
     try {
       const res = await fetch(
@@ -30,32 +32,36 @@ const SignIn = () => {
           body: JSON.stringify({ email, password }),
         }
       );
+
       const data = await res.json();
 
       if (res.ok) {
         localStorage.setItem("token", data.token);
         alert(`${data.user.user}  ${data.message}`);
-        return router.replace("/"); // ログイン成功後の遷移
+        router.push("/"); // replace の代わりに push を使用
       } else {
+        setError(data.message || "サインインに失敗しました。");
         alert(data.message || "サインインに失敗しました。");
-        return router.replace("/");
       }
     } catch (error) {
-      const errorData = await res.json();
-      return setError(errorData.message || "サインインに失敗しました。");
+      console.error("サインインエラー:", error);
+      setError("サインインに失敗しました。もう一度お試しください。");
+      alert("サインインに失敗しました。もう一度お試しください。");
     } finally {
       setIsLoading(false);
     }
   };
+
   return (
     <div className={styles.sign_page}>
       <div className={styles.sign_wrapper}>
         <h1 className={styles.contents_title}>Sign In</h1>
         <div className={styles.sign_card}>
           <form onSubmit={handleSubmit}>
+            {error && <div className={styles.error_message}>{error}</div>}
             <ul className={styles.sign_list}>
               <li className={styles.sign_item}>
-                <label htmlFor="email">user email</label>
+                <label htmlFor="email">メールアドレス</label>
                 <br className={styles.line_break} />
                 <input
                   type="email"
@@ -65,10 +71,11 @@ const SignIn = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
                   required
+                  disabled={isLoading}
                 />
               </li>
               <li className={styles.sign_item}>
-                <label htmlFor="password">user password</label>
+                <label htmlFor="password">パスワード</label>
                 <br className={styles.line_break} />
                 <input
                   type="password"
@@ -78,21 +85,23 @@ const SignIn = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
                   required
+                  disabled={isLoading}
                 />
               </li>
             </ul>
             <div className={styles.sign_btn}>
-              <SignBtn />
+              <SignBtn isLoading={isLoading} />
             </div>
           </form>
         </div>
         <p className={styles.sign_link}>
-          <Link href={"./signup"} className={styles.smallFont}>
-            Sing Upは、こちらをクリック！
+          <Link href="/signup" className={styles.smallFont}>
+            新規登録はこちらをクリック！
           </Link>
         </p>
       </div>
     </div>
   );
 };
+
 export default SignIn;

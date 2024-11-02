@@ -1,13 +1,10 @@
 "use client"; // Error components must be Client Components
 import styles from "@/app/styles/Error_404.module.css";
-import { useEffect } from "react";
+
 import { useRouter } from "next/navigation";
 export default function Error({ error, reset }) {
   const router = useRouter();
-  useEffect(() => {
-    // Log the error to an error reporting service
-    console.error(error);
-  }, [error]);
+
   const ClickLink = () => {
     router.replace("/");
   };

@@ -25,12 +25,13 @@ export function Select() {
   const [isUser, setIsUser] = useState("");
   // context.data.user[1];
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const getUser = () => {
+    const getUser = () => {
+      try {
         const token = localStorage.getItem("token");
 
-        try {
+        if (token) {
+          const token = localStorage.getItem("token");
+
           const decodedToken = jwtDecode(token);
           // デコードされたトークンから必要な情報を取得
           const userData = {
@@ -41,20 +42,19 @@ export function Select() {
           };
           setIsUser(decodedToken.id);
           setIsUserEmail(decodedToken.email);
+
+          setIsLoggedIn(!!token);
           return userData;
-        } catch (error) {
-          console.error("トークンのデコードに失敗しました:", error);
+        } else {
+          console.log("トークンが見つかりません");
           return null;
         }
-      };
-
-      setIsLoggedIn(!!token);
-
-      return getUser();
-    } else {
-      console.log("トークンが見つかりません");
-      return null;
-    }
+      } catch (error) {
+        console.error("トークンのデコードに失敗しました:", error);
+        return null;
+      }
+    };
+    getUser();
   }, []);
 
   const { data, error } = useSWR(`/pages/api/readall/${isUser}`, fetcher, {

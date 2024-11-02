@@ -27,10 +27,10 @@ export function Search(context) {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [isUserName, setIsUserName] = useState("");
   useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        const getUser = () => {
+    const getUser = () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
           const token = localStorage.getItem("token");
           const decodedToken = jwtDecode(token);
           // デコードされたトークンから必要な情報を取得
@@ -43,17 +43,17 @@ export function Search(context) {
           setIsLoggedIn(!!token);
           setIsUserId(userData.id);
           setIsUserEmail(userData.email);
-          setIsUserName(userData.user);
-        };
-        return getUser();
-      } else {
-        console.log("トークンが見つかりません");
+          setIsUserName(userData.username);
+        } else {
+          console.log("トークンが見つかりません");
+          return null;
+        }
+      } catch (error) {
+        console.error("トークンのデコードに失敗しました:", error);
         return null;
       }
-    } catch (error) {
-      console.error("トークンのデコードに失敗しました:", error);
-      return null;
-    }
+    };
+    getUser();
   }, []);
 
   const { data, error } = useSWR(
@@ -68,17 +68,31 @@ export function Search(context) {
       dedupingInterval: 0,
     }
   );
+  console.log(context);
+
+  const GroupData = context.user.groups;
+
+  const options = [];
+  GroupData.forEach((e, i, a) => {
+    if (e.email.includes(isUserEmail)) {
+      options.push(
+        <option key={e._id} value={e.groupname}>
+          {e.groupname}
+        </option>
+      );
+    }
+  });
 
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
       if (!selectedGroup) {
         return router.push(
-          `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}`
+          `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUserId}`
         );
       }
       // URLを更新
-      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUser}/${selectedGroup}`;
+      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${isUserId}/${selectedGroup}`;
 
       return router.push(newUrl, undefined, { shallow: true });
     } catch (err) {
@@ -198,11 +212,7 @@ export function Search(context) {
                   >
                     <optgroup label="Group">
                       <option value="">All</option>
-                      {ReadGroups.map((group) => (
-                        <option key={group._id} value={group.groupname}>
-                          {group.groupname}
-                        </option>
-                      ))}
+                      {options}
                     </optgroup>
                   </select>
                   <button

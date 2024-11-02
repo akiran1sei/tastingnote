@@ -3,7 +3,10 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
-const GroupSchema = new Schema({ groupname: String, email: [String] });
+const GroupSchema = new Schema({
+  groupname: String,
+  email: [{ type: String }], // 初期値を空の配列にする
+});
 const BeansSchema = new Schema(
   {
     username: String,

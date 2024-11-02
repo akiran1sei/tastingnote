@@ -61,7 +61,7 @@ export function GroupCreate(context) {
 
         if (jsonData.message === "グループ作成成功") {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/pages/api/group/chioce`,
+            `${process.env.NEXT_PUBLIC_URL}/pages/api/group/choice`,
             {
               // method: "GET",
               "Cache-Control": "no-store",
@@ -86,7 +86,7 @@ export function GroupCreate(context) {
       `${process.env.NEXT_PUBLIC_URL}/pages/api/group/delete/${groupChoice}`,
       {
         method: "DELETE",
-        body: JSON.stringify({ groupname: groupChoice }),
+        body: JSON.stringify({ id: groupChoice, email: UserData.email }),
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -95,10 +95,11 @@ export function GroupCreate(context) {
       }
     );
     const jsonData = await response.json();
-    const pathname = router.pathname;
-    router.refresh({ shallow: true });
+    // const pathname = router.pathname;
+
+    // router.refresh({ shallow: true });
     alert(jsonData.message);
-    return router.push(pathname);
+    return router.refresh();
   };
 
   return (

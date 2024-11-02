@@ -54,11 +54,11 @@ export function BeansCreateTable(context) {
 
   const router = useRouter();
   useEffect(() => {
-    try {
-      const token = localStorage.getItem("token");
+    const getUser = () => {
+      try {
+        const token = localStorage.getItem("token");
 
-      if (token) {
-        const getUser = () => {
+        if (token) {
           const token = localStorage.getItem("token");
 
           const decodedToken = jwtDecode(token);
@@ -73,29 +73,30 @@ export function BeansCreateTable(context) {
           setIsUserEmail(userData.email);
           setIsUserName(userData.username);
           setUserName(userData.username);
-        };
-
-        getUser();
-
-        return getUser();
-      } else {
-        console.log("トークンが見つかりません");
+        } else {
+          console.log("トークンが見つかりません");
+          return null;
+        }
+      } catch (error) {
+        console.error("トークンのデコードに失敗しました:", error);
         return null;
       }
-    } catch (error) {
-      console.error("トークンのデコードに失敗しました:", error);
-      return null;
-    }
+    };
+
+    getUser();
   }, []);
 
-  const data = context.data.groups;
+  const Groups = context.data.groups;
+
   const options = [];
-  data.forEach((name) => {
-    options.push(
-      <option key={name._id} value={name.groupname}>
-        {name.groupname}
-      </option>
-    );
+  Groups.forEach((e) => {
+    if (e.email.includes(isUserEmail)) {
+      options.push(
+        <option key={e._id} value={e.groupname}>
+          {e.groupname}
+        </option>
+      );
+    }
   });
   function RoastArticle() {
     const NumberRoast = Number(roast);

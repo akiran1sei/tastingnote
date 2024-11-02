@@ -8,7 +8,7 @@ export async function POST(request) {
 
   try {
     await connectDB();
-
+    console.log(groupname, email);
     // グループ名のバリデーション
     if (!groupname || groupname.trim().length === 0) {
       return NextResponse.json({
@@ -38,8 +38,10 @@ export async function POST(request) {
         });
       }
     } else {
+      console.log(email);
       // 新しいグループを作成
       const newGroup = new GroupModel({ groupname, email: [email] });
+      console.log(newGroup);
       await newGroup.save();
       return NextResponse.json({
         message: "グループを作成しました。",

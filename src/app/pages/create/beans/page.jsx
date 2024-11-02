@@ -1,51 +1,91 @@
 "use client";
-import Head from "next/head";
-import styles from "@/app/styles/Contents.module.css";
-import { BeansCreate } from "@/app/components/molecules/Create/Create";
-import useSWR from "swr";
+
 import { useState, useEffect } from "react";
+import styles from "@/app/styles/Contents.module.css";
 import { BeansCreateTable } from "@/app/components/molecules/Create/Create_ver-2";
-const tags = ["group-choice"]; // データソースのタグ
+import useSWR from "swr";
+import { useRouter } from "next/navigation";
+
 const BeansCreatePage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
-  const { data, error } = useSWR(`/pages/api/group/chioce`, fetcher, {
-    initial: true, // 初回レンダリング時に必ず更新
-    onBackgroundUpdate: true, // バックグラウンドで再読み込み
-    revalidateOnMount: true, // マウント時に再検証
-    revalidateOnReconnect: true, // 再接続時に再検証
-  });
+    const checkAuth = () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          router.push("/signin");
+          return;
+        }
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("認証チェックエラー:", error);
+        router.push("/signin");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  if (error) return <div>エラーが発生しました: {error.message}</div>;
-  if (!data) return <div>データを取得中...</div>;
+    checkAuth();
+  }, [router]);
 
-  return isLoggedIn ? (
-    <>
-      <Head>
-        <title>新規作成ページ</title>
-        <meta
-          name="description"
-          content="コーヒーをテイスティングするときに使用するアプリです。"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+  const fetcher = async (url) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Cache-Control": "no-store",
+        },
+      });
 
-      {/* <BeansCreate data={data} /> */}
-      <BeansCreateTable data={data} />
-    </>
-  ) : (
-    <div className={styles.sign_off_page}>
-      <p className={styles.sign_off_text}>ログインしてください。</p>
-    </div>
+      if (!response.ok) {
+        throw new Error("データの取得に失敗しました");
+      }
+
+      return response.json();
+    } catch (error) {
+      console.error("Fetch error:", error);
+      throw error;
+    }
+  };
+
+  const { data, error } = useSWR(
+    isLoggedIn ? `/pages/api/group/choice` : null,
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    }
   );
-};
 
-const fetcher = async (url) => {
-  const response = await fetch(url);
-  return response.json();
+  if (isLoading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className={styles.error}>
+        データの取得に失敗しました。再度お試しください。
+      </div>
+    );
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <div className={styles.sign_off_page}>
+        <p className={styles.sign_off_text}>ログインが必要です。</p>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return <div className={styles.loading}>データを取得中です...</div>;
+  }
+
+  return <BeansCreateTable data={data} />;
 };
 
 export default BeansCreatePage;
