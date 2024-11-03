@@ -45,7 +45,7 @@ const Profile = () => {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
-            // Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
 
@@ -75,6 +75,7 @@ const Profile = () => {
               "Content-Type": "application/json",
               "Cache-Control": "no-store",
             },
+            body: JSON.stringify({ id: isUserId }),
           });
           const jsonData = await res.json();
           localStorage.removeItem("token");
