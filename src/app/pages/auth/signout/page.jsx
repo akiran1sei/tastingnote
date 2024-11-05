@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+
 import styles from "@/app/styles/Contents.module.css";
 
 const Signout = () => {
@@ -12,7 +12,7 @@ const Signout = () => {
 
     router.prefetch("/pages/auth/signin");
   }, [router]);
-  const signInBtn = router.replace("/pages/auth/signin");
+
   useEffect(() => {
     async function handleSignout() {
       setError(null);
@@ -30,6 +30,9 @@ const Signout = () => {
 
         localStorage.removeItem("token");
         // 必要に応じて他のローカルストレージのデータも削除
+
+        // サインアウト成功後にprefetch
+        router.prefetch("/pages/auth/signin");
       } catch (error) {
         console.error("サインアウトエラー:", error);
         setError(error.message);
@@ -38,7 +41,6 @@ const Signout = () => {
 
     handleSignout();
   }, []);
-
   return (
     <div className={styles.sign_page}>
       <div className={styles.sign_wrapper}>
@@ -48,7 +50,10 @@ const Signout = () => {
         </p>
         {error && <p className={styles.error_message}>{error}</p>}
         <div className={styles.sign_btn}>
-          <button className={styles.sign_out_btn} onClick={signInBtn}>
+          <button
+            className={styles.sign_out_btn}
+            onClick={() => router.replace("/pages/auth/signin")}
+          >
             サインインへ
           </button>
         </div>
