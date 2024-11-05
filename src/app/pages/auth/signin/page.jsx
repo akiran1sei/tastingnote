@@ -95,7 +95,7 @@ const SignIn = () => {
           </form>
         </div>
         <p className={styles.sign_link}>
-          <Link href="/signup" className={styles.smallFont}>
+          <Link href="/pages/auth/signup" className={styles.smallFont}>
             新規登録はこちらをクリック！
           </Link>
         </p>

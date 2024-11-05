@@ -16,45 +16,29 @@ export async function DELETE(request) {
         secure: true,
         sameSite: "strict",
       });
-      await UserModel.deleteOne({ _id: userData._id });
-      await BeansModel.deleteMany({ userEmail: userData.email });
-
-      // グループの検索
-
-      const singleGroup = await GroupModel.find({
-        email: { $in: userData.email },
-      });
-      const emailSizeOne = await GroupModel.find({
-        email: {
-          $in: userData.email,
-          $size: 1,
-        },
-      });
-
-      if (singleGroup) {
-        if (emailSizeOne) {
-          await GroupModel.deleteMany({ email: { $in: userData.email } });
-          return NextResponse.json({
-            message: "ユーザー削除成功",
-            status: 200,
-          });
-        }
-        await GroupModel.updateMany(
-          { email: { $in: userData.email } },
-          {
-            $pull: { email: userData.email },
-          }
-        );
-        return NextResponse.json({
-          message: "ユーザー削除成功",
-          status: 200,
-        });
-      }
     }
-  } catch (err) {
+    // 1. ユーザーを削除
+    await UserModel.deleteOne({ _id: userData._id });
+
+    // 2. ユーザーに関連するBeansデータを削除
+    await BeansModel.deleteMany({ userEmail: userData.email });
+
+    // 3. グループの更新と削除を一括処理
+    // まず、該当ユーザーのemailを全グループから削除
+    await GroupModel.updateMany(
+      { email: userData.email },
+      { $pull: { email: userData.email } }
+    );
+
+    // emailが空の配列になったグループを削除
+    await GroupModel.deleteMany({ email: { $size: 0 } });
+
     return NextResponse.json({
-      message: "ユーザー削除失敗",
-      status: 500,
+      success: true,
+      message: "ユーザーとその関連データを正常に削除しました",
     });
+  } catch (error) {
+    console.error("データ削除中にエラーが発生しました:", error);
+    throw new Error("ユーザー削除処理に失敗しました");
   }
 }
