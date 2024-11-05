@@ -80,7 +80,7 @@ function handleLogout(request, reason) {
 export const config = {
   matcher: [
     // 保護されたルートの定義
-    "/",
+
     "/pages/select:path*",
     "/pages/select/:path*",
     "/pages/create/:path*",
