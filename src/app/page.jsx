@@ -50,7 +50,11 @@ const Home = () => {
 
     checkAuth();
   }, []);
-
+  const startBtn = () => {
+    router.refresh();
+    navigateTo(`/pages/select/${isUserId}`);
+  };
+  useEffect(() => {}, [router]);
   return (
     <div className={styles.home}>
       <div className={styles.home_bg}>
@@ -75,8 +79,8 @@ const Home = () => {
               <button
                 type="button"
                 className={styles.home_start_btn}
-                onClick={() => navigateTo(`/pages/select/${isUserId}`)}
-              >
+                onClick={startBtn}
+                            >
                 START
               </button>
             </li>
