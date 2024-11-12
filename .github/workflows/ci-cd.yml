@@ -1,0 +1,30 @@
+name: Vercel Deployment
+
+on:
+  push:
+    branches:
+      - main # mainブランチにプッシュするとワークフローが実行
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v2
+
+      - name: Node.jsをセットアップ
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14" # 任意のNode.jsバージョンを指定
+
+      - name: 依存関係のインストール
+        run: npm install
+
+      - name: テストの実行
+        run: npm test
+      - name: Vercelへデプロイ
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel --prod --token=$VERCEL_TOKEN

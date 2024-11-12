@@ -51,7 +51,6 @@ const Home = () => {
     checkAuth();
   }, []);
   const startBtn = () => {
-    router.refresh();
     navigateTo(`/pages/select/${isUserId}`);
   };
   useEffect(() => {}, [router]);
@@ -80,7 +79,7 @@ const Home = () => {
                 type="button"
                 className={styles.home_start_btn}
                 onClick={startBtn}
-                            >
+              >
                 START
               </button>
             </li>
