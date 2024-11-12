@@ -7,11 +7,6 @@ import styles from "@/app/styles/Contents.module.css";
 const Signout = () => {
   const router = useRouter();
   const [error, setError] = useState(null);
-  useEffect(() => {
-    // サインインページを事前に読み込む
-
-    router.prefetch("/pages/auth/signin");
-  }, [router]);
 
   useEffect(() => {
     async function handleSignout() {
@@ -28,11 +23,9 @@ const Signout = () => {
           throw new Error("サインアウトに失敗しました");
         }
 
-        localStorage.removeItem("token");
+        // localStorage.removeItem("token");
+        localStorage.clear();
         // 必要に応じて他のローカルストレージのデータも削除
-
-        // サインアウト成功後にprefetch
-        router.prefetch("/pages/auth/signin");
       } catch (error) {
         console.error("サインアウトエラー:", error);
         setError(error.message);
