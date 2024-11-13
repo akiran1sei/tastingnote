@@ -7,7 +7,6 @@ import styles from "@/app/styles/Contents.module.css";
 const Signout = () => {
   const router = useRouter();
   const [error, setError] = useState(null);
-
   useEffect(() => {
     async function handleSignout() {
       setError(null);
@@ -18,7 +17,6 @@ const Signout = () => {
             "Content-Type": "application/json",
           },
         });
-
         if (!res.ok) {
           throw new Error("サインアウトに失敗しました");
         }
