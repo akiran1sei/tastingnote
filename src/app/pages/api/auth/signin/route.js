@@ -57,16 +57,18 @@ export async function POST(request) {
       email: userWithoutPassword.email,
     };
     // 定数で時間単位を定義
-    const ONE_HOUR_IN_SECONDS = 60 * 60;
+    const ONE_HOUR_IN_SECONDS = 60 * 60; // 1時間を秒数で表す
+    const COOKIE_EXPIRATION_HOURS = 12; // Cookieの有効期限（時間）
     // JWTの有効期限を12時間に設定（秒単位）
-    const jwtExpirationTimeInSeconds = 12 * ONE_HOUR_IN_SECONDS;
+    const jwtExpirationTimeInSeconds =
+      COOKIE_EXPIRATION_HOURS * ONE_HOUR_IN_SECONDS;
+
     // JWTトークンの生成
     const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
     const token = await new SignJWT(userData)
       .setProtectedHeader({ alg: "HS256" })
-      .setExpirationTime(jwtExpirationTimeInSeconds)
+      .setExpirationTime("12h")
       .sign(secretKey);
-
     // クッキーの設定
     cookies().set({
       name: "token",
@@ -75,7 +77,7 @@ export async function POST(request) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
-      maxAge: jwtExpirationTimeInSeconds, // 12時間
+      maxAge: COOKIE_EXPIRATION_HOURS * ONE_HOUR_IN_SECONDS, // 12時間
     });
 
     return NextResponse.json(
