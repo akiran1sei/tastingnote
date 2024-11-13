@@ -72,7 +72,7 @@ export async function POST(request) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
-      maxAge: 60 * 60 * 12, // 12時間
+      maxAge: 12 * 60 * 60, // 12時間
     });
 
     return NextResponse.json(
