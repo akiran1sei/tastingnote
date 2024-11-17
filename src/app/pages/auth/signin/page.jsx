@@ -3,7 +3,7 @@
 import SignBtn from "@/app/components/buttons/SignBtn";
 import styles from "@/app/styles/Contents.module.css";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import dotenv from "dotenv";
 dotenv.config();
@@ -14,7 +14,11 @@ const SignIn = () => {
   const [error, setError] = useState(""); // エラー状態の追加
 
   const router = useRouter();
-
+  useEffect(() => {
+    //  window.location.reload();
+    console.log("router.refresh() が実行されました");
+    router.refresh();
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
