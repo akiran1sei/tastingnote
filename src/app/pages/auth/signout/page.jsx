@@ -32,6 +32,14 @@ const Signout = () => {
 
     handleSignout();
   }, []);
+  const signInReplace = () => {
+    router.replace("/pages/auth/signin");
+  };
+  useEffect(() => {
+    console.log("router.refresh() が実行されました");
+    router.refresh();
+  }, [router]);
+
   return (
     <div className={styles.sign_page}>
       <div className={styles.sign_wrapper}>
@@ -41,10 +49,7 @@ const Signout = () => {
         </p>
         {error && <p className={styles.error_message}>{error}</p>}
         <div className={styles.sign_btn}>
-          <button
-            className={styles.sign_out_btn}
-            onClick={() => router.replace("/pages/auth/signin")}
-          >
+          <button className={styles.sign_out_btn} onClick={signInReplace}>
             サインインへ
           </button>
         </div>
