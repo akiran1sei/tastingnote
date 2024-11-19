@@ -67,7 +67,7 @@ export async function POST(request) {
     const secretKey = new TextEncoder().encode(process.env.JWT_SECRET);
     const token = await new SignJWT(userData)
       .setProtectedHeader({ alg: "HS256" })
-      .setExpirationTime("12h")
+      .setExpirationTime("1h")
       .sign(secretKey);
     // クッキーの設定
     cookies().set({
@@ -77,7 +77,7 @@ export async function POST(request) {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
       path: "/",
-      maxAge: COOKIE_EXPIRATION_HOURS * ONE_HOUR_IN_SECONDS, // 12時間
+      maxAge: ONE_HOUR_IN_SECONDS, // 1時間
     });
 
     return NextResponse.json(
