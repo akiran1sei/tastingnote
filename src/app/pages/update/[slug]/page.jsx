@@ -6,6 +6,7 @@ import styles from "@/app/styles/Contents.module.css";
 import { Update } from "@/app/components/molecules/Update/Update";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
+import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 import { jwtDecode } from "jwt-decode";
 const UpdatePage = ({ params }) => {
   const id = use(params);
@@ -87,12 +88,16 @@ const UpdatePage = ({ params }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <GlobalHeader />
       <Update data={singleData} groups={GroupData} item={singleData} />
     </>
   ) : (
-    <div className={styles.sign_off_page}>
-      <p className={styles.sign_off_text}>ログインしてください。</p>
-    </div>
+    <>
+      <GlobalHeader />
+      <div className={styles.sign_off_page}>
+        <p className={styles.sign_off_text}>ログインしてください。</p>
+      </div>
+    </>
   );
 };
 

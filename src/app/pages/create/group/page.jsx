@@ -5,6 +5,7 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import styles from "@/app/styles/Contents.module.css";
 import { jwtDecode } from "jwt-decode";
+import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 
 const GroupPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -63,12 +64,14 @@ const GroupPage = () => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <GlobalHeader />
       <GroupCreate data={data} user={isUserId} />
     </>
-  ) : (
+  ) : (<>
+    <GlobalHeader/>
     <div className={styles.sign_off_page}>
       <p className={styles.sign_off_text}>ログインしてください。</p>
-    </div>
+    </div></>
   );
 };
 

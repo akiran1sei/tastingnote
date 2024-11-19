@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import styles from "@/app/styles/Contents.module.css";
 import { jwtDecode } from "jwt-decode";
+import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 const Profile = () => {
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -95,46 +96,49 @@ const Profile = () => {
   };
 
   return (
-    <div className={styles.profile_page}>
-      {isToken && (
-        <div className={styles.profile_card}>
-          <ul className={styles.profile_user_list}>
-            <li className={styles.profile_user_item}>
-              <span className={styles.profile_item_title}>username</span>
-              <span className={styles.profile_item_value}>{isUserName}</span>
+    <>
+      <GlobalHeader />
+      <div className={styles.profile_page}>
+        {isToken && (
+          <div className={styles.profile_card}>
+            <ul className={styles.profile_user_list}>
+              <li className={styles.profile_user_item}>
+                <span className={styles.profile_item_title}>username</span>
+                <span className={styles.profile_item_value}>{isUserName}</span>
+              </li>
+              <li className={styles.profile_user_item}>
+                <span className={styles.profile_item_title}>email</span>
+                <span className={styles.profile_item_value}>{isUserEmail}</span>
+              </li>
+            </ul>
+          </div>
+        )}
+        <div className={styles.profile_btn_box}>
+          <ul className={styles.profile_btn_list}>
+            <li className={styles.profile_btn_item}>
+              <button
+                className={`${styles.profile_btn} ${styles.profile_signout_btn}`}
+                type="button"
+                onClick={handleTokenRemove}
+                disabled={isLoggingOut}
+              >
+                {isLoggingOut ? "ログアウト中..." : "SignOut"}
+              </button>
             </li>
-            <li className={styles.profile_user_item}>
-              <span className={styles.profile_item_title}>email</span>
-              <span className={styles.profile_item_value}>{isUserEmail}</span>
+            <li className={styles.profile_btn_item}>
+              <button
+                className={`${styles.profile_btn} ${styles.profile_delete_btn}`}
+                type="button"
+                onClick={handleAccountDelete}
+                disabled={isAccountDelete}
+              >
+                {isLoggingOut ? "アカウント 削除中.." : "Account Delete"}
+              </button>
             </li>
           </ul>
         </div>
-      )}
-      <div className={styles.profile_btn_box}>
-        <ul className={styles.profile_btn_list}>
-          <li className={styles.profile_btn_item}>
-            <button
-              className={`${styles.profile_btn} ${styles.profile_signout_btn}`}
-              type="button"
-              onClick={handleTokenRemove}
-              disabled={isLoggingOut}
-            >
-              {isLoggingOut ? "ログアウト中..." : "SignOut"}
-            </button>
-          </li>
-          <li className={styles.profile_btn_item}>
-            <button
-              className={`${styles.profile_btn} ${styles.profile_delete_btn}`}
-              type="button"
-              onClick={handleAccountDelete}
-              disabled={isAccountDelete}
-            >
-              {isLoggingOut ? "アカウント 削除中.." : "Account Delete"}
-            </button>
-          </li>
-        </ul>
       </div>
-    </div>
+    </>
   );
 };
 
