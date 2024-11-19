@@ -85,6 +85,6 @@ export const config = {
     "/pages/select/:path*",
     "/pages/create/:path*",
     "/pages/update/:path*",
-    "/pages/auth/profile",
+    "/pages/user/profile",
   ],
 };
