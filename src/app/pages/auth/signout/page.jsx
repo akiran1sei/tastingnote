@@ -12,6 +12,7 @@ const Signout = () => {
       setError(null);
       try {
         const res = await fetch("/pages/api/auth/signout", {
+          // API ルートの修正
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -21,9 +22,12 @@ const Signout = () => {
           throw new Error("サインアウトに失敗しました");
         }
 
-        // localStorage.removeItem("token");
-        localStorage.clear();
-        // 必要に応じて他のローカルストレージのデータも削除
+        // トークンのみ削除
+        localStorage.removeItem("token");
+
+        // サインインページへリダイレクト
+
+        router.replace("/pages/auth/signin");
       } catch (error) {
         console.error("サインアウトエラー:", error);
         setError(error.message);
@@ -32,13 +36,10 @@ const Signout = () => {
 
     handleSignout();
   }, []);
+
   const signInReplace = () => {
     router.replace("/pages/auth/signin");
   };
-  useEffect(() => {
-    console.log("router.refresh() が実行されました");
-    router.refresh();
-  }, [router]);
 
   return (
     <div className={styles.sign_page}>
@@ -50,7 +51,7 @@ const Signout = () => {
         {error && <p className={styles.error_message}>{error}</p>}
         <div className={styles.sign_btn}>
           <button className={styles.sign_out_btn} onClick={signInReplace}>
-            サインインへ
+            サインイン
           </button>
         </div>
       </div>

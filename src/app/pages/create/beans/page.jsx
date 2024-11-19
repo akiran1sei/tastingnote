@@ -5,7 +5,7 @@ import styles from "@/app/styles/Contents.module.css";
 import { BeansCreateTable } from "@/app/components/molecules/Create/Create_ver-2";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
-
+import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 const BeansCreatePage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -85,7 +85,12 @@ const BeansCreatePage = () => {
     return <div className={styles.loading}>データを取得中です...</div>;
   }
 
-  return <BeansCreateTable data={data} />;
+  return (
+    <>
+      <GlobalHeader />
+      <BeansCreateTable data={data} />
+    </>
+  );
 };
 
 export default BeansCreatePage;

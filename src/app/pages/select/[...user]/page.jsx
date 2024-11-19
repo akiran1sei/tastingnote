@@ -1,6 +1,7 @@
 "use client";
 import Head from "next/head";
 import { Search } from "@/app/components/molecules/Select/Search";
+import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 import { use } from "react";
 import useSWR from "swr";
 const SelectPage = ({ params }) => {
@@ -25,6 +26,7 @@ const SelectPage = ({ params }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <GlobalHeader />
       <Search data={id.user} user={data} />
     </>
   );
