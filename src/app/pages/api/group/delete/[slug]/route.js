@@ -24,7 +24,7 @@ export async function DELETE(request) {
       if (emailSizeOne) {
         await GroupModel.deleteOne({ _id: body.id });
         return NextResponse.json({
-          message: "グループ削除成功One",
+          message: "グループ削除成功",
           status: 200,
         });
       } else {
@@ -35,7 +35,7 @@ export async function DELETE(request) {
           }
         );
         return NextResponse.json({
-          message: "グループ削除成功multiple",
+          message: "グループ削除成功",
           status: 200,
         });
       }

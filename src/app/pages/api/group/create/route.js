@@ -44,7 +44,7 @@ export async function POST(request) {
       console.log(newGroup);
       await newGroup.save();
       return NextResponse.json({
-        message: "グループを作成しました。",
+        message: "グループ作成成功",
         status: 200,
       });
     }

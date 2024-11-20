@@ -130,7 +130,7 @@ export function GlobalHeader() {
                     priority
                   />
                 </span>
-                <span className={header.reload_txt}>Refresh</span>
+                <span className={header.reload_txt}>再読み込み</span>
               </button>
             </li>
           </ul>
