@@ -223,6 +223,11 @@ export function BeansCreateTable(context) {
                   <option></option>
                   {options}
                 </select>
+                <div className={styles.edit_point_memo}>
+                  <p className={styles.edit_point_text}>
+                    グループ名は、Group作成ページにて作成してください。
+                  </p>
+                </div>
               </div>
             </div>
             <div className={styles.edit_contents_item}>
