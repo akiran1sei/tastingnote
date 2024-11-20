@@ -70,7 +70,7 @@ export function GroupCreate(context) {
           const Group = await res.json();
           router.refresh({ shallow: true });
           alert(Group.message);
-          return router.replace("/pages/create/beans");
+          return window.location.reload();
         } else {
           return null;
         }
