@@ -83,12 +83,12 @@ export function GlobalHeader() {
                 </li>
                 <li className={header.menu_item}>
                   <button onClick={() => navigateTo("/pages/create/group")}>
-                    Create Group
+                    Group
                   </button>
                 </li>
                 <li className={header.menu_item}>
                   <button onClick={() => navigateTo("/pages/create/beans")}>
-                    Create NewPage
+                    NewPage
                   </button>
                 </li>
 
@@ -105,12 +105,12 @@ export function GlobalHeader() {
               <>
                 <li className={header.menu_item}>
                   <button onClick={() => navigateTo("/pages/auth/signin")}>
-                    SignIn
+                    サインイン
                   </button>
                 </li>
                 <li className={header.menu_item}>
                   <button onClick={() => navigateTo("/pages/auth/signup")}>
-                    SignUp
+                    サインアップ
                   </button>
                 </li>
               </>
