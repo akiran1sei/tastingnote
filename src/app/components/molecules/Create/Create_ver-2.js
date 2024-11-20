@@ -101,21 +101,21 @@ export function BeansCreateTable(context) {
   function RoastArticle() {
     const NumberRoast = Number(roast);
     if (NumberRoast >= 0 && NumberRoast <= 15) {
-      return "light";
+      return "ライト";
     } else if (NumberRoast > 15 && NumberRoast <= 30) {
-      return "cinnamon";
+      return "シナモン";
     } else if (NumberRoast > 30 && NumberRoast <= 45) {
-      return "medium";
+      return "ミディアム";
     } else if (NumberRoast > 45 && NumberRoast <= 60) {
-      return "hight";
+      return "ハイ";
     } else if (NumberRoast > 60 && NumberRoast <= 75) {
-      return "city";
+      return "シティ";
     } else if (NumberRoast > 75 && NumberRoast <= 90) {
-      return "full city";
+      return "フルシティ";
     } else if (NumberRoast > 90 && NumberRoast < 100) {
-      return "french";
+      return "フレンチ";
     } else if (NumberRoast === 100) {
-      return "italian";
+      return "イタリアン";
     }
   }
 
@@ -188,7 +188,12 @@ export function BeansCreateTable(context) {
     const answer = Number(point * score * 4);
     setDefects(answer);
   }
-
+  useEffect(() => {
+    const RoastData = () => {
+      setRoastDegree(RoastSelect);
+    };
+    return RoastData();
+  }, [RoastSelect]);
   return (
     <>
       <h1 className={styles.contents_title}>CREATE</h1>
@@ -325,32 +330,22 @@ export function BeansCreateTable(context) {
                     <span className={styles.smallFont}>{RoastSelect}</span>
                   </output>
                   <br />
-                  {roast}%
+                  <input
+                    type="number"
+                    className={styles.edit_input_roastNumber}
+                    value={roast}
+                    onChange={(e) => setRoast(e.target.value)}
+                    name="roastNumber"
+                    required
+                  />
+                  %
                 </p>
-                <select
-                  name="roast-degree"
-                  id="roast-degree"
-                  value={roastDegree}
-                  className={styles.edit_select_value}
-                  onChange={(e) => setRoastDegree(e.target.value)}
-                  required
-                >
-                  <option></option>
-                  <option value="ライト">ライト</option>
-                  <option value="シナモン">シナモン</option>
-                  <option value="ミディアム">ミディアム</option>
-                  <option value="ハイ">ハイ</option>
-                  <option value="シティ">シティ</option>
-                  <option value="フルシティ">フルシティ</option>
-                  <option value="フレンチ">フレンチ</option>
-                  <option value="イタリアン">イタリアン</option>
-                </select>
               </div>
               <div className={styles.edit_point_memo}>
                 <p className={styles.edit_point_text}>
                   焙煎具合、パーセンテージによって焙煎度名が変化するので、
                   <wbr />
-                  それに合わせて焙煎度の中から選んでください。なお、パーセンテージは目安になっています。
+                  それに合わせて焙煎度の中から選んでください。なお、上記のメモリグラフとパーセンテージは目安です。
                 </p>
               </div>
             </div>
