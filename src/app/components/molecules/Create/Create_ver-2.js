@@ -522,7 +522,7 @@ export function BeansCreateTable(context) {
                   欠点・瑕疵
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -587,7 +587,7 @@ export function BeansCreateTable(context) {
                   カップの綺麗さ
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -631,7 +631,7 @@ export function BeansCreateTable(context) {
                   甘さ
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -677,7 +677,7 @@ export function BeansCreateTable(context) {
                   酸の質
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -758,7 +758,7 @@ export function BeansCreateTable(context) {
                   口に含んだ質感
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -840,7 +840,7 @@ export function BeansCreateTable(context) {
                   フレーバー
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -884,7 +884,7 @@ export function BeansCreateTable(context) {
                   後味の印象度
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -930,7 +930,7 @@ export function BeansCreateTable(context) {
                   ハーモニーの均衝性
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -978,7 +978,7 @@ export function BeansCreateTable(context) {
                   総合評価
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -1041,7 +1041,7 @@ export function BeansCreateTable(context) {
                 <p className={styles.edit_point_text}>
                   <span className={styles.edit_contents_item_mark}>
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
