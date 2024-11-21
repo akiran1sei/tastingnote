@@ -305,7 +305,7 @@ export function BeansCreate(context) {
                   onClick={handlePointCoffeeNameBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -391,7 +391,7 @@ export function BeansCreate(context) {
                   onClick={handlePointRoastBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -613,7 +613,7 @@ export function BeansCreate(context) {
                   onClick={handlePointAromaBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -721,7 +721,7 @@ export function BeansCreate(context) {
                   onClick={handlePointDefectsBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -794,7 +794,7 @@ export function BeansCreate(context) {
                   onClick={handlePointCleancapBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -865,7 +865,7 @@ export function BeansCreate(context) {
                   onClick={handlePointSweetBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -971,7 +971,7 @@ export function BeansCreate(context) {
                   onClick={handlePointAcidityBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -1079,7 +1079,7 @@ export function BeansCreate(context) {
                   onClick={handlePointMouthfeelBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -1157,7 +1157,7 @@ export function BeansCreate(context) {
                     onClick={handlePointFlavorBtn}
                   >
                     <Image
-                      src="/images/priority_high_img.svg"
+                      src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -1230,7 +1230,7 @@ export function BeansCreate(context) {
                   onClick={handlePointAfterBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -1303,7 +1303,7 @@ export function BeansCreate(context) {
                   onClick={handlePointBalanceBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -1378,7 +1378,7 @@ export function BeansCreate(context) {
                   onClick={handlePointOverallBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -1425,7 +1425,7 @@ export function BeansCreate(context) {
                   onClick={handlePointTotalBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
@@ -1472,7 +1472,7 @@ export function BeansCreate(context) {
                   onClick={handlePointImpressionBtn}
                 >
                   <Image
-                    src="/images/priority_high_img.svg"
+                    src="/images/exclamation_img.svg"
                     alt="エクスクラメーションボタン"
                     width={24}
                     height={24}
