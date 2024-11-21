@@ -88,7 +88,7 @@ const SignUp = () => {
         </div>
         <p className={styles.sign_link}>
           <Link href={"./signin"} className={styles.smallFont}>
-            Sing Inは、こちらをクリック！
+            <span>Sing In</span>は、こちらをクリック！
           </Link>
         </p>
       </div>
