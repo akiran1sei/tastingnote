@@ -16,10 +16,9 @@ export function Search(context) {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
   const [showExportButton, setShowExportButton] = useState(false);
-
+  const [selectedItems, setSelectedItems] = useState(new Set());
   const [checkbox, setCheckBox] = useState([]);
-  const router = useRouter();
-  const ReadGroups = useReadGroups();
+  const [isChecked, setIsChecked] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
   const [defaultValue, setDefaultValue] = useState(context.data[1]);
   const dataId = context.data[0];
@@ -28,6 +27,9 @@ export function Search(context) {
   const [isUserId, setIsUserId] = useState("");
   const [isUserEmail, setIsUserEmail] = useState("");
   const [isUserName, setIsUserName] = useState("");
+  const router = useRouter();
+  const ReadGroups = useReadGroups();
+
   useEffect(() => {
     const getUser = () => {
       try {
@@ -70,7 +72,6 @@ export function Search(context) {
       dedupingInterval: 0,
     }
   );
-  console.log(context);
 
   const GroupData = context.user.groups;
 
@@ -108,7 +109,6 @@ export function Search(context) {
   const handleSearchClick = () => {
     // 親コンポーネントにメッセージを送信
     setShowSearchButton(!showSearchButton);
-  
   };
   const handleDeleteClick = () => {
     // 親コンポーネントにメッセージを送信
@@ -144,8 +144,36 @@ export function Search(context) {
   }
   const handleExportClick = () => {
     setShowExportButton(!showExportButton);
-      setShowDeleteButton(false);
+    setShowDeleteButton(false);
   };
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setSelectedItems((prev) => {
+      const newSelected = new Set(prev);
+      if (e.target.checked) {
+        newSelected.add(value);
+      } else {
+        newSelected.delete(value);
+      }
+      return newSelected;
+    });
+
+    // checkboxステートの更新
+    if (e.target.checked) {
+      setCheckBox((prev) => [...prev, value]);
+    } else {
+      setCheckBox((prev) => prev.filter((item) => item !== value));
+    }
+  };
+
+  // const handleChange = (e) => {
+  //   console.log(e.target.value);
+  //   const { checked, value } = e.target;
+  //   console.log(checked, value);
+  //   setCheckBox([...checkbox, e.target.value]);
+  //   setIsChecked(!isChecked);
+  // };
+  console.log(checkbox);
   return isLoggedIn ? (
     <>
       <header className={styles.select_header}>
@@ -372,11 +400,11 @@ export function Search(context) {
                         <input
                           type="checkbox"
                           className={styles.select_checkbox_input}
-                          defaultValue={beans._id}
-                          onChange={(e) =>
-                            setCheckBox([...checkbox, e.target.value])
-                          }
-                          checked
+                          defaultValue={[beans._id, index + 1]}
+                          onChange={handleChange}
+                          checked={selectedItems.has(
+                            [beans._id, index + 1].toString()
+                          )}
                           required
                         />
                       </li>
@@ -432,7 +460,7 @@ export function Search(context) {
                               <div
                                 className={styles.select_aroma_valueHeader_list}
                               >
-                                質　：
+                                質 :
                               </div>
                             </div>
                             <div
