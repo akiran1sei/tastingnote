@@ -9,11 +9,13 @@ import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 
 import dotenv from "dotenv";
+import ExportButton from "@/app/components/buttons/ExportButton";
 dotenv.config();
 export function Search(context) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
+  const [showExportButton, setShowExportButton] = useState(false);
 
   const [checkbox, setCheckBox] = useState([]);
   const router = useRouter();
@@ -106,10 +108,12 @@ export function Search(context) {
   const handleSearchClick = () => {
     // 親コンポーネントにメッセージを送信
     setShowSearchButton(!showSearchButton);
+  
   };
   const handleDeleteClick = () => {
     // 親コンポーネントにメッセージを送信
     setShowDeleteButton(!showDeleteButton);
+    setShowExportButton(false);
   };
   async function handleDeleteSubmit(e) {
     e.preventDefault();
@@ -138,6 +142,10 @@ export function Search(context) {
       return alert("アイテム削除失敗/Select");
     }
   }
+  const handleExportClick = () => {
+    setShowExportButton(!showExportButton);
+      setShowDeleteButton(false);
+  };
   return isLoggedIn ? (
     <>
       <header className={styles.select_header}>
@@ -173,6 +181,21 @@ export function Search(context) {
                 />
               </button>
             </li>
+            <li className={styles.select_header_menu_item}>
+              <button
+                type="button"
+                className={styles.select_header_menu_btn}
+                onClick={handleExportClick}
+              >
+                <Image
+                  src="/images/export_img.svg"
+                  alt="エクスポートボタン"
+                  width={24}
+                  height={24}
+                  priority
+                />
+              </button>
+            </li>
           </ul>
         </nav>
       </header>
@@ -191,6 +214,14 @@ export function Search(context) {
               >
                 Delete
               </button>
+            </li>
+          )}
+          {showExportButton && (
+            <li
+              className={styles.select_header_active_menu_item}
+              hidden={!showExportButton}
+            >
+              <ExportButton />
             </li>
           )}
           {showSearchButton && (
@@ -329,7 +360,7 @@ export function Search(context) {
           <div className={styles.select_beans_box}>
             {data.allItems.map((beans, index) => (
               <div className={styles.select_beans} key={beans._id}>
-                {showDeleteButton ? (
+                {showDeleteButton || showExportButton ? (
                   <div className={styles.select_delete_list}>
                     <ul
                       className={`${styles.select_list} ${styles.select_checkbox}`}
@@ -345,6 +376,7 @@ export function Search(context) {
                           onChange={(e) =>
                             setCheckBox([...checkbox, e.target.value])
                           }
+                          checked
                           required
                         />
                       </li>
