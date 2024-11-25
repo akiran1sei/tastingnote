@@ -18,7 +18,6 @@ export function Search(context) {
   const [showExportButton, setShowExportButton] = useState(false);
   const [selectedItems, setSelectedItems] = useState(new Set());
   const [checkbox, setCheckBox] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
   const [defaultValue, setDefaultValue] = useState(context.data[1]);
   const dataId = context.data[0];
@@ -166,14 +165,8 @@ export function Search(context) {
     }
   };
 
-  // const handleChange = (e) => {
-  //   console.log(e.target.value);
-  //   const { checked, value } = e.target;
-  //   console.log(checked, value);
-  //   setCheckBox([...checkbox, e.target.value]);
-  //   setIsChecked(!isChecked);
-  // };
-  console.log(checkbox);
+  
+
   return isLoggedIn ? (
     <>
       <header className={styles.select_header}>
@@ -249,7 +242,7 @@ export function Search(context) {
               className={styles.select_header_active_menu_item}
               hidden={!showExportButton}
             >
-              <ExportButton />
+              <ExportButton data={checkbox} />
             </li>
           )}
           {showSearchButton && (
@@ -400,10 +393,10 @@ export function Search(context) {
                         <input
                           type="checkbox"
                           className={styles.select_checkbox_input}
-                          defaultValue={[beans._id, index + 1]}
+                          defaultValue={[beans._id]}
                           onChange={handleChange}
                           checked={selectedItems.has(
-                            [beans._id, index + 1].toString()
+                            [beans._id].toString()
                           )}
                           required
                         />

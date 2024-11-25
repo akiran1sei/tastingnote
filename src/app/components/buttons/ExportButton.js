@@ -1,13 +1,20 @@
 "use client";
 import { useState } from "react";
 
-export default function ExportButton() {
+export default function ExportButton(context) {
   const [isExporting, setIsExporting] = useState(false);
 
   const handleExport = async () => {
     try {
       setIsExporting(true);
-      const response = await fetch("/pages/api/export");
+
+      console.log("context", context.data);
+      const response = await fetch(
+        `/pages/api/export?data=${encodeURIComponent(
+          JSON.stringify(context.data)
+        )}`
+      );
+      // const response = await fetch("/pages/api/export");
 
       if (!response.ok) {
         throw new Error("Export failed");

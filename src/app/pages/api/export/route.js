@@ -7,7 +7,16 @@ import { BeansModel } from "@/app/utils/schemaModels";
 export async function GET(request) {
   try {
     await connectDB();
-    const beans = await BeansModel.find({}).lean();
+    const { searchParams } = new URL(request.url);
+    const searchQuery = searchParams.get("data");
+    // searchQueryを解析して、検索条件を生成
+    const query = {};
+    // 例: 特定のフィールドで検索
+    if (searchQuery) {
+      query.username = searchQuery;
+    }
+    console.log("query", query);
+    const beans = await BeansModel.find(query).lean();
 
     const fields = [
       "username",
