@@ -169,7 +169,7 @@ export function Select() {
               <button
                 type="submit"
                 onClick={handleDeleteSubmit}
-                className={styles.select_delete_btn}
+                className={styles.select_menu_btn}
               >
                 Delete
               </button>

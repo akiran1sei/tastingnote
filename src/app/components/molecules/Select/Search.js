@@ -165,8 +165,6 @@ export function Search(context) {
     }
   };
 
-  
-
   return isLoggedIn ? (
     <>
       <header className={styles.select_header}>
@@ -221,6 +219,9 @@ export function Search(context) {
         </nav>
       </header>
       <h1 className={styles.contents_title}>SELECT</h1>
+         <p>
+                エクスポート機能は使用できますが、まだ、調整しておりません。自己責任でご使用ください。
+              </p>
       <div className={styles.select_header_active_contents}>
         <ul className={styles.select_header_active_menu}>
           {showDeleteButton && (
@@ -231,7 +232,7 @@ export function Search(context) {
               <button
                 type="submit"
                 onClick={handleDeleteSubmit}
-                className={styles.select_delete_btn}
+                className={styles.select_menu_btn}
               >
                 Delete
               </button>
@@ -242,6 +243,7 @@ export function Search(context) {
               className={styles.select_header_active_menu_item}
               hidden={!showExportButton}
             >
+           
               <ExportButton data={checkbox} />
             </li>
           )}
@@ -395,9 +397,7 @@ export function Search(context) {
                           className={styles.select_checkbox_input}
                           defaultValue={[beans._id]}
                           onChange={handleChange}
-                          checked={selectedItems.has(
-                            [beans._id].toString()
-                          )}
+                          checked={selectedItems.has([beans._id].toString())}
                           required
                         />
                       </li>

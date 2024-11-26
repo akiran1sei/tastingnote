@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-
+import styles from "@/app/styles/Contents.module.css";
 export default function ExportButton(context) {
   const [isExporting, setIsExporting] = useState(false);
   const responseData = context.data;
@@ -9,11 +9,6 @@ export default function ExportButton(context) {
       setIsExporting(true);
 
       const response = await fetch(`/pages/api/export/${responseData}`);
-      // const response = await fetch(
-      //   `/pages/api/export?data=${encodeURIComponent(
-      //     JSON.stringify(context.data)
-      //   )}`
-      // );
 
       if (!response.ok) {
         throw new Error("Export failed");
@@ -54,7 +49,7 @@ export default function ExportButton(context) {
     <button
       onClick={handleExport}
       disabled={isExporting}
-      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-400"
+      className={styles.select_menu_btn}
     >
       {isExporting ? "エクスポート中..." : "エクスポート"}
     </button>
