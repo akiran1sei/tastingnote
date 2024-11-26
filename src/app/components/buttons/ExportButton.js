@@ -3,18 +3,17 @@ import { useState } from "react";
 
 export default function ExportButton(context) {
   const [isExporting, setIsExporting] = useState(false);
-
+  const responseData = context.data;
   const handleExport = async () => {
     try {
       setIsExporting(true);
 
-      console.log("context", context.data);
-      const response = await fetch(
-        `/pages/api/export?data=${encodeURIComponent(
-          JSON.stringify(context.data)
-        )}`
-      );
-      // const response = await fetch("/pages/api/export");
+      const response = await fetch(`/pages/api/export/${responseData}`);
+      // const response = await fetch(
+      //   `/pages/api/export?data=${encodeURIComponent(
+      //     JSON.stringify(context.data)
+      //   )}`
+      // );
 
       if (!response.ok) {
         throw new Error("Export failed");
