@@ -14,6 +14,9 @@ const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(""); // エラー状態の追加
   const [action, setAction] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState("akira.application@gmail.com");
+  const [copiedPassword, setCopiedPassword] = useState("1111");
   const router = useRouter();
   useEffect(() => {
     //  window.location.reload();
@@ -59,6 +62,20 @@ const SignIn = () => {
   const handleClick = () => {
     setAction(!action);
   };
+  const handleCopy = async (text) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+
+      // 2秒後に表示を元に戻す
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error("クリップボードへのコピーに失敗しました:", err);
+    }
+  };
+
   return (
     <div className={styles.sign_page}>
       <div className={styles.sign_wrapper}>
@@ -80,17 +97,30 @@ const SignIn = () => {
             </button>
 
             {action && (
-              <p className={styles.sign_point}>
-                <span className={styles.sign_pointWrap}>
-                  下記の入力欄に記載されている
+              <div className={styles.sign_point}>
+                <span className={styles.sign_pointText}>
+                  下記の”email”、”password”をクリックしますと
                   <br />
-                  アドレスとパスワード
+                  お試しで使用する”email”、”password”を
                   <br />
-                  を使用していただきますと、
-                  <br />
-                  お試し用でアプリを使用できます。
+                  コピーできますので、ご使用下さい。
                 </span>
-              </p>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(copiedEmail)}
+                  className={styles.sign_point_button}
+                >
+                  email
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleCopy(copiedPassword)}
+                  className={styles.sign_point_button}
+                >
+                  password
+                </button>
+              </div>
             )}
           </div>
           <form onSubmit={handleSubmit}>
@@ -105,7 +135,7 @@ const SignIn = () => {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="akira.application@gmail.com"
+                  placeholder="email"
                   required
                   disabled={isLoading}
                 />
@@ -119,7 +149,7 @@ const SignIn = () => {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="1111"
+                  placeholder="password"
                   required
                   disabled={isLoading}
                 />
