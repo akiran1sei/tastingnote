@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>コーヒー評価結果</title>
+    <style>
+      /* CSS をここに記述 */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>コーヒー評価結果</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>日付</th>
+          <th>ユーザー名</th>
+          <th>グループ名</th>
+          <th>コーヒー名</th>
+          <th>焙煎度</th>
+          <th>アロマ</th>
+          <th>強さ</th>
+          <th>質</th>
+          <th>ドライ</th>
+          <th>クラスト</th>
+          <th>ブレーク</th>
+          <th>欠点・瑕疵</th>
+          <th>カップの綺麗さ</th>
+          <th>甘さ</th>
+          <th>酸の質</th>
+          <th>酸の強さ</th>
+          <th>口に含んだ質感</th>
+          <th>ボディの強さ</th>
+          <th>フレーバー</th>
+          <th>後味の印象度</th>
+          <th>ハーモニーの均衝性</th>
+          <th>総合評価</th>
+          <th>小計</th>
+          <th>TOTAL (+36点)</th>
+          <th>味の印象度</th>
+          <th>memo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% evaluations.forEach(evaluation => { %>
+        <tr>
+          <td><%= evaluation.date %></td>
+          <td><%= evaluation.username %></td>
+          <td><%= evaluation.groupname %></td>
+          <td><%= evaluation.coffee %></td>
+          <td><%= evaluation.roast %></td>
+          <td><%= evaluation.roastDegree %></td>
+          <td><%= evaluation.aromaDryStrength %></td>
+          <td><%= evaluation.aromaCrustStrength %></td>
+          <td><%= evaluation.aromaBreakStrength %></td>
+          <td><%= evaluation.aromaDryQuality %></td>
+          <td><%= evaluation.aromaCrustQuality %></td>
+          <td><%= evaluation.aromaBreakQuality %></td>
+          <td><%= evaluation.defects %></td>
+          <td><%= evaluation.cleancap %></td>
+          <td><%= evaluation.sweet %></td>
+          <td><%= evaluation.acidity %></td>
+          <td><%= evaluation.acidityStrength %></td>
+          <td><%= evaluation.mouthfeel %></td>
+          <td><%= evaluation.bodyStrength %></td>
+          <td><%= evaluation.flavor %></td>
+          <td><%= evaluation.after %></td>
+          <td><%= evaluation.balance %></td>
+          <td><%= evaluation.overall %></td>
+          <td><%= evaluation.result %></td>
+          <td><%= evaluation.impression %></td>
+          <td><%= evaluation.total %></td>
+          <td><%= evaluation.memo %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>
