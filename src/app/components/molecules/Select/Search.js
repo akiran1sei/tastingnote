@@ -7,9 +7,11 @@ import useReadGroups from "@/app/utils/useReadGroups";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-
+import axios from "axios";
 import dotenv from "dotenv";
-import ExportButton from "@/app/components/buttons/ExportButton";
+import CSV from "@/app/components/buttons/Export/CSV";
+import PDF from "@/app/components/buttons/Export/PDF";
+
 dotenv.config();
 export function Search(context) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -219,9 +221,9 @@ export function Search(context) {
         </nav>
       </header>
       <h1 className={styles.contents_title}>SELECT</h1>
-         <p>
-                エクスポート機能は使用できますが、まだ、調整しておりません。自己責任でご使用ください。
-              </p>
+      <p>
+        エクスポート機能は使用できますが、まだ、調整しておりません。自己責任でご使用ください。
+      </p>
       <div className={styles.select_header_active_contents}>
         <ul className={styles.select_header_active_menu}>
           {showDeleteButton && (
@@ -243,8 +245,8 @@ export function Search(context) {
               className={styles.select_header_active_menu_item}
               hidden={!showExportButton}
             >
-           
-              <ExportButton data={checkbox} />
+              <PDF data={checkbox} />
+              <CSV data={checkbox} />
             </li>
           )}
           {showSearchButton && (
