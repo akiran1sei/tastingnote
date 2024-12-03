@@ -4,130 +4,385 @@
     <title>コーヒー評価結果</title>
     <style>
       /* CSS をここに記述 */
+body {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #333333;
+  font-size: 62.5%;
+}
+.main {
+  width: 100%;
+  height: 100%;
+}
+.main-contents {
+  width: 100%;
+  height: 100%;
+}
+.main-title {
+  width: 100%;
+  text-align: center;
+}
+.tasting-data {
+  width: 100%;
+  height: auto;
+}
+.tasting-data__wrap {
+  width: 100%;
+  height: auto;
+}
+/* -----.tasting-data__header----- */
+.tasting-data__header {
+  width: 100%;
+  height: auto;
+}
+.tasting-data__header-wrap {
+  width: 100%;
+  height: auto;
+}
+.tasting-data__header-list {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.tasting-data__header-item {
+  list-style-type: none;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0.5rem;
+}
+.tasting-data__header-title {
+  width: 100%;
+  display: inline-block;
+  border-top: 1px solid #333;
+}
+.tasting-data__header-text {
+  width: 100%;
+  height: 2rem;
+  display: inline-block;
+}
+.tasting-data__header-username {
+  max-width: 200px;
+}
+.tasting-data__header-number {
+  max-width: 50px;
+}
+.tasting-data__header-date {
+  max-width: 100px;
+}
+.tasting-data__header-round {
+  max-width: 100px;
+}
+.tasting-data__header-sn {
+  max-width: 100px;
+}
+.tasting-data__header-lot {
+  max-width: 100px;
+}
+.tasting-data__header-country {
+  max-width: 200px;
+}
+
+/* .tasting-data__  */
+.tasting-data__section {
+  width: 100%;
+  height: auto;
+}
+.tasting-data__list {
+  width: 100%;
+  height: auto;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  align-items: start;
+  justify-items: stretch;
+  padding-left: 0;
+  gap: 0.5rem;
+}
+.tasting-data__item {
+  width: 100%;
+  height: auto;
+  list-style-type: none;
+}
+.tasting-data__item-value {
+}
+.tasting-data__item-value-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.tasting-data__item:nth-child(n + 3):nth-child(-n + 14) {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.tasting-data__item-title {
+  text-align: center;
+}
+.tasting-data__number {
+  width: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-area: 1 / 1 / 4 / 2;
+}
+.tasting-data__coffee {
+  grid-area: 1 / 2 / 2 / 7;
+}
+.tasting-data__roast {
+  grid-area: 2 / 2 / 3 / 3;
+}
+.tasting-data__aroma {
+  grid-area: 2 / 3 / 3 / 4;
+}
+.aroma-data-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.aroma-data-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.aroma-data-item-title {
+  letter-spacing: -2px;
+}
+
+.tasting-data__defects {
+  grid-area: 2 / 4 / 3 / 5;
+}
+.tasting-data__cleancap {
+  grid-area: 2 / 5 / 3 / 6;
+}
+.tasting-data__sweet {
+  grid-area: 2 / 6 / 3 / 7;
+}
+.tasting-data__acidity {
+  grid-area: 2 / 7 / 3 / 8;
+}
+.tasting-data__mouthfeel {
+  grid-area: 2 / 8 / 3 / 9;
+}
+input[type="range"] {
+  -webkit-appearance: slider-vertical; /* WebKit系ブラウザ用 */
+  appearance: slider-vertical; /* その他のブラウザ用 */
+  width: 20px; /* スライダーの幅 */
+  height: 50px; /* スライダーの高さ */
+}
+datalist {
+ 
+}
+.tasting-data__flavor {
+  grid-area: 2 / 9 / 3 / 10;
+}
+.tasting-data__after {
+  grid-area: 2 / 10 / 3 / 11;
+}
+.tasting-data__balance {
+  grid-area: 2 / 11 / 3 / 12;
+}
+.tasting-data__overall {
+  grid-area: 2 / 12 / 3 / 13;
+}
+.tasting-data__total {
+  grid-area: 2 / 13 / 3 / 14;
+}
+.tasting-data__impression {
+  grid-area: 1 / 7 / 2 / 14;
+}
+.tasting-data__memo {
+  grid-area: 3 / 2 / 4 / 14;
+}
+
     </style>
   </head>
   <body>
     <main class="main">
       <div class="main-contents">
-        <h1>コーヒー評価結果</h1>
+        <h1 class="main-title">コーヒー評価結果</h1>
         <div class="tasting-data">
           <div class="tasting-data__wrap">
             <header class="tasting-data__header">
               <div class="tasting-data__header-wrap">
                 <ul class="tasting-data__header-list">
-                  <li class="tasting-data__header-item">
-                    <!-- <span class="tasting-data__username"></span> -->
-                    <span class="tasting-data__header-text">NAME</span>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-username"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">NAME</span>
                   </li>
-                  <li class="tasting-data__header-item">
-                    <span class="tasting-data__header-text">#</span>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-number"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">#</span>
                   </li>
-                  <li class="tasting-data__header-item">
-                    <!-- <span class="tasting-data__date"></span> -->
-                    <span class="tasting-data__header-text">DATE</span>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-date"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">DATE</span>
                   </li>
-                  <li class="tasting-data__header-item">
-                    <span class="tasting-data__header-text">ROUND</span>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-round"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">ROUND</span>
                   </li>
-                  <li class="tasting-data__header-item">
-                    <span class="tasting-data__header-text">SN</span>
+                  <li class="tasting-data__header-item tasting-data__header-sn">
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">SN</span>
                   </li>
-                  <li class="tasting-data__header-item">
-                    <span class="tasting-data__header-text">TLB#</span>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-lot"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">TLB#</span>
                   </li>
-                  <li class="tasting-data__header-item">
-                    <span class="tasting-data__header-text">COUNTRY</span>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-country"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">COUNTRY</span>
                   </li>
                 </ul>
               </div>
             </header>
             <% data.forEach(evaluation => { %>
-            <div class="tasting-data__section">
-              <ul class="tasting-data__list">
-                <li class="tasting-data__item asting-data__number">
-                  <span class="tasting-data__item-title"></span>
-                </li>
-                <li class="tasting-data__item tasting-data__coffee">
-                  <span class="tasting-data__item-title">coffee</span><%=
-                  evaluation.coffee %>
-                </li>
-                <li class="tasting-data__item tasting-data__roast">
-                  <span class="tasting-data__item-title">ロースト</span>
-                  <%= evaluation.roast %> <%= evaluation.roastDegree %>
-                </li>
-                <li class="tasting-data__item tasting-data__aroma">
-                  <span class="tasting-data__item-title">アロマ</span>
-                  <div class="aroma-data-list">
-                    <div class="aroma-data-item">
-                      <span class="aroma-data-item-title">ドライ</span>
-                      <%= evaluation.aromaDryStrength %>|<%=
-                      evaluation.aromaDryQuality %>
-                    </div>
-                    <div class="aroma-data-item">
-                      <span class="aroma-data-item-title">クラスト</span>
-                      <%= evaluation.aromaCrustStrength %>|<%=
-                      evaluation.aromaCrustQuality %>
-                    </div>
-                    <div class="aroma-data-item">
-                      <span class="aroma-data-item-title">ブレーク</span>
-                      <%= evaluation.aromaBreakStrength %>|<%=
-                      evaluation.aromaBreakQuality %>
-                    </div>
+                <div class="tasting-data__section">
+            <ul class="tasting-data__list">
+              <li class="tasting-data__item tasting-data__number">
+                <span class="tasting-data__item-value">1</span>
+              </li>
+              <li class="tasting-data__item tasting-data__coffee">
+                <span class="tasting-data__item-title">coffee</span>
+                <span class="tasting-data__item-value"><%= evaluation.coffee %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__roast">
+                <span class="tasting-data__item-title">ロースト</span>
+                <span class="tasting-data__item-value"><%= evaluation.roast %> <%= evaluation.roastDegree %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__aroma">
+                <span class="tasting-data__item-title">アロマ</span>
+                <div class="aroma-data-list">
+                  <div class="aroma-data-item">
+                    <span class="aroma-data-item-title">ドライ</span>
+                    <span class="tasting-data__item-value"><%= evaluation.aromaDryStrength %>|<%=
+                      evaluation.aromaDryQuality %></span>
                   </div>
-                </li>
-                <li class="tasting-data__item tasting-data__defects">
-                  <span class="tasting-data__item-title">欠点・瑕疵</span>
-                  <%= evaluation.defects %>
-                </li>
-                <li class="tasting-data__item tasting-data__cleancap">
-                  <span class="tasting-data__item-title"
-                    >カップの<br />綺麗さ</span
-                  ><%= evaluation.cleancap %>
-                </li>
-                <li class="tasting-data__item tasting-data__sweet">
-                  <span class="tasting-data__item-title">甘さ</span><%=
-                  evaluation.sweet %>
-                </li>
-                <li class="tasting-data__item tasting-data__acidity">
-                  <span class="tasting-data__item-title">酸の質</span><%=
-                  evaluation.acidity %><%= evaluation.acidityStrength %>
-                </li>
-                <li class="tasting-data__item tasting-data__mouthfeel">
-                  <span class="tasting-data__item-title"
-                    >口に含んだ<br />質感</span
-                  ><%= evaluation.mouthfeel %><%= evaluation.bodyStrength %>
-                </li>
-                <li class="tasting-data__item tasting-data__flavor">
-                  <span class="tasting-data__item-title">フレーバー</span><%=
-                  evaluation.flavor %>
-                </li>
-                <li class="tasting-data__item tasting-data__after">
-                  <span class="tasting-data__item-title"
-                    >後味の<br />印象度</span
-                  ><%= evaluation.after %>
-                </li>
-                <li class="tasting-data__item tasting-data__balance">
-                  <span class="tasting-data__item-title">バランス</span><%=
-                  evaluation.balance %>
-                </li>
-                <li class="tasting-data__item tasting-data__overall">
-                  <span class="tasting-data__item-title">総合評価</span><%=
-                  evaluation.overall %>
-                </li>
-                <li class="tasting-data__item tasting-data__total">
-                  <span class="tasting-data__item-title">TOTAL(＋36)</span><%=
-                  evaluation.result %><%= evaluation.total %>
-                </li>
-                <li class="tasting-data__item tasting-data__impression">
-                  <span class="tasting-data__item-title">味の印象</span><%=
-                  evaluation.impression %>
-                </li>
-                <li class="tasting-data__item tasting-data__memo">
-                  <span class="tasting-data__item-title">memo</span><%=
-                  evaluation.memo %>
-                </li>
-              </ul>
-            </div>
+                  <div class="aroma-data-item">
+                    <span class="aroma-data-item-title">クラスト</span>
+                    <span class="tasting-data__item-value"><%= evaluation.aromaCrustStrength %>|<%=
+                      evaluation.aromaCrustQuality %></span>
+                  </div>
+                  <div class="aroma-data-item">
+                    <span class="aroma-data-item-title">ブレーク</span>
+                    <span class="tasting-data__item-value"><%= evaluation.aromaBreakStrength %>|<%=
+                      evaluation.aromaBreakQuality %></span>
+                  </div>
+                </div>
+              </li>
+              <li class="tasting-data__item tasting-data__defects">
+                <span class="tasting-data__item-title">欠点・瑕疵</span>
+                <span class="tasting-data__item-value"><%= evaluation.defects %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__cleancap">
+                <span class="tasting-data__item-title">カップの<br />綺麗さ</span>
+                <span class="tasting-data__item-value"><%= evaluation.cleancap %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__sweet">
+                <span class="tasting-data__item-title">甘さ</span>
+                <span class="tasting-data__item-value"><%=
+                  evaluation.sweet %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__acidity">
+
+                <div class="tasting-data__item-title">
+                  酸の質
+                </div>
+                <div class="tasting-data__item-value-wrap">
+                  <span class="tasting-data__item-value"><%=
+                  evaluation.acidity %><%= evaluation.acidityStrength %></span> <output>
+                    <input type="range" min="0" max="6" step="1">
+                  </output>
+
+                </div>
+              </li>
+              <li class="tasting-data__item tasting-data__mouthfeel">
+                <div class="tasting-data__item-title">
+                  口に含んだ<br>
+                  質感
+                </div>
+                <div class="tasting-data__item-value-wrap">
+                  <output>
+                    <input type="range" min="0" max="4" step="1"list="values">
+                    <datalist id="values">
+                      <option value="4" label="H"></option>
+                      <option value="3" label="H1"></option>
+                      <option value="2" label="M"></option>
+                      <option value="1" label="L"></option>
+                      <option value="0" label="L1"></option>
+                    </datalist>
+                  </output>
+                  
+                  <span class="tasting-data__item-value"><%= evaluation.mouthfeel %><%= evaluation.bodyStrength %></span>
+                </div>
+              </li>
+              <li class="tasting-data__item tasting-data__flavor">
+                <span class="tasting-data__item-title">フレーバー</span>
+                <span class="tasting-data__item-value"><%=
+                  evaluation.flavor %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__after">
+                <span class="tasting-data__item-title">後味の<br />印象度</span>
+                <span class="tasting-data__item-value"><%= evaluation.after %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__balance">
+                <span class="tasting-data__item-title">バランス</span>
+                <span class="tasting-data__item-value"><%=
+                  evaluation.balance %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__overall">
+                <span class="tasting-data__item-title">総合評価</span>
+                <span class="tasting-data__item-value"><%=
+                  evaluation.overall %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__total">
+                <span class="tasting-data__item-title">TOTAL(＋36)</span>
+                <span class="tasting-data__item-value"><%=
+                  evaluation.result %><%= evaluation.total %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__impression">
+                <span class="tasting-data__item-title">味の印象</span>
+                <span class="tasting-data__item-value"><%=
+                  evaluation.impression %></span>
+              </li>
+              <li class="tasting-data__item tasting-data__memo">
+                <span class="tasting-data__item-title">memo</span>
+                <span class="tasting-data__item-value"><%=
+                  evaluation.memo %></span>
+              </li>
+            </ul>
+          </div>
+        </div>
             <% }); %>
           </div>
         </div>
