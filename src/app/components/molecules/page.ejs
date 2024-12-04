@@ -1,204 +1,423 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <title>コーヒー評価シート</title>
+    <title>コーヒー評価結果</title>
     <style>
-      :root {
-        --primary-color: #2c3e50;
-        --secondary-color: #34495e;
-        --background-color: #f4f4f4;
-        --text-color: #333;
-        --border-color: #bdc3c7;
-      }
+    body {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #333333;
+  font-size: 62.5%;
+}
+.main {
+  width: 100%;
+  height: 100%;
+}
+.main-contents {
+  width: 100%;
+  height: 100%;
+}
+.main-title {
+  width: 100%;
+  text-align: center;
+}
+.tasting-data {
+  width: 100%;
+  height: auto;
+}
+.tasting-data__wrap {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+/* -----.tasting-data__header----- */
+.tasting-data__header {
+  width: 100%;
+  height: auto;
+}
+.tasting-data__header-wrap {
+  width: 100%;
+  height: auto;
+}
+.tasting-data__header-list {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.tasting-data__header-item {
+  list-style-type: none;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 0.5rem;
+}
+.tasting-data__header-title {
+  width: 100%;
+  display: inline-block;
+  border-top: 1px solid #333;
+}
+.tasting-data__header-text {
+  width: 100%;
+  height: 2rem;
+  display: inline-block;
+}
+.tasting-data__header-username {
+  max-width: 200px;
+}
+.tasting-data__header-number {
+  max-width: 50px;
+}
+.tasting-data__header-date {
+  max-width: 100px;
+}
+.tasting-data__header-round {
+  max-width: 100px;
+}
+.tasting-data__header-sn {
+  max-width: 100px;
+}
+.tasting-data__header-lot {
+  max-width: 100px;
+}
+.tasting-data__header-country {
+  max-width: 200px;
+}
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+/* .tasting-data__  */
+.tasting-data__section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  
+  align-items: stretch;
+   background: #f2f2f2;
+  
+  
+}
 
-      body {
-        font-family: "Helvetica", "Arial", sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        font-size: 14px;
-        background-color: var(--background-color);
-        padding: 20px;
-      }
 
-      .cupping-sheet {
-        background: white;
-        border: 1px solid var(--border-color);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-      }
+.tasting-data__list {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  justify-content: space-between;
+  align-items: start;
+  justify-items: stretch;
+  padding-left: 0;
 
-      .sheet-header {
-        display: flex;
-        justify-content: space-between;
-        border-bottom: 2px solid var(--primary-color);
-        padding-bottom: 10px;
-        margin-bottom: 15px;
-      }
+  row-gap: .5rem;
+  
+}
+.tasting-data__item {
+  width: 100%;
+  height: 100%;
+  list-style-type: none;
+}
 
-      .evaluation-grid {
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-        gap: 10px;
-        background-color: white;
-      }
+.tasting-data__item-value {
+  color: #333;
+    font-size: 14px;
+}
+/* {border-right: 3px solid #f2b86d;} */
+.tasting-data__item-value-wrap {
+  width: 100%;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.tasting-data__item:nth-child(n + 3):nth-child(-n + 14) {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+.tasting-data__item-title {
+      text-align: center;
+    color: #dba52c;
+    font-size: 14px;
+    font-weight: bold;
+}
+.tasting-data__number {
+  width: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-area: 1 / 1 / 4 / 2;
+}
+.tasting-data__coffee {
+  grid-area: 1 / 2 / 2 / 7;
+}
+.tasting-data__roast {
+  grid-area: 2 / 2 / 3 / 3;
+}
+.tasting-data__aroma {
+  grid-area: 2 / 3 / 3 / 4;
+}
+.aroma-data-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.aroma-data-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.aroma-data-item-title {
+  letter-spacing: -2px;
+}
 
-      .grid-section {
-        border: 1px solid var(--border-color);
-        padding: 10px;
-        text-align: center;
-      }
+.tasting-data__defects {
+  grid-area: 2 / 4 / 3 / 5;
+}
+.tasting-data__cleancap {
+  grid-area: 2 / 5 / 3 / 6;
+}
+.tasting-data__sweet {
+  grid-area: 2 / 6 / 3 / 7;
+}
+.tasting-data__acidity {
+  grid-area: 2 / 7 / 3 / 8;
+}
+.tasting-data__acidity-strength{ grid-area: 2 / 8 / 3 / 9;}
+.tasting-data__mouthfeel {
+  grid-area: 2 / 9 / 3 / 10;
+}
+.tasting-data__body-strength{ grid-area: 2 / 10 / 3 / 11;}
 
-      .section-title {
-        font-weight: bold;
-        margin-bottom: 5px;
-        font-size: 12px;
-        color: var(--secondary-color);
-      }
+.tasting-data__flavor {grid-area: 2 / 11 / 3 / 12;
+}
+.tasting-data__after {
+grid-area: 2 / 12 / 3 / 13;}
+.tasting-data__balance {
+grid-area: 2 / 13 / 3 / 14;}
+.tasting-data__overall {
+grid-area: 2 / 14 / 3 / 15;
+}
+.tasting-data__total {
+grid-area: 2 / 15 / 3 / 16;
+}
+.tasting-data__impression {
+  grid-area: 1 / 7 / 2 / 16;
+}
+.tasting-data__memo {
+  grid-area: 3 / 2 / 4 / 16;
+}
 
-      .section-value {
-        font-size: 14px;
-      }
 
-      .full-span {
-        grid-column: span 12;
-      }
-
-      .half-span {
-        grid-column: span 6;
-      }
-
-      .quarter-span {
-        grid-column: span 3;
-      }
-
-      .aroma-details {
-        display: flex;
-        justify-content: space-around;
-      }
-
-      .range-input {
-        width: 100%;
-        margin-top: 5px;
-      }
-
-      @media (max-width: 768px) {
-        .evaluation-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      }
     </style>
   </head>
   <body>
-    <div class="cupping-sheet">
-      <div class="sheet-header">
-        <div>カッピングシート</div>
-        <div>評価日: <span id="current-date"></span></div>
-      </div>
+    <main class="main">
+      <div class="main-contents">
+        <h1 class="main-title">コーヒー評価結果</h1>
+        <div class="tasting-data">
+          <div class="tasting-data__wrap">
+            <header class="tasting-data__header">
+              <div class="tasting-data__header-wrap">
+                <ul class="tasting-data__header-list">
+                  <li
+                    class="tasting-data__header-item tasting-data__header-username"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">NAME</span>
+                  </li>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-number"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">#</span>
+                  </li>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-date"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">DATE</span>
+                  </li>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-round"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">ROUND</span>
+                  </li>
+                  <div class="tasting-data__header-item tasting-data__header-sn">
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">SN</span>
+                  </div>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-lot"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">TLB#</span>
+                  </li>
+                  <li
+                    class="tasting-data__header-item tasting-data__header-country"
+                  >
+                    <span class="tasting-data__header-text"></span>
+                    <span class="tasting-data__header-title">COUNTRY</span>
+                  </li>
+                </ul>
+              </div>
+            </header>
+          
+            
+                <div class="tasting-data__section">
+                  <% data.forEach(evaluation => { %>
+                  <div class="tasting-data__list">
+                    <div class="tasting-data__item tasting-data__number">
+                      <span class="tasting-data__item-value">1</span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__coffee">
+                      <span class="tasting-data__item-title">coffee</span>
+                      <span class="tasting-data__item-value"><%= evaluation.coffee %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__roast">
+                      <span class="tasting-data__item-title">ロースト</span>
+                      <span class="tasting-data__item-value"><%= evaluation.roast %> <%= evaluation.roastDegree %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__aroma">
+                      <span class="tasting-data__item-title">アロマ</span>
+                      <div class="aroma-data-list">
+                        <div class="aroma-data-item">
+                          <span class="aroma-data-item-title">ドライ</span>
+                          <span class="tasting-data__item-value"><%= evaluation.aromaDryStrength %>|<%=
+                            evaluation.aromaDryQuality %></span>
+                        </div>
+                        <div class="aroma-data-item">
+                          <span class="aroma-data-item-title">クラスト</span>
+                          <span class="tasting-data__item-value"><%= evaluation.aromaCrustStrength %>|<%=
+                            evaluation.aromaCrustQuality %></span>
+                        </div>
+                        <div class="aroma-data-item">
+                          <span class="aroma-data-item-title">ブレーク</span>
+                          <span class="tasting-data__item-value"><%= evaluation.aromaBreakStrength %>|<%=
+                            evaluation.aromaBreakQuality %></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tasting-data__item tasting-data__defects">
+                      <span class="tasting-data__item-title">欠点・瑕疵</span>
+                      <span class="tasting-data__item-value"><%= evaluation.defects %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__cleancap">
+                      <span class="tasting-data__item-title">カップの<br />綺麗さ</span>
+                      <span class="tasting-data__item-value"><%= evaluation.cleancap %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__sweet">
+                      <span class="tasting-data__item-title">甘さ</span>
+                      <span class="tasting-data__item-value"><%=
+                        evaluation.sweet %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__acidity">
 
-      <div class="evaluation-grid">
-        <!-- コーヒー基本情報 -->
-        <div class="grid-section full-span">
-          <div class="section-title">コーヒー情報</div>
-          <div class="section-value">エチオピア ゲレゲタ G1 ナチュラル</div>
-        </div>
+                      <div class="tasting-data__item-title">
+                        酸の質
+                      </div>
+                      <div class="tasting-data__item-value-wrap">
+                        <span class="tasting-data__item-value"><%=
+                        evaluation.acidity %></span> 
 
-        <!-- 詳細情報 -->
-        <div class="grid-section quarter-span">
-          <div class="section-title">農園</div>
-          <div class="section-value">ゲレゲタ農園</div>
-        </div>
-        <div class="grid-section quarter-span">
-          <div class="section-title">品種</div>
-          <div class="section-value">ヘイルマリアム</div>
-        </div>
-        <div class="grid-section quarter-span">
-          <div class="section-title">精製方法</div>
-          <div class="section-value">ナチュラル</div>
-        </div>
-        <div class="grid-section quarter-span">
-          <div class="section-title">標高</div>
-          <div class="section-value">2000m</div>
-        </div>
+                      </div>
+                    </div>
+                    <div class="tasting-data__item tasting-data__acidity-strength">
 
-        <!-- アロマ評価 -->
-        <div class="grid-section half-span">
-          <div class="section-title">アロマ</div>
-          <div class="aroma-details">
-            <div>
-              <div>ドライ</div>
-              <input type="range" class="range-input" min="0" max="10" />
-            </div>
-            <div>
-              <div>クラスト</div>
-              <input type="range" class="range-input" min="0" max="10" />
-            </div>
-            <div>
-              <div>ブレーク</div>
-              <input type="range" class="range-input" min="0" max="10" />
-            </div>
+                      <div class="tasting-data__item-title">
+                      酸の強さ
+                      </div>
+                      <div class="tasting-data__item-value-wrap">
+
+                        
+
+                        <span class="tasting-data__item-value"><%=
+                        evaluation.acidityStrength %></span>
+                      </div>
+                    </div>
+                    <div class="tasting-data__item tasting-data__mouthfeel">
+                      <div class="tasting-data__item-title">
+                        口に含んだ<br>
+                        質感
+                      </div>
+                      <div class="tasting-data__item-value-wrap">
+                        
+                        <span class="tasting-data__item-value"><%= evaluation.mouthfeel %></span>
+                      </div>
+                    </div>
+                    <div class="tasting-data__item tasting-data__body-strength">
+                    <div class="tasting-data__item-title">
+                      ボディの強さ
+                    </div>
+                    <div class="tasting-data__item-value-wrap">
+
+                      
+                      <span class="tasting-data__item-value"><%= evaluation.bodyStrength %></span>
+                    </div>
+                  </div>
+                    <div class="tasting-data__item tasting-data__flavor">
+                      <span class="tasting-data__item-title">フレーバー</span>
+                      <span class="tasting-data__item-value"><%=
+                        evaluation.flavor %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__after">
+                      <span class="tasting-data__item-title">後味の<br />印象度</span>
+                      <span class="tasting-data__item-value"><%= evaluation.after %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__balance">
+                      <span class="tasting-data__item-title">バランス</span>
+                      <span class="tasting-data__item-value"><%=
+                        evaluation.balance %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__overall">
+                      <span class="tasting-data__item-title">総合評価</span>
+                      <span class="tasting-data__item-value"><%=
+                        evaluation.overall %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__total">
+                      <span class="tasting-data__item-title">TOTAL(＋36)</span>
+                      <span class="tasting-data__item-value"><br/><%=
+                        evaluation.result %><br/><%= evaluation.total %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__impression">
+                      <span class="tasting-data__item-title">味の印象</span>
+                      <span class="tasting-data__item-value"><%=
+                        evaluation.impression %></span>
+                    </div>
+                    <div class="tasting-data__item tasting-data__memo">
+                      <span class="tasting-data__item-title">memo</span>
+                      <span class="tasting-data__item-value"><%=
+                        evaluation.memo %></span>
+                    </div>
+                  </div>
+                    <% }); %>
+                </div>
+        </div>
+          
           </div>
         </div>
-
-        <!-- 欠点・カップクオリティ -->
-        <div class="grid-section quarter-span">
-          <div class="section-title">欠点</div>
-          <div class="section-value">0</div>
-        </div>
-        <div class="grid-section quarter-span">
-          <div class="section-title">カップクオリティ</div>
-          <div class="section-value">良好</div>
-        </div>
-
-        <!-- 詳細評価 -->
-        <div class="grid-section quarter-span">
-          <div class="section-title">酸味</div>
-          <input type="range" class="range-input" min="0" max="10" />
-        </div>
-        <div class="grid-section quarter-span">
-          <div class="section-title">甘味</div>
-          <input type="range" class="range-input" min="0" max="10" />
-        </div>
-        <div class="grid-section quarter-span">
-          <div class="section-title">口当たり</div>
-          <input type="range" class="range-input" min="0" max="10" />
-        </div>
-        <div class="grid-section quarter-span">
-          <div class="section-title">バランス</div>
-          <input type="range" class="range-input" min="0" max="10" />
-        </div>
-
-        <!-- 総合評価 -->
-        <div class="grid-section full-span">
-          <div class="section-title">総合印象</div>
-          <div class="section-value">
-            繊細で豊かな味わい。柑橘系の明るい酸味と、ベリーのような甘さが特徴的。
-          </div>
-        </div>
-
-        <!-- メモ -->
-        <div class="grid-section full-span">
-          <div class="section-title">追加メモ</div>
-          <div class="section-value">カッピング時の追加コメントや気づき</div>
-        </div>
       </div>
-    </div>
-
-    <script>
-      document.getElementById("current-date").textContent =
-        new Date().toLocaleDateString("ja-JP", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        });
-    </script>
+    </main>
   </body>
 </html>
