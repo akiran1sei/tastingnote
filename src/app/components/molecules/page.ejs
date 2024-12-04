@@ -105,7 +105,7 @@
   justify-content: flex-start;
   
   align-items: stretch;
-   background: #f2f2f2;
+   
   
   
 }
@@ -120,8 +120,8 @@
   align-items: start;
   justify-items: stretch;
   padding-left: 0;
-
-  row-gap: .5rem;
+margin-bottom: 0.5rem;
+background: #f2f2f2;
   
 }
 .tasting-data__item {
@@ -134,7 +134,7 @@
   color: #333;
     font-size: 14px;
 }
-/* {border-right: 3px solid #f2b86d;} */
+
 .tasting-data__item-value-wrap {
   width: 100%;
   height:100%;
@@ -286,10 +286,10 @@ grid-area: 2 / 15 / 3 / 16;
           
             
                 <div class="tasting-data__section">
-                  <% data.forEach(evaluation => { %>
+                  <% data.forEach((evaluation, index)  => { %>
                   <div class="tasting-data__list">
                     <div class="tasting-data__item tasting-data__number">
-                      <span class="tasting-data__item-value">1</span>
+                      <span class="tasting-data__item-value"> <%= index + 1 %> </span>
                     </div>
                     <div class="tasting-data__item tasting-data__coffee">
                       <span class="tasting-data__item-title">coffee</span>
