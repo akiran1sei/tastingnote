@@ -9,9 +9,8 @@ let browser;
 
 export async function GET(req, res) {
   try {
-    if (!browser) {
-      browser = await puppeteer.launch();
-    }
+    // ブラウザの初期化をリクエストごとに
+    const browser = await puppeteer.launch();
 
     await connectDB();
     const jsonData = res.params.id.split(",");
@@ -20,13 +19,21 @@ export async function GET(req, res) {
 
     const html = await ejs.renderFile(
       path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
-      // path.join(process.cwd(), "../src/app/components/molecules/page.ejs"),
+      // path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
+
       { data }
     );
     const page = await browser.newPage();
     await page.setContent(html);
-    await page.pdf({ path: "output.pdf", format: "A4", printBackground: true });
 
+    await page.pdf({
+      path: "output.pdf",
+      format: "A4",
+      printBackground: true,
+      landscape: true, // 横向きに設定
+    });
+
+    await browser.close(); // 使用後は必ずブラウザを閉じる
     return NextResponse.json({
       message: "PDF作成成功",
 
