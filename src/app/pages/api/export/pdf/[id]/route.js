@@ -27,7 +27,7 @@ export async function GET(req, res) {
     );
 
     const page = await browser.newPage();
-    await page.setContent(html);
+    await page.setContent(html, { encoding: "utf-8" });
 
     const pdfBuffer = await page.pdf({
       format: "A4",
@@ -40,7 +40,7 @@ export async function GET(req, res) {
 
     return new Response(pdfBuffer, {
       headers: {
-        "Content-Type": "application/pdf",
+        "Content-Type": "application/pdf; text/html;charset=utf-8",
         "Content-Disposition": 'attachment; filename="your_file_name.pdf"',
       },
     });
