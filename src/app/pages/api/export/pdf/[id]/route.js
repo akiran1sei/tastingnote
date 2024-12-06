@@ -20,10 +20,11 @@ export async function GET(req, res) {
     const jsonData = res.params.id.split(",");
 
     const data = await BeansModel.find({ _id: { $in: jsonData } });
+    const username = data.length > 0 ? data[0].username : "";
 
     const html = await ejs.renderFile(
       path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
-      { data }
+      { data, username }
     );
 
     const page = await browser.newPage();
