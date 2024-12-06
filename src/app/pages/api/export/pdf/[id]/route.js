@@ -3,47 +3,43 @@ import connectDB from "@/app/utils/database";
 import { BeansModel } from "@/app/utils/schemaModels";
 import path from "path";
 import ejs from "ejs";
+
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 
 export async function GET(req, res) {
+  let browser = null;
   try {
-    await connectDB();
-    const jsonData = res.params.id.split(",");
-    const data = await BeansModel.find({ _id: { $in: jsonData } });
-
-    const browser = await puppeteer.launch({
+    browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
       executablePath: await chromium.executablePath(),
       headless: true, // trueに固定
     });
+    await connectDB();
+    const jsonData = res.params.id.split(",");
 
-    const pdfBuffers = await Promise.all(
-      data.map(async (item) => {
-        const html = await ejs.renderFile(
-          path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
-          { data: item, header: "共通ヘッダー" }
-        );
+    const data = await BeansModel.find({ _id: { $in: jsonData } });
+    const username = data.length > 0 ? data[0].username : "";
 
-        const page = await browser.newPage();
-        await page.setContent(html, { encoding: "utf-8" });
-
-        const buffer = await page.pdf({
-          format: "A4",
-          printBackground: true,
-          landscape: true,
-        });
-        await page.close();
-        return buffer;
-      })
+    const html = await ejs.renderFile(
+      path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
+      { data }
     );
 
+    const page = await browser.newPage();
+    await page.setContent(html, { encoding: "utf-8" });
+
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: true,
+      landscape: true,
+    });
+
+    await page.close();
     await browser.close();
 
-    const mergedPdf = Buffer.concat(pdfBuffers);
-
-    return new Response(mergedPdf, {
+    return new Response(pdfBuffer, {
       headers: {
         "Content-Type": "application/pdf; text/html;charset=utf-8",
         "Content-Disposition": 'attachment; filename="your_file_name.pdf"',
