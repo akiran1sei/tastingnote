@@ -15,10 +15,7 @@ export async function GET(req, res) {
 
     // EJSテンプレートをレンダリング
     const html = await ejs.renderFile(
-      path.join(
-        process.cwd(),
-        "/src/app/components/molecules/EJS_Template/page.ejs"
-      ),
+      path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
       { data }
     );
 
