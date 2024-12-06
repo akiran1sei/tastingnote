@@ -2,16 +2,20 @@ import { NextResponse } from "next/server";
 import connectDB from "@/app/utils/database";
 import { BeansModel } from "@/app/utils/schemaModels";
 import path from "path";
-import puppeteer from "puppeteer";
 import ejs from "ejs";
 
-let browser;
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 
 export async function GET(req, res) {
+  let browser = null;
   try {
-    // ブラウザの初期化をリクエストごとに
-    const browser = await puppeteer.launch();
-
+    browser = await puppeteer.launch({
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(),
+      headless: true, // trueに固定
+    });
     await connectDB();
     const jsonData = res.params.id.split(",");
 
@@ -19,16 +23,20 @@ export async function GET(req, res) {
 
     const html = await ejs.renderFile(
       path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
-
       { data }
     );
+
     const page = await browser.newPage();
     await page.setContent(html);
+
     const pdfBuffer = await page.pdf({
       format: "A4",
       printBackground: true,
       landscape: true,
     });
+
+    await page.close();
+    await browser.close();
 
     return new Response(pdfBuffer, {
       headers: {
@@ -43,6 +51,8 @@ export async function GET(req, res) {
       status: 500,
     });
   } finally {
-    // browser.close(); // 必要に応じてブラウザを閉じる
+    if (browser) {
+      await browser.close();
+    }
   }
 }
