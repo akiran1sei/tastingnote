@@ -25,20 +25,17 @@ export async function GET(req, res) {
     );
     const page = await browser.newPage();
     await page.setContent(html);
-
-    await page.pdf({
-      path: "output.pdf",
+    const pdfBuffer = await page.pdf({
       format: "A4",
       printBackground: true,
-      landscape: true, // 横向きに設定
+      landscape: true,
     });
 
-    await browser.close(); // 使用後は必ずブラウザを閉じる
-    return NextResponse.json({
-      message: "PDF作成成功",
-
-      pdfUrl: "/output.pdf",
-      status: 200,
+    return new Response(pdfBuffer, {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": 'attachment; filename="your_file_name.pdf"',
+      },
     });
   } catch (error) {
     console.error("PDF作成失敗:", error);

@@ -1,4 +1,4 @@
-"use client";
+// client側 (PDF.js)
 import { useState } from "react";
 import dotenv from "dotenv";
 dotenv.config();
@@ -14,9 +14,22 @@ export default function PDF(data) {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/pages/api/puppeteer/${data.data}`
       );
-      if (!response.ok) {
-        throw new Error("PDF生成に失敗しました。");
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "your_file_name.pdf";
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      } else {
+        throw new Error("PDFの生成に失敗しました。");
       }
+
       setIsLoading(false);
     } catch (error) {
       console.error("Error generating PDF:", error);
