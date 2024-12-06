@@ -34,7 +34,6 @@ export async function GET(req, res) {
       format: "A4",
       printBackground: true,
       landscape: true,
-      headerTemplate: "<p>coffeeカッピングシート</p>",
     });
 
     await page.close();
@@ -55,6 +54,7 @@ export async function GET(req, res) {
   } finally {
     if (browser) {
       await browser.close();
+      return window.location.reload();
     }
   }
 }
