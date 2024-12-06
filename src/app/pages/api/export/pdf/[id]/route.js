@@ -33,6 +33,42 @@ export async function GET(req, res) {
       format: "A4",
       printBackground: true,
       landscape: true,
+      headerTemplate: `  <header class="tasting-data__header">
+            <div class="tasting-data__header-wrap">
+              <ul class="tasting-data__header-list">
+                <li class="tasting-data__header-item tasting-data__header-username">
+                  <span class="tasting-data__header-text"><% if (data.length > 0) { %>
+                    <%= data[0].username %>
+                    <% } %> </span>
+                  <span class="tasting-data__header-title">NAME</span>
+                </li>
+                <li class="tasting-data__header-item tasting-data__header-number">
+                  <span class="tasting-data__header-text"></span>
+                  <span class="tasting-data__header-title">#</span>
+                </li>
+                <li class="tasting-data__header-item tasting-data__header-date">
+                  <span class="tasting-data__header-text"></span>
+                  <span class="tasting-data__header-title">DATE</span>
+                </li>
+                <li class="tasting-data__header-item tasting-data__header-round">
+                  <span class="tasting-data__header-text"></span>
+                  <span class="tasting-data__header-title">ROUND</span>
+                </li>
+                <div class="tasting-data__header-item tasting-data__header-sn">
+                  <span class="tasting-data__header-text"></span>
+                  <span class="tasting-data__header-title">SN</span>
+                </div>
+                <li class="tasting-data__header-item tasting-data__header-lot">
+                  <span class="tasting-data__header-text"></span>
+                  <span class="tasting-data__header-title">TLB#</span>
+                </li>
+                <li class="tasting-data__header-item tasting-data__header-country">
+                  <span class="tasting-data__header-text"></span>
+                  <span class="tasting-data__header-title">COUNTRY</span>
+                </li>
+              </ul>
+            </div>
+          </header>`,
     });
 
     await page.close();
