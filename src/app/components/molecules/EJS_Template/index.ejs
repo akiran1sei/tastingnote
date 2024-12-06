@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>コーヒー評価結果</title>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      color: #333333;
+      font-weight: normal;
+      font-size: 62.5%;
+      font-family: "Noto Sans JP", sans-serif;
+    }
+
+    .main {
+      width: 100%;
+      height: 100%;
+    }
+
+    .main-contents {
+      width: 100%;
+      height: 100%;
+    }
+
+    .main-title {
+      width: 100%;
+      text-align: center;
+    }
+
+    .tasting-data {
+      width: 100%;
+      height: auto;
+    }
+
+    .tasting-data__wrap {
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+
+    /* -----.tasting-data__header----- */
+    .tasting-data__header {
+      width: 100%;
+      height: auto;
+    }
+
+    .tasting-data__header-wrap {
+      width: 100%;
+      height: auto;
+    }
+
+    .tasting-data__header-list {
+      width: 100%;
+      height: auto;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tasting-data__header-item {
+      list-style-type: none;
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 0.5rem;
+    }
+
+    .tasting-data__header-title {
+      width: 100%;
+      display: inline-block;
+      border-top: 1px solid #333;
+      font-size: 14px;
+    }
+
+    .tasting-data__header-text {
+      width: 100%;
+      height: 1rem;
+      display: inline-block;
+      font-size: 14px;
+    }
+
+    .tasting-data__header-username {
+      max-width: 200px;
+    }
+
+    .tasting-data__header-number {
+      max-width: 50px;
+    }
+
+    .tasting-data__header-date {
+      max-width: 100px;
+    }
+
+    .tasting-data__header-round {
+      max-width: 100px;
+    }
+
+    .tasting-data__header-sn {
+      max-width: 100px;
+    }
+
+    .tasting-data__header-lot {
+      max-width: 100px;
+    }
+
+    .tasting-data__header-country {
+      max-width: 200px;
+    }
+
+    /* .tasting-data__  */
+    .tasting-data__section {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+
+
+    .tasting-data__list {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      align-content: center;
+      justify-content: space-between;
+      align-items: start;
+      justify-items: stretch;
+      padding-left: 0;
+      margin-bottom: 0.5rem;
+      background: #f2f2f2;
+
+    }
+
+    .tasting-data__item {
+      width: 100%;
+      height: 100%;
+      list-style-type: none;
+    }
+
+    .tasting-data__item-value {
+      color: #333;
+      font-size: 14px;
+    }
+
+    .tasting-data__item-wrap {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tasting-data__coffee .tasting-data__item-wrap,
+    .tasting-data__impression .tasting-data__item-wrap,
+    .tasting-data__memo .tasting-data__item-wrap {
+
+      flex-direction: row !important;
+      justify-content: flex-start !important;
+    }
+
+    .tasting-data__item:nth-child(n + 3):nth-child(-n + 14) {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+
+    .tasting-data__item-title {
+
+      text-align: center;
+      color: #dba52c;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .tasting-data__number {
+      width: 2rem;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      grid-area: 1 / 1 / 4 / 2;
+    }
+
+    .tasting-data__coffee {
+      grid-area: 1 / 2 / 2 / 7;
+    }
+
+    .tasting-data__roast {
+      grid-area: 2 / 2 / 3 / 3;
+    }
+
+
+
+    .roast-data__item-value {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+    }
+
+
+    .roast-data__item-range {
+      display: inline-block;
+      width: 100px;
+      height: 10px;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 5%;
+      background: linear-gradient(270deg, #734e30 0%, #d9d9d9 100%);
+
+      border: 0.1px solid;
+
+    }
+
+    .roast-data__item-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 5px;
+      height: 15px;
+      border-radius: 5px;
+
+      background: #333;
+
+    }
+
+    .roast-data__item-range-scale-box {
+
+      width: 100px;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .tasting-data__aroma {
+      grid-area: 2 / 3 / 3 / 4;
+    }
+
+    .aroma-data-list {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .aroma-data-item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .aroma-data-item-title {
+      letter-spacing: -2px;
+    }
+
+    .aroma-data__item-value {
+      width: auto;
+      height: 100%;
+      padding: 0 0.5rem;
+    }
+
+    .aroma-data__item-value:first-child {
+      display: inline-block;
+
+      border-right: 1px solid #dba52c;
+    }
+
+    .tasting-data__defects {
+      grid-area: 2 / 4 / 3 / 5;
+    }
+
+    .tasting-data__cleancap {
+      grid-area: 2 / 5 / 3 / 6;
+    }
+
+    .tasting-data__sweet {
+      grid-area: 2 / 6 / 3 / 7;
+    }
+
+    .tasting-data__acidity {
+      grid-area: 2 / 7 / 3 / 8;
+    }
+
+    .tasting-data__acidity-strength {
+      grid-area: 2 / 8 / 3 / 9;
+    }
+
+    .tasting-data__mouthfeel {
+      grid-area: 2 / 9 / 3 / 10;
+    }
+
+    .tasting-data__body-strength {
+      grid-area: 2 / 10 / 3 / 11;
+    }
+
+    .tasting-data__flavor {
+      grid-area: 2 / 11 / 3 / 12;
+    }
+
+    .tasting-data__after {
+      grid-area: 2 / 12 / 3 / 13;
+    }
+
+    .tasting-data__balance {
+      grid-area: 2 / 13 / 3 / 14;
+    }
+
+    .tasting-data__overall {
+      grid-area: 2 / 14 / 3 / 15;
+    }
+
+    .tasting-data__total {
+      grid-area: 2 / 15 / 3 / 16;
+    }
+
+    .result-data__value {
+      display: block;
+    }
+
+    .result-data__value::after {
+      content: "+36";
+      color: #dba52c;
+    }
+
+    .total-data__value {
+      display: block;
+      font-weight: 500;
+      font-size: 18px;
+    }
+
+    .tasting-data__impression {
+      grid-area: 1 / 7 / 2 / 16;
+    }
+
+    .tasting-data__memo {
+      grid-area: 3 / 2 / 4 / 16;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <%- include('./header') %>
+  <main class="main">
+    <div class="main-contents">
+      <div class="tasting-data">
+        <div class="tasting-data__wrap">
+
+
+          <%- yield %>
+
+        </div>
+      </div>
+
+    </div>
+    </div>
+    </div>
+  </main>
+</body>
+
+</html>

@@ -3,34 +3,36 @@ import connectDB from "@/app/utils/database";
 import { BeansModel } from "@/app/utils/schemaModels";
 import path from "path";
 import ejs from "ejs";
-
-import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium";
+import puppeteer from "puppeteer";
 
 export async function GET(req, res) {
-  let browser = null;
   try {
-    browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(),
-      headless: true, // trueに固定
-    });
+    // データベース接続設定（例：MongoDB）
     await connectDB();
     const jsonData = res.params.id.split(",");
-
     const data = await BeansModel.find({ _id: { $in: jsonData } });
     const username = data.length > 0 ? data[0].username : "";
 
+    // EJSテンプレートをレンダリング
     const html = await ejs.renderFile(
-      path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
+      path.join(
+        process.cwd(),
+        "/src/app/components/molecules/EJS_Template/page.ejs"
+      ),
       { data }
     );
 
+    // PuppeteerでPDFを生成
+    const browser = await puppeteer.launch({
+      headless: false, // ローカルで確認する場合はfalse
+    });
     const page = await browser.newPage();
     await page.setContent(html, { encoding: "utf-8" });
 
-    const pdfBuffer = await page.pdf({
+    // PDFを保存するディレクトリを指定
+    const pdfPath = path.join(__dirname, "output", "your_file_name.pdf");
+    await page.pdf({
+      path: pdfPath,
       format: "A4",
       printBackground: true,
       landscape: true,
@@ -39,21 +41,10 @@ export async function GET(req, res) {
     await page.close();
     await browser.close();
 
-    return new Response(pdfBuffer, {
-      headers: {
-        "Content-Type": "application/pdf; text/html;charset=utf-8",
-        "Content-Disposition": 'attachment; filename="your_file_name.pdf"',
-      },
-    });
+    // ローカルではブラウザで開くなど、適切な処理を行う
+    console.log(`PDFが生成されました: ${pdfPath}`);
   } catch (error) {
     console.error("PDF作成失敗:", error);
-    return NextResponse.json({
-      message: "PDF作成失敗: " + error.message,
-      status: 500,
-    });
-  } finally {
-    if (browser) {
-      await browser.close();
-    }
+    // エラー処理
   }
 }
