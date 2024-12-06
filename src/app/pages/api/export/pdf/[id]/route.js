@@ -69,6 +69,7 @@ export async function GET(req, res) {
       format: "A4",
       printBackground: true,
       landscape: true,
+      printMedia: true,
       headerTemplate,
     });
 
