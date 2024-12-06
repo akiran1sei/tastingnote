@@ -54,7 +54,6 @@ export async function GET(req, res) {
   } finally {
     if (browser) {
       await browser.close();
-      return window.location.reload();
     }
   }
 }
