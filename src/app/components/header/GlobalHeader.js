@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
-import ExportButton from "../buttons/ExportButton";
 
 export function GlobalHeader() {
   const [isActive, setIsActive] = useState(false);
@@ -101,9 +100,7 @@ export function GlobalHeader() {
                     User Profile
                   </button>
                 </li>
-                <li className={header.menu_item}>
-                  <ExportButton />
-                </li>
+               
               </>
             ) : (
               <>

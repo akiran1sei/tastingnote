@@ -210,12 +210,19 @@
   border: 0.5px solid var(--color-yellow);
   box-shadow: 1px 1px 0 var(--color-box-shadow);
 }
-.select_menu_btn {
+.select_menu_btn_white {
   padding: 0.5rem;
   background: var(--color-white);
   border: 2px solid var(--color-yellow);
   border-radius: 5px;
   color: var(--color-yellow);
+}
+.select_menu_btn_yellow {
+  padding: 0.5rem;
+  background: var(--color-yellow);
+  border: 2px solid var(--color-yellow);
+  border-radius: 5px;
+  color: var(--color-white);
 }
 .select_list_box {
   width: 100%;
@@ -298,12 +305,15 @@
   height: auto;
 }
 .select_header_active_menu {
+  width: 100%;
+  min-width: 300px;
+  max-width: 500px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  margin: 1rem 0;
+  margin: 1rem auto;
 }
 .select_header_active_menu_item {
   margin: 0.5rem 0;

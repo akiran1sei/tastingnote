@@ -7,9 +7,11 @@ import useReadGroups from "@/app/utils/useReadGroups";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-
+import axios from "axios";
 import dotenv from "dotenv";
-import ExportButton from "@/app/components/buttons/ExportButton";
+import CSV from "@/app/components/buttons/Export/CSV";
+import PDF from "@/app/components/buttons/Export/PDF";
+
 dotenv.config();
 export function Search(context) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -108,11 +110,19 @@ export function Search(context) {
   const handleSearchClick = () => {
     // 親コンポーネントにメッセージを送信
     setShowSearchButton(!showSearchButton);
+    setShowExportButton(false);
+    setShowDeleteButton(false);
   };
   const handleDeleteClick = () => {
     // 親コンポーネントにメッセージを送信
     setShowDeleteButton(!showDeleteButton);
     setShowExportButton(false);
+    setShowSearchButton(false);
+  };
+  const handleExportClick = () => {
+    setShowExportButton(!showExportButton);
+    setShowDeleteButton(false);
+    setShowSearchButton(false);
   };
   async function handleDeleteSubmit(e) {
     e.preventDefault();
@@ -141,10 +151,7 @@ export function Search(context) {
       return alert("アイテム削除失敗/Select");
     }
   }
-  const handleExportClick = () => {
-    setShowExportButton(!showExportButton);
-    setShowDeleteButton(false);
-  };
+
   const handleChange = (e) => {
     const value = e.target.value;
     setSelectedItems((prev) => {
@@ -219,9 +226,7 @@ export function Search(context) {
         </nav>
       </header>
       <h1 className={styles.contents_title}>SELECT</h1>
-         <p>
-                エクスポート機能は使用できますが、まだ、調整しておりません。自己責任でご使用ください。
-              </p>
+
       <div className={styles.select_header_active_contents}>
         <ul className={styles.select_header_active_menu}>
           {showDeleteButton && (
@@ -232,20 +237,27 @@ export function Search(context) {
               <button
                 type="submit"
                 onClick={handleDeleteSubmit}
-                className={styles.select_menu_btn}
+                className={styles.select_menu_btn_white}
               >
                 Delete
               </button>
             </li>
           )}
           {showExportButton && (
-            <li
-              className={styles.select_header_active_menu_item}
-              hidden={!showExportButton}
-            >
-           
-              <ExportButton data={checkbox} />
-            </li>
+            <>
+              <li
+                className={styles.select_header_active_menu_item}
+                hidden={!showExportButton}
+              >
+                <PDF data={checkbox} />
+              </li>
+              {/* <li
+                className={styles.select_header_active_menu_item}
+                hidden={!showExportButton}
+              >
+                <CSV data={checkbox} />
+              </li> */}
+            </>
           )}
           {showSearchButton && (
             <li

@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 import styles from "@/app/styles/Contents.module.css";
-export default function ExportButton(context) {
+export default function CSV(context) {
   const [isExporting, setIsExporting] = useState(false);
   const responseData = context.data;
   const handleExport = async () => {
     try {
       setIsExporting(true);
 
-      const response = await fetch(`/pages/api/export/${responseData}`);
+      const response = await fetch(`/pages/api/export/csv/${responseData}`);
 
       if (!response.ok) {
         throw new Error("Export failed");
@@ -49,9 +49,9 @@ export default function ExportButton(context) {
     <button
       onClick={handleExport}
       disabled={isExporting}
-      className={styles.select_menu_btn}
+      className={styles.select_menu_btn_white}
     >
-      {isExporting ? "エクスポート中..." : "エクスポート"}
+      {isExporting ? "エクスポート中..." : "CSV"}
     </button>
   );
 }
