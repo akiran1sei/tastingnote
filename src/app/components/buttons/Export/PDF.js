@@ -1,6 +1,7 @@
 // client側 (PDF.js)
 import { useState } from "react";
 import dotenv from "dotenv";
+import styles from "@/app/styles/Contents.module.css";
 dotenv.config();
 
 export default function PDF(data) {
@@ -12,7 +13,7 @@ export default function PDF(data) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/puppeteer/${data.data}`
+        `${process.env.NEXT_PUBLIC_URL}/pages/api/export/pdf/${data.data}`
       );
 
       if (response.ok) {
@@ -40,7 +41,11 @@ export default function PDF(data) {
     }
   };
   return (
-    <button onClick={handleExport} disabled={isLoading}>
+    <button
+      onClick={handleExport}
+      disabled={isLoading}
+      className={styles.select_menu_btn_yellow}
+    >
       {isLoading ? "Exporting..." : "PDF"}
     </button>
   );

@@ -19,7 +19,6 @@ export async function GET(req, res) {
 
     const html = await ejs.renderFile(
       path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
-      // path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
 
       { data }
     );

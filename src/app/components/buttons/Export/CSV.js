@@ -8,7 +8,7 @@ export default function CSV(context) {
     try {
       setIsExporting(true);
 
-      const response = await fetch(`/pages/api/export/${responseData}`);
+      const response = await fetch(`/pages/api/export/csv/${responseData}`);
 
       if (!response.ok) {
         throw new Error("Export failed");
@@ -49,7 +49,7 @@ export default function CSV(context) {
     <button
       onClick={handleExport}
       disabled={isExporting}
-      className={styles.select_menu_btn}
+      className={styles.select_menu_btn_white}
     >
       {isExporting ? "エクスポート中..." : "CSV"}
     </button>
