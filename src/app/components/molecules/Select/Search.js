@@ -403,8 +403,12 @@ export function Search(context) {
                     <ul
                       className={`${styles.select_list} ${styles.select_checkbox}`}
                       onClick={(e) => {
-                        // クリックされた要素がチェックボックスでない場合のみ処理する
-                        if (e.target !== e.currentTarget) {
+                        // チェックボックスをクリックした場合
+                        if (e.target.type === "checkbox") {
+                          // チェックボックスの状態を変更する処理 (既存の handleChange 関数などを呼び出す)
+                          handleChange(e);
+                        } else {
+                          // ul要素内の他の要素をクリックした場合
                           const checkboxes = e.target
                             .closest("ul")
                             .querySelectorAll('input[type="checkbox"]');
@@ -414,7 +418,6 @@ export function Search(context) {
                           handleChange(e);
                         }
                       }}
-                      // ... (その他の属性)
                     >
                       <li
                         className={`${styles.select_list} ${styles.select_index}`}
