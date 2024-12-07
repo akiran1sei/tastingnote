@@ -1,25 +1,19 @@
 // client側 (PDF.js)
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import dotenv from "dotenv";
 import styles from "@/app/styles/Contents.module.css";
-import { useRouter } from "next/navigation";
-dotenv.config();
 
 export default function PDF(data) {
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+
   console.log(data.data);
 
   const handleExport = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/export/pdf/${data.data}`,
-        {
-          cache: "no-store",
-        }
-      );
+      const response = await fetch(`/pages/api/export/pdf/${data.data}`, {
+        cache: "no-store",
+      });
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -37,10 +31,17 @@ export default function PDF(data) {
       await window.location.reload();
       return setIsLoading(false);
     } catch (error) {
-      console.error("Error generating PDF:", error);
-      alert(
-        "PDF生成に失敗しました。詳細については、管理者にお問い合わせください。"
-      );
+      console.error("PDF生成エラー:", error);
+      // エラーの種類に応じて、より具体的なエラーメッセージを返す
+      if (error.message.includes("Network")) {
+        alert("ネットワークエラーが発生しました。PDFの生成に失敗しました。");
+      } else if (error.message.includes("404")) {
+        alert("指定されたAPIエンドポイントが見つかりません。");
+      } else {
+        alert(
+          "PDFの生成に失敗しました。詳細については、管理者にお問い合わせください。"
+        );
+      }
       setIsLoading(false);
     }
   };
