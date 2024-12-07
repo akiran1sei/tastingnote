@@ -404,7 +404,7 @@ export function Search(context) {
                       className={`${styles.select_list} ${styles.select_checkbox}`}
                       onClick={(e) => {
                         // クリックされた要素がチェックボックスでない場合のみ処理する
-                        if (e.target.type !== "checkbox") {
+                        if (e.target !== e.currentTarget) {
                           const checkboxes = e.target
                             .closest("ul")
                             .querySelectorAll('input[type="checkbox"]');
