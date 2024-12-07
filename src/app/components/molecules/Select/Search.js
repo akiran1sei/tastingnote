@@ -402,30 +402,30 @@ export function Search(context) {
                   <div className={styles.select_delete_list}>
                     <ul
                       className={`${styles.select_list} ${styles.select_checkbox}`}
-                      onClick={(e) => {
-                        // チェックボックスのクリック時
-                        if (e.target.type === "checkbox") {
-                          // 既存の handleChange 関数を呼び出す
-                          handleChange(e);
-                        } else {
-                          // ul 要素内のチェックボックスを全て取得
-                          const checkboxes = e.currentTarget.querySelectorAll(
-                            'input[type="checkbox"]'
-                          );
+                      // onClick={(e) => {
+                      //   // チェックボックスのクリック時
+                      //   if (e.target.type === "checkbox") {
+                      //     // 既存の handleChange 関数を呼び出す
+                      //     handleChange(e);
+                      //   } else {
+                      //     // ul 要素内のチェックボックスを全て取得
+                      //     const checkboxes = e.currentTarget.querySelectorAll(
+                      //       'input[type="checkbox"]'
+                      //     );
 
-                          // チェック状態を反転する
-                          const allChecked = Array.from(checkboxes).every(
-                            (checkbox) => checkbox.checked
-                          );
-                          checkboxes.forEach((checkbox) => {
-                            checkbox.checked = !allChecked;
-                            // チェック状態が変更されたら handleChange を呼び出す
-                            checkbox.dispatchEvent(
-                              new Event("change", { bubbles: true })
-                            );
-                          });
-                        }
-                      }}
+                      //     // チェック状態を反転する
+                      //     const allChecked = Array.from(checkboxes).every(
+                      //       (checkbox) => checkbox.checked
+                      //     );
+                      //     checkboxes.forEach((checkbox) => {
+                      //       checkbox.checked = !allChecked;
+                      //       // チェック状態が変更されたら handleChange を呼び出す
+                      //       checkbox.dispatchEvent(
+                      //         new Event("change", { bubbles: true })
+                      //       );
+                      //     });
+                      //   }
+                      // }}
                     >
                       <li
                         className={`${styles.select_list} ${styles.select_index}`}
