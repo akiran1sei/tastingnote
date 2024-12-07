@@ -1,12 +1,14 @@
 // client側 (PDF.js)
 import { useState } from "react";
+
 import dotenv from "dotenv";
 import styles from "@/app/styles/Contents.module.css";
+import { useRouter } from "next/navigation";
 dotenv.config();
 
 export default function PDF(data) {
   const [isLoading, setIsLoading] = useState(false);
-
+  const router = useRouter();
   console.log(data.data);
 
   const handleExport = async () => {
@@ -30,8 +32,8 @@ export default function PDF(data) {
       } else {
         throw new Error("PDFの生成に失敗しました。");
       }
-
-      setIsLoading(false);
+      await router.refresh();
+      return setIsLoading(false);
     } catch (error) {
       console.error("Error generating PDF:", error);
       alert(
