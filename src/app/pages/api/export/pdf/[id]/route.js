@@ -34,8 +34,7 @@ export async function GET(req, res) {
       format: "A4",
       printBackground: true,
       printMedia: true,
-      // landscape: true,//横方向
-      landscape: false, //縦方向
+      landscape: true, //横方向
     });
 
     await page.close();
