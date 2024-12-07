@@ -362,6 +362,10 @@
 </head>
 
 <body>
+  <% data.forEach((evaluation, index)  => { %>
+  <% if (index % 6 === 0) { %>
+
+
   <% if (data.length > 0) { %>
   <header class="tasting-data__header">
     <div class="tasting-data__header-wrap">
@@ -398,6 +402,7 @@
     </div>
   </header>
   <% } %>
+  <% } %>
   <main class="main">
     <div class="main-contents">
       <div class="tasting-data">
@@ -406,7 +411,7 @@
 
           <div class="tasting-data__section">
 
-            <% data.forEach((evaluation, index)  => { %>
+
             <div class="tasting-data__list">
               <div class="tasting-data__item tasting-data__number">
                 <div class="tasting-data__item-value"> <%= index + 1 %> </div>
