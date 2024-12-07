@@ -15,9 +15,11 @@ export default function PDF(data) {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/export/pdf/${data.data}`
+        `${process.env.NEXT_PUBLIC_URL}/pages/api/export/pdf/${data.data}`,
+        {
+          cache: "no-store",
+        }
       );
-
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
