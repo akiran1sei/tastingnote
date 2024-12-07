@@ -3,30 +3,63 @@ import connectDB from "@/app/utils/database";
 import { BeansModel } from "@/app/utils/schemaModels";
 import path from "path";
 import ejs from "ejs";
+import { promises as fs } from "fs";
 
 import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 
+// ブラウザプールの実装
+let browserInstance;
+const browserPool = {
+  async getBrowser() {
+    if (!browserInstance) {
+      browserInstance = await puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath(),
+        headless: true,
+      });
+    }
+    return browserInstance;
+  },
+  async close() {
+    if (browserInstance) {
+      await browserInstance.close();
+      browserInstance = null;
+    }
+  },
+};
+
+// EJSテンプレートのコンパイル
+const compiledTemplate = await ejs.compileFile(
+  path.join(process.cwd(), "/src/app/components/molecules/page.ejs")
+);
+
+// キャッシュの実装 (簡易的なメモリキャッシュ)
+const cache = new Map();
+
 export async function GET(req, res) {
-  let browser = null;
+  const jsonData = res.params.id.split(",");
+  const cacheKey = jsonData.join(",");
+
   try {
-    browser = await puppeteer.launch({
-      args: chromium.args,
-      defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(),
-      headless: true, // trueに固定
-    });
+    // キャッシュから取得
+    if (cache.has(cacheKey)) {
+      return new Response(cache.get(cacheKey), {
+        headers: {
+          "Content-Type": "application/pdf; text/html;charset=utf-8",
+          "Content-Disposition": 'attachment; filename="your_file_name.pdf"',
+        },
+      });
+    }
+
     await connectDB();
-    const jsonData = res.params.id.split(",");
-
     const data = await BeansModel.find({ _id: { $in: jsonData } });
-    const username = data.length > 0 ? data[0].username : "";
 
-    const html = await ejs.renderFile(
-      path.join(process.cwd(), "/src/app/components/molecules/page.ejs"),
-      { data }
-    );
+    // EJSレンダリング
+    const html = compiledTemplate({ data });
 
+    const browser = await browserPool.getBrowser();
     const page = await browser.newPage();
     await page.setContent(html, { encoding: "utf-8" });
 
@@ -36,8 +69,8 @@ export async function GET(req, res) {
       landscape: true,
     });
 
-    await page.close();
-    await browser.close();
+    // キャッシュに保存
+    cache.set(cacheKey, pdfBuffer);
 
     return new Response(pdfBuffer, {
       headers: {
@@ -51,9 +84,11 @@ export async function GET(req, res) {
       message: "PDF作成失敗: " + error.message,
       status: 500,
     });
-  } finally {
-    if (browser) {
-      await browser.close();
-    }
   }
 }
+
+// サーバー停止時にブラウザを閉じる
+process.on("SIGINT", () => {
+  browserPool.close();
+  process.exit(0);
+});
