@@ -1,5 +1,5 @@
 // client側 (PDF.js)
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import dotenv from "dotenv";
 import styles from "@/app/styles/Contents.module.css";
@@ -32,7 +32,7 @@ export default function PDF(data) {
       } else {
         throw new Error("PDFの生成に失敗しました。");
       }
-      await router.refresh();
+      await window.location.reload();
       return setIsLoading(false);
     } catch (error) {
       console.error("Error generating PDF:", error);
