@@ -362,16 +362,13 @@
 </head>
 
 <body>
-  <% data.forEach((evaluation, index)  => { %>
+  <% data.forEach((evaluation, index) => { %>
   <% if (index % 6 === 0) { %>
-
-
-  <% if (data.length > 0) { %>
   <header class="tasting-data__header">
     <div class="tasting-data__header-wrap">
       <ul class="tasting-data__header-list">
         <li class="tasting-data__header-item tasting-data__header-username">
-          <span class="tasting-data__header-text"><%= data[0].username %></span>
+          <span class="tasting-data__header-text"><%= data[index].username %></span>
           <span class="tasting-data__header-title">NAME</span>
         </li>
         <li class="tasting-data__header-item tasting-data__header-number">
@@ -402,7 +399,7 @@
     </div>
   </header>
   <% } %>
-  <% } %>
+
   <main class="main">
     <div class="main-contents">
       <div class="tasting-data">
