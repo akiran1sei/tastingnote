@@ -33,7 +33,8 @@ export async function GET(req, res) {
     const pdfBuffer = await page.pdf({
       format: "A4",
       printBackground: true,
-      landscape: true,
+      // landscape: true,//横方向
+      landscape: false, //縦方向
     });
 
     await page.close();
