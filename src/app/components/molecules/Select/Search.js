@@ -245,6 +245,9 @@ export function Search(context) {
           )}
           {showExportButton && (
             <>
+              <p>
+                pdfへのダウンロードは、現在、調整中です。エラーがでたりしたら、リロードをしていただくかキャッシュを削除して対応してください。
+              </p>
               <li
                 className={styles.select_header_active_menu_item}
                 hidden={!showExportButton}
