@@ -405,28 +405,16 @@ export function Search(context) {
                       onClick={(e) => {
                         // クリックされた要素がチェックボックスでない場合のみ処理する
                         if (e.target.type !== "checkbox") {
-                          const checkbox = e.target.closest(
-                            'input[type="checkbox"]'
-                          );
-                          if (checkbox) {
+                          const checkboxes = e.target
+                            .closest("ul")
+                            .querySelectorAll('input[type="checkbox"]');
+                          checkboxes.forEach((checkbox) => {
                             checkbox.checked = !checkbox.checked;
-                            handleChange(e);
-                          }
+                          });
+                          handleChange(e);
                         }
                       }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === "Space") {
-                          e.preventDefault(); // デフォルトの動作をキャンセル
-                          const checkbox = e.target.closest(
-                            'input[type="checkbox"]'
-                          );
-                          if (checkbox) {
-                            checkbox.checked = !checkbox.checked;
-                            handleChange(e);
-                          }
-                        }
-                      }}
-                      tabIndex={0} // キーボードフォーカスを可能にする
+                      // ... (その他の属性)
                     >
                       <li
                         className={`${styles.select_list} ${styles.select_index}`}
