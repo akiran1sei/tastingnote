@@ -363,7 +363,7 @@
 
 <body>
   <% data.forEach((evaluation, index) => { %>
-  <% if (index % 6 === 0) { %>
+  <% if (index === 0 || index % 5 === 0) {%>
   <header class="tasting-data__header">
     <div class="tasting-data__header-wrap">
       <ul class="tasting-data__header-list">
