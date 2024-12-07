@@ -402,6 +402,31 @@ export function Search(context) {
                   <div className={styles.select_delete_list}>
                     <ul
                       className={`${styles.select_list} ${styles.select_checkbox}`}
+                      onClick={(e) => {
+                        // クリックされた要素がチェックボックスでない場合のみ処理する
+                        if (e.target.type !== "checkbox") {
+                          const checkbox = e.target.closest(
+                            'input[type="checkbox"]'
+                          );
+                          if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                            handleChange(e);
+                          }
+                        }
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === "Space") {
+                          e.preventDefault(); // デフォルトの動作をキャンセル
+                          const checkbox = e.target.closest(
+                            'input[type="checkbox"]'
+                          );
+                          if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                            handleChange(e);
+                          }
+                        }
+                      }}
+                      tabIndex={0} // キーボードフォーカスを可能にする
                     >
                       <li
                         className={`${styles.select_list} ${styles.select_index}`}
