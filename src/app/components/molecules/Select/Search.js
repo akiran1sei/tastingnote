@@ -403,19 +403,27 @@ export function Search(context) {
                     <ul
                       className={`${styles.select_list} ${styles.select_checkbox}`}
                       onClick={(e) => {
-                        // チェックボックスをクリックした場合
+                        // チェックボックスのクリック時
                         if (e.target.type === "checkbox") {
-                          // チェックボックスの状態を変更する処理 (既存の handleChange 関数などを呼び出す)
+                          // 既存の handleChange 関数を呼び出す
                           handleChange(e);
                         } else {
-                          // ul要素内の他の要素をクリックした場合
-                          const checkboxes = e.target
-                            .closest("ul")
-                            .querySelectorAll('input[type="checkbox"]');
+                          // ul 要素内のチェックボックスを全て取得
+                          const checkboxes = e.currentTarget.querySelectorAll(
+                            'input[type="checkbox"]'
+                          );
+
+                          // チェック状態を反転する
+                          const allChecked = Array.from(checkboxes).every(
+                            (checkbox) => checkbox.checked
+                          );
                           checkboxes.forEach((checkbox) => {
-                            checkbox.checked = !checkbox.checked;
+                            checkbox.checked = !allChecked;
+                            // チェック状態が変更されたら handleChange を呼び出す
+                            checkbox.dispatchEvent(
+                              new Event("change", { bubbles: true })
+                            );
                           });
-                          handleChange(e);
                         }
                       }}
                     >
@@ -432,6 +440,7 @@ export function Search(context) {
                           required
                         />
                       </li>
+
                       <li
                         className={`${styles.select_list} ${styles.select_coffee}`}
                       >
