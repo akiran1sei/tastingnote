@@ -34,7 +34,6 @@ export async function GET(req, res) {
       format: "A4",
       printBackground: true,
       landscape: true,
-      printMedia: true,
     });
 
     await page.close();
@@ -47,11 +46,39 @@ export async function GET(req, res) {
       },
     });
   } catch (error) {
-    console.error("PDF作成失敗:", error);
-    return NextResponse.json({
-      message: "PDF作成失敗: " + error.message,
-      status: 500,
-    });
+    console.error("PDF作成中にエラーが発生しました:", error);
+    // エラーの種類に応じて、より具体的なエラーメッセージを返す
+    if (error instanceof Error && error.message.includes("Network")) {
+      return NextResponse.json({
+        message: "ネットワークエラーが発生しました。PDFの作成に失敗しました。",
+        status: 500,
+      });
+    } else if (
+      error instanceof Error &&
+      error.message.includes("Evaluation failed")
+    ) {
+      // テンプレートレンダリングエラーが発生した場合の処理
+      console.error("テンプレートレンダリングに失敗しました:", error);
+
+      // 具体的なエラーメッセージをユーザーに返す
+      return NextResponse.json({
+        message:
+          "テンプレートの処理中にエラーが発生しました。詳細については、管理者にお問い合わせください。",
+        status: 500,
+      });
+    } else {
+      // その他のエラーが発生した場合
+      console.error("予期しないエラーが発生しました:", error);
+
+      // ユーザーに表示するエラーメッセージ
+      const errorMessage =
+        "システムエラーが発生しました。しばらくしてから再度お試しください。";
+
+      return NextResponse.json({
+        message: errorMessage,
+        status: 500,
+      });
+    }
   } finally {
     if (browser) {
       await browser.close();
