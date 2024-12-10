@@ -12,7 +12,9 @@ export default function PDF(data) {
     setIsLoading(true);
     try {
       const response = await fetch(`/pages/api/export/pdf/${data.data}`, {
-        cache: "no-store",
+        headers: {
+          "Cache-Control": "no-store",
+        },
       });
       if (response.ok) {
         const blob = await response.blob();
