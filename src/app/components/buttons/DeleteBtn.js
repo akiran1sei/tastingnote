@@ -60,7 +60,7 @@ export function DeleteBtn(context) {
 
         alert(jsonData.message);
         return router.replace(
-          `${process.env.NEXT_PUBLIC_URL}/pages/` + `${isUserId}`
+          `${process.env.NEXT_PUBLIC_URL}/pages/select/` + `${isUserId}`
         );
       }
     } catch (err) {
