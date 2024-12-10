@@ -2,10 +2,12 @@
 import styles from "@/app/styles/Contents.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import useReadGroups from "@/app/utils/useReadGroups";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 import dotenv from "dotenv";
 import CSV from "@/app/components/buttons/Export/CSV";
 import PDF from "@/app/components/buttons/Export/PDF";
@@ -27,8 +29,8 @@ export function Search(context) {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [isUserName, setIsUserName] = useState("");
   const router = useRouter();
+  const ReadGroups = useReadGroups();
 
-  const browserRef = useRef(null);
   useEffect(() => {
     const getUser = () => {
       try {
@@ -58,28 +60,7 @@ export function Search(context) {
     };
     getUser();
   }, []);
-  useEffect(() => {
-    // Puppeteerの初期化 (必要に応じて)
-    const initBrowser = async () => {
-      try {
-        browserRef.current = await puppeteer.launch({
-          // ... Puppeteerオプション
-        });
-      } catch (err) {
-        console.error("Puppeteer初期化エラー:", err);
-        setError(err);
-      }
-    };
 
-    initBrowser();
-
-    // クリーンアップ
-    return () => {
-      if (browserRef.current) {
-        browserRef.current.close();
-      }
-    };
-  }, []);
   const { data, error } = useSWR(
     `/pages/api/readall/${dataId}/${defaultValue}`,
 
@@ -137,12 +118,14 @@ export function Search(context) {
     setShowDeleteButton(!showDeleteButton);
     setShowExportButton(false);
     setShowSearchButton(false);
+    setSelectedItems(new Set());
     setCheckBox([]);
   };
   const handleExportClick = () => {
     setShowExportButton(!showExportButton);
     setShowDeleteButton(false);
     setShowSearchButton(false);
+    setSelectedItems(new Set());
     setCheckBox([]);
   };
   async function handleDeleteSubmit(e) {

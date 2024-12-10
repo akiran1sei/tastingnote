@@ -316,6 +316,7 @@
   margin: 1rem auto;
 }
 .select_header_active_menu_item {
+  text-align: center;
   margin: 0.5rem 0;
 }
 .select_list {
