@@ -59,8 +59,9 @@ export function DeleteBtn(context) {
         const jsonData = await response.json();
 
         alert(jsonData.message);
-       return window.location.reload()
-     
+        return router.replace(
+          `${process.env.NEXT_PUBLIC_URL}/pages/` + `${isUserId}`
+        );
       }
     } catch (err) {
       return alert("アイテム削除失敗/DeleteBtn");
