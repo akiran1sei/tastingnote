@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Error from "./error";
+import Provider from "./components/molecules/Auth/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +19,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <div className={styles.container}>
           <main className={styles.main}>
-            <ErrorBoundary fallback={<Error />}>{children} </ErrorBoundary>
+            <Provider>
+              <ErrorBoundary fallback={<Error />}>{children} </ErrorBoundary>
+            </Provider>
           </main>
           <footer className={styles.footer}></footer>
         </div>
