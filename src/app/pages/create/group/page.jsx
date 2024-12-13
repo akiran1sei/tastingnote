@@ -44,7 +44,7 @@ const GroupPage = () => {
     getUser();
   }, []);
 
-  const { data, error } = useSWR(`/pages/api/group/choice`, fetcher, {
+  const { data, error } = useSWR(`/api/group/choice`, fetcher, {
     initial: true, // 初回レンダリング時に必ず更新
     onBackgroundUpdate: true, // バックグラウンドで再読み込み
     revalidateOnMount: true, // マウント時に再検証
@@ -67,11 +67,13 @@ const GroupPage = () => {
       <GlobalHeader />
       <GroupCreate data={data} user={isUserId} />
     </>
-  ) : (<>
-    <GlobalHeader/>
-    <div className={styles.sign_off_page}>
-      <p className={styles.sign_off_text}>ログインしてください。</p>
-    </div></>
+  ) : (
+    <>
+      <GlobalHeader />
+      <div className={styles.sign_off_page}>
+        <p className={styles.sign_off_text}>ログインしてください。</p>
+      </div>
+    </>
   );
 };
 

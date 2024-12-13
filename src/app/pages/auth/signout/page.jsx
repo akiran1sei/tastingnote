@@ -11,7 +11,7 @@ const Signout = () => {
     async function handleSignout() {
       setError(null);
       try {
-        const res = await fetch("/pages/api/auth/signout", {
+        const res = await fetch("/api/auth/signout", {
           // API ルートの修正
           method: "DELETE",
           headers: {

@@ -1,4 +1,4 @@
-import connectDB from "../../../../utils/database";
+import connectDB from "@/app/utils/database";
 import { GroupModel } from "@/app/utils/schemaModels";
 import { NextResponse } from "next/server";
 

@@ -7,7 +7,7 @@ import useSWR from "swr";
 const SelectPage = ({ params }) => {
   const id = use(params);
 
-  const { data, error } = useSWR(`/pages/api/group/choice`, fetcher, {
+  const { data, error } = useSWR(`/api/group/choice`, fetcher, {
     initial: true, // 初回レンダリング時に必ず更新
     onBackgroundUpdate: true, // バックグラウンドで再読み込み
     revalidateOnMount: true, // マウント時に再検証

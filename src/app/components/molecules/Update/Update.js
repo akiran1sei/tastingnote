@@ -1,8 +1,7 @@
 "use client";
-import styles from "../../../styles/Contents.module.css";
+import styles from "@/app/styles/Contents.module.css";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Today } from "../../items/today";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { CreateBtn } from "@/app/components/buttons/CreateBtn";
 import Image from "next/image";
@@ -184,7 +183,7 @@ export function Update(context) {
       // バリデーション
 
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/update/${singleData._id}`,
+        `${process.env.NEXT_PUBLIC_URL}/api/update/${singleData._id}`,
         {
           method: "PUT",
           cache: "no-store",

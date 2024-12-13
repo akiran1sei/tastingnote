@@ -62,7 +62,7 @@ export function Search(context) {
   }, []);
 
   const { data, error } = useSWR(
-    `/pages/api/readall/${dataId}/${defaultValue}`,
+    `/api/readall/${dataId}/${defaultValue}`,
 
     fetcher,
     {
@@ -133,7 +133,7 @@ export function Search(context) {
     try {
       if (confirm("削除しますか？")) {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/pages/api/delete/multiple/${isUserEmail}`,
+          `${process.env.NEXT_PUBLIC_URL}/api/delete/multiple/${isUserEmail}`,
           {
             headers: {
               "Content-Type": "application/json",

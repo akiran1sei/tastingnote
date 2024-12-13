@@ -45,8 +45,7 @@ export function DeleteBtn(context) {
     try {
       if (confirm("削除しますか？")) {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/pages/api/delete/` +
-            `${context.data}`,
+          `${process.env.NEXT_PUBLIC_URL}/api/delete/` + `${context.data}`,
           {
             method: "DELETE",
             headers: {

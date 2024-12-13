@@ -11,7 +11,7 @@ export default function PDF(data) {
   const handleExport = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`/pages/api/export/pdf/${data.data}`, {
+      const response = await fetch(`/api/export/pdf/${data.data}`, {
         headers: {
           "Cache-Control": "no-store",
         },

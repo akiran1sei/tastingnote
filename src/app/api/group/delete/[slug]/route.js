@@ -1,6 +1,6 @@
 // delete/route
 import { GroupModel } from "@/app/utils/schemaModels";
-import connectDB from "../../../../../utils/database";
+import connectDB from "@/app/utils/database";
 
 import { NextResponse } from "next/server";
 // import { NextRequest } from "next/server";

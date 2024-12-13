@@ -2,7 +2,8 @@
 
 import styles from "@/app/styles/Contents.module.css";
 import React, { useState, useEffect } from "react";
-import { Today } from "../../items/today";
+import { Today } from "@/app/components/items/today";
+
 import { useRouter } from "next/navigation";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { CreateBtn } from "@/app/components/buttons/CreateBtn";
@@ -135,7 +136,7 @@ export function BeansCreateTable(context) {
 
     try {
       const response = // フォームの入力値をサーバーに送信する
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/pages/api/create`, {
+        await fetch(`${process.env.NEXT_PUBLIC_URL}/api/create`, {
           // cache: "no-store",
           method: "POST",
           body: JSON.stringify({

@@ -41,7 +41,7 @@ export function GroupCreate(context) {
       } else {
         setError(null);
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/pages/api/group/create`,
+          `${process.env.NEXT_PUBLIC_URL}/api/group/create`,
           {
             // cache: "no-store",
             method: "POST",
@@ -61,7 +61,7 @@ export function GroupCreate(context) {
 
         if (jsonData.message === "グループ作成成功") {
           const res = await fetch(
-            `${process.env.NEXT_PUBLIC_URL}/pages/api/group/choice`,
+            `${process.env.NEXT_PUBLIC_URL}/api/group/choice`,
             {
               // method: "GET",
               "Cache-Control": "no-store",
@@ -83,7 +83,7 @@ export function GroupCreate(context) {
     e.preventDefault();
 
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/pages/api/group/delete/${groupChoice}`,
+      `${process.env.NEXT_PUBLIC_URL}/api/group/delete/${groupChoice}`,
       {
         method: "DELETE",
         body: JSON.stringify({ id: groupChoice, email: UserData.email }),

@@ -1,5 +1,5 @@
-import connectDB from "../../../../utils/database";
-import { BeansModel, UserModel } from "../../../../utils/schemaModels";
+import connectDB from "@/app/utils/database";
+import { BeansModel, UserModel } from "@/app/utils/schemaModels";
 import { NextResponse } from "next/server";
 
 export async function GET(req, res) {

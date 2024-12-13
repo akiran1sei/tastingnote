@@ -40,7 +40,7 @@ const Profile = () => {
     if (confirm("Sign Out？")) {
       setIsLoggingOut(true);
       try {
-        const res = await fetch("/pages/api/auth/signout", {
+        const res = await fetch("/api/auth/signout", {
           cache: "no-store",
           method: "DELETE",
           headers: {
@@ -69,7 +69,7 @@ const Profile = () => {
       if (confirm("作成したデータ全て削除しますがよろしいでしょうか？")) {
         setIsAccountDelete(true);
         try {
-          const res = await fetch(`/pages/api/auth/delete/${isUserId}`, {
+          const res = await fetch(`/api/auth/delete/${isUserId}`, {
             method: "DELETE",
             headers: {
               Accept: "application/json",

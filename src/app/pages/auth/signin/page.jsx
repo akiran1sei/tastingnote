@@ -30,7 +30,7 @@ const SignIn = () => {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/auth/signin`,
+        `${process.env.NEXT_PUBLIC_URL}/api/auth/signin`,
         {
           method: "POST",
           headers: {

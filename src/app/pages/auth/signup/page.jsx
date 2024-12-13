@@ -15,7 +15,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/pages/api/auth/signup`,
+        `${process.env.NEXT_PUBLIC_URL}/api/auth/signup`,
         {
           method: "POST",
           headers: { "Cache-Control": "no-store" },

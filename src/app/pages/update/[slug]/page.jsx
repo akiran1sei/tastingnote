@@ -50,7 +50,7 @@ const UpdatePage = ({ params }) => {
   });
 
   const { data: itemData, error: itemError } = useSWR(
-    `/pages/api/singleitem/${id.slug}`,
+    `/api/singleitem/${id.slug}`,
     fetcher,
     {
       initial: true, // 初回レンダリング時に必ず更新
@@ -62,7 +62,7 @@ const UpdatePage = ({ params }) => {
 
   // 2つ目のuseSWR - グループ情報の取得
   const { data: groupsData, error: groupsError } = useSWR(
-    `/pages/api/group/choice`,
+    `/api/group/choice`,
     fetcher,
     {
       initial: true, // 初回レンダリング時に必ず更新

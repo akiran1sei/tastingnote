@@ -1,4 +1,4 @@
-// app/pages/api/export/route.js
+// app/api/export/route.js
 import { Parser } from "json2csv";
 import { NextResponse } from "next/server";
 import connectDB from "@/app/utils/database";

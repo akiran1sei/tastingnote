@@ -1,21 +1,25 @@
-//  app/pages/api/singleItem/[slug].jsx
 import connectDB from "@/app/utils/database";
 import { BeansModel } from "@/app/utils/schemaModels";
 import { NextResponse } from "next/server";
 // import { revalidatePath } from "next/cache";
+
 export async function GET(req, res) {
   try {
     await connectDB();
-    // await revalidatePath(`${process.env.NEXT_PUBLIC_URL}/pages/update`);
-    const singleItem = await BeansModel.findById(res.params.slug);
+
+    const allItems = await BeansModel.find({ groupname: { $exists: true } })
+      .sort({ createdAt: 1 })
+      .limit(100)
+      .exec();
+
     return NextResponse.json({
-      message: "アイテム読み取り成功（シングル）",
-      singleItem: singleItem,
+      message: "読み取り成功（オール）",
+      allItems: allItems,
       status: 200,
     });
   } catch (err) {
     return NextResponse.json({
-      message: "アイテム読み取り失敗（シングル）",
+      message: "読み取り失敗（オール）",
       status: 500,
     });
   }

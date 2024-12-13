@@ -53,7 +53,7 @@ const BeansCreatePage = () => {
   };
 
   const { data, error } = useSWR(
-    isLoggedIn ? `/pages/api/group/choice` : null,
+    isLoggedIn ? `/api/group/choice` : null,
     fetcher,
     {
       revalidateOnFocus: false,

@@ -1,6 +1,6 @@
 // delete/route
-import connectDB from "../../../../utils/database";
-import { BeansModel } from "../../../../utils/schemaModels";
+import connectDB from "@/app/utils/database";
+import { BeansModel } from "@/app/utils/schemaModels";
 import { NextResponse } from "next/server";
 
 export async function DELETE(req, res) {
