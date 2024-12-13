@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
-import { AuthBtn } from "./components/buttons/AuthBtn";
+import { AuthBtn } from "@/app/components/buttons/AuthBtn";
 
 const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

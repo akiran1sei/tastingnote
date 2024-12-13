@@ -3,8 +3,8 @@ import styles from "@/app/styles/Contents.module.css";
 import { Inter } from "next/font/google";
 
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import Error from "./error";
-import Provider from "./components/molecules/Auth/Provider";
+import Error from "@/app/error";
+import Provider from "@/app/components/molecules/Auth/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 

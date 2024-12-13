@@ -11,7 +11,7 @@ const handler = NextAuth({
       authorization: {
         params: {
           scope: "openid profile email",
-          prompt: "consent", // 初回認証時に同意画面を必ず表示
+          prompt: "select_account",
           access_type: "offline", // リフレッシュトークンを取得
         },
       },
@@ -22,7 +22,7 @@ const handler = NextAuth({
     }),
   ],
   // デバッグモードを有効化
-  // debug: true,
+  debug: true,
 
   // セッション設定
   session: {
@@ -43,7 +43,8 @@ const handler = NextAuth({
       console.log("Sign in", message);
     },
     async signOut(message) {
-      console.log("Sign out", message);
+      console.log("Sign out event:", message);
+      // 必要に応じて、セッション情報などをログに出力
     },
   },
 });
