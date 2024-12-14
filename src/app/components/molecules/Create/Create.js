@@ -8,37 +8,37 @@ import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { CreateBtn } from "@/app/components/buttons/CreateBtn";
 import dotenv from "dotenv";
 import Image from "next/image";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 export function BeansCreate(context) {
   dotenv.config();
-  useEffect(() => {
-    const getUser = () => {
-      const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const getUser = () => {
+  //     const token = localStorage.getItem("token");
 
-      try {
-        if (token) {
-          const decodedToken = jwtDecode(token);
-          // デコードされたトークンから必要な情報を取得
-          const userData = {
-            id: decodedToken.id,
-            username: decodedToken.user,
-            email: decodedToken.email,
-            // その他の必要な情報
-          };
-          setIsUser(userData.id);
-          setUserEmail(userData.email);
-          setUserName(userData.username);
-        } else {
-          console.log("トークンが見つかりません");
-          return null;
-        }
-      } catch (error) {
-        console.error("トークンのデコードに失敗しました:", error);
-        return null;
-      }
-    };
-    getUser();
-  }, []);
+  //     try {
+  //       if (token) {
+  //         const decodedToken = jwtDecode(token);
+  //         // デコードされたトークンから必要な情報を取得
+  //         const userData = {
+  //           id: decodedToken.id,
+  //           username: decodedToken.user,
+  //           email: decodedToken.email,
+  //           // その他の必要な情報
+  //         };
+  //         setIsUser(userData.id);
+  //         setUserEmail(userData.email);
+  //         setUserName(userData.username);
+  //       } else {
+  //         console.log("トークンが見つかりません");
+  //         return null;
+  //       }
+  //     } catch (error) {
+  //       console.error("トークンのデコードに失敗しました:", error);
+  //       return null;
+  //     }
+  //   };
+  //   getUser();
+  // }, []);
 
   const [userEmail, setUserEmail] = useState();
   const [username, setUserName] = useState("");

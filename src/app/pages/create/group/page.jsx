@@ -4,45 +4,45 @@ import Head from "next/head";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import styles from "@/app/styles/Contents.module.css";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 
 const GroupPage = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUser, setIsUser] = useState([]);
   const [isUserId, setIsUserId] = useState("");
   const [isUserEmail, setIsUserEmail] = useState("");
   const [isUserName, setIsUserName] = useState("");
-  useEffect(() => {
-    const getUser = () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const decodedToken = jwtDecode(token);
-          // デコードされたトークンから必要な情報を取得
-          const userData = {
-            id: decodedToken.id,
-            username: decodedToken.user,
-            email: decodedToken.email,
-            // その他の必要な情報
-          };
-          setIsUserId(userData);
-          setIsUserEmail(userData.email);
-          setIsUserName(userData.username);
-          setIsUser(userData.id);
-        } catch (error) {
-          console.error("トークンのデコードに失敗しました:", error);
-          return null;
-        }
+  // useEffect(() => {
+  //   const getUser = () => {
+  //     const token = localStorage.getItem("token");
+  //     if (token) {
+  //       try {
+  //         const decodedToken = jwtDecode(token);
+  //         // デコードされたトークンから必要な情報を取得
+  //         const userData = {
+  //           id: decodedToken.id,
+  //           username: decodedToken.user,
+  //           email: decodedToken.email,
+  //           // その他の必要な情報
+  //         };
+  //         setIsUserId(userData);
+  //         setIsUserEmail(userData.email);
+  //         setIsUserName(userData.username);
+  //         setIsUser(userData.id);
+  //       } catch (error) {
+  //         console.error("トークンのデコードに失敗しました:", error);
+  //         return null;
+  //       }
 
-        setIsLoggedIn(!!token);
-      } else {
-        console.log("トークンが見つかりません");
-        return null;
-      }
-    };
-    getUser();
-  }, []);
+  //       setIsLoggedIn(!!token);
+  //     } else {
+  //       console.log("トークンが見つかりません");
+  //       return null;
+  //     }
+  //   };
+  //   getUser();
+  // }, []);
 
   const { data, error } = useSWR(`/api/group/choice`, fetcher, {
     initial: true, // 初回レンダリング時に必ず更新
@@ -53,8 +53,7 @@ const GroupPage = () => {
 
   if (error) return <div>エラーが発生しました: {error.message}</div>;
   if (!data) return <div>データを取得中...</div>;
-
-  return isLoggedIn ? (
+  return (
     <>
       <Head>
         <title>グループ作成ページ</title>
@@ -67,14 +66,28 @@ const GroupPage = () => {
       <GlobalHeader />
       <GroupCreate data={data} user={isUserId} />
     </>
-  ) : (
-    <>
-      <GlobalHeader />
-      <div className={styles.sign_off_page}>
-        <p className={styles.sign_off_text}>ログインしてください。</p>
-      </div>
-    </>
   );
+  // return isLoggedIn ? (
+  //   <>
+  //     <Head>
+  //       <title>グループ作成ページ</title>
+  //       <meta
+  //         name="description"
+  //         content="グループ作成、または、選択するページです。"
+  //       />
+  //       <meta name="viewport" content="width=device-width, initial-scale=1" />
+  //     </Head>
+  //     <GlobalHeader />
+  //     <GroupCreate data={data} user={isUserId} />
+  //   </>
+  // ) : (
+  //   <>
+  //     <GlobalHeader />
+  //     <div className={styles.sign_off_page}>
+  //       <p className={styles.sign_off_text}>ログインしてください。</p>
+  //     </div>
+  //   </>
+  // );
 };
 
 const fetcher = async (url) => {

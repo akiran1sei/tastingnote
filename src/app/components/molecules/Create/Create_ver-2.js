@@ -8,13 +8,12 @@ import { useRouter } from "next/navigation";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { CreateBtn } from "@/app/components/buttons/CreateBtn";
 import dotenv from "dotenv";
-
-import { jwtDecode } from "jwt-decode";
+import { UserData } from "@/app/components/items/user";
+// import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 
 export function BeansCreateTable(context) {
   dotenv.config();
-
   const [username, setUserName] = useState("");
   const [coffee, setCoffee] = useState("");
   const [isUserId, setIsUserId] = useState("");
@@ -22,7 +21,6 @@ export function BeansCreateTable(context) {
   const [isUserName, setIsUserName] = useState("");
   const [roast, setRoast] = useState("50");
   const [roastDegree, setRoastDegree] = useState();
-
   const [aromaDryStrength, setAromaDryStrength] = useState("");
   const [aromaCrustStrength, setAromaCrustStrength] = useState("");
   const [aromaBreakStrength, setAromaBreakStrength] = useState("");
@@ -32,17 +30,13 @@ export function BeansCreateTable(context) {
   const [defects, setDefects] = useState("0");
   const [point, setPoint] = useState("0");
   const [score, setScore] = useState("0");
-
   const [cleancap, setCleancap] = useState("");
   const [sweet, setSweet] = useState("");
   const [acidity, setAcidity] = useState("");
-
   const [acidityStrength, setAcidityStrength] = useState("");
   const [mouthfeel, setMouthfeel] = useState("");
-
   const [bodyStrength, setBodyStrength] = useState("");
   const [flavor, setFlavor] = useState("");
-
   const [after, setAfter] = useState("");
   const [afterMessage, setAfterMessage] = useState("");
   const [balance, setBalance] = useState("");
@@ -52,40 +46,41 @@ export function BeansCreateTable(context) {
   const [impression, setImpression] = useState("");
   const [date, setDate] = useState(Today);
   const [groupName, setGroupName] = useState("");
-
+  const UserInfo = UserData().session;
+  console.log(UserInfo.email, UserInfo.name);
   const router = useRouter();
-  useEffect(() => {
-    const getUser = () => {
-      try {
-        const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const getUser = () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
 
-        if (token) {
-          const token = localStorage.getItem("token");
+  //       if (token) {
+  //         const token = localStorage.getItem("token");
 
-          const decodedToken = jwtDecode(token);
-          // デコードされたトークンから必要な情報を取得
-          const userData = {
-            id: decodedToken.id,
-            username: decodedToken.user,
-            email: decodedToken.email,
-            // その他の必要な情報
-          };
-          setIsUserId(userData.id);
-          setIsUserEmail(userData.email);
-          setIsUserName(userData.username);
-          setUserName(userData.username);
-        } else {
-          console.log("トークンが見つかりません");
-          return null;
-        }
-      } catch (error) {
-        console.error("トークンのデコードに失敗しました:", error);
-        return null;
-      }
-    };
+  //         const decodedToken = jwtDecode(token);
+  //         // デコードされたトークンから必要な情報を取得
+  //         const userData = {
+  //           id: decodedToken.id,
+  //           username: decodedToken.user,
+  //           email: decodedToken.email,
+  //           // その他の必要な情報
+  //         };
+  //         setIsUserId(userData.id);
+  //         setIsUserEmail(userData.email);
+  //         setIsUserName(userData.username);
+  //         setUserName(userData.username);
+  //       } else {
+  //         console.log("トークンが見つかりません");
+  //         return null;
+  //       }
+  //     } catch (error) {
+  //       console.error("トークンのデコードに失敗しました:", error);
+  //       return null;
+  //     }
+  //   };
 
-    getUser();
-  }, []);
+  //   getUser();
+  // }, []);
 
   const Groups = context.data.groups;
 

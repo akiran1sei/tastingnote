@@ -10,6 +10,7 @@ import { EditBtn } from "@/app/components/buttons/EditBtn";
 export function Browse(context) {
   const data = context.data;
   const browse = data.singleItem;
+
   return (
     <>
       <Head>

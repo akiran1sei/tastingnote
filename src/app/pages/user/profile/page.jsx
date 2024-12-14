@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import styles from "@/app/styles/Contents.module.css";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 const Profile = () => {
   const router = useRouter();
@@ -14,27 +14,27 @@ const Profile = () => {
   const [isUserEmail, setIsUserEmail] = useState("");
   const [isUserName, setIsUserName] = useState("");
   const [isToken, setIsToken] = useState("");
-  useEffect(() => {
-    const getUser = () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        setIsToken(token);
-        const decodedToken = jwtDecode(token);
-        // デコードされたトークンから必要な情報を取得
-        console.log(decodedToken);
-        const userData = {
-          id: decodedToken.id,
-          username: decodedToken.user,
-          email: decodedToken.email,
-        };
+  // useEffect(() => {
+  //   const getUser = () => {
+  //     const token = localStorage.getItem("token");
+  //     if (token) {
+  //       setIsToken(token);
+  //       const decodedToken = jwtDecode(token);
+  //       // デコードされたトークンから必要な情報を取得
+  //       console.log(decodedToken);
+  //       const userData = {
+  //         id: decodedToken.id,
+  //         username: decodedToken.user,
+  //         email: decodedToken.email,
+  //       };
 
-        setIsUserId(userData.id);
-        setIsUserEmail(userData.email);
-        setIsUserName(userData.username);
-      }
-    };
-    getUser();
-  }, []);
+  //       setIsUserId(userData.id);
+  //       setIsUserEmail(userData.email);
+  //       setIsUserName(userData.username);
+  //     }
+  //   };
+  //   getUser();
+  // }, []);
 
   const handleTokenRemove = async () => {
     if (confirm("Sign Out？")) {

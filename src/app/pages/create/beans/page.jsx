@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 const BeansCreatePage = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -53,7 +53,8 @@ const BeansCreatePage = () => {
   };
 
   const { data, error } = useSWR(
-    isLoggedIn ? `/api/group/choice` : null,
+    `/api/group/choice`,
+    // isLoggedIn ? `/api/group/choice` : null,
     fetcher,
     {
       revalidateOnFocus: false,

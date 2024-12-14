@@ -7,47 +7,47 @@ import { Update } from "@/app/components/molecules/Update/Update";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 const UpdatePage = ({ params }) => {
   const id = use(params);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  ////const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [isUserId, setIsUserId] = useState("");
-  const [isUserEmail, setIsUserEmail] = useState("");
-  const [isUserName, setIsUserName] = useState("");
+  // const [isUserId, setIsUserId] = useState("");
+  // const [isUserEmail, setIsUserEmail] = useState("");
+  // const [isUserName, setIsUserName] = useState("");
 
-  useEffect(() => {
-    const getUser = () => {
-      try {
-        const token = localStorage.getItem("token");
+  // useEffect(() => {
+  //   const getUser = () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
 
-        if (token) {
-          const token = localStorage.getItem("token");
+  //       if (token) {
+  //         const token = localStorage.getItem("token");
 
-          const decodedToken = jwtDecode(token);
-          // デコードされたトークンから必要な情報を取得
-          const userData = {
-            id: decodedToken.id,
-            username: decodedToken.user,
-            email: decodedToken.email,
-            // その他の必要な情報
-          };
-          setIsUserId(userData.id);
-          setIsUserEmail(userData.email);
-          setIsUserName(userData.username);
-          setIsLoggedIn(!!token);
-        } else {
-          console.log("トークンが見つかりません");
-          return null;
-        }
-      } catch (error) {
-        console.error("トークンのデコードに失敗しました:", error);
-        return null;
-      }
-    };
-    getUser();
-  });
+  //         const decodedToken = jwtDecode(token);
+  //         // デコードされたトークンから必要な情報を取得
+  //         const userData = {
+  //           id: decodedToken.id,
+  //           username: decodedToken.user,
+  //           email: decodedToken.email,
+  //           // その他の必要な情報
+  //         };
+  //         setIsUserId(userData.id);
+  //         setIsUserEmail(userData.email);
+  //         setIsUserName(userData.username);
+  //         setIsLoggedIn(!!token);
+  //       } else {
+  //         console.log("トークンが見つかりません");
+  //         return null;
+  //       }
+  //     } catch (error) {
+  //       console.error("トークンのデコードに失敗しました:", error);
+  //       return null;
+  //     }
+  //   };
+  //   getUser();
+  // });
 
   const { data: itemData, error: itemError } = useSWR(
     `/api/singleitem/${id.slug}`,
@@ -77,8 +77,7 @@ const UpdatePage = ({ params }) => {
   if (!itemData || !groupsData) return <div>データを取得中...</div>;
   const singleData = itemData.singleItem;
   const GroupData = groupsData.groups;
-
-  return isLoggedIn ? (
+  return (
     <>
       <Head>
         <title>編集ページ</title>
@@ -91,14 +90,28 @@ const UpdatePage = ({ params }) => {
       <GlobalHeader />
       <Update data={singleData} groups={GroupData} item={singleData} />
     </>
-  ) : (
-    <>
-      <GlobalHeader />
-      <div className={styles.sign_off_page}>
-        <p className={styles.sign_off_text}>ログインしてください。</p>
-      </div>
-    </>
   );
+  // return isLoggedIn ? (
+  //   <>
+  //     <Head>
+  //       <title>編集ページ</title>
+  //       <meta
+  //         name="description"
+  //         content="コーヒーをテイスティングするときに使用するアプリです。"
+  //       />
+  //       <meta name="viewport" content="width=device-width, initial-scale=1" />
+  //     </Head>
+  //     <GlobalHeader />
+  //     <Update data={singleData} groups={GroupData} item={singleData} />
+  //   </>
+  // ) : (
+  //   <>
+  //     <GlobalHeader />
+  //     <div className={styles.sign_off_page}>
+  //       <p className={styles.sign_off_text}>ログインしてください。</p>
+  //     </div>
+  //   </>
+  // );
 };
 
 const fetcher = async (url) => {
