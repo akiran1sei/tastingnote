@@ -7,11 +7,9 @@ export async function GET(req, res) {
     await connectDB();
     const response = res.params.user;
 
-    const userData = await UserModel.findById(response[0]);
-
     if (response[1] === "undefined") {
       const allItems = await BeansModel.find({
-        userEmail: userData.email,
+        userEmail: response[0],
       })
         .sort({ createdAt: 1 })
         .limit(100)
@@ -24,7 +22,7 @@ export async function GET(req, res) {
       });
     } else {
       const allItems = await BeansModel.find({
-        userEmail: userData.email,
+        userEmail: response[0],
         groupname: response[1],
       })
         .sort({ createdAt: 1 })

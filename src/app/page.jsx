@@ -1,18 +1,20 @@
 "use client";
 import styles from "@/app/styles/Contents.module.css";
 import Image from "next/image";
-
+import { UserData } from "@/app/components/items/user";
 import { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 import { useRouter } from "next/navigation";
 import { AuthBtn } from "@/app/components/buttons/AuthBtn";
 
 const Home = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isUserId, setIsUserId] = useState("");
-  const [isUserEmail, setIsUserEmail] = useState("");
-  const [isUserName, setIsUserName] = useState("");
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isUserId, setIsUserId] = useState("");
+  // const [isUserEmail, setIsUserEmail] = useState("");
+  // const [isUserName, setIsUserName] = useState("");
+
   const router = useRouter();
+  const UserInfo = UserData().session;
 
   const navigateTo = (path) => {
     if (router.pathname !== path) {
@@ -20,39 +22,39 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    const checkAuth = () => {
-      if (typeof window !== "undefined") {
-        try {
-          const token = localStorage.getItem("token");
-          if (!token) {
-            console.log("トークンが見つかりません");
-            setIsLoggedIn(false);
-            return;
-          }
+  // useEffect(() => {
+  //   const checkAuth = () => {
+  //     if (typeof window !== "undefined") {
+  //       try {
+  //         const token = localStorage.getItem("token");
+  //         if (!token) {
+  //           console.log("トークンが見つかりません");
+  //           setIsLoggedIn(false);
+  //           return;
+  //         }
 
-          const decodedToken = jwtDecode(token);
-          const userData = {
-            id: decodedToken.id,
-            username: decodedToken.user,
-            email: decodedToken.email,
-            // その他の必要な情報
-          };
-          setIsUserId(userData.id);
-          setIsUserEmail(userData.email);
-          setIsUserName(userData.username);
-          setIsLoggedIn(true);
-        } catch (error) {
-          console.error("認証エラー:", error);
-          setIsLoggedIn(false);
-        }
-      }
-    };
+  //         const decodedToken = jwtDecode(token);
+  //         const userData = {
+  //           id: decodedToken.id,
+  //           username: decodedToken.user,
+  //           email: decodedToken.email,
+  //           // その他の必要な情報
+  //         };
+  //         setIsUserId(userData.id);
+  //         setIsUserEmail(userData.email);
+  //         setIsUserName(userData.username);
+  //         setIsLoggedIn(true);
+  //       } catch (error) {
+  //         console.error("認証エラー:", error);
+  //         setIsLoggedIn(false);
+  //       }
+  //     }
+  //   };
 
-    checkAuth();
-  }, []);
+  //   checkAuth();
+  // }, []);
   const startBtn = () => {
-    navigateTo(`/pages/select/${isUserId}`);
+    navigateTo(`/pages/select/${UserInfo.id}`);
   };
 
   return (
@@ -69,12 +71,26 @@ const Home = () => {
           />
         </div>
       </div>
+
+      <h1 className={styles.header_title_txt}>
+        <span>Tasting Note</span>
+      </h1>
+
       <nav className={styles.home_nav}>
-        <h1 className={styles.header_title_txt}>
-          <span>Tasting Note</span>
-        </h1>
         <ul className={styles.home_nav_list}>
-          {isLoggedIn ? (
+          <li className={styles.home_nav_item}>
+            <button
+              type="button"
+              className={styles.home_start_btn}
+              onClick={startBtn}
+            >
+              START
+            </button>
+          </li>
+          <li>
+            <AuthBtn />
+          </li>
+          {/* {isLoggedIn ? (
             <li className={styles.home_nav_item}>
               <button
                 type="button"
@@ -86,9 +102,6 @@ const Home = () => {
             </li>
           ) : (
             <>
-              <li>
-                <AuthBtn />
-              </li>
               <li className={styles.home_nav_item}>
                 <button
                   type="button"
@@ -108,7 +121,7 @@ const Home = () => {
                 </button>
               </li>
             </>
-          )}
+          )} */}
         </ul>
       </nav>
     </div>

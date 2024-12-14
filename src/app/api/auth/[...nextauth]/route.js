@@ -28,7 +28,7 @@ const handler = NextAuth({
   session: {
     strategy: "jwt", // JWTストラテジーを明示的に指定
   },
-
+  secret: process.env.NEXTAUTH_SECRET,
   // コールバック設定
   callbacks: {
     async session({ session, token }) {
@@ -36,7 +36,10 @@ const handler = NextAuth({
       return session;
     },
   },
-
+  pages: {
+    signOut: "/auth/signout",
+    error: "/auth/error",
+  },
   // ログ設定
   events: {
     async signIn(message) {
