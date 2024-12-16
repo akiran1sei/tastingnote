@@ -10,11 +10,11 @@ export async function DELETE(request) {
     const body = await request.json();
 
     const singleGroup = await GroupModel.findOne({
-      _id: body.id,
+      _id: body._id,
       email: { $in: body.email },
     });
     const emailSizeOne = await GroupModel.findOne({
-      _id: body.id,
+      _id: body._id,
       email: {
         $size: 1,
       },
@@ -22,14 +22,14 @@ export async function DELETE(request) {
 
     if (singleGroup) {
       if (emailSizeOne) {
-        await GroupModel.deleteOne({ _id: body.id });
+        await GroupModel.deleteOne({ _id: body._id });
         return NextResponse.json({
           message: "グループ削除成功",
           status: 200,
         });
       } else {
         await GroupModel.updateOne(
-          { _id: body.id },
+          { _id: body._id },
           {
             $pull: { email: body.email },
           }

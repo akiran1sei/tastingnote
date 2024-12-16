@@ -4,18 +4,22 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { CreateBtn } from "@/app/components/buttons/CreateBtn";
+import { useSession } from "next-auth/react";
+import useReadGroups from "@/app/utils/useReadGroups";
 import Image from "next/image";
 import dotenv from "dotenv";
-import { jwtDecode } from "jwt-decode";
+
 export function Update(context) {
+  dotenv.config();
   const singleData = context.item;
   const router = useRouter();
-  dotenv.config();
+
+  const { data: session, status } = useSession();
+  const [userInfo, setUserInfo] = useState(null);
   const [coffee, setCoffee] = useState(singleData.coffee);
   const [roast, setRoast] = useState(singleData.roast);
   const [roastDegree, setRoastDegree] = useState(singleData.roastDegree);
   const [username, setUserName] = useState(singleData.username);
-
   const [aromaDryStrength, setAromaDryStrength] = useState(
     singleData.aromaDryStrength
   );
@@ -37,17 +41,13 @@ export function Update(context) {
   const [defects, setDefects] = useState(singleData.defects);
   const [point, setPoint] = useState("0");
   const [score, setScore] = useState("0");
-
   const [cleancap, setCleancap] = useState(singleData.cleancap);
-
   const [sweet, setSweet] = useState(singleData.sweet);
   const [acidity, setAcidity] = useState(singleData.acidity);
-
   const [acidityStrength, setAcidityStrength] = useState(
     singleData.acidityStrength
   );
   const [mouthfeel, setMouthfeel] = useState(singleData.mouthfeel);
-
   const [bodyStrength, setBodyStrength] = useState(singleData.bodyStrength);
   const [flavor, setFlavor] = useState(singleData.flavor);
   const [after, setAfter] = useState(singleData.after);
@@ -63,48 +63,23 @@ export function Update(context) {
   const [isUserName, setIsUserName] = useState("");
   const [error, setError] = useState("");
   useEffect(() => {
-    const getUser = () => {
-      const token = localStorage.getItem("token");
-
-      if (token) {
-        try {
-          const decodedToken = jwtDecode(token);
-          // デコードされたトークンから必要な情報を取得
-          const userData = {
-            id: decodedToken.id,
-            username: decodedToken.user,
-            email: decodedToken.email,
-            // その他の必要な情報
-          };
-          setIsUserId(userData.id);
-          setIsUserEmail(userData.email);
-          setIsUserName(userData.username);
-          setIsUser(userData);
-          return;
-        } catch (error) {
-          console.error("トークンのデコードに失敗しました:", error);
-          return null;
-        }
-      } else {
-        console.log("トークンが見つかりません");
-        return null;
-      }
-    };
-    getUser();
+    if (status === "authenticated" && session) {
+      setUserInfo(session.user);
+    }
   }, []);
 
-  const GroupsData = context.groups;
-  console.log(GroupsData, singleData);
-  const options = [];
-  GroupsData.forEach((e) => {
-    if (e.email.includes(isUserEmail)) {
-      options.push(
-        <option key={e._id} value={e.groupname}>
-          {e.groupname}
-        </option>
-      );
-    }
-  });
+  const ReadGroups = useReadGroups();
+
+  const GroupsData = [...ReadGroups];
+
+  const options = context.groups
+    .filter((e) => e.email.includes(isUserEmail))
+    .map((e) => (
+      <option key={e._id} value={e.groupname}>
+        {e.groupname}
+      </option>
+    ));
+
   function RoastArticle() {
     const NumberRoast = Number(roast);
     if (NumberRoast >= 0 && NumberRoast <= 15) {
@@ -246,7 +221,7 @@ export function Update(context) {
                   onChange={(e) => setGroupName(e.target.value)}
                   required
                 >
-                  <option></option>
+                  <option> {groupName}</option>
                   {options}
                 </select>
               </div>

@@ -1,16 +1,20 @@
 "use client";
-import { useState } from "react";
+import React, { useState } from "react";
 import styles from "@/app/styles/Contents.module.css";
 import useReadGroups from "@/app/utils/useReadGroups";
 import { useRouter } from "next/navigation";
+import { UserData } from "@/app/components/items/user";
 
 import dotenv from "dotenv";
 export function GroupCreate(context) {
   dotenv.config();
+
+  const UserInfo = UserData().session;
+  console.log(UserInfo.email, UserInfo.name);
   const ReadGroups = useReadGroups();
   const [groupCreate, setGroupCreate] = useState("");
-  const [groupChoice, setGroupChoice] = useState(ReadGroups);
-  const [groupEmail, setGroupEmail] = useState(context.user.email);
+  const [groupChoice, setGroupChoice] = useState("");
+  const [groupEmail, setGroupEmail] = useState(UserInfo.email);
   const [error, setError] = useState("");
   const router = useRouter();
   const navigateTo = (path) => {
@@ -19,12 +23,11 @@ export function GroupCreate(context) {
     }
   };
 
-  const GroupData = context.data.groups;
-  const UserData = context.user;
+  const GroupData = [...ReadGroups];
 
   const options = [];
   GroupData.forEach((e, i, a) => {
-    if (e.email.includes(UserData.email)) {
+    if (e.email.includes(groupEmail)) {
       options.push(
         <option key={e._id} value={e._id}>
           {e.groupname}
@@ -86,7 +89,7 @@ export function GroupCreate(context) {
       `${process.env.NEXT_PUBLIC_URL}/api/group/delete/${groupChoice}`,
       {
         method: "DELETE",
-        body: JSON.stringify({ id: groupChoice, email: UserData.email }),
+        body: JSON.stringify({ _id: groupChoice, email: groupEmail }),
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",

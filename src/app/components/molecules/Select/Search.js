@@ -3,19 +3,18 @@ import styles from "@/app/styles/Contents.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
-import useReadGroups from "@/app/utils/useReadGroups";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
-// import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import dotenv from "dotenv";
 import CSV from "@/app/components/buttons/Export/CSV";
 import PDF from "@/app/components/buttons/Export/PDF";
-import { UserData } from "@/app/components/items/user";
-
+import { useSession } from "next-auth/react";
 dotenv.config();
 export function Search(context) {
-  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { data: session, status } = useSession();
+  const [userInfo, setUserInfo] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
   const [showExportButton, setShowExportButton] = useState(false);
@@ -23,45 +22,17 @@ export function Search(context) {
   const [checkbox, setCheckBox] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
   const [defaultValue, setDefaultValue] = useState(context.data[1]);
-  // const dataId = context.data[0];
-  // const [isUser, setIsUser] = useState(context.data[0]);
-  // const [isUserId, setIsUserId] = useState("");
-  // const [isUserEmail, setIsUserEmail] = useState("");
-  // const [isUserName, setIsUserName] = useState("");
-  const router = useRouter();
-  const ReadGroups = useReadGroups();
-  const UserInfo = UserData().session;
-  console.log(UserInfo);
-  // useEffect(() => {
-  //   const getUser = () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       if (token) {
-  //         const token = localStorage.getItem("token");
-  //         const decodedToken = jwtDecode(token);
-  //         // デコードされたトークンから必要な情報を取得
-  //         const userData = {
-  //           id: decodedToken.id,
-  //           username: decodedToken.user,
-  //           email: decodedToken.email,
-  //           // その他の必要な情報
-  //         };
-  //         setIsLoggedIn(!!token);
-  //         setIsUserId(userData.id);
-  //         setIsUserEmail(userData.email);
-  //         setIsUserName(userData.username);
-  //       } else {
-  //         console.log("トークンが見つかりません");
-  //         return null;
-  //       }
-  //     } catch (error) {
-  //       console.error("トークンのデコードに失敗しました:", error);
-  //       return null;
-  //     }
-  //   };
-  //   getUser();
-  // }, []);
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      setUserInfo(session.user);
+    }
+  }, [session, status]);
+  console.log(session.user.email);
+  const UserInfo = session.user;
+  console.log(UserInfo);
   const { data, error } = useSWR(
     `/api/readall/${UserInfo.email}/${defaultValue}`,
 
@@ -93,11 +64,11 @@ export function Search(context) {
       e.preventDefault();
       if (!selectedGroup) {
         return router.push(
-          `${process.env.NEXT_PUBLIC_URL}/pages/select/${UserInfo.id}`
+          `${process.env.NEXT_PUBLIC_URL}/pages/select/${UserInfo.name}`
         );
       }
       // URLを更新
-      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${UserInfo.id}/${selectedGroup}`;
+      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${UserInfo.name}/${selectedGroup}`;
 
       return router.push(newUrl, undefined, { shallow: true });
     } catch (err) {
@@ -150,7 +121,7 @@ export function Search(context) {
         const json = await response.json();
         setShowDeleteButton(false);
 
-        await router.push(`/pages/select/${UserInfo.id}?user=`);
+        await router.push(`/pages/select/${UserInfo.name}?user=`);
         return alert(json.message);
       }
     } catch (err) {
