@@ -57,29 +57,26 @@ export function Update(context) {
   const [impression, setImpression] = useState(singleData.impression);
   const [date, setDate] = useState(singleData.date);
   const [groupName, setGroupName] = useState(singleData.groupname);
-  const [isUser, setIsUser] = useState([]);
-  const [isUserId, setIsUserId] = useState("");
-  const [isUserEmail, setIsUserEmail] = useState("");
-  const [isUserName, setIsUserName] = useState("");
+
   const [error, setError] = useState("");
   useEffect(() => {
     if (status === "authenticated" && session) {
       setUserInfo(session.user);
     }
-  }, []);
+  }, [session, status]);
 
   const ReadGroups = useReadGroups();
 
   const GroupsData = [...ReadGroups];
 
-  const options = context.groups
-    .filter((e) => e.email.includes(isUserEmail))
-    .map((e) => (
-      <option key={e._id} value={e.groupname}>
-        {e.groupname}
-      </option>
-    ));
-
+  const options = GroupsData.filter((e) =>
+    e.email.includes(userInfo.email)
+  ).map((e) => (
+    <option key={e._id} value={e.groupname}>
+      {e.groupname}
+    </option>
+  ));
+  console.log();
   function RoastArticle() {
     const NumberRoast = Number(roast);
     if (NumberRoast >= 0 && NumberRoast <= 15) {
@@ -174,7 +171,7 @@ export function Update(context) {
       const jsonData = await res.json();
       router.refresh({ shallow: true });
       alert(jsonData.message);
-      return router.replace(`/pages/select/${isUserId}`);
+      return router.replace(`/pages/select/${userInfo.email}`);
     } catch (error) {
       return alert("アイテム編集失敗");
     }

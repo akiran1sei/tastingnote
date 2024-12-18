@@ -4,42 +4,20 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-// import { jwtDecode } from "jwt-decode";
+import { useSession } from "next-auth/react";
 
 export function GlobalHeader() {
   const [isActive, setIsActive] = useState(false);
   //const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isUserId, setIsUserId] = useState("");
-  const [isUserEmail, setIsUserEmail] = useState("");
-  const [isUserName, setIsUserName] = useState("");
+
   const router = useRouter();
-  // useEffect(() => {
-  //   const getUser = () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       if (token) {
-  //         const decodedToken = jwtDecode(token);
-  //         const userData = {
-  //           id: decodedToken.id,
-  //           username: decodedToken.user,
-  //           email: decodedToken.email,
-  //           // その他の必要な情報
-  //         };
-  //         setIsUserId(userData.id);
-  //         setIsUserEmail(userData.email);
-  //         setIsUserName(userData.username);
-  //         setIsLoggedIn(!!localStorage.getItem("token"));
-  //       } else {
-  //         console.log("トークンが見つかりません");
-  //         return null;
-  //       }
-  //     } catch (error) {
-  //       console.error("トークンのデコードに失敗しました:", error);
-  //       return null;
-  //     }
-  //   };
-  //   getUser();
-  // }, []);
+  const { data: session, status } = useSession();
+  const [userInfo, setUserInfo] = useState(null);
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      setUserInfo(session.user);
+    }
+  }, [session, status]);
 
   const toggleMenu = () => setIsActive(!isActive);
   const reload = () => {
@@ -76,7 +54,7 @@ export function GlobalHeader() {
               <>
                 <li className={header.menu_item}>
                   <button
-                    onClick={() => navigateTo(`/pages/select/${isUserId}`)}
+                    onClick={() => navigateTo(`/pages/select/${userInfo.email}`)}
                   >
                     Select
                   </button>
@@ -117,7 +95,9 @@ export function GlobalHeader() {
             )} */}
 
             <li className={header.menu_item}>
-              <button onClick={() => navigateTo(`/pages/select/${isUserId}`)}>
+              <button
+                onClick={() => navigateTo(`/pages/select/${userInfo.email}`)}
+              >
                 Select
               </button>
             </li>

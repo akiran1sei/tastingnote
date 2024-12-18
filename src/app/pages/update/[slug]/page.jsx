@@ -7,47 +7,17 @@ import { Update } from "@/app/components/molecules/Update/Update";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
-// import { jwtDecode } from "jwt-decode";
+import { useSession } from "next-auth/react";
 const UpdatePage = ({ params }) => {
   const id = use(params);
 
-  ////const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // const [isUserId, setIsUserId] = useState("");
-  // const [isUserEmail, setIsUserEmail] = useState("");
-  // const [isUserName, setIsUserName] = useState("");
-
-  // useEffect(() => {
-  //   const getUser = () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-
-  //       if (token) {
-  //         const token = localStorage.getItem("token");
-
-  //         const decodedToken = jwtDecode(token);
-  //         // デコードされたトークンから必要な情報を取得
-  //         const userData = {
-  //           id: decodedToken.id,
-  //           username: decodedToken.user,
-  //           email: decodedToken.email,
-  //           // その他の必要な情報
-  //         };
-  //         setIsUserId(userData.id);
-  //         setIsUserEmail(userData.email);
-  //         setIsUserName(userData.username);
-  //         setIsLoggedIn(!!token);
-  //       } else {
-  //         console.log("トークンが見つかりません");
-  //         return null;
-  //       }
-  //     } catch (error) {
-  //       console.error("トークンのデコードに失敗しました:", error);
-  //       return null;
-  //     }
-  //   };
-  //   getUser();
-  // });
+  const { data: session, status } = useSession();
+  const [userInfo, setUserInfo] = useState(null);
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      setUserInfo(session.user);
+    }
+  }, [session, status]);
 
   const { data: itemData, error: itemError } = useSWR(
     `/api/singleitem/${id.slug}`,

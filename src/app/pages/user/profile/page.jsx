@@ -3,38 +3,19 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import styles from "@/app/styles/Contents.module.css";
-// import { jwtDecode } from "jwt-decode";
+import { useSession } from "next-auth/react";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 const Profile = () => {
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isAccountDelete, setIsAccountDelete] = useState(false);
-
-  const [isUserId, setIsUserId] = useState("");
-  const [isUserEmail, setIsUserEmail] = useState("");
-  const [isUserName, setIsUserName] = useState("");
-  const [isToken, setIsToken] = useState("");
-  // useEffect(() => {
-  //   const getUser = () => {
-  //     const token = localStorage.getItem("token");
-  //     if (token) {
-  //       setIsToken(token);
-  //       const decodedToken = jwtDecode(token);
-  //       // デコードされたトークンから必要な情報を取得
-  //       console.log(decodedToken);
-  //       const userData = {
-  //         id: decodedToken.id,
-  //         username: decodedToken.user,
-  //         email: decodedToken.email,
-  //       };
-
-  //       setIsUserId(userData.id);
-  //       setIsUserEmail(userData.email);
-  //       setIsUserName(userData.username);
-  //     }
-  //   };
-  //   getUser();
-  // }, []);
+  const { data: session, status } = useSession();
+  const [userInfo, setUserInfo] = useState(null);
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      setUserInfo(session.user);
+    }
+  }, [session, status]);
 
   const handleTokenRemove = async () => {
     if (confirm("Sign Out？")) {
@@ -69,14 +50,14 @@ const Profile = () => {
       if (confirm("作成したデータ全て削除しますがよろしいでしょうか？")) {
         setIsAccountDelete(true);
         try {
-          const res = await fetch(`/api/auth/delete/${isUserId}`, {
+          const res = await fetch(`/api/auth/delete/${userInfo.email}`, {
             method: "DELETE",
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
               "Cache-Control": "no-store",
             },
-            body: JSON.stringify({ id: isUserId }),
+            body: JSON.stringify({ email: userInfo.email }),
           });
           const jsonData = await res.json();
           localStorage.removeItem("token");
@@ -99,20 +80,22 @@ const Profile = () => {
     <>
       <GlobalHeader />
       <div className={styles.profile_page}>
-        {isToken && (
-          <div className={styles.profile_card}>
-            <ul className={styles.profile_user_list}>
-              <li className={styles.profile_user_item}>
-                <span className={styles.profile_item_title}>username</span>
-                <span className={styles.profile_item_value}>{isUserName}</span>
-              </li>
-              <li className={styles.profile_user_item}>
-                <span className={styles.profile_item_title}>email</span>
-                <span className={styles.profile_item_value}>{isUserEmail}</span>
-              </li>
-            </ul>
-          </div>
-        )}
+        {/* {session && ( */}
+        <div className={styles.profile_card}>
+          <ul className={styles.profile_user_list}>
+            <li className={styles.profile_user_item}>
+              <span className={styles.profile_item_title}>username</span>
+              <span className={styles.profile_item_value}>{userInfo.name}</span>
+            </li>
+            <li className={styles.profile_user_item}>
+              <span className={styles.profile_item_title}>email</span>
+              <span className={styles.profile_item_value}>
+                {userInfo.email}
+              </span>
+            </li>
+          </ul>
+        </div>
+        {/* )} */}
         <div className={styles.profile_btn_box}>
           <ul className={styles.profile_btn_list}>
             <li className={styles.profile_btn_item}>

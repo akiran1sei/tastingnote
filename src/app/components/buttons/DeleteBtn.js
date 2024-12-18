@@ -3,42 +3,18 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Buttons from "@/app/styles/Btn.module.css";
 import dotenv from "dotenv";
-// import { jwtDecode } from "jwt-decode";
+import { useSession } from "next-auth/react";
 export function DeleteBtn(context) {
   const router = useRouter();
   dotenv.config();
-  const [isUserId, setIsUserId] = useState("");
-  const [isUserEmail, setIsUserEmail] = useState("");
-  const [isUserName, setIsUserName] = useState("");
-  // useEffect(() => {
-  //   const getUser = () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
+  const { data: session, status } = useSession();
+  const [userInfo, setUserInfo] = useState(null);
 
-  //       if (token) {
-  //         const decodedToken = jwtDecode(token);
-  //         // デコードされたトークンから必要な情報を取得
-  //         const userData = {
-  //           id: decodedToken.id,
-  //           username: decodedToken.user,
-  //           email: decodedToken.email,
-  //           // その他の必要な情報
-  //         };
-  //         setIsUserId(userData.id);
-  //         setIsUserEmail(userData.email);
-  //         setIsUserName(userData.username);
-  //       } else {
-  //         console.log("トークンが見つかりません");
-  //         return null;
-  //       }
-  //     } catch (error) {
-  //       console.error("トークンのデコードに失敗しました:", error);
-  //       return null;
-  //     }
-  //   };
-  //   getUser();
-  // }, []);
-
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      setUserInfo(session.user);
+    }
+  }, [session, status]);
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -59,7 +35,7 @@ export function DeleteBtn(context) {
 
         alert(jsonData.message);
         return router.replace(
-          `${process.env.NEXT_PUBLIC_URL}/pages/select/` + `${isUserId}`
+          `${process.env.NEXT_PUBLIC_URL}/pages/select/` + `${userInfo.email}`
         );
       }
     } catch (err) {
