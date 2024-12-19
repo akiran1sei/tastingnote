@@ -38,10 +38,9 @@ export async function POST(request) {
         });
       }
     } else {
-      console.log(email);
       // 新しいグループを作成
       const newGroup = new GroupModel({ groupname, email: [email] });
-      console.log(newGroup);
+
       await newGroup.save();
       return NextResponse.json({
         message: "グループ作成成功",

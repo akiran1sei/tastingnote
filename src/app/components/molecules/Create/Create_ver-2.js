@@ -7,14 +7,13 @@ import useReadGroups from "@/app/utils/useReadGroups";
 import { useRouter } from "next/navigation";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { CreateBtn } from "@/app/components/buttons/CreateBtn";
-import dotenv from "dotenv";
+
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 
 export function BeansCreateTable(context) {
-  dotenv.config();
   const ReadGroups = useReadGroups();
 
   const { data: session, status } = useSession();
@@ -103,7 +102,7 @@ export function BeansCreateTable(context) {
 
     try {
       const response = // フォームの入力値をサーバーに送信する
-        await fetch(`${process.env.NEXT_PUBLIC_URL}/api/create`, {
+        await fetch(`/api/create`, {
           // cache: "no-store",
           method: "POST",
           body: JSON.stringify({
@@ -1128,7 +1127,7 @@ export function BeansCreateTable(context) {
 
                 <CreateBtn />
 
-                <HomeBtn />
+                <HomeBtn email={isUserEmail} />
               </div>
             </div>
           </form>

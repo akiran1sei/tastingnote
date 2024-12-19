@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function GET(req, res) {
   try {
     await connectDB();
-    // await revalidatePath(`${process.env.NEXT_PUBLIC_URL}/pages/update`);
+    // await revalidatePath(`/pages/update`);
     const singleItem = await BeansModel.findById(res.params.slug);
     return NextResponse.json({
       message: "アイテム読み取り成功（シングル）",

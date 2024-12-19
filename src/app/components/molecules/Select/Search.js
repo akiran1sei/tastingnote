@@ -6,14 +6,20 @@ import React, { useState, useEffect } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import dotenv from "dotenv";
+
 import CSV from "@/app/components/buttons/Export/CSV";
 import PDF from "@/app/components/buttons/Export/PDF";
+
 import { useSession } from "next-auth/react";
-dotenv.config();
+import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
+import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
+
 export function Search(context) {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isUsername, setUserName] = useState("");
+  const [isUserEmail, setIsUserEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
@@ -25,16 +31,8 @@ export function Search(context) {
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (status === "authenticated" && session) {
-      setUserInfo(session.user);
-    }
-  }, [session, status]);
-  console.log(session.user.email);
-  const UserInfo = session.user;
-  console.log(UserInfo);
   const { data, error } = useSWR(
-    `/api/readall/${UserInfo.email}/${defaultValue}`,
+    `/api/readall/${isUserEmail}/${defaultValue}`,
 
     fetcher,
     {
@@ -47,10 +45,10 @@ export function Search(context) {
   );
 
   const GroupData = context.user.groups;
-
+  console.log("checkbox", checkbox);
   const options = [];
   GroupData.forEach((e, i, a) => {
-    if (e.email.includes(UserInfo.email)) {
+    if (e.email.includes(isUserEmail)) {
       options.push(
         <option key={e._id} value={e.groupname}>
           {e.groupname}
@@ -63,12 +61,10 @@ export function Search(context) {
     try {
       e.preventDefault();
       if (!selectedGroup) {
-        return router.push(
-          `${process.env.NEXT_PUBLIC_URL}/pages/select/${UserInfo.name}`
-        );
+        return router.push(`/pages/select/${isUserEmail}`);
       }
       // URLを更新
-      const newUrl = `${process.env.NEXT_PUBLIC_URL}/pages/select/${UserInfo.name}/${selectedGroup}`;
+      const newUrl = `/pages/select/${isUserEmail}/${selectedGroup}`;
 
       return router.push(newUrl, undefined, { shallow: true });
     } catch (err) {
@@ -76,9 +72,6 @@ export function Search(context) {
       return alert("検索に失敗しました");
     }
   };
-
-  if (error) return <div>エラーが発生しました: {error.message}</div>;
-  if (!data) return <div>データを取得中...</div>;
 
   const handleSearchClick = () => {
     // 親コンポーネントにメッセージを送信
@@ -105,23 +98,20 @@ export function Search(context) {
     e.preventDefault();
     try {
       if (confirm("削除しますか？")) {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_URL}/api/delete/multiple/${UserInfo.email}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              "Cache-Control": "no-store",
-            },
-            method: "DELETE",
+        const response = await fetch(`/api/delete/multiple/${isUserEmail}`, {
+          headers: {
+            "Content-Type": "application/json",
+            "Cache-Control": "no-store",
+          },
+          method: "DELETE",
 
-            body: JSON.stringify([...checkbox]),
-          }
-        );
+          body: JSON.stringify([...checkbox]),
+        });
 
         const json = await response.json();
         setShowDeleteButton(false);
 
-        await router.push(`/pages/select/${UserInfo.name}?user=`);
+        await router.push(`/pages/select/${isUserEmail}?user=`);
         return alert(json.message);
       }
     } catch (err) {
@@ -148,1204 +138,665 @@ export function Search(context) {
       setCheckBox((prev) => prev.filter((item) => item !== value));
     }
   };
-  return (
-    <>
-      <header className={styles.select_header}>
-        <nav className={styles.select_header_menu}>
-          <ul className={styles.select_menu_list}>
-            <li className={styles.select_header_menu_item}>
-              <button
-                type="button"
-                className={styles.select_header_menu_btn}
-                onClick={handleDeleteClick}
-              >
-                <Image
-                  src="/images/delete_img.svg"
-                  alt="削除"
-                  width={48}
-                  height={48}
-                  priority
-                />
-              </button>
-            </li>
-            <li className={styles.select_header_menu_item}>
-              <button
-                type="button"
-                className={styles.select_header_menu_btn}
-                onClick={handleSearchClick}
-              >
-                <Image
-                  src="/images/search_img.svg"
-                  alt="検索ボタン"
-                  width={24}
-                  height={24}
-                  priority
-                />
-              </button>
-            </li>
-            <li className={styles.select_header_menu_item}>
-              <button
-                type="button"
-                className={styles.select_header_menu_btn}
-                onClick={handleExportClick}
-              >
-                <Image
-                  src="/images/export_img.svg"
-                  alt="エクスポートボタン"
-                  width={24}
-                  height={24}
-                  priority
-                />
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </header>
-      <h1 className={styles.contents_title}>SELECT</h1>
 
-      <div className={styles.select_header_active_contents}>
-        <ul className={styles.select_header_active_menu}>
-          {showDeleteButton && (
-            <li
-              className={styles.select_header_active_menu_item}
-              hidden={!showDeleteButton}
-            >
-              <button
-                type="submit"
-                onClick={handleDeleteSubmit}
-                className={styles.select_menu_btn_white}
-              >
-                Delete
-              </button>
-            </li>
-          )}
-          {showExportButton && (
-            <>
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      setUserInfo(session.user);
+      setUserName(session.user.name);
+      setIsUserEmail(session.user.email);
+      setIsLoading(false);
+    } else if (status === "unauthenticated") {
+      setIsLoading(false);
+    }
+  }, [session, status]);
+  console.log(status);
+  if (error) return <div>エラーが発生しました: {error.message}</div>;
+  if (!data) return <div>データを取得中...</div>;
+  if (isLoading) {
+    return <LoadingSkeleton />;
+  } else if (status === "unauthenticated") {
+    return <Uncertified />;
+  } else {
+    return (
+      <>
+        <header className={styles.select_header}>
+          <nav className={styles.select_header_menu}>
+            <ul className={styles.select_menu_list}>
+              <li className={styles.select_header_menu_item}>
+                <button
+                  type="button"
+                  className={styles.select_header_menu_btn}
+                  onClick={handleDeleteClick}
+                >
+                  <Image
+                    src="/images/delete_img.svg"
+                    alt="削除"
+                    width={48}
+                    height={48}
+                    priority
+                  />
+                </button>
+              </li>
+              <li className={styles.select_header_menu_item}>
+                <button
+                  type="button"
+                  className={styles.select_header_menu_btn}
+                  onClick={handleSearchClick}
+                >
+                  <Image
+                    src="/images/search_img.svg"
+                    alt="検索ボタン"
+                    width={24}
+                    height={24}
+                    priority
+                  />
+                </button>
+              </li>
+              <li className={styles.select_header_menu_item}>
+                <button
+                  type="button"
+                  className={styles.select_header_menu_btn}
+                  onClick={handleExportClick}
+                >
+                  <Image
+                    src="/images/export_img.svg"
+                    alt="エクスポートボタン"
+                    width={24}
+                    height={24}
+                    priority
+                  />
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <h1 className={styles.contents_title}>SELECT</h1>
+
+        <div className={styles.select_header_active_contents}>
+          <ul className={styles.select_header_active_menu}>
+            {showDeleteButton && (
               <li
                 className={styles.select_header_active_menu_item}
-                hidden={!showExportButton}
+                hidden={!showDeleteButton}
               >
-                <span>
-                  エラーがでましたら、リロードをしていただくか
-                  <br />
-                  キャッシュを削除して対応してください。
-                </span>
-                <br />
-                <PDF data={checkbox} />
+                <button
+                  type="submit"
+                  onClick={handleDeleteSubmit}
+                  className={styles.select_menu_btn_white}
+                >
+                  Delete
+                </button>
               </li>
-              {/* <li
+            )}
+            {showExportButton && (
+              <>
+                <li
+                  className={styles.select_header_active_menu_item}
+                  hidden={!showExportButton}
+                >
+                  <span>
+                    エラーがでましたら、リロードをしていただくか
+                    <br />
+                    キャッシュを削除して対応してください。
+                  </span>
+                  <br />
+                  <PDF data={checkbox} />
+                </li>
+                {/* <li
                 className={styles.select_header_active_menu_item}
                 hidden={!showExportButton}
               >
                 <CSV data={checkbox} />
               </li> */}
-            </>
-          )}
-          {showSearchButton && (
-            <li
-              className={styles.select_header_active_menu_item}
-              hidden={!showSearchButton}
-            >
-              <div className={styles.searchBarBox}>
-                <div className={styles.searchBar}>
-                  <label htmlFor="search" className={styles.searchBar_label}>
-                    SEARCH
-                  </label>
-                  <select
-                    name="search"
-                    id="search"
-                    value={selectedGroup}
-                    onChange={(e) => setSelectedGroup(e.target.value)}
-                    className={styles.searchBar_select}
-                  >
-                    <optgroup label="Group">
-                      <option value="">All</option>
-                      {options}
-                    </optgroup>
-                  </select>
-                  <button
-                    type="button"
-                    onClick={handleSearch}
-                    className={styles.searchBar_button}
-                  >
-                    <Image
-                      src="/images/search_img.svg"
-                      alt="検索ボタン"
-                      width={24}
-                      height={24}
-                      priority
-                    />
-                  </button>
-                </div>
-              </div>
-            </li>
-          )}
-        </ul>
-      </div>
-
-      <div className={styles.select_list_box}>
-        <div className={styles.select_wrap}>
-          <ul className={styles.select_header_list}>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_index}`}
-            >
-              <span className={styles.select_title}>No.</span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_coffee}`}
-            >
-              <span className={styles.select_title}>コーヒー豆</span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_roast}`}
-            >
-              <span className={styles.select_title}>ロースト</span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_aroma}`}
-            >
-              <span className={styles.select_title}>アロマ</span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_defects}`}
-            >
-              <span className={styles.select_title}>欠点・瑕疵</span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_cleancap}`}
-            >
-              <span className={styles.select_title}>
-                カップの
-                <br />
-                綺麗さ
-              </span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_sweet}`}
-            >
-              <span className={styles.select_title}>甘さ</span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_acidity}`}
-            >
-              <span className={styles.select_title}>酸の質</span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_mouthfeel}`}
-            >
-              <span className={styles.select_title}>
-                口に含んだ
-                <br />
-                質感
-              </span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_flavor}`}
-            >
-              <span className={styles.select_title}>フレーバー</span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_after}`}
-            >
-              <span className={styles.select_title}>
-                後味の
-                <br />
-                印象度
-              </span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_balance}`}
-            >
-              <span className={styles.select_title}>ハーモニーの均衝性</span>
-            </li>
-
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_overall}`}
-            >
-              <span className={styles.select_title}>総合評価</span>
-            </li>
-            <li
-              className={`${styles.select_header_list_item} ${styles.select_total}`}
-            >
-              <span className={styles.select_title}>
-                TOTAL
-                <br />
-                +36
-              </span>
-            </li>
-          </ul>
-          <div className={styles.select_beans_box}>
-            {data.allItems.map((beans, index) => (
-              <div className={styles.select_beans} key={beans._id}>
-                {showDeleteButton || showExportButton ? (
-                  <div className={styles.select_delete_list}>
-                    <ul
-                      className={`${styles.select_list} ${styles.select_checkbox}`}
-                      // onClick={(e) => {
-                      //   // チェックボックスのクリック時
-                      //   if (e.target.type === "checkbox") {
-                      //     // 既存の handleChange 関数を呼び出す
-                      //     handleChange(e);
-                      //   } else {
-                      //     // ul 要素内のチェックボックスを全て取得
-                      //     const checkboxes = e.currentTarget.querySelectorAll(
-                      //       'input[type="checkbox"]'
-                      //     );
-
-                      //     // チェック状態を反転する
-                      //     const allChecked = Array.from(checkboxes).every(
-                      //       (checkbox) => checkbox.checked
-                      //     );
-                      //     checkboxes.forEach((checkbox) => {
-                      //       checkbox.checked = !allChecked;
-                      //       // チェック状態が変更されたら handleChange を呼び出す
-                      //       checkbox.dispatchEvent(
-                      //         new Event("change", { bubbles: true })
-                      //       );
-                      //     });
-                      //   }
-                      // }}
+              </>
+            )}
+            {showSearchButton && (
+              <li
+                className={styles.select_header_active_menu_item}
+                hidden={!showSearchButton}
+              >
+                <div className={styles.searchBarBox}>
+                  <div className={styles.searchBar}>
+                    <label htmlFor="search" className={styles.searchBar_label}>
+                      SEARCH
+                    </label>
+                    <select
+                      name="search"
+                      id="search"
+                      value={selectedGroup}
+                      onChange={(e) => setSelectedGroup(e.target.value)}
+                      className={styles.searchBar_select}
                     >
-                      <li
-                        className={`${styles.select_list} ${styles.select_index}`}
-                      >
-                        {index + 1}
-                        <input
-                          type="checkbox"
-                          className={styles.select_checkbox_input}
-                          defaultValue={[beans._id]}
-                          onChange={handleChange}
-                          checked={selectedItems.has([beans._id].toString())}
-                          required
-                        />
-                      </li>
-
-                      <li
-                        className={`${styles.select_list} ${styles.select_coffee}`}
-                      >
-                        <p className={styles.select_value}>
-                          {beans.coffee.slice(0, 20)}
-                        </p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_roast}`}
-                      >
-                        <p className={styles.select_value}>
-                          {beans.roastDegree} <br />
-                          <output>
-                            <input
-                              type="range"
-                              className={styles.select_input_roast}
-                              value={beans.roast}
-                              readOnly
-                            />
-                          </output>
-                          <br />
-                          {beans.roast}%
-                        </p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_aroma}`}
-                      >
-                        <div className={styles.select_value}>
-                          <div className={styles.select_aroma_box}>
-                            <div className={styles.select_aroma_header}>
-                              <div className={styles.select_aroma_headerTitle}>
-                                ドライ
-                              </div>
-                              <div className={styles.select_aroma_headerTitle}>
-                                クラスト
-                              </div>
-                              <div className={styles.select_aroma_headerTitle}>
-                                ブレーク
-                              </div>
-                            </div>
-                            <div className={styles.select_aroma_valueHeader}>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
-                              ></div>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
-                              >
-                                強さ：
-                              </div>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
-                              >
-                                質 :
-                              </div>
-                            </div>
-                            <div
-                              className={styles.select_aroma_valueListStrength}
-                            >
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaDryStrength}
-                              </div>
-
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaCrustStrength}
-                              </div>
-
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaBreakStrength}
-                              </div>
-                            </div>
-                            <div
-                              className={styles.select_aroma_valueListQuality}
-                            >
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaDryQuality}
-                              </div>
-
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaCrustQuality}
-                              </div>
-
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaBreakQuality}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_defects}`}
-                      >
-                        <p className={styles.select_value}>{beans.defects}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_cleancap}`}
-                      >
-                        <p className={styles.select_value}>{beans.cleancap}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_sweet}`}
-                      >
-                        <p className={styles.select_value}>{beans.sweet}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_acidity}`}
-                      >
-                        <p className={styles.select_value}>{beans.acidity}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_mouthfeel}`}
-                      >
-                        <p className={styles.select_value}>{beans.mouthfeel}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_flavor}`}
-                      >
-                        <p className={styles.select_value}>{beans.flavor}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_after}`}
-                      >
-                        <p className={styles.select_value}>{beans.after}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_balance}`}
-                      >
-                        <p className={styles.select_value}>{beans.balance}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_overall}`}
-                      >
-                        <p className={styles.select_value}>{beans.overall}</p>
-                      </li>
-
-                      <li
-                        className={`${styles.select_list} ${styles.select_total}`}
-                      >
-                        <div className={styles.select_total_wrap}>
-                          <p className={styles.select_value}>
-                            <span className={styles.select_resultTxt}>
-                              {beans.result}
-                            </span>
-                          </p>
-                          <p className={styles.select_total_value} colSpan={2}>
-                            <span className={styles.select_totalTxt}>
-                              {beans.total}
-                            </span>
-                          </p>
-                        </div>
-                      </li>
-                    </ul>
+                      <optgroup label="Group">
+                        <option value="">All</option>
+                        {options}
+                      </optgroup>
+                    </select>
+                    <button
+                      type="button"
+                      onClick={handleSearch}
+                      className={styles.searchBar_button}
+                    >
+                      <Image
+                        src="/images/search_img.svg"
+                        alt="検索ボタン"
+                        width={24}
+                        height={24}
+                        priority
+                      />
+                    </button>
                   </div>
-                ) : (
-                  <Link
-                    href={`/pages/${beans._id}`}
-                    scroll={false}
-                    className={styles.select_beans_link}
-                    passHref
-                  >
-                    <ul className={styles.select_list}>
-                      <li
-                        className={`${styles.select_list} ${styles.select_index}`}
+                </div>
+              </li>
+            )}
+          </ul>
+        </div>
+
+        <div className={styles.select_list_box}>
+          <div className={styles.select_wrap}>
+            <ul className={styles.select_header_list}>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_index}`}
+              >
+                <span className={styles.select_title}>No.</span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_coffee}`}
+              >
+                <span className={styles.select_title}>コーヒー豆</span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_roast}`}
+              >
+                <span className={styles.select_title}>ロースト</span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_aroma}`}
+              >
+                <span className={styles.select_title}>アロマ</span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_defects}`}
+              >
+                <span className={styles.select_title}>欠点・瑕疵</span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_cleancap}`}
+              >
+                <span className={styles.select_title}>
+                  カップの
+                  <br />
+                  綺麗さ
+                </span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_sweet}`}
+              >
+                <span className={styles.select_title}>甘さ</span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_acidity}`}
+              >
+                <span className={styles.select_title}>酸の質</span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_mouthfeel}`}
+              >
+                <span className={styles.select_title}>
+                  口に含んだ
+                  <br />
+                  質感
+                </span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_flavor}`}
+              >
+                <span className={styles.select_title}>フレーバー</span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_after}`}
+              >
+                <span className={styles.select_title}>
+                  後味の
+                  <br />
+                  印象度
+                </span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_balance}`}
+              >
+                <span className={styles.select_title}>ハーモニーの均衝性</span>
+              </li>
+
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_overall}`}
+              >
+                <span className={styles.select_title}>総合評価</span>
+              </li>
+              <li
+                className={`${styles.select_header_list_item} ${styles.select_total}`}
+              >
+                <span className={styles.select_title}>
+                  TOTAL
+                  <br />
+                  +36
+                </span>
+              </li>
+            </ul>
+            <div className={styles.select_beans_box}>
+              {data.allItems.map((beans, index) => (
+                <div className={styles.select_beans} key={beans._id}>
+                  {showDeleteButton || showExportButton ? (
+                    <div className={styles.select_delete_list}>
+                      <ul
+                        className={`${styles.select_list} ${styles.select_checkbox}`}
+                        onClick={(e) => {
+                          // チェックボックスのクリック時
+                          if (e.target.type === "checkbox") {
+                            // 既存の handleChange 関数を呼び出す
+                            handleChange(e);
+                          } else {
+                            // ul 要素内のチェックボックスを全て取得
+                            const checkboxes = e.currentTarget.querySelectorAll(
+                              'input[type="checkbox"]'
+                            );
+
+                            // チェック状態を反転する
+                            const allChecked = Array.from(checkboxes).every(
+                              (checkbox) => checkbox.checked
+                            );
+                            checkboxes.forEach((checkbox) => {
+                              checkbox.checked = !allChecked;
+                              // チェック状態が変更されたら handleChange を呼び出す
+                              checkbox.dispatchEvent(
+                                new Event("change", { bubbles: true })
+                              );
+                            });
+                          }
+                        }}
                       >
-                        {index + 1}
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_coffee}`}
-                      >
-                        <p className={styles.select_value}>
-                          {beans.coffee.slice(0, 20)}
-                        </p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_roast}`}
-                      >
-                        <p className={styles.select_value}>
-                          {beans.roastDegree} <br />
-                          <output>
-                            <input
-                              type="range"
-                              className={styles.select_input_roast}
-                              value={beans.roast}
-                              readOnly
-                            />
-                          </output>
-                          <br />
-                          {beans.roast}%
-                        </p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_aroma}`}
-                      >
-                        <div className={styles.select_value}>
-                          <div className={styles.select_aroma_box}>
-                            <div className={styles.select_aroma_header}>
-                              <div className={styles.select_aroma_headerTitle}>
-                                ドライ
+                        <li
+                          className={`${styles.select_list} ${styles.select_index}`}
+                        >
+                          {index + 1}
+                          <input
+                            type="checkbox"
+                            className={styles.select_checkbox_input}
+                            defaultValue={[beans._id]}
+                            onChange={handleChange}
+                            checked={selectedItems.has([beans._id].toString())}
+                            required
+                          />
+                        </li>
+
+                        <li
+                          className={`${styles.select_list} ${styles.select_coffee}`}
+                        >
+                          <p className={styles.select_value}>
+                            {beans.coffee.slice(0, 20)}
+                          </p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_roast}`}
+                        >
+                          <p className={styles.select_value}>
+                            {beans.roastDegree} <br />
+                            <output>
+                              <input
+                                type="range"
+                                className={styles.select_input_roast}
+                                value={beans.roast}
+                                readOnly
+                              />
+                            </output>
+                            <br />
+                            {beans.roast}%
+                          </p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_aroma}`}
+                        >
+                          <div className={styles.select_value}>
+                            <div className={styles.select_aroma_box}>
+                              <div className={styles.select_aroma_header}>
+                                <div
+                                  className={styles.select_aroma_headerTitle}
+                                >
+                                  ドライ
+                                </div>
+                                <div
+                                  className={styles.select_aroma_headerTitle}
+                                >
+                                  クラスト
+                                </div>
+                                <div
+                                  className={styles.select_aroma_headerTitle}
+                                >
+                                  ブレーク
+                                </div>
                               </div>
-                              <div className={styles.select_aroma_headerTitle}>
-                                クラスト
+                              <div className={styles.select_aroma_valueHeader}>
+                                <div
+                                  className={
+                                    styles.select_aroma_valueHeader_list
+                                  }
+                                ></div>
+                                <div
+                                  className={
+                                    styles.select_aroma_valueHeader_list
+                                  }
+                                >
+                                  強さ：
+                                </div>
+                                <div
+                                  className={
+                                    styles.select_aroma_valueHeader_list
+                                  }
+                                >
+                                  質 :
+                                </div>
                               </div>
-                              <div className={styles.select_aroma_headerTitle}>
-                                ブレーク
-                              </div>
-                            </div>
-                            <div className={styles.select_aroma_valueHeader}>
                               <div
-                                className={styles.select_aroma_valueHeader_list}
-                              ></div>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
+                                className={
+                                  styles.select_aroma_valueListStrength
+                                }
                               >
-                                強さ：
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaDryStrength}
+                                </div>
+
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaCrustStrength}
+                                </div>
+
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaBreakStrength}
+                                </div>
                               </div>
                               <div
-                                className={styles.select_aroma_valueHeader_list}
+                                className={styles.select_aroma_valueListQuality}
                               >
-                                質　：
-                              </div>
-                            </div>
-                            <div
-                              className={styles.select_aroma_valueListStrength}
-                            >
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaDryStrength}
-                              </div>
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaDryQuality}
+                                </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaCrustStrength}
-                              </div>
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaCrustQuality}
+                                </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaBreakStrength}
-                              </div>
-                            </div>
-                            <div
-                              className={styles.select_aroma_valueListQuality}
-                            >
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaDryQuality}
-                              </div>
-
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaCrustQuality}
-                              </div>
-
-                              <div className={styles.select_aroma_valueIItem}>
-                                {beans.aromaBreakQuality}
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaBreakQuality}
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_defects}`}
-                      >
-                        <p className={styles.select_value}>{beans.defects}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_cleancap}`}
-                      >
-                        <p className={styles.select_value}>{beans.cleancap}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_sweet}`}
-                      >
-                        <p className={styles.select_value}>{beans.sweet}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_acidity}`}
-                      >
-                        <p className={styles.select_value}>{beans.acidity}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_mouthfeel}`}
-                      >
-                        <p className={styles.select_value}>{beans.mouthfeel}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_flavor}`}
-                      >
-                        <p className={styles.select_value}>{beans.flavor}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_after}`}
-                      >
-                        <p className={styles.select_value}>{beans.after}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_balance}`}
-                      >
-                        <p className={styles.select_value}>{beans.balance}</p>
-                      </li>
-                      <li
-                        className={`${styles.select_list} ${styles.select_overall}`}
-                      >
-                        <p className={styles.select_value}>{beans.overall}</p>
-                      </li>
-
-                      <li
-                        className={`${styles.select_list} ${styles.select_total}`}
-                      >
-                        <div className={styles.select_total_wrap}>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_defects}`}
+                        >
+                          <p className={styles.select_value}>{beans.defects}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_cleancap}`}
+                        >
                           <p className={styles.select_value}>
-                            <span className={styles.select_resultTxt}>
-                              {beans.result}
-                            </span>
+                            {beans.cleancap}
                           </p>
-                          <p className={styles.select_total_value} colSpan={2}>
-                            <span className={styles.select_totalTxt}>
-                              {beans.total}
-                            </span>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_sweet}`}
+                        >
+                          <p className={styles.select_value}>{beans.sweet}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_acidity}`}
+                        >
+                          <p className={styles.select_value}>{beans.acidity}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_mouthfeel}`}
+                        >
+                          <p className={styles.select_value}>
+                            {beans.mouthfeel}
                           </p>
-                        </div>
-                      </li>
-                    </ul>
-                  </Link>
-                )}
-              </div>
-            ))}
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_flavor}`}
+                        >
+                          <p className={styles.select_value}>{beans.flavor}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_after}`}
+                        >
+                          <p className={styles.select_value}>{beans.after}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_balance}`}
+                        >
+                          <p className={styles.select_value}>{beans.balance}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_overall}`}
+                        >
+                          <p className={styles.select_value}>{beans.overall}</p>
+                        </li>
+
+                        <li
+                          className={`${styles.select_list} ${styles.select_total}`}
+                        >
+                          <div className={styles.select_total_wrap}>
+                            <p className={styles.select_value}>
+                              <span className={styles.select_resultTxt}>
+                                {beans.result}
+                              </span>
+                            </p>
+                            <p
+                              className={styles.select_total_value}
+                              colSpan={2}
+                            >
+                              <span className={styles.select_totalTxt}>
+                                {beans.total}
+                              </span>
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : (
+                    <Link
+                      href={`/pages/${beans._id}`}
+                      scroll={false}
+                      className={styles.select_beans_link}
+                      passHref
+                    >
+                      <ul className={styles.select_list}>
+                        <li
+                          className={`${styles.select_list} ${styles.select_index}`}
+                        >
+                          {index + 1}
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_coffee}`}
+                        >
+                          <p className={styles.select_value}>
+                            {beans.coffee.slice(0, 20)}
+                          </p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_roast}`}
+                        >
+                          <p className={styles.select_value}>
+                            {beans.roastDegree} <br />
+                            <output>
+                              <input
+                                type="range"
+                                className={styles.select_input_roast}
+                                value={beans.roast}
+                                readOnly
+                              />
+                            </output>
+                            <br />
+                            {beans.roast}%
+                          </p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_aroma}`}
+                        >
+                          <div className={styles.select_value}>
+                            <div className={styles.select_aroma_box}>
+                              <div className={styles.select_aroma_header}>
+                                <div
+                                  className={styles.select_aroma_headerTitle}
+                                >
+                                  ドライ
+                                </div>
+                                <div
+                                  className={styles.select_aroma_headerTitle}
+                                >
+                                  クラスト
+                                </div>
+                                <div
+                                  className={styles.select_aroma_headerTitle}
+                                >
+                                  ブレーク
+                                </div>
+                              </div>
+                              <div className={styles.select_aroma_valueHeader}>
+                                <div
+                                  className={
+                                    styles.select_aroma_valueHeader_list
+                                  }
+                                ></div>
+                                <div
+                                  className={
+                                    styles.select_aroma_valueHeader_list
+                                  }
+                                >
+                                  強さ：
+                                </div>
+                                <div
+                                  className={
+                                    styles.select_aroma_valueHeader_list
+                                  }
+                                >
+                                  質　：
+                                </div>
+                              </div>
+                              <div
+                                className={
+                                  styles.select_aroma_valueListStrength
+                                }
+                              >
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaDryStrength}
+                                </div>
+
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaCrustStrength}
+                                </div>
+
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaBreakStrength}
+                                </div>
+                              </div>
+                              <div
+                                className={styles.select_aroma_valueListQuality}
+                              >
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaDryQuality}
+                                </div>
+
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaCrustQuality}
+                                </div>
+
+                                <div className={styles.select_aroma_valueIItem}>
+                                  {beans.aromaBreakQuality}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_defects}`}
+                        >
+                          <p className={styles.select_value}>{beans.defects}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_cleancap}`}
+                        >
+                          <p className={styles.select_value}>
+                            {beans.cleancap}
+                          </p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_sweet}`}
+                        >
+                          <p className={styles.select_value}>{beans.sweet}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_acidity}`}
+                        >
+                          <p className={styles.select_value}>{beans.acidity}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_mouthfeel}`}
+                        >
+                          <p className={styles.select_value}>
+                            {beans.mouthfeel}
+                          </p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_flavor}`}
+                        >
+                          <p className={styles.select_value}>{beans.flavor}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_after}`}
+                        >
+                          <p className={styles.select_value}>{beans.after}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_balance}`}
+                        >
+                          <p className={styles.select_value}>{beans.balance}</p>
+                        </li>
+                        <li
+                          className={`${styles.select_list} ${styles.select_overall}`}
+                        >
+                          <p className={styles.select_value}>{beans.overall}</p>
+                        </li>
+
+                        <li
+                          className={`${styles.select_list} ${styles.select_total}`}
+                        >
+                          <div className={styles.select_total_wrap}>
+                            <p className={styles.select_value}>
+                              <span className={styles.select_resultTxt}>
+                                {beans.result}
+                              </span>
+                            </p>
+                            <p
+                              className={styles.select_total_value}
+                              colSpan={2}
+                            >
+                              <span className={styles.select_totalTxt}>
+                                {beans.total}
+                              </span>
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  );
-  // return isLoggedIn ? (
-  //   <>
-  //     <header className={styles.select_header}>
-  //       <nav className={styles.select_header_menu}>
-  //         <ul className={styles.select_menu_list}>
-  //           <li className={styles.select_header_menu_item}>
-  //             <button
-  //               type="button"
-  //               className={styles.select_header_menu_btn}
-  //               onClick={handleDeleteClick}
-  //             >
-  //               <Image
-  //                 src="/images/delete_img.svg"
-  //                 alt="削除"
-  //                 width={48}
-  //                 height={48}
-  //                 priority
-  //               />
-  //             </button>
-  //           </li>
-  //           <li className={styles.select_header_menu_item}>
-  //             <button
-  //               type="button"
-  //               className={styles.select_header_menu_btn}
-  //               onClick={handleSearchClick}
-  //             >
-  //               <Image
-  //                 src="/images/search_img.svg"
-  //                 alt="検索ボタン"
-  //                 width={24}
-  //                 height={24}
-  //                 priority
-  //               />
-  //             </button>
-  //           </li>
-  //           <li className={styles.select_header_menu_item}>
-  //             <button
-  //               type="button"
-  //               className={styles.select_header_menu_btn}
-  //               onClick={handleExportClick}
-  //             >
-  //               <Image
-  //                 src="/images/export_img.svg"
-  //                 alt="エクスポートボタン"
-  //                 width={24}
-  //                 height={24}
-  //                 priority
-  //               />
-  //             </button>
-  //           </li>
-  //         </ul>
-  //       </nav>
-  //     </header>
-  //     <h1 className={styles.contents_title}>SELECT</h1>
-
-  //     <div className={styles.select_header_active_contents}>
-  //       <ul className={styles.select_header_active_menu}>
-  //         {showDeleteButton && (
-  //           <li
-  //             className={styles.select_header_active_menu_item}
-  //             hidden={!showDeleteButton}
-  //           >
-  //             <button
-  //               type="submit"
-  //               onClick={handleDeleteSubmit}
-  //               className={styles.select_menu_btn_white}
-  //             >
-  //               Delete
-  //             </button>
-  //           </li>
-  //         )}
-  //         {showExportButton && (
-  //           <>
-  //             <li
-  //               className={styles.select_header_active_menu_item}
-  //               hidden={!showExportButton}
-  //             >
-  //               <span>
-  //                 エラーがでましたら、リロードをしていただくか
-  //                 <br />
-  //                 キャッシュを削除して対応してください。
-  //               </span>
-  //               <br />
-  //               <PDF data={checkbox} />
-  //             </li>
-  //             {/* <li
-  //               className={styles.select_header_active_menu_item}
-  //               hidden={!showExportButton}
-  //             >
-  //               <CSV data={checkbox} />
-  //             </li> */}
-  //           </>
-  //         )}
-  //         {showSearchButton && (
-  //           <li
-  //             className={styles.select_header_active_menu_item}
-  //             hidden={!showSearchButton}
-  //           >
-  //             <div className={styles.searchBarBox}>
-  //               <div className={styles.searchBar}>
-  //                 <label htmlFor="search" className={styles.searchBar_label}>
-  //                   SEARCH
-  //                 </label>
-  //                 <select
-  //                   name="search"
-  //                   id="search"
-  //                   value={selectedGroup}
-  //                   onChange={(e) => setSelectedGroup(e.target.value)}
-  //                   className={styles.searchBar_select}
-  //                 >
-  //                   <optgroup label="Group">
-  //                     <option value="">All</option>
-  //                     {options}
-  //                   </optgroup>
-  //                 </select>
-  //                 <button
-  //                   type="button"
-  //                   onClick={handleSearch}
-  //                   className={styles.searchBar_button}
-  //                 >
-  //                   <Image
-  //                     src="/images/search_img.svg"
-  //                     alt="検索ボタン"
-  //                     width={24}
-  //                     height={24}
-  //                     priority
-  //                   />
-  //                 </button>
-  //               </div>
-  //             </div>
-  //           </li>
-  //         )}
-  //       </ul>
-  //     </div>
-
-  //     <div className={styles.select_list_box}>
-  //       <div className={styles.select_wrap}>
-  //         <ul className={styles.select_header_list}>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_index}`}
-  //           >
-  //             <span className={styles.select_title}>No.</span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_coffee}`}
-  //           >
-  //             <span className={styles.select_title}>コーヒー豆</span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_roast}`}
-  //           >
-  //             <span className={styles.select_title}>ロースト</span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_aroma}`}
-  //           >
-  //             <span className={styles.select_title}>アロマ</span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_defects}`}
-  //           >
-  //             <span className={styles.select_title}>欠点・瑕疵</span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_cleancap}`}
-  //           >
-  //             <span className={styles.select_title}>
-  //               カップの
-  //               <br />
-  //               綺麗さ
-  //             </span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_sweet}`}
-  //           >
-  //             <span className={styles.select_title}>甘さ</span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_acidity}`}
-  //           >
-  //             <span className={styles.select_title}>酸の質</span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_mouthfeel}`}
-  //           >
-  //             <span className={styles.select_title}>
-  //               口に含んだ
-  //               <br />
-  //               質感
-  //             </span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_flavor}`}
-  //           >
-  //             <span className={styles.select_title}>フレーバー</span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_after}`}
-  //           >
-  //             <span className={styles.select_title}>
-  //               後味の
-  //               <br />
-  //               印象度
-  //             </span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_balance}`}
-  //           >
-  //             <span className={styles.select_title}>ハーモニーの均衝性</span>
-  //           </li>
-
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_overall}`}
-  //           >
-  //             <span className={styles.select_title}>総合評価</span>
-  //           </li>
-  //           <li
-  //             className={`${styles.select_header_list_item} ${styles.select_total}`}
-  //           >
-  //             <span className={styles.select_title}>
-  //               TOTAL
-  //               <br />
-  //               +36
-  //             </span>
-  //           </li>
-  //         </ul>
-  //         <div className={styles.select_beans_box}>
-  //           {data.allItems.map((beans, index) => (
-  //             <div className={styles.select_beans} key={beans._id}>
-  //               {showDeleteButton || showExportButton ? (
-  //                 <div className={styles.select_delete_list}>
-  //                   <ul
-  //                     className={`${styles.select_list} ${styles.select_checkbox}`}
-  //                     // onClick={(e) => {
-  //                     //   // チェックボックスのクリック時
-  //                     //   if (e.target.type === "checkbox") {
-  //                     //     // 既存の handleChange 関数を呼び出す
-  //                     //     handleChange(e);
-  //                     //   } else {
-  //                     //     // ul 要素内のチェックボックスを全て取得
-  //                     //     const checkboxes = e.currentTarget.querySelectorAll(
-  //                     //       'input[type="checkbox"]'
-  //                     //     );
-
-  //                     //     // チェック状態を反転する
-  //                     //     const allChecked = Array.from(checkboxes).every(
-  //                     //       (checkbox) => checkbox.checked
-  //                     //     );
-  //                     //     checkboxes.forEach((checkbox) => {
-  //                     //       checkbox.checked = !allChecked;
-  //                     //       // チェック状態が変更されたら handleChange を呼び出す
-  //                     //       checkbox.dispatchEvent(
-  //                     //         new Event("change", { bubbles: true })
-  //                     //       );
-  //                     //     });
-  //                     //   }
-  //                     // }}
-  //                   >
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_index}`}
-  //                     >
-  //                       {index + 1}
-  //                       <input
-  //                         type="checkbox"
-  //                         className={styles.select_checkbox_input}
-  //                         defaultValue={[beans._id]}
-  //                         onChange={handleChange}
-  //                         checked={selectedItems.has([beans._id].toString())}
-  //                         required
-  //                       />
-  //                     </li>
-
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_coffee}`}
-  //                     >
-  //                       <p className={styles.select_value}>
-  //                         {beans.coffee.slice(0, 20)}
-  //                       </p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_roast}`}
-  //                     >
-  //                       <p className={styles.select_value}>
-  //                         {beans.roastDegree} <br />
-  //                         <output>
-  //                           <input
-  //                             type="range"
-  //                             className={styles.select_input_roast}
-  //                             value={beans.roast}
-  //                             readOnly
-  //                           />
-  //                         </output>
-  //                         <br />
-  //                         {beans.roast}%
-  //                       </p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_aroma}`}
-  //                     >
-  //                       <div className={styles.select_value}>
-  //                         <div className={styles.select_aroma_box}>
-  //                           <div className={styles.select_aroma_header}>
-  //                             <div className={styles.select_aroma_headerTitle}>
-  //                               ドライ
-  //                             </div>
-  //                             <div className={styles.select_aroma_headerTitle}>
-  //                               クラスト
-  //                             </div>
-  //                             <div className={styles.select_aroma_headerTitle}>
-  //                               ブレーク
-  //                             </div>
-  //                           </div>
-  //                           <div className={styles.select_aroma_valueHeader}>
-  //                             <div
-  //                               className={styles.select_aroma_valueHeader_list}
-  //                             ></div>
-  //                             <div
-  //                               className={styles.select_aroma_valueHeader_list}
-  //                             >
-  //                               強さ：
-  //                             </div>
-  //                             <div
-  //                               className={styles.select_aroma_valueHeader_list}
-  //                             >
-  //                               質 :
-  //                             </div>
-  //                           </div>
-  //                           <div
-  //                             className={styles.select_aroma_valueListStrength}
-  //                           >
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaDryStrength}
-  //                             </div>
-
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaCrustStrength}
-  //                             </div>
-
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaBreakStrength}
-  //                             </div>
-  //                           </div>
-  //                           <div
-  //                             className={styles.select_aroma_valueListQuality}
-  //                           >
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaDryQuality}
-  //                             </div>
-
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaCrustQuality}
-  //                             </div>
-
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaBreakQuality}
-  //                             </div>
-  //                           </div>
-  //                         </div>
-  //                       </div>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_defects}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.defects}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_cleancap}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.cleancap}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_sweet}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.sweet}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_acidity}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.acidity}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_mouthfeel}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.mouthfeel}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_flavor}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.flavor}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_after}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.after}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_balance}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.balance}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_overall}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.overall}</p>
-  //                     </li>
-
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_total}`}
-  //                     >
-  //                       <div className={styles.select_total_wrap}>
-  //                         <p className={styles.select_value}>
-  //                           <span className={styles.select_resultTxt}>
-  //                             {beans.result}
-  //                           </span>
-  //                         </p>
-  //                         <p className={styles.select_total_value} colSpan={2}>
-  //                           <span className={styles.select_totalTxt}>
-  //                             {beans.total}
-  //                           </span>
-  //                         </p>
-  //                       </div>
-  //                     </li>
-  //                   </ul>
-  //                 </div>
-  //               ) : (
-  //                 <Link
-  //                   href={`/pages/${beans._id}`}
-  //                   scroll={false}
-  //                   className={styles.select_beans_link}
-  //                   passHref
-  //                 >
-  //                   <ul className={styles.select_list}>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_index}`}
-  //                     >
-  //                       {index + 1}
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_coffee}`}
-  //                     >
-  //                       <p className={styles.select_value}>
-  //                         {beans.coffee.slice(0, 20)}
-  //                       </p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_roast}`}
-  //                     >
-  //                       <p className={styles.select_value}>
-  //                         {beans.roastDegree} <br />
-  //                         <output>
-  //                           <input
-  //                             type="range"
-  //                             className={styles.select_input_roast}
-  //                             value={beans.roast}
-  //                             readOnly
-  //                           />
-  //                         </output>
-  //                         <br />
-  //                         {beans.roast}%
-  //                       </p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_aroma}`}
-  //                     >
-  //                       <div className={styles.select_value}>
-  //                         <div className={styles.select_aroma_box}>
-  //                           <div className={styles.select_aroma_header}>
-  //                             <div className={styles.select_aroma_headerTitle}>
-  //                               ドライ
-  //                             </div>
-  //                             <div className={styles.select_aroma_headerTitle}>
-  //                               クラスト
-  //                             </div>
-  //                             <div className={styles.select_aroma_headerTitle}>
-  //                               ブレーク
-  //                             </div>
-  //                           </div>
-  //                           <div className={styles.select_aroma_valueHeader}>
-  //                             <div
-  //                               className={styles.select_aroma_valueHeader_list}
-  //                             ></div>
-  //                             <div
-  //                               className={styles.select_aroma_valueHeader_list}
-  //                             >
-  //                               強さ：
-  //                             </div>
-  //                             <div
-  //                               className={styles.select_aroma_valueHeader_list}
-  //                             >
-  //                               質　：
-  //                             </div>
-  //                           </div>
-  //                           <div
-  //                             className={styles.select_aroma_valueListStrength}
-  //                           >
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaDryStrength}
-  //                             </div>
-
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaCrustStrength}
-  //                             </div>
-
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaBreakStrength}
-  //                             </div>
-  //                           </div>
-  //                           <div
-  //                             className={styles.select_aroma_valueListQuality}
-  //                           >
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaDryQuality}
-  //                             </div>
-
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaCrustQuality}
-  //                             </div>
-
-  //                             <div className={styles.select_aroma_valueIItem}>
-  //                               {beans.aromaBreakQuality}
-  //                             </div>
-  //                           </div>
-  //                         </div>
-  //                       </div>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_defects}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.defects}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_cleancap}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.cleancap}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_sweet}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.sweet}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_acidity}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.acidity}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_mouthfeel}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.mouthfeel}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_flavor}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.flavor}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_after}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.after}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_balance}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.balance}</p>
-  //                     </li>
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_overall}`}
-  //                     >
-  //                       <p className={styles.select_value}>{beans.overall}</p>
-  //                     </li>
-
-  //                     <li
-  //                       className={`${styles.select_list} ${styles.select_total}`}
-  //                     >
-  //                       <div className={styles.select_total_wrap}>
-  //                         <p className={styles.select_value}>
-  //                           <span className={styles.select_resultTxt}>
-  //                             {beans.result}
-  //                           </span>
-  //                         </p>
-  //                         <p className={styles.select_total_value} colSpan={2}>
-  //                           <span className={styles.select_totalTxt}>
-  //                             {beans.total}
-  //                           </span>
-  //                         </p>
-  //                       </div>
-  //                     </li>
-  //                   </ul>
-  //                 </Link>
-  //               )}
-  //             </div>
-  //           ))}
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </>
-  // ) : (
-  //   <div className={styles.sign_off_page}>
-  //     <p className={styles.sign_off_text}>ログインしてください。</p>
-  //   </div>
-  // );
+      </>
+    );
+  }
 }
 const fetcher = async (url) => {
   const response = await fetch(url);

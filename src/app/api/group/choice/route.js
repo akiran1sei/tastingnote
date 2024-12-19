@@ -7,7 +7,7 @@ export async function GET() {
   try {
     await connectDB();
     // const groups = await GroupModel.find({ groupname: { $exists: true } });
-    // await revalidatePath(`${process.env.NEXT_PUBLIC_URL}/pages/group`);
+    // await revalidatePath(`/pages/group`);
     const groups = await GroupModel.aggregate([
       {
         $match: {
@@ -26,14 +26,14 @@ export async function GET() {
     ]).exec();
 
     return NextResponse.json({
-      message: "アクセス成功",
+      message: "成功しました。",
       groups,
       status: 200,
     });
   } catch (error) {
     console.error(error);
     return NextResponse.json({
-      message: "アクセスできませんでした",
+      message: "失敗しました。",
       status: 500,
     });
   }
