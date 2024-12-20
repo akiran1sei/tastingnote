@@ -118,11 +118,15 @@ export function Search(context) {
     setShowDeleteButton(!showDeleteButton);
     setShowExportButton(false);
     setShowSearchButton(false);
+    setSelectedItems(new Set());
+    setCheckBox([]);
   };
   const handleExportClick = () => {
     setShowExportButton(!showExportButton);
     setShowDeleteButton(false);
     setShowSearchButton(false);
+    setSelectedItems(new Set());
+    setCheckBox([]);
   };
   async function handleDeleteSubmit(e) {
     e.preventDefault();
