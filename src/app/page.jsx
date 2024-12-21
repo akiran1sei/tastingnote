@@ -1,10 +1,11 @@
 "use client";
 import styles from "@/app/styles/Contents.module.css";
 import Image from "next/image";
-
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 
 const Home = () => {
+  const { data: session } = useSession();
   return (
     <div className={styles.home}>
       <div className={styles.home_bg}>
@@ -19,17 +20,23 @@ const Home = () => {
           />
         </div>
       </div>
-
-      <h1 className={styles.header_title_txt}>
+      <div className={styles.home_bg_cover}></div>
+      <h1 className={styles.home_title_txt}>
         <span>Tasting Note</span>
       </h1>
 
       <nav className={styles.home_nav}>
-        <button type="button" className={styles.home_login_btn}>
-          <Link href={"/api/auth/signin"} passHref>
-            loginページへ
-          </Link>
-        </button>
+        {session ? (
+          <button type="button" className={styles.home_login_btn}>
+            スタート
+          </button>
+        ) : (
+          <button type="button" className={styles.home_login_btn}>
+            <Link href={"/api/auth/signin"} passHref>
+              login
+            </Link>
+          </button>
+        )}
       </nav>
     </div>
   );

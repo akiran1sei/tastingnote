@@ -47,6 +47,7 @@ const Profile = () => {
       }
     }
   };
+  console.log(session);
   useEffect(() => {
     if (status === "authenticated" && session) {
       setUserInfo(session.user);
