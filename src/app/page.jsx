@@ -28,7 +28,9 @@ const Home = () => {
       <nav className={styles.home_nav}>
         {session ? (
           <button type="button" className={styles.home_login_btn}>
-            スタート
+            <Link href={"/pages/user/profile"} passHref>
+              Start
+            </Link>
           </button>
         ) : (
           <button type="button" className={styles.home_login_btn}>

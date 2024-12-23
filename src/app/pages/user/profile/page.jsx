@@ -68,6 +68,7 @@ const Profile = () => {
       <>
         <GlobalHeader />
         <div className={styles.profile_page}>
+          <h1 className={styles.contents_title}>Profile</h1>
           {/* {session && ( */}
           <div className={styles.profile_card}>
             <ul className={styles.profile_user_list}>
@@ -88,7 +89,7 @@ const Profile = () => {
                 <button
                   className={`${styles.profile_btn} ${styles.profile_signout_btn}`}
                   type="button"
-                  onClick={() => signOut()}
+                  onClick={() => signOut({ callbackUrl: "/" })}
                   disabled={isLoggingOut}
                 >
                   {isLoggingOut ? "ログアウト中..." : "SignOut"}
