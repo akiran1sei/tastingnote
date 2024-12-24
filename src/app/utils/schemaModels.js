@@ -43,7 +43,7 @@ const BeansSchema = new Schema(
 
 //データーベースをdb変数に代入
 const UserSchema = new Schema({
-  username: String,
+  name: String,
   email: String,
   password: String,
 });

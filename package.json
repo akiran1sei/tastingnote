@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.7.4",
     "@sparticuz/chromium": "^131.0.1",
     "axios": "^1.7.8",
+    "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
@@ -21,6 +23,7 @@
     "mongoose": "^8.5.3",
     "next": "^15.0.1",
     "next-auth": "^4.24.11",
+    "nodemailer": "^6.9.16",
     "puppeteer": "^23.10.1",
     "puppeteer-core": "^23.10.1",
     "react": "^18.3.1",
