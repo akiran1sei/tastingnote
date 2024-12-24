@@ -37,42 +37,7 @@
 }
 
 /* signボタン */
-.sign_btn_section {
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-.sign_btn {
-  width: 100%;
-  max-width: 320px;
-  min-width: 300px;
-  min-height: 62px;
-  text-align: center;
-  margin: 0.5rem auto;
-  padding: 0.75rem 1rem;
-  border-color: rgba(0, 0, 0, 0.1);
-  font-size: var(--font-size-base);
-  border: 0.5px solid var(--color-yellow-10);
-  border-radius: 1rem;
-}
-.sign_btn:active {
-  color: var(--color-yellow);
-  background: transparent;
-  transform: translate(2px);
-  transition-duration: 0.2s;
-  box-shadow: inset 2px 2px 5px var(--color-box-shadow);
-}
+
 .signout_btn {
   padding: 1rem;
   color: var(--color-yellow);
