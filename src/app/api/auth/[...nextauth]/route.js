@@ -1,20 +1,45 @@
+// app/api/auth/[...nextauth]/route.js
 import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import DiscordProvider from "next-auth/providers/discord";
-import LineProvider from "next-auth/providers/line";
-
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import { clientPromise } from "@/app/utils/database";
+import connectDB from "@/app/utils/database";
+import { UserModel } from "@/app/utils/schemaModels";
+import bcrypt from "bcrypt";
 const handler = NextAuth({
+  adapter: MongoDBAdapter(clientPromise),
   providers: [
+    CredentialsProvider({
+      name: "Email",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        // データベースからユーザー情報を取得し、パスワードを検証
+        await connectDB();
+
+        const user = await UserModel.findOne({ email: credentials.email });
+
+        if (user && bcrypt.compare(credentials.password, user.password)) {
+          return user;
+        } else {
+          return null;
+        }
+      },
+    }),
+
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      // スコープの明示的な指定
       authorization: {
         params: {
           scope: "openid profile email",
           prompt: "select_account",
-          access_type: "offline", // リフレッシュトークンを取得
+          access_type: "offline",
         },
       },
     }),
@@ -26,38 +51,32 @@ const handler = NextAuth({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
     }),
-    LineProvider({
-      clientId: process.env.LINE_CLIENT_ID,
-      clientSecret: process.env.LINE_CLIENT_SECRET,
-    }),
   ],
-  // デバッグモードを有効化
   debug: true,
-
-  // セッション設定
   session: {
-    strategy: "jwt", // JWTストラテジーを明示的に指定
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
-  // コールバック設定
   callbacks: {
-    async session({ session, token }) {
-      session.user.id = token.sub;
+    async session({ session, token, user }) {
+      if (session?.user) {
+        session.user.id = token.sub;
+      }
       return session;
     },
   },
   pages: {
-    signOut: "/auth/signout",
-    error: "/auth/error",
+    signIn: "/pages/auth/sign-in",
+
+    signOut: "/api/auth/signout",
+    error: "/api/auth/error",
   },
-  // ログ設定
   events: {
     async signIn(message) {
       console.log("Sign in", message);
     },
     async signOut(message) {
       console.log("Sign out event:", message);
-      // 必要に応じて、セッション情報などをログに出力
     },
   },
 });
