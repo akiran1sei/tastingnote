@@ -1,21 +1,18 @@
 "use client";
 
-import SignBtn from "@/app/components/buttons/SignBtn";
 import styles from "@/app/styles/Contents.module.css";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import dotenv from "dotenv";
 
-import { AuthBtn } from "@/app/components/buttons/Auth/AuthBtn";
 import { useSession, signIn } from "next-auth/react";
 dotenv.config();
-const SignIn = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(""); // エラー状態の追加
-  const [action, setAction] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
@@ -46,16 +43,12 @@ const SignIn = () => {
       setIsLoading(false);
     }
   };
-  const handleClick = () => {
-    setAction(!action);
-  };
-
   return (
     <div className={styles.sign_page}>
       <div className={styles.sign_wrapper}>
         <h1 className={styles.contents_title}>Sign In</h1>
         <div className={styles.sign_card}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className={styles.sign_form}>
             {error && <div className={styles.error_message}>{error}</div>}
             <ul className={styles.sign_list}>
               <li className={styles.sign_item}>
@@ -87,7 +80,7 @@ const SignIn = () => {
                 />
               </li>
               <li className={styles.sign_link}>
-                <Link href="/pages/auth/signup" className={styles.smallFont}>
+                <Link href="/pages/auth/sign-up" className={styles.smallFont}>
                   <span>新規登録</span>はこちらをクリック！
                 </Link>
               </li>
@@ -101,19 +94,19 @@ const SignIn = () => {
           <hr className={styles.hr}></hr>
           <div className={styles.sign_btns}>
             <button
-              onClick={() => signIn("google")}
+              onClick={() => signIn("google", { callbackUrl: "/" })}
               className={styles.sign_btn}
             >
               GoogleでSign In
             </button>
             <button
-              onClick={() => signIn("github")}
+              onClick={() => signIn("github", { callbackUrl: "/" })}
               className={styles.sign_btn}
             >
               GitHubでSign In
             </button>
             <button
-              onClick={() => signIn("discord")}
+              onClick={() => signIn("discord", { callbackUrl: "/" })}
               className={styles.sign_btn}
             >
               DiscordでSign In
@@ -125,4 +118,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;
