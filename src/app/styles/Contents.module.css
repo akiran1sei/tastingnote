@@ -638,6 +638,21 @@ input[type="range"].select_input_roast {
     border: unset;
   }
 
+  .select_list_box {
+    width: 100%;
+    max-width: none;
+    min-width: 65px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-items: stretch;
+    margin: 0;
+    border: none;
+    flex-direction: row;
+    min-height: 0;
+  }
   .select_list {
     width: 100%;
     max-width: none;
