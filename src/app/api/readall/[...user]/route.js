@@ -6,10 +6,10 @@ export async function GET(req, res) {
   try {
     await connectDB();
     const response = res.params.user;
-    console.log(response);
-    if (response[1] === "undefined") {
+    console.log(Boolean(response[1]));
+    if (response[1] === "undefined" || !response[1]) {
       const allItems = await BeansModel.find({
-        userEmail: response[0],
+        userEmail: response,
       })
         .sort({ createdAt: 1 })
         .limit(100)
