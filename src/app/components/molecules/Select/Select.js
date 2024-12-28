@@ -4,9 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import useSWR from "swr";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
-
 import CSV from "@/app/components/buttons/Export/CSV";
 import PDF from "@/app/components/buttons/Export/PDF";
 
@@ -14,21 +13,23 @@ import { useSession } from "next-auth/react";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 
-export function Search(context) {
+export function Select({ params }) {
   const { data: session, status } = useSession();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const searchData = searchParams.get("search") || " ";
   const [userInfo, setUserInfo] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
   const [showExportButton, setShowExportButton] = useState(false);
+
   const [selectedItems, setSelectedItems] = useState(new Set());
   const [checkbox, setCheckBox] = useState([]);
-  const [selectedGroup, setSelectedGroup] = useState(""); // 選択された値を保持
-  const [defaultValue, setDefaultValue] = useState(context.data[1]);
+  const [selectedGroup, setSelectedGroup] = useState(searchData || "undefined"); // 選択された値を保持
 
-  const router = useRouter();
+  console.log(searchData);
   const { data: groupData, error: groupError } = useSWR(
     "/api/group/choice",
     fetcher,
@@ -38,7 +39,7 @@ export function Search(context) {
     }
   );
   const { data: readAllData, error: readAllError } = useSWR(
-    `/api/readall/${userInfo.email}/${defaultValue}`,
+    `/api/readall/${userInfo.email}/${selectedGroup}`,
 
     fetcher,
     {
@@ -49,29 +50,32 @@ export function Search(context) {
       dedupingInterval: 0,
     }
   );
-
-  console.log("checkbox", checkbox);
-  const options = [];
-  groupData.groups.forEach((e, i, a) => {
-    if (e.email.includes(userInfo.email)) {
-      options.push(
-        <option key={e._id} value={e.groupname}>
-          {e.groupname}
-        </option>
-      );
-    }
-  });
-
+  const options = groupData?.groups
+    ?.map((e) => {
+      if (e.email.includes(userInfo.email)) {
+        return (
+          <option key={e._id} value={e.groupname}>
+            {e.groupname}
+          </option>
+        );
+      }
+      return null;
+    })
+    .filter(Boolean);
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
+      console.log(Boolean(selectedGroup));
       if (!selectedGroup) {
-        return router.push(`/pages/select/${userInfo.email}`);
+        return router.replace(`/pages/select?search=`);
+        // return router.push(`/pages/select/${userInfo.email}`);
       }
       // URLを更新
-      const newUrl = `/pages/select/${userInfo.email}/${selectedGroup}`;
 
-      return router.push(newUrl, undefined, { shallow: true });
+      const newUrl = `/pages/select?search=${selectedGroup}`;
+      // const newUrl = `/pages/select/${userInfo.email}/${selectedGroup}`;
+
+      return router.replace(newUrl, undefined, { shallow: true });
     } catch (err) {
       console.error("Error during search:", err);
       return alert("検索に失敗しました");
@@ -116,7 +120,8 @@ export function Search(context) {
         const json = await response.json();
         setShowDeleteButton(false);
 
-        await router.push(`/pages/select/${userInfo.email}?user=`);
+        await router.push(`/pages/select?user=`);
+        // await router.push(`/pages/select/${userInfo.email}?user=`);
         return alert(json.message);
       }
     } catch (err) {
@@ -147,18 +152,20 @@ export function Search(context) {
   useEffect(() => {
     if (status === "authenticated" && session) {
       setUserInfo(session.user);
-
-      setIsLoading(false);
+      if (groupData && readAllData) {
+        // AND条件に変更
+        console.log("all Ok");
+        setIsLoading(false);
+      }
     } else if (status === "unauthenticated") {
       setIsLoading(false);
     }
   }, [session, status, readAllData, groupData]);
-  console.log(status);
+
   if (isLoading) return <LoadingSkeleton />;
   if (status === "unauthenticated") return <Uncertified />;
+  if (!groupData || !readAllData) return <div>データを取得中...</div>;
   if (readAllError || groupError) return <div>エラーが発生しました</div>;
-  if (!readAllData || !groupData) return <div>データを取得中...</div>;
-
   return (
     <>
       <header className={styles.select_header}>
