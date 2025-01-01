@@ -1688,14 +1688,24 @@ input[type="range"].select_input_roast {
   justify-content: center;
   align-items: center;
 }
+.sign_submit {
+  width: 100%;
+  max-width: 100px;
+  border: 1px solid;
+  border-color: var(--color-white);
+  border-radius: 5px;
+  background: var(--color-yellow);
+  color: var(--color-white);
+  padding: 0.5rem;
+  box-shadow: 2px 2px 0px var(--color-box-shadow);
+}
 .sign_btn {
   width: 100%;
-  max-width: 250px;
-  min-width: 250px;
-  min-height: 62px;
+  max-width: 200px;
+  box-shadow: 2px 2px 0px var(--color-box-shadow);
   text-align: center;
   margin: 0.5rem auto;
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0rem;
   background: var(--color-white);
   font-size: var(--font-size-base);
   border: 1px solid var(--color-yellow);
@@ -1703,6 +1713,11 @@ input[type="range"].select_input_roast {
 }
 .sign_btn:active {
   color: var(--color-yellow);
+}
+.sign_submit:active {
+}
+.sign_btn:active,
+.sign_submit:active {
   background: transparent;
   transform: translate(2px);
   transition-duration: 0.2s;

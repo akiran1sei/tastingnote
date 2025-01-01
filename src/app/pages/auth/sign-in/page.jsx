@@ -86,7 +86,7 @@ const Login = () => {
               </li>
             </ul>
             <div className={styles.sign_btns}>
-              <button type="submit" className={styles.sign_btn}>
+              <button type="submit" className={styles.sign_submit}>
                 Submit
               </button>
             </div>
