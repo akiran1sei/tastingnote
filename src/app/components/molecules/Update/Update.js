@@ -1136,7 +1136,7 @@ export function Update(context) {
 
               <CreateBtn />
 
-              <HomeBtn email={isUserEmail} />
+              <HomeBtn />
             </div>
           </form>
         </div>

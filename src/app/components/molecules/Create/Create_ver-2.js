@@ -1127,7 +1127,7 @@ export function BeansCreateTable(context) {
 
                 <CreateBtn />
 
-                <HomeBtn email={isUserEmail} />
+                <HomeBtn />
               </div>
             </div>
           </form>
