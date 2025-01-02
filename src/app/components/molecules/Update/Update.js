@@ -173,7 +173,7 @@ export function Update(context) {
       const jsonData = await res.json();
       router.refresh({ shallow: true });
       alert(jsonData.message);
-      return router.replace(`/pages/select/${isUserEmail}`);
+      return router.replace(`/pages/select`);
     } catch (error) {
       return alert("アイテム編集失敗");
     }

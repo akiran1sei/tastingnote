@@ -24,11 +24,11 @@ export function Select({ params }) {
   const [showDeleteButton, setShowDeleteButton] = useState(false);
   const [showSearchButton, setShowSearchButton] = useState(false);
   const [showExportButton, setShowExportButton] = useState(false);
-
+  const [isClicked, setIsClicked] = useState(false);
   const [selectedItems, setSelectedItems] = useState(new Set());
   const [checkbox, setCheckBox] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(searchData || "undefined"); // 選択された値を保持
-
+  const [defaultValue, setDefaultValue] = useState("");
   console.log(searchData);
   const { data: groupData, error: groupError } = useSWR(
     "/api/group/choice",
@@ -39,7 +39,7 @@ export function Select({ params }) {
     }
   );
   const { data: readAllData, error: readAllError } = useSWR(
-    `/api/readall/${userInfo.email}/${selectedGroup}`,
+    `/api/readall/${userInfo.email}/${defaultValue}`,
 
     fetcher,
     {
@@ -65,15 +65,14 @@ export function Select({ params }) {
   const handleSearch = async (e) => {
     try {
       e.preventDefault();
+      setIsClicked(true);
       console.log(Boolean(selectedGroup));
       if (!selectedGroup) {
         return router.replace(`/pages/select?search=`);
-        // return router.push(`/pages/select/${userInfo.email}`);
       }
       // URLを更新
 
       const newUrl = `/pages/select?search=${selectedGroup}`;
-      // const newUrl = `/pages/select/${userInfo.email}/${selectedGroup}`;
 
       return router.replace(newUrl, undefined, { shallow: true });
     } catch (err) {
@@ -121,7 +120,6 @@ export function Select({ params }) {
         setShowDeleteButton(false);
 
         await router.push(`/pages/select?user=`);
-        // await router.push(`/pages/select/${userInfo.email}?user=`);
         return alert(json.message);
       }
     } catch (err) {
@@ -148,7 +146,11 @@ export function Select({ params }) {
       setCheckBox((prev) => prev.filter((item) => item !== value));
     }
   };
-
+  useEffect(() => {
+    if (isClicked) {
+      setDefaultValue(selectedGroup);
+    }
+  }, [selectedGroup, isClicked]);
   useEffect(() => {
     if (status === "authenticated" && session) {
       setUserInfo(session.user);
@@ -156,6 +158,7 @@ export function Select({ params }) {
         // AND条件に変更
         console.log("all Ok");
         setIsLoading(false);
+        setIsClicked(false);
       }
     } else if (status === "unauthenticated") {
       setIsLoading(false);

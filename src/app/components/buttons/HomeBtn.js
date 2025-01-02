@@ -18,7 +18,7 @@ export function HomeBtn(context) {
     <button
       type="button"
       className={Buttons.icon_btn}
-      onClick={() => navigateTo(`/pages/select/${context.email}`)}
+      onClick={() => navigateTo(`/pages/select`)}
     >
       <Image
         src="/images/home_img.svg"

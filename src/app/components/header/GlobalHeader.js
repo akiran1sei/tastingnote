@@ -54,7 +54,7 @@ export function GlobalHeader() {
               <>
                 <li className={header.menu_item}>
                   <button
-                    onClick={() => navigateTo(`/pages/select/${userInfo.email}`)}
+                    onClick={() => navigateTo(`/pages/select`)}
                   >
                     Select
                   </button>
@@ -95,9 +95,7 @@ export function GlobalHeader() {
             )} */}
 
             <li className={header.menu_item}>
-              <button
-                onClick={() => navigateTo(`/pages/select/${userInfo.email}`)}
-              >
+              <button onClick={() => navigateTo(`/pages/select`)}>
                 Select
               </button>
             </li>

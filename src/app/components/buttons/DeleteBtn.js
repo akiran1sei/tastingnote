@@ -22,7 +22,7 @@ export function DeleteBtn(context) {
         const jsonData = await response.json();
 
         alert(jsonData.message);
-        return router.replace(`/pages/select/` + `${context.email}`);
+        return router.replace(`/pages/select`);
       }
     } catch (err) {
       return alert("アイテム削除失敗/DeleteBtn");
