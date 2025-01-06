@@ -7,50 +7,20 @@ import { Update } from "@/app/components/molecules/Update/Update";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
-import { jwtDecode } from "jwt-decode";
+import { useSession } from "next-auth/react";
 const UpdatePage = ({ params }) => {
   const id = use(params);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const [isUserId, setIsUserId] = useState("");
-  const [isUserEmail, setIsUserEmail] = useState("");
-  const [isUserName, setIsUserName] = useState("");
-
+  const { data: session, status } = useSession();
+  const [userInfo, setUserInfo] = useState(null);
   useEffect(() => {
-    const getUser = () => {
-      try {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-          const token = localStorage.getItem("token");
-
-          const decodedToken = jwtDecode(token);
-          // デコードされたトークンから必要な情報を取得
-          const userData = {
-            id: decodedToken.id,
-            username: decodedToken.user,
-            email: decodedToken.email,
-            // その他の必要な情報
-          };
-          setIsUserId(userData.id);
-          setIsUserEmail(userData.email);
-          setIsUserName(userData.username);
-          setIsLoggedIn(!!token);
-        } else {
-          console.log("トークンが見つかりません");
-          return null;
-        }
-      } catch (error) {
-        console.error("トークンのデコードに失敗しました:", error);
-        return null;
-      }
-    };
-    getUser();
-  });
+    if (status === "authenticated" && session) {
+      setUserInfo(session.user);
+    }
+  }, [session, status]);
 
   const { data: itemData, error: itemError } = useSWR(
-    `/pages/api/singleitem/${id.slug}`,
+    `/api/singleitem/${id.slug}`,
     fetcher,
     {
       initial: true, // 初回レンダリング時に必ず更新
@@ -62,7 +32,7 @@ const UpdatePage = ({ params }) => {
 
   // 2つ目のuseSWR - グループ情報の取得
   const { data: groupsData, error: groupsError } = useSWR(
-    `/pages/api/group/choice`,
+    `/api/group/choice`,
     fetcher,
     {
       initial: true, // 初回レンダリング時に必ず更新
@@ -77,8 +47,7 @@ const UpdatePage = ({ params }) => {
   if (!itemData || !groupsData) return <div>データを取得中...</div>;
   const singleData = itemData.singleItem;
   const GroupData = groupsData.groups;
-
-  return isLoggedIn ? (
+  return (
     <>
       <Head>
         <title>編集ページ</title>
@@ -91,14 +60,28 @@ const UpdatePage = ({ params }) => {
       <GlobalHeader />
       <Update data={singleData} groups={GroupData} item={singleData} />
     </>
-  ) : (
-    <>
-      <GlobalHeader />
-      <div className={styles.sign_off_page}>
-        <p className={styles.sign_off_text}>ログインしてください。</p>
-      </div>
-    </>
   );
+  // return isLoggedIn ? (
+  //   <>
+  //     <Head>
+  //       <title>編集ページ</title>
+  //       <meta
+  //         name="description"
+  //         content="コーヒーをテイスティングするときに使用するアプリです。"
+  //       />
+  //       <meta name="viewport" content="width=device-width, initial-scale=1" />
+  //     </Head>
+  //     <GlobalHeader />
+  //     <Update data={singleData} groups={GroupData} item={singleData} />
+  //   </>
+  // ) : (
+  //   <>
+  //     <GlobalHeader />
+  //     <div className={styles.sign_off_page}>
+  //       <p className={styles.sign_off_text}>ログインしてください。</p>
+  //     </div>
+  //   </>
+  // );
 };
 
 const fetcher = async (url) => {

@@ -1,59 +1,11 @@
 "use client";
 import styles from "@/app/styles/Contents.module.css";
 import Image from "next/image";
-
-import { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
-import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const Home = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isUserId, setIsUserId] = useState("");
-  const [isUserEmail, setIsUserEmail] = useState("");
-  const [isUserName, setIsUserName] = useState("");
-  const router = useRouter();
-
-  const navigateTo = (path) => {
-    if (router.pathname !== path) {
-      router.push(path);
-    }
-  };
-
-  useEffect(() => {
-    const checkAuth = () => {
-      if (typeof window !== "undefined") {
-        try {
-          const token = localStorage.getItem("token");
-          if (!token) {
-            console.log("トークンが見つかりません");
-            setIsLoggedIn(false);
-            return;
-          }
-
-          const decodedToken = jwtDecode(token);
-          const userData = {
-            id: decodedToken.id,
-            username: decodedToken.user,
-            email: decodedToken.email,
-            // その他の必要な情報
-          };
-          setIsUserId(userData.id);
-          setIsUserEmail(userData.email);
-          setIsUserName(userData.username);
-          setIsLoggedIn(true);
-        } catch (error) {
-          console.error("認証エラー:", error);
-          setIsLoggedIn(false);
-        }
-      }
-    };
-
-    checkAuth();
-  }, []);
-  const startBtn = () => {
-    navigateTo(`/pages/select/${isUserId}`);
-  };
-  useEffect(() => {}, [router]);
+  const { data: session } = useSession();
   return (
     <div className={styles.home}>
       <div className={styles.home_bg}>
@@ -68,44 +20,25 @@ const Home = () => {
           />
         </div>
       </div>
+      <div className={styles.home_bg_cover}></div>
+      <h1 className={styles.home_title_txt}>
+        <span>Tasting Note</span>
+      </h1>
+
       <nav className={styles.home_nav}>
-        <h1 className={styles.header_title_txt}>
-          <span>Tasting Note</span>
-        </h1>
-        <ul className={styles.home_nav_list}>
-          {isLoggedIn ? (
-            <li className={styles.home_nav_item}>
-              <button
-                type="button"
-                className={styles.home_start_btn}
-                onClick={startBtn}
-              >
-                START
-              </button>
-            </li>
-          ) : (
-            <>
-              <li className={styles.home_nav_item}>
-                <button
-                  type="button"
-                  className={styles.home_log_btn}
-                  onClick={() => navigateTo("/pages/auth/signin")}
-                >
-                  SignIn
-                </button>
-              </li>
-              <li className={styles.home_nav_item}>
-                <button
-                  type="button"
-                  className={styles.home_log_btn}
-                  onClick={() => navigateTo("/pages/auth/signup")}
-                >
-                  SignUp
-                </button>
-              </li>
-            </>
-          )}
-        </ul>
+        {session ? (
+          <button type="button" className={styles.home_login_btn}>
+            <Link href={"/pages/user/profile"} passHref>
+              Start
+            </Link>
+          </button>
+        ) : (
+          <button type="button" className={styles.home_login_btn}>
+            <Link href={"/api/auth/signin"} passHref>
+              login
+            </Link>
+          </button>
+        )}
       </nav>
     </div>
   );

@@ -40,13 +40,13 @@ const BeansSchema = new Schema(
   },
   { timestamps: true }
 );
+
+//データーベースをdb変数に代入
 const UserSchema = new Schema({
-  username: String,
+  name: String,
   email: String,
   password: String,
 });
-//データーベースをdb変数に代入
-
 export const BeansModel =
   mongoose.models.Beans || mongoose.model("Beans", BeansSchema);
 export const GroupModel =

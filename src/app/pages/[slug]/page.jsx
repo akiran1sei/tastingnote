@@ -7,7 +7,7 @@ import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 const CoffeeSingleItem = ({ params }) => {
   const id = use(params);
 
-  const { data, error } = useSWR(`/pages/api/singleitem/${id.slug}`, fetcher, {
+  const { data, error } = useSWR(`/api/singleitem/${id.slug}`, fetcher, {
     initial: true, // 初回レンダリング時に必ず更新
     onBackgroundUpdate: true, // バックグラウンドで再読み込み
     revalidateOnMount: true, // マウント時に再検証
