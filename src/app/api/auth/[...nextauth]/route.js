@@ -20,7 +20,7 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         await connectDB();
-        console.log(credentials);
+
         const user = await UserModel.findOne({ email: credentials.email });
         const user_boolean = await bcrypt.compare(
           credentials.password,

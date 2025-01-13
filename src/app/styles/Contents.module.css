@@ -83,6 +83,15 @@
 .largeFont {
   font-size: var(--font-size-large);
 }
+/* .caution_text */
+.caution_text {
+  background: #ed1a3d;
+  color: var(--color-white);
+  padding: 0 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+  box-shadow: 3px 3px var(--color-box-shadow);
+}
 /* 
 
 ---------- home ----------

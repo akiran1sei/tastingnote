@@ -107,6 +107,11 @@ const Profile = () => {
               </li>
             </ul>
           </div>
+          <p className={styles.caution_text}>
+            こちらの全データ削除について、
+            <br />
+            アカウントを含む全データを削除するのは、emailとpasswordを利用したユーザーのみになります。SNS認証のアカウントの方は、ユーザーデータ以外のデータが削除されます。
+          </p>
         </div>
       </>
     );
