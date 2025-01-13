@@ -13,22 +13,26 @@ const handler = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     CredentialsProvider({
-      name: "Email",
+      name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // データベースからユーザー情報を取得し、パスワードを検証
         await connectDB();
-
+        console.log(credentials);
         const user = await UserModel.findOne({ email: credentials.email });
+        const user_boolean = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
 
-        if (user && bcrypt.compare(credentials.password, user.password)) {
+        // If no error and we have user data, return it
+        if (user_boolean) {
           return user;
-        } else {
-          return null;
         }
+        // Return null if user data could not be retrieved
+        return null;
       },
     }),
 
