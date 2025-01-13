@@ -39,8 +39,8 @@ export async function POST(request) {
 
     // ユーザー作成
     const newUser = await UserModel.create({
-      username,
-      email,
+      name: username,
+      email: email,
       password: hashedPassword,
     });
 
