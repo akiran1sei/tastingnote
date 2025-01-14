@@ -15,26 +15,25 @@ const Login = () => {
   const [error, setError] = useState(""); // エラー状態の追加
 
   const router = useRouter();
-  useEffect(() => {
-    //  window.location.reload();
-    console.log("router.refresh() が実行されました");
-    router.refresh();
-  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError("");
 
     try {
-      await signIn("credentials", {
+      const sign_in = await signIn("credentials", {
         redirect: false,
         email,
         password,
       });
 
-      // 認証成功時の処理
-      // 例:
-      router.push("/");
+      if (sign_in.ok) {
+        return router.push("/");
+      }
+      await setError("サインインに失敗しました。もう一度お試しください。");
+
+      return;
     } catch (error) {
       // 認証失敗時の処理
       console.error("サインインエラー:", error);

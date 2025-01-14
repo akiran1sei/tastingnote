@@ -1,4 +1,4 @@
-import { BeansModel, GroupModel } from "@/app/utils/schemaModels";
+import { BeansModel, GroupModel, UserModel } from "@/app/utils/schemaModels";
 import connectDB from "@/app/utils/database";
 
 import { NextResponse } from "next/server";
@@ -39,6 +39,8 @@ export async function DELETE(request) {
 
       // // emailが空の配列になったグループを削除
       await GroupModel.deleteMany({ email: { $size: 0 } });
+
+      await UserModel.deleteOne({ email: body.email });
 
       return NextResponse.json({
         success: true,
