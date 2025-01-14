@@ -36,7 +36,7 @@ const Profile = () => {
 
           alert(jsonData.message);
 
-          router.push("/");
+          return router.push("/");
         } catch (error) {
           console.error("アカウント削除エラー:", error);
           // ユーザーにエラーメッセージを表示するなど
