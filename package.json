@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cy:open": "cypress open"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.7.4",
@@ -30,6 +31,7 @@
     "swr": "^2.3.0"
   },
   "devDependencies": {
+    "cypress": "^13.17.0",
     "eslint": "^8.57.1",
     "eslint-config-next": "14.2.5"
   },
