@@ -35,8 +35,8 @@ const Profile = () => {
           const jsonData = await res.json();
 
           alert(jsonData.message);
-
-          return router.push("/");
+          return signOut({ callbackUrl: "/" });
+          // return router.push("/");
         } catch (error) {
           console.error("アカウント削除エラー:", error);
           // ユーザーにエラーメッセージを表示するなど
