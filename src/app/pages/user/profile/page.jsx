@@ -8,6 +8,7 @@ import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/Load
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 import { useSession, signOut } from "next-auth/react";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
+import Link from "next/link";
 const Profile = () => {
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -93,6 +94,21 @@ const Profile = () => {
                   disabled={isLoggingOut}
                 >
                   {isLoggingOut ? "ログアウト中..." : "SignOut"}
+                </button>
+              </li>
+              <li className={styles.profile_btn_item}>
+                <button
+                  className={`${styles.profile_btn} ${styles.profile_link_btn}`}
+                  type="button"
+                >
+                  <Link
+                    href={
+                      "https://nakamoriakira-portfolio.vercel.app/pages/contact"
+                    }
+                    passHref
+                  >
+                    お問い合わせページへ
+                  </Link>
                 </button>
               </li>
               <li className={styles.profile_btn_item}>
