@@ -40,7 +40,12 @@ const BeansSchema = new Schema(
   },
   { timestamps: true }
 );
-
+const AccountSchema = new Schema({
+  name: String,
+  email: String,
+  password: String,
+  userId: String,
+});
 //データーベースをdb変数に代入
 const UserSchema = new Schema({
   name: String,
@@ -53,3 +58,5 @@ export const GroupModel =
   mongoose.models.Group || mongoose.model("Group", GroupSchema);
 export const UserModel =
   mongoose.models.User || mongoose.model("User", UserSchema);
+export const AccountModel =
+  mongoose.models.Account || mongoose.model("Account", AccountSchema);

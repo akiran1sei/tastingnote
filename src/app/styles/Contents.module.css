@@ -1621,16 +1621,17 @@ input[type="range"].select_input_roast {
 }
 .hr::before {
   content: "or";
-  background: var(--color-background-card);
+  background: var(--color-white);
   color: #888;
   padding: 0 0.4rem;
   position: relative;
-  top: -0.7rem;
+  top: -15px;
+  vertical-align: middle;
 }
 .sign_page {
   width: 100vw;
   height: calc(100vh - 60px);
-  background: var(--color-yellow-10);
+  background-color: var(--color-white);
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -1713,11 +1714,9 @@ input[type="range"].select_input_roast {
   max-width: 200px;
   box-shadow: 2px 2px 0px var(--color-box-shadow);
   text-align: center;
-  margin: 0.5rem auto;
-  padding: 0.5rem 0rem;
-  background: var(--color-white);
+
   font-size: var(--font-size-base);
-  border: 1px solid var(--color-yellow);
+
   border-radius: 1rem;
 }
 .sign_btn:active {

@@ -7,13 +7,13 @@ import { useRouter } from "next/navigation";
 import dotenv from "dotenv";
 
 import { useSession, signIn } from "next-auth/react";
+import Image from "next/image";
 dotenv.config();
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(""); // エラー状態の追加
-
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -42,6 +42,15 @@ const Login = () => {
       setIsLoading(false);
     }
   };
+  const signInWithGoogle = async () => {
+    try {
+      await signIn("google", { callbackUrl: "/" });
+    } catch (error) {
+      setError("サインインに失敗しました。");
+      return alert(error);
+    }
+  };
+
   return (
     <div className={styles.sign_page}>
       <div className={styles.sign_wrapper}>
@@ -92,23 +101,13 @@ const Login = () => {
           </form>
           <hr className={styles.hr}></hr>
           <div className={styles.sign_btns}>
-            <button
-              onClick={() => signIn("google", { callbackUrl: "/" })}
-              className={styles.sign_btn}
-            >
-              GoogleでSign In
-            </button>
-            <button
-              onClick={() => signIn("github", { callbackUrl: "/" })}
-              className={styles.sign_btn}
-            >
-              GitHubでSign In
-            </button>
-            <button
-              onClick={() => signIn("discord", { callbackUrl: "/" })}
-              className={styles.sign_btn}
-            >
-              DiscordでSign In
+            <button onClick={signInWithGoogle} className={styles.sign_btn}>
+              <Image
+                src={"../../images/web_light_sq_SI.svg"}
+                alt="googleでログイン"
+                width={200}
+                height={50}
+              />
             </button>
           </div>
         </div>

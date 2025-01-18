@@ -38,7 +38,7 @@ const SignUp = () => {
       <div className={styles.sign_wrapper}>
         <h1 className={styles.contents_title}>Sign Up</h1>
         <div className={styles.sign_card}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className={styles.sign_form}>
             <ul className={styles.sign_list}>
               <li className={styles.sign_item}>
                 <label htmlFor="name">user name</label>
@@ -81,7 +81,7 @@ const SignUp = () => {
               </li>
             </ul>
             {/* <div className={styles.sign_btn}> */}
-            <button type="submit" className={styles.sign_btn}>
+            <button type="submit" className={styles.sign_submit}>
               Submit
             </button>
             {/* </div> */}
