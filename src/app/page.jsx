@@ -3,8 +3,10 @@ import { HomePage } from "@/app/components/molecules/Home/Home";
 
 const Home = () => {
   return (
-    <div className={styles.home}>
-      <HomePage />
+    <div className={styles.main_contents}>
+      <section className={styles.home}>
+        <HomePage />
+      </section>
     </div>
   );
 };
