@@ -179,28 +179,28 @@ export function BeansCreateTable(context) {
   } else {
     return (
       <>
-        <h1 className={styles.contents_title}>CREATE</h1>
+        <h1 className={styles.contents__title}>CREATE</h1>
 
-        <div className={styles.edit_contents}>
+        <div className={styles.edit__contents}>
           <form onSubmit={handleSubmit}>
-            <div className={styles.edit_wrap}>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__wrap}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label>
-                    <span className={styles.edit_contents_item_number}>1</span>
+                    <span className={styles.edit__item__number}>1</span>
                     日付
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>{date}</div>
+                <div className={styles.edit__data}>{date}</div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="group-name">
-                    <span className={styles.edit_contents_item_number}>2</span>
+                    <span className={styles.edit__item__number}>2</span>
                     グループ名
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     name="group-name"
                     id="group-name"
@@ -211,23 +211,23 @@ export function BeansCreateTable(context) {
                     <option></option>
                     {options}
                   </select>
-                  <div className={styles.edit_point_memo}>
-                    <p className={styles.edit_point_text}>
+                  <div className={styles.edit__point__memo}>
+                    <p className={styles.edit__point__text}>
                       グループ名は、Group作成ページにて作成してください。
                     </p>
                   </div>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="username">
-                    <span className={styles.edit_contents_item_number}>3</span>
+                    <span className={styles.edit__item__number}>3</span>
                     ユーザー
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <input
-                    className={styles.edit_input_medium}
+                    className={styles.edit__input__medium}
                     type="text"
                     name="username"
                     id="username"
@@ -240,16 +240,16 @@ export function BeansCreateTable(context) {
                   />
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="coffee">
-                    <span className={styles.edit_contents_item_number}>4</span>
+                    <span className={styles.edit__item__number}>4</span>
                     コーヒー豆
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <input
-                    className={styles.edit_input_medium}
+                    className={styles.edit__input__medium}
                     type="text"
                     name="coffee"
                     id="coffee"
@@ -261,27 +261,27 @@ export function BeansCreateTable(context) {
                     required
                   />
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>豆の名前、又は、番号</p>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
+                    豆の名前、又は、番号
+                  </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="roast">
-                    <span className={styles.edit_contents_item_number}>5</span>
+                    <span className={styles.edit__item__number}>5</span>
                     ロースト
                   </label>
                 </div>
-                <div
-                  className={`${styles.edit_contents_data} ${styles.edit_contents_roast}`}
-                >
+                <div className={`${styles.edit__data} ${styles.edit__roast}`}>
                   <input
                     type="range"
                     min="0"
                     max="100"
                     name="roast"
                     id="roast"
-                    className={styles.edit_input_roast}
+                    className={styles.edit__input__roast}
                     value={roast}
                     list="roast_value"
                     onChange={(e) => setRoast(e.target.value)}
@@ -308,14 +308,14 @@ export function BeansCreateTable(context) {
                     <option value="90">フレンチ</option>
                     <option value="100">イタリアン</option>
                   </datalist>
-                  <p className={styles.edit_output_value}>
+                  <p className={styles.edit__output__value}>
                     <output>
-                      <span className={styles.smallFont}>{RoastSelect}</span>
+                      <span className={styles.small__font}>{RoastSelect}</span>
                     </output>
                     <br />
                     <input
                       type="number"
-                      className={styles.edit_input_roastNumber}
+                      className={styles.edit__input__roast__number}
                       value={roast}
                       onChange={(e) => setRoast(e.target.value)}
                       name="roastNumber"
@@ -324,39 +324,35 @@ export function BeansCreateTable(context) {
                     %
                   </p>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     焙煎具合、パーセンテージによって焙煎度名が変化するので、
                     <wbr />
                     それに合わせて焙煎度の中から選んでください。なお、上記のメモリグラフとパーセンテージは目安です。
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label>
-                    <span className={styles.edit_contents_item_number}>6</span>
+                    <span className={styles.edit__item__number}>6</span>
                     アロマ
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
-                  <div border="0" className={styles.edit_contents_aroma}>
-                    <div className={styles.edit_contents_aroma_row}>
-                      <div
-                        className={styles.edit_contents_aroma_data_header}
-                      ></div>
-                      <div className={styles.edit_contents_aroma_data_header}>
+                <div className={styles.edit__data}>
+                  <div border="0" className={styles.edit__aroma}>
+                    <div className={styles.edit__aroma__row}>
+                      <div className={styles.edit__aroma__data__header}></div>
+                      <div className={styles.edit__aroma__data__header}>
                         強さ
                       </div>
-                      <div className={styles.edit_contents_aroma_data_header}>
-                        質
-                      </div>
+                      <div className={styles.edit__aroma__data__header}>質</div>
                     </div>
 
-                    <div className={styles.edit_contents_aroma_data}>
+                    <div className={styles.edit__aroma__data}>
                       <label>ドライ</label>
 
-                      <div className={styles.edit_contents_aroma_data}>
+                      <div className={styles.edit__aroma__data}>
                         <select
                           name="aroma-dry-strength"
                           id="aroma-dry-strength"
@@ -374,7 +370,7 @@ export function BeansCreateTable(context) {
                           <option value={3}>3</option>
                         </select>
                       </div>
-                      <div className={styles.edit_contents_aroma_data}>
+                      <div className={styles.edit__aroma__data}>
                         <select
                           name="aroma-dry-quality"
                           id="aroma-dry-quality"
@@ -394,10 +390,10 @@ export function BeansCreateTable(context) {
                       </div>
                     </div>
 
-                    <div className={styles.edit_contents_aroma_data}>
+                    <div className={styles.edit__aroma__data}>
                       <label>クラスト</label>
 
-                      <div className={styles.edit_contents_aroma_data}>
+                      <div className={styles.edit__aroma__data}>
                         <select
                           name="aroma_crust-strength"
                           id="aroma_crust-strength"
@@ -417,7 +413,7 @@ export function BeansCreateTable(context) {
                           <option value={3}>3</option>
                         </select>
                       </div>
-                      <div className={styles.edit_contents_aroma_data}>
+                      <div className={styles.edit__aroma__data}>
                         <select
                           name="aroma_crust-quality"
                           id="aroma_crust-quality"
@@ -437,9 +433,9 @@ export function BeansCreateTable(context) {
                       </div>
                     </div>
 
-                    <div className={styles.edit_contents_aroma_data}>
+                    <div className={styles.edit__aroma__data}>
                       <label>ブレーク</label>
-                      <div className={styles.edit_contents_aroma_data}>
+                      <div className={styles.edit__aroma__data}>
                         <select
                           name="aroma_break-strength"
                           id="aroma_break-strength"
@@ -459,7 +455,7 @@ export function BeansCreateTable(context) {
                           <option value={3}>3</option>
                         </select>
                       </div>
-                      <div className={styles.edit_contents_aroma_data}>
+                      <div className={styles.edit__aroma__data}>
                         <select
                           name="aroma_break-quality"
                           id="aroma_break-quality"
@@ -480,34 +476,34 @@ export function BeansCreateTable(context) {
                     </div>
                   </div>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <ul className={styles.edit_point_txtBox}>
-                    <li className={styles.edit_point_text}>
-                      <span className={styles.edit_yellow}>『dry』</span>
+                <div className={styles.edit__point__memo}>
+                  <ul className={styles.edit__point__list}>
+                    <li className={styles.edit__point__text}>
+                      <span className={styles.edit__yellow}>『dry』</span>
                       <br /> 粉の状態からaroma
                     </li>
-                    <li className={styles.edit_point_text}>
-                      <span className={styles.edit_yellow}>『crust』</span>
+                    <li className={styles.edit__point__text}>
+                      <span className={styles.edit__yellow}>『crust』</span>
                       <br />
                       湯を注いだ直後のaroma
                     </li>
-                    <li className={styles.edit_point_text}>
-                      <span className={styles.edit_yellow}>『break』</span>
+                    <li className={styles.edit__point__text}>
+                      <span className={styles.edit__yellow}>『break』</span>
                       <br />
                       混ぜた後のaroma
                     </li>
                   </ul>
-                  <p className={styles.edit_point_text}>
+                  <p className={styles.edit__point__text}>
                     の３つで香りの強さ（左）と質（右）を評価
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="defects">
-                    <span className={styles.edit_contents_item_number}>7</span>
+                    <span className={styles.edit__item__number}>7</span>
                     欠点・瑕疵
-                    <span className={styles.edit_contents_item_mark}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -518,11 +514,11 @@ export function BeansCreateTable(context) {
                     </span>
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
-                  <div className={styles.edit_defects_calc}>
+                <div className={styles.edit__data}>
+                  <div className={styles.edit__defects__calc}>
                     <input
                       type="number"
-                      className={styles.edit_input_small}
+                      className={styles.edit__input__small}
                       value={point}
                       onChange={(e) => setPoint(e.target.value)}
                       name="point"
@@ -531,7 +527,7 @@ export function BeansCreateTable(context) {
                     ×
                     <select
                       type="number"
-                      className={styles.edit_defects_score}
+                      className={styles.edit__defects__score}
                       onChange={(e) => setScore(e.target.value)}
                       value={score}
                       name="score"
@@ -546,7 +542,7 @@ export function BeansCreateTable(context) {
                     <output
                       name="defects"
                       onChange={defectsAnswer}
-                      className={styles.edit_defects_answer}
+                      className={styles.edit__defects__answer}
                     >
                       {point * score * 4}
                     </output>
@@ -555,24 +551,24 @@ export function BeansCreateTable(context) {
                     type="number"
                     name="defects"
                     id="defects"
-                    className={styles.edit_input_small}
+                    className={styles.edit__input__small}
                     value={defects}
                     onChange={(e) => setDefects(e.target.value)}
                     required
                   />
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     スペシャルティコーヒーなどは、欠点・瑕疵がないことが多く『０』で進めることが多い
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="cleancap">
-                    <span className={styles.edit_contents_item_number}>8</span>
+                    <span className={styles.edit__item__number}>8</span>
                     カップの綺麗さ
-                    <span className={styles.edit_contents_item_mark}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -583,12 +579,12 @@ export function BeansCreateTable(context) {
                     </span>
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     type="number"
                     name="cleancap"
                     id="cleancap"
-                    className={styles.select_box}
+                    className={styles.select__box}
                     value={cleancap}
                     onChange={(e) => setCleancap(e.target.value)}
                     required
@@ -607,16 +603,16 @@ export function BeansCreateTable(context) {
                     <option value={8}>8</option>
                   </select>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>味わいの透明度</p>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>味わいの透明度</p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="sweet">
-                    <span className={styles.edit_contents_item_number}>9</span>
+                    <span className={styles.edit__item__number}>9</span>
                     甘さ
-                    <span className={styles.edit_contents_item_mark}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -627,12 +623,12 @@ export function BeansCreateTable(context) {
                     </span>
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     type="number"
                     name="sweet"
                     id="sweet"
-                    className={styles.select_box}
+                    className={styles.select__box}
                     value={sweet}
                     onChange={(e) => setSweet(e.target.value)}
                     required
@@ -651,18 +647,18 @@ export function BeansCreateTable(context) {
                     <option value={8}>8</option>
                   </select>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     味わいに甘味の印象が強ければ強い程よいとされる
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="acidity">
-                    <span className={styles.edit_contents_item_number}>10</span>
+                    <span className={styles.edit__item__number}>10</span>
                     酸の質
-                    <span className={styles.edit_contents_item_mark}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -673,12 +669,12 @@ export function BeansCreateTable(context) {
                     </span>
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     type="number"
                     name="acidity"
                     id="acidity"
-                    className={styles.select_box}
+                    className={styles.select__box}
                     value={acidity}
                     onChange={(e) => setAcidity(e.target.value)}
                     required
@@ -698,16 +694,14 @@ export function BeansCreateTable(context) {
                   </select>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label>
-                    <span className={styles.edit_contents_item_number}>
-                      10-1
-                    </span>
+                    <span className={styles.edit__item__number}>10-1</span>
                     酸の強さ
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     name="acidity"
                     value={acidityStrength}
@@ -728,8 +722,8 @@ export function BeansCreateTable(context) {
                     </optgroup>
                   </select>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     強い順から、
                     <br />
                     High2→High1→Middle
@@ -740,12 +734,12 @@ export function BeansCreateTable(context) {
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="mouthfeel">
-                    <span className={styles.edit_contents_item_number}>11</span>
+                    <span className={styles.edit__item__number}>11</span>
                     口に含んだ質感
-                    <span className={styles.edit_contents_item_mark}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -756,12 +750,12 @@ export function BeansCreateTable(context) {
                     </span>
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     type="number"
                     name="mouthfeel"
                     id="mouthfeel"
-                    className={styles.select_box}
+                    className={styles.select__box}
                     value={mouthfeel}
                     onChange={(e) => setMouthfeel(e.target.value)}
                     required
@@ -782,16 +776,14 @@ export function BeansCreateTable(context) {
                 </div>
               </div>
 
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label>
-                    <span className={styles.edit_contents_item_number}>
-                      11-1
-                    </span>
+                    <span className={styles.edit__item__number}>11-1</span>
                     ボディの強さ
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     name="body"
                     value={bodyStrength}
@@ -813,8 +805,8 @@ export function BeansCreateTable(context) {
                   </select>
                 </div>
 
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     舌触りの滑らかさ強い順から,
                     <br />
                     High2→High1→Middle
@@ -824,12 +816,12 @@ export function BeansCreateTable(context) {
                 </div>
               </div>
 
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="flavor">
-                    <span className={styles.edit_contents_item_number}>12</span>
+                    <span className={styles.edit__item__number}>12</span>
                     フレーバー
-                    <span className={styles.edit_contents_item_mark}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -840,12 +832,12 @@ export function BeansCreateTable(context) {
                     </span>
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     name="flavor"
                     type="number"
                     id="flavor"
-                    className={styles.select_box}
+                    className={styles.select__box}
                     value={flavor}
                     onChange={(e) => setFlavor(e.target.value)}
                     required
@@ -864,16 +856,16 @@ export function BeansCreateTable(context) {
                     <option value={8}>8</option>
                   </select>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>風味の質を評価する</p>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>風味の質を評価する</p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="after">
-                    <span className={styles.edit_contents_item_number}>13</span>
+                    <span className={styles.edit__item__number}>13</span>
                     後味の印象度
-                    <span className={styles.edit_contents_item_mark}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -884,12 +876,12 @@ export function BeansCreateTable(context) {
                     </span>
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     name="after"
                     type="number"
                     id="after"
-                    className={styles.select_box}
+                    className={styles.select__box}
                     value={after}
                     onChange={(e) => setAfter(e.target.value)}
                     required
@@ -908,18 +900,18 @@ export function BeansCreateTable(context) {
                     <option value={8}>8</option>
                   </select>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     後味は心地よいか、そうでないか評価。
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="balance">
-                    <span className={styles.edit_contents_item_number}>14</span>
+                    <span className={styles.edit__item__number}>14</span>
                     ハーモニーの均衝性
-                    <span className={styles.edit_contents_item_mark}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -930,12 +922,12 @@ export function BeansCreateTable(context) {
                     </span>
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     name="balance"
                     type="number"
                     id="balance"
-                    className={styles.select_box}
+                    className={styles.select__box}
                     value={balance}
                     onChange={(e) => setBalance(e.target.value)}
                     required
@@ -954,20 +946,20 @@ export function BeansCreateTable(context) {
                     <option value={8}>8</option>
                   </select>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     「7～13」の要素に悪目立ちしているものがなく、
                     <wbr />
                     全体のバランスが良い程加点。
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="overall">
-                    <span className={styles.edit_contents_item_number}>15</span>
+                    <span className={styles.edit__item__number}>15</span>
                     総合評価
-                    <span className={styles.edit_contents_item_mark}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -978,12 +970,12 @@ export function BeansCreateTable(context) {
                     </span>
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <select
                     name="overall"
                     type="number"
                     id="overall"
-                    className={styles.select_box}
+                    className={styles.select__box}
                     value={overall}
                     onChange={(e) => setOverall(e.target.value)}
                     required
@@ -1002,21 +994,21 @@ export function BeansCreateTable(context) {
                     <option value={8}>8</option>
                   </select>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     味わいの奥行など項目にない点にも着目し、ここまでの評価に囚われず、主観で付ける。
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label>
-                    <span className={styles.edit_contents_item_number}>16</span>
+                    <span className={styles.edit__item__number}>16</span>
                     小計
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
-                  <output className={styles.edit_sub_value}>
+                <div className={styles.edit__data}>
+                  <output className={styles.edit__sub__value}>
                     {-Number(defects) +
                       Number(cleancap) +
                       Number(sweet) +
@@ -1028,9 +1020,9 @@ export function BeansCreateTable(context) {
                       Number(overall)}
                   </output>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
-                    <span className={styles.edit_contents_item_mark}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
+                    <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
@@ -1043,15 +1035,15 @@ export function BeansCreateTable(context) {
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label>
-                    <span className={styles.edit_contents_item_number}>17</span>
+                    <span className={styles.edit__item__number}>17</span>
                     TOTAL (+36点)
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
-                  <output className={styles.edit_sub_value}>
+                <div className={styles.edit__data}>
+                  <output className={styles.edit__sub__value}>
                     {Number(cleancap) +
                       Number(sweet) +
                       Number(acidity) +
@@ -1064,48 +1056,48 @@ export function BeansCreateTable(context) {
                       Number(36)}
                   </output>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     小計項目の得点に定数３６点を足して出た数字。
                     <br />
                     １００点満点で評価。
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="impression">
-                    <span className={styles.edit_contents_item_number}>18</span>
+                    <span className={styles.edit__item__number}>18</span>
                     味の印象度
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <textarea
-                    className={styles.edit_item_message}
+                    className={styles.edit__item__message}
                     name="impression"
                     id="impression"
                     value={impression}
                     onChange={(e) => setImpression(e.target.value)}
                   ></textarea>
                 </div>
-                <div className={styles.edit_point_memo}>
-                  <p className={styles.edit_point_text}>
+                <div className={styles.edit__point__memo}>
+                  <p className={styles.edit__point__text}>
                     具体的な味の印象を記入。フレーバーの表現もカッピングの重要な目的。
                     <br />
                     冷めていく過程で、味わいがどのように変化したかも都度メモしておくとよい。
                   </p>
                 </div>
               </div>
-              <div className={styles.edit_contents_item}>
-                <div className={styles.edit_contents_data_header}>
+              <div className={styles.edit__item}>
+                <div className={styles.edit__data__header}>
                   <label htmlFor="memo">
-                    <span className={styles.edit_contents_item_number}>19</span>
+                    <span className={styles.edit__item__number}>19</span>
                     memo
                   </label>
                 </div>
-                <div className={styles.edit_contents_data}>
+                <div className={styles.edit__data}>
                   <textarea
-                    className={styles.edit_item_message}
+                    className={styles.edit__item__message}
                     name="memo"
                     id="memo"
                     value={Memo}
@@ -1115,7 +1107,7 @@ export function BeansCreateTable(context) {
                 </div>
               </div>
 
-              <div className={styles.edit_btn_box}>
+              <div className={styles.edit__btn__box}>
                 {error && (
                   <span
                     onChange={(e) => setError(e.target.value)}

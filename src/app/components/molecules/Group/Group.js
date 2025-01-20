@@ -115,10 +115,10 @@ export function GroupCreate(context) {
   } else {
     return (
       <>
-        <div className={styles.group_page}>
-          <h1 className={styles.group_title}>Group</h1>
-          <div className={styles.group_wrap}>
-            <p className={styles.group_txt}>
+        <div className={styles.group__contents}>
+          <h1 className={styles.contents__title}>Group</h1>
+          <div className={styles.group__wrap}>
+            <p className={styles.group__text}>
               グループ作成を行ってください。
               <br />
               ここでは、グループ作成/削除を行います。
@@ -127,14 +127,14 @@ export function GroupCreate(context) {
               <br />
               「NewPage」より進んでください。
             </p>
-            <div className={styles.group_card}>
-              <ul className={styles.group_form_list}>
-                <p className={styles.group_txt}>
+            <div className={styles.group__card}>
+              <ul className={styles.group__form__list}>
+                <p className={styles.group__text}>
                   こちらは、グループ作成になります。
                 </p>
-                <li className={styles.group_form_item}>
+                <li className={styles.group__form__item}>
                   <form onSubmit={handleCreateSubmit}>
-                    <h2 className={styles.group_form_title}>
+                    <h2 className={styles.group__form__title}>
                       <label htmlFor="group-delete">Group Crate</label>
                     </h2>
                     <input
@@ -145,22 +145,22 @@ export function GroupCreate(context) {
                       onChange={(e) => setGroupCreate(e.target.value)}
                       required
                     />
-                    <div className={styles.group_error_txt}>
+                    <div className={styles.group__error__text}>
                       {error && (
                         <span onChange={(e) => setError(e.target.value)}>
                           {error}
                         </span>
                       )}
                     </div>
-                    <button type="submit" className={styles.group_create_btn}>
+                    <button type="submit" className={styles.group__create__btn}>
                       CREATE
                     </button>
                   </form>
                 </li>
-                <li className={styles.group_form_item}>
+                <li className={styles.group__form__item}>
                   <form onSubmit={handleDeleteSubmit}>
-                    <div className={styles.edit_item_value_box}>
-                      <h2 className={styles.group_form_title}>
+                    <div className={styles.edit__item__value__box}>
+                      <h2 className={styles.group__form__title}>
                         <label htmlFor="group-delete">Group Delete</label>
                       </h2>
                       <select
@@ -173,7 +173,7 @@ export function GroupCreate(context) {
                         <option></option>
                         {options}
                       </select>
-                      <button className={styles.group_delete_btn}>
+                      <button className={styles.group__delete__btn}>
                         Delete
                       </button>
                     </div>
@@ -181,7 +181,7 @@ export function GroupCreate(context) {
                 </li>
               </ul>
               <button
-                className={styles.group_next_btn}
+                className={styles.group__next__btn}
                 onClick={() => navigateTo("/pages/create/beans")}
               >
                 New Page

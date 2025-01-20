@@ -52,67 +52,72 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.sign_page}>
-      <div className={styles.sign_wrapper}>
-        <h1 className={styles.contents_title}>Sign In</h1>
-        <div className={styles.sign_card}>
-          <form onSubmit={handleSubmit} className={styles.sign_form}>
-            {error && <div className={styles.error_message}>{error}</div>}
-            <ul className={styles.sign_list}>
-              <li className={styles.sign_item}>
-                <label htmlFor="email">メールアドレス</label>
-                <br className={styles.line_break} />
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="email"
-                  required
-                  disabled={isLoading}
+    <section className={`${styles.sign} ${styles.section}`}>
+      <div className={styles.sign__page}>
+        <div className={styles.sign__wrapper}>
+          <h1 className={styles.contents__title}>Sign In</h1>
+          <div className={styles.sign__card}>
+            <form onSubmit={handleSubmit} className={styles.sign__form}>
+              {error && <div className={styles.error__message}>{error}</div>}
+              <ul className={styles.sign__list}>
+                <li className={styles.sign__item}>
+                  <label htmlFor="email">メールアドレス</label>
+                  <br className={styles.line__break} />
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="email"
+                    required
+                    disabled={isLoading}
+                  />
+                </li>
+                <li className={styles.sign__item}>
+                  <label htmlFor="password">パスワード</label>
+                  <br className={styles.line__break} />
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="password"
+                    required
+                    disabled={isLoading}
+                  />
+                </li>
+                <li className={styles.sign__link}>
+                  <Link
+                    href="/pages/auth/sign-up"
+                    className={styles.small__font}
+                  >
+                    <span>新規登録</span>はこちらをクリック！
+                  </Link>
+                </li>
+              </ul>
+              <div className={styles.sign__btns}>
+                <button type="submit" className={styles.sign__submit}>
+                  Submit
+                </button>
+              </div>
+            </form>
+            <hr className={styles.hr}></hr>
+            <div className={styles.sign__btns}>
+              <button onClick={signInWithGoogle} className={styles.sign__btn}>
+                <Image
+                  src={"../../images/web_light_sq_SI.svg"}
+                  alt="googleでログイン"
+                  width={200}
+                  height={50}
                 />
-              </li>
-              <li className={styles.sign_item}>
-                <label htmlFor="password">パスワード</label>
-                <br className={styles.line_break} />
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="password"
-                  required
-                  disabled={isLoading}
-                />
-              </li>
-              <li className={styles.sign_link}>
-                <Link href="/pages/auth/sign-up" className={styles.smallFont}>
-                  <span>新規登録</span>はこちらをクリック！
-                </Link>
-              </li>
-            </ul>
-            <div className={styles.sign_btns}>
-              <button type="submit" className={styles.sign_submit}>
-                Submit
               </button>
             </div>
-          </form>
-          <hr className={styles.hr}></hr>
-          <div className={styles.sign_btns}>
-            <button onClick={signInWithGoogle} className={styles.sign_btn}>
-              <Image
-                src={"../../images/web_light_sq_SI.svg"}
-                alt="googleでログイン"
-                width={200}
-                height={50}
-              />
-            </button>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

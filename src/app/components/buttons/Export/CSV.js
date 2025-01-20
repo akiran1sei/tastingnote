@@ -49,7 +49,7 @@ export default function CSV(context) {
     <button
       onClick={handleExport}
       disabled={isExporting}
-      className={styles.select_menu_btn_white}
+      className={styles.select__menu__btn__white}
     >
       {isExporting ? "エクスポート中..." : "CSV"}
     </button>

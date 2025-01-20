@@ -68,67 +68,71 @@ const Profile = () => {
     return (
       <>
         <GlobalHeader />
-        <div className={styles.profile_page}>
-          <h1 className={styles.contents_title}>Profile</h1>
-          {/* {session && ( */}
-          <div className={styles.profile_card}>
-            <ul className={styles.profile_user_list}>
-              <li className={styles.profile_user_item}>
-                <span className={styles.profile_item_title}>username</span>
-                <span className={styles.profile_item_value}>{username}</span>
-              </li>
-              <li className={styles.profile_user_item}>
-                <span className={styles.profile_item_title}>email</span>
-                <span className={styles.profile_item_value}>{isUserEmail}</span>
-              </li>
-            </ul>
-          </div>
-          {/* )} */}
-          <div className={styles.profile_btn_box}>
-            <ul className={styles.profile_btn_list}>
-              <li className={styles.profile_btn_item}>
-                <button
-                  className={`${styles.profile_btn} ${styles.profile_signout_btn}`}
-                  type="button"
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  disabled={isLoggingOut}
-                >
-                  {isLoggingOut ? "ログアウト中..." : "SignOut"}
-                </button>
-              </li>
-              <li className={styles.profile_btn_item}>
-                <button
-                  className={`${styles.profile_btn} ${styles.profile_link_btn}`}
-                  type="button"
-                >
-                  <Link
-                    href={
-                      "https://nakamoriakira-portfolio.vercel.app/pages/contact"
-                    }
-                    passHref
+        <section className={`${styles.profile} ${styles.section}`}>
+          <div className={styles.profile_page}>
+            <h1 className={styles.contents__title}>Profile</h1>
+            {/* {session && ( */}
+            <div className={styles.profile_card}>
+              <ul className={styles.profile_user_list}>
+                <li className={styles.profile_user_item}>
+                  <span className={styles.profile_item_title}>username</span>
+                  <span className={styles.profile_item_value}>{username}</span>
+                </li>
+                <li className={styles.profile_user_item}>
+                  <span className={styles.profile_item_title}>email</span>
+                  <span className={styles.profile_item_value}>
+                    {isUserEmail}
+                  </span>
+                </li>
+              </ul>
+            </div>
+            {/* )} */}
+            <div className={styles.profile_btn_box}>
+              <ul className={styles.profile_btn_list}>
+                <li className={styles.profile_btn_item}>
+                  <button
+                    className={`${styles.profile_btn} ${styles.profile_signout_btn}`}
+                    type="button"
+                    onClick={() => signOut({ callbackUrl: "/" })}
+                    disabled={isLoggingOut}
                   >
-                    お問い合わせページへ
-                  </Link>
-                </button>
-              </li>
-              <li className={styles.profile_btn_item}>
-                <button
-                  className={`${styles.profile_btn} ${styles.profile_delete_btn}`}
-                  type="button"
-                  onClick={handleAccountDelete}
-                  disabled={isAccountDelete}
-                >
-                  {isLoggingOut ? "データ 削除中.." : "全データ 削除"}
-                </button>
-              </li>
-            </ul>
+                    {isLoggingOut ? "ログアウト中..." : "SignOut"}
+                  </button>
+                </li>
+                <li className={styles.profile_btn_item}>
+                  <button
+                    className={`${styles.profile_btn} ${styles.profile_link_btn}`}
+                    type="button"
+                  >
+                    <Link
+                      href={
+                        "https://nakamoriakira-portfolio.vercel.app/pages/contact"
+                      }
+                      passHref
+                    >
+                      お問い合わせページへ
+                    </Link>
+                  </button>
+                </li>
+                <li className={styles.profile_btn_item}>
+                  <button
+                    className={`${styles.profile_btn} ${styles.profile_delete_btn}`}
+                    type="button"
+                    onClick={handleAccountDelete}
+                    disabled={isAccountDelete}
+                  >
+                    {isLoggingOut ? "データ 削除中.." : "全データ 削除"}
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <p className={styles.caution_text}>
+              こちらの全データ削除について、
+              <br />
+              アカウントを含む全データを削除するのは、emailとpasswordを利用したユーザーのみになります。SNS認証のアカウントの方は、ユーザーデータ以外のデータが削除されます。
+            </p>
           </div>
-          <p className={styles.caution_text}>
-            こちらの全データ削除について、
-            <br />
-            アカウントを含む全データを削除するのは、emailとpasswordを利用したユーザーのみになります。SNS認証のアカウントの方は、ユーザーデータ以外のデータが削除されます。
-          </p>
-        </div>
+        </section>
       </>
     );
   }

@@ -2,7 +2,7 @@
 import { GroupCreate } from "@/app/components/molecules/Group/Group";
 import Head from "next/head";
 import useSWR from "swr";
-
+import styles from "@/app/styles/Contents.module.css";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 
 const GroupPage = () => {
@@ -26,7 +26,9 @@ const GroupPage = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <GlobalHeader />
-      <GroupCreate data={data} />
+      <section className={`${styles.group} ${styles.section}`}>
+        <GroupCreate data={data} />
+      </section>
     </>
   );
   // return isLoggedIn ? (

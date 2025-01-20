@@ -34,66 +34,68 @@ const SignUp = () => {
     }
   };
   return (
-    <div className={styles.sign_page}>
-      <div className={styles.sign_wrapper}>
-        <h1 className={styles.contents_title}>Sign Up</h1>
-        <div className={styles.sign_card}>
-          <form onSubmit={handleSubmit} className={styles.sign_form}>
-            <ul className={styles.sign_list}>
-              <li className={styles.sign_item}>
-                <label htmlFor="name">user name</label>
-                <br className={styles.line_break} />
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Name"
-                  required
-                />
-              </li>
-              <li className={styles.sign_item}>
-                <label htmlFor="email">user email</label>
-                <br className={styles.line_break} />
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
-                  required
-                />
-              </li>
-              <li className={styles.sign_item}>
-                <label htmlFor="password">user password</label>
-                <br className={styles.line_break} />
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
-                  required
-                />
-              </li>
-            </ul>
-            {/* <div className={styles.sign_btn}> */}
-            <button type="submit" className={styles.sign_submit}>
-              Submit
-            </button>
-            {/* </div> */}
-          </form>
+    <section className={`${styles.sign} ${styles.section}`}>
+      <div className={styles.sign__page}>
+        <div className={styles.sign__wrapper}>
+          <h1 className={styles.contents__title}>Sign Up</h1>
+          <div className={styles.sign__card}>
+            <form onSubmit={handleSubmit} className={styles.sign__form}>
+              <ul className={styles.sign__list}>
+                <li className={styles.sign__item}>
+                  <label htmlFor="name">user name</label>
+                  <br className={styles.line__break} />
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Name"
+                    required
+                  />
+                </li>
+                <li className={styles.sign__item}>
+                  <label htmlFor="email">user email</label>
+                  <br className={styles.line__break} />
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email"
+                    required
+                  />
+                </li>
+                <li className={styles.sign__item}>
+                  <label htmlFor="password">user password</label>
+                  <br className={styles.line__break} />
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password"
+                    required
+                  />
+                </li>
+              </ul>
+              {/* <div className={styles.sign__btn}> */}
+              <button type="submit" className={styles.sign__submit}>
+                Submit
+              </button>
+              {/* </div> */}
+            </form>
+          </div>
+          <p className={styles.sign__link}>
+            <Link href={"/pages/auth/sign-in"} className={styles.small__font}>
+              <span>Sing In</span>は、こちらをクリック！
+            </Link>
+          </p>
         </div>
-        <p className={styles.sign_link}>
-          <Link href={"/pages/auth/sign-in"} className={styles.smallFont}>
-            <span>Sing In</span>は、こちらをクリック！
-          </Link>
-        </p>
       </div>
-    </div>
+    </section>
   );
 };
 export default SignUp;

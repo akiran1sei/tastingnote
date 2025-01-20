@@ -10,7 +10,7 @@ export function AuthBtn() {
         ようこそ {session.user.name}
         <button
           onClick={() => signOut({ callbackUrl: "/" })}
-          className={Buttons.sign_btn}
+          className={Buttons.sign__btn}
         >
           サインアウト
         </button>
@@ -19,10 +19,10 @@ export function AuthBtn() {
   }
   return (
     <>
-      <button onClick={() => signIn("google")} className={Buttons.sign_btn}>
+      <button onClick={() => signIn("google")} className={Buttons.sign__btn}>
         Googleでサインイン
       </button>
-      <button onClick={() => signIn("github")} className={Buttons.sign_btn}>
+      <button onClick={() => signIn("github")} className={Buttons.sign__btn}>
         GitHubでサインイン
       </button>
     </>
