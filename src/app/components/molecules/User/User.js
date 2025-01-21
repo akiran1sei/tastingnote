@@ -7,10 +7,8 @@ import styles from "@/app/styles/Pages.module.css";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 import { useSession, signOut } from "next-auth/react";
-import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 import Link from "next/link";
 export function ProfileComponent() {
-  const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [isAccountDelete, setIsAccountDelete] = useState(false);
   const { data: session, status } = useSession();
@@ -88,16 +86,6 @@ export function ProfileComponent() {
             <ul className={styles.profile__btn__list}>
               <li className={styles.profile__btn__item}>
                 <button
-                  className={`${styles.profile__btn} ${styles.profile__signout__btn}`}
-                  type="button"
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  disabled={isLoggingOut}
-                >
-                  {isLoggingOut ? "ログアウト中..." : "SignOut"}
-                </button>
-              </li>
-              <li className={styles.profile__btn__item}>
-                <button
                   className={`${styles.profile__btn} ${styles.profile__link__btn}`}
                   type="button"
                 >
@@ -111,7 +99,14 @@ export function ProfileComponent() {
                   </Link>
                 </button>
               </li>
-              <li className={styles.profile__btn__item}>
+              <li
+                className={`${styles.profile__btn__item} ${styles.profile__delete}`}
+              >
+                <span className={styles.caution__text}>
+                  こちらの全データ削除について、
+                  <br />
+                  アカウントを含む全データを削除するのは、emailとpasswordを利用したユーザーのみになります。SNS認証のアカウントの方は、ユーザーデータ以外のデータが削除されます。
+                </span>
                 <button
                   className={`${styles.profile__btn} ${styles.profile__delete__btn}`}
                   type="button"
@@ -123,11 +118,6 @@ export function ProfileComponent() {
               </li>
             </ul>
           </div>
-          <p className={styles.caution__text}>
-            こちらの全データ削除について、
-            <br />
-            アカウントを含む全データを削除するのは、emailとpasswordを利用したユーザーのみになります。SNS認証のアカウントの方は、ユーザーデータ以外のデータが削除されます。
-          </p>
         </div>
       </>
     );

@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 export function GlobalHeader() {
   const [isActive, setIsActive] = useState(false);
   //const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState(null);
@@ -74,8 +74,17 @@ export function GlobalHeader() {
                 User Profile
               </button>
             </li>
-
             <li className={header.menu_item}>
+              <button
+                className={header.signout__btn}
+                type="button"
+                onClick={() => signOut({ callbackUrl: "/" })}
+                disabled={isLoggingOut}
+              >
+                {isLoggingOut ? "ログアウト中..." : "SignOut"}
+              </button>
+            </li>
+            {/* <li className={header.menu_item}>
               <button
                 type="button"
                 onClick={reload}
@@ -92,7 +101,7 @@ export function GlobalHeader() {
                 </span>
                 <span className={header.reload_txt}>再読み込み</span>
               </button>
-            </li>
+            </li> */}
           </ul>
         </nav>
       )}
