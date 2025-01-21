@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";

@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 
 import { use } from "react";
 import { Select } from "@/app/components/molecules/Select/Select";

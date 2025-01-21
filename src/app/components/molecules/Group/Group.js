@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 import useReadGroups from "@/app/utils/useReadGroups";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";

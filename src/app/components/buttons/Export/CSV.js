@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 export default function CSV(context) {
   const [isExporting, setIsExporting] = useState(false);
   const responseData = context.data;

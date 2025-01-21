@@ -5,7 +5,7 @@ import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/Load
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 import Image from "next/image";
 import Head from "next/head";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { DeleteBtn } from "@/app/components/buttons/DeleteBtn";
 import { EditBtn } from "@/app/components/buttons/EditBtn";

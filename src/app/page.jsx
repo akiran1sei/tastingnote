@@ -1,4 +1,4 @@
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 import { HomePage } from "@/app/components/molecules/Home/Home";
 
 const Home = () => {

@@ -1,5 +1,5 @@
 import { BeansCreateTable } from "@/app/components/molecules/Create/Create_ver-2";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 const BeansCreatePage = () => {
   return (

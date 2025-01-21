@@ -2,7 +2,7 @@
 import { GroupCreate } from "@/app/components/molecules/Group/Group";
 import Head from "next/head";
 import useSWR from "swr";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 
 const GroupPage = () => {

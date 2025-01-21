@@ -1,7 +1,7 @@
 // client側 (PDF.js)
 import { useState } from "react";
 
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 
 export default function PDF(data) {
   const [isLoading, setIsLoading] = useState(false);
