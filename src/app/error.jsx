@@ -1,13 +1,8 @@
-"use client"; // Error components must be Client Components
+// Error components must be Client Components
+"use client";
 import styles from "@/app/styles/Error_404.module.css";
-
-import { useRouter } from "next/navigation";
+import { TopBtn } from "@/app/components/buttons/TopBtn";
 export default function Error({ error, reset }) {
-  const router = useRouter();
-
-  const ClickLink = () => {
-    router.replace("/");
-  };
   return (
     <div className={styles.error_404_page}>
       <h1 className={styles.error_404_title}>
@@ -25,13 +20,7 @@ export default function Error({ error, reset }) {
         >
           Try again
         </button>
-        <button
-          type="button"
-          className={styles.error_404_button}
-          onClick={ClickLink}
-        >
-          Home へ
-        </button>
+        <TopBtn />
       </div>
     </div>
   );
