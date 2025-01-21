@@ -34,7 +34,7 @@ export function SignUpComponent() {
     }
   };
   return (
-    <div className={styles.sign__page}>
+    <div className={styles.sign__contents}>
       <div className={styles.sign__wrapper}>
         <h1 className={styles.contents__title}>Sign Up</h1>
         <div className={styles.sign__card}>

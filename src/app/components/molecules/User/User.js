@@ -66,27 +66,29 @@ export function ProfileComponent() {
   } else {
     return (
       <>
-        <div className={styles.profile_page}>
+        <div className={styles.profile__contents}>
           <h1 className={styles.contents__title}>Profile</h1>
           {/* {session && ( */}
-          <div className={styles.profile_card}>
-            <ul className={styles.profile_user_list}>
-              <li className={styles.profile_user_item}>
-                <span className={styles.profile_item_title}>username</span>
-                <span className={styles.profile_item_value}>{username}</span>
+          <div className={styles.profile__card}>
+            <ul className={styles.profile__user__list}>
+              <li className={styles.profile__user__item}>
+                <span className={styles.profile__item__title}>username</span>
+                <span className={styles.profile__item__value}>{username}</span>
               </li>
-              <li className={styles.profile_user_item}>
-                <span className={styles.profile_item_title}>email</span>
-                <span className={styles.profile_item_value}>{isUserEmail}</span>
+              <li className={styles.profile__user__item}>
+                <span className={styles.profile__item__title}>email</span>
+                <span className={styles.profile__item__value}>
+                  {isUserEmail}
+                </span>
               </li>
             </ul>
           </div>
           {/* )} */}
-          <div className={styles.profile_btn_box}>
-            <ul className={styles.profile_btn_list}>
-              <li className={styles.profile_btn_item}>
+          <div className={styles.profile__btn__box}>
+            <ul className={styles.profile__btn__list}>
+              <li className={styles.profile__btn__item}>
                 <button
-                  className={`${styles.profile_btn} ${styles.profile_signout_btn}`}
+                  className={`${styles.profile__btn} ${styles.profile__signout__btn}`}
                   type="button"
                   onClick={() => signOut({ callbackUrl: "/" })}
                   disabled={isLoggingOut}
@@ -94,9 +96,9 @@ export function ProfileComponent() {
                   {isLoggingOut ? "ログアウト中..." : "SignOut"}
                 </button>
               </li>
-              <li className={styles.profile_btn_item}>
+              <li className={styles.profile__btn__item}>
                 <button
-                  className={`${styles.profile_btn} ${styles.profile_link_btn}`}
+                  className={`${styles.profile__btn} ${styles.profile__link__btn}`}
                   type="button"
                 >
                   <Link
@@ -109,9 +111,9 @@ export function ProfileComponent() {
                   </Link>
                 </button>
               </li>
-              <li className={styles.profile_btn_item}>
+              <li className={styles.profile__btn__item}>
                 <button
-                  className={`${styles.profile_btn} ${styles.profile_delete_btn}`}
+                  className={`${styles.profile__btn} ${styles.profile__delete__btn}`}
                   type="button"
                   onClick={handleAccountDelete}
                   disabled={isAccountDelete}
@@ -121,7 +123,7 @@ export function ProfileComponent() {
               </li>
             </ul>
           </div>
-          <p className={styles.caution_text}>
+          <p className={styles.caution__text}>
             こちらの全データ削除について、
             <br />
             アカウントを含む全データを削除するのは、emailとpasswordを利用したユーザーのみになります。SNS認証のアカウントの方は、ユーザーデータ以外のデータが削除されます。

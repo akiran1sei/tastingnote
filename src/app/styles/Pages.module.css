@@ -83,8 +83,8 @@
 .largeFont {
   font-size: var(--font-size-large);
 }
-/* .caution_text */
-.caution_text {
+/* .caution__text */
+.caution__text {
   background: #ed1a3d;
   color: var(--color-white);
   padding: 0 1rem;
@@ -1520,7 +1520,7 @@ input[type="range"].select__input__roast {
   top: -15px;
   vertical-align: middle;
 }
-.sign__page {
+.sign__contents {
   width: 100%;
 
   height: calc(100vh - 60px);
@@ -1532,7 +1532,7 @@ input[type="range"].select__input__roast {
   align-items: center;
 }
 @media screen and (min-width: 768px) {
-  .sign__page {
+  .sign__contents {
     height: calc(100vh - 100px);
   }
 }
@@ -1725,7 +1725,7 @@ input[type="range"].select__input__roast {
 
 
 */
-.profile_page {
+.profile__contents {
   width: 100%;
   min-width: 300px;
   max-width: 500px;
@@ -1741,17 +1741,17 @@ input[type="range"].select__input__roast {
   align-items: center;
 }
 @media screen and (min-width: 768px) {
-  .profile_page {
+  .profile__contents {
     height: calc(100vh - 100px - 2rem);
   }
 }
-.profile_card {
+.profile__card {
   width: 300px;
   height: auto;
 }
-.profile_user_list {
+.profile__user__list {
 }
-.profile_user_item {
+.profile__user__item {
   width: 100%;
   height: auto;
   margin-top: 1rem;
@@ -1761,7 +1761,7 @@ input[type="range"].select__input__roast {
   justify-content: center;
   align-items: center;
 }
-.profile_item_title {
+.profile__item__title {
   width: 100%;
   height: auto;
   text-align: center;
@@ -1771,7 +1771,7 @@ input[type="range"].select__input__roast {
   padding: 0.5rem;
   border-radius: 5px 5px 0 0;
 }
-.profile_item_value {
+.profile__item__value {
   width: 100%;
   height: auto;
   text-align: center;
@@ -1781,31 +1781,31 @@ input[type="range"].select__input__roast {
   word-wrap: break-word; /* 長い単語やメールアドレスを改行 */
   overflow-wrap: break-word; /* 古いブラウザでのサポート */
 }
-.profile_btn_box {
+.profile__btn__box {
   margin-top: 2rem;
 }
-.profile_btn_list {
+.profile__btn__list {
 }
-.profile_btn_item {
+.profile__btn__item {
   text-align: center;
 }
-.profile_btn {
+.profile__btn {
   padding: 0.5rem;
   border-radius: 5px;
   margin: 0.5rem 0;
   color: var(--color-white);
   box-shadow: 3px 3px var(--color-box-shadow);
 }
-.profile_btn:active {
+.profile__btn:active {
   box-shadow: inset 1px 2px var(--color-box-shadow);
   transform: translate(3px);
 }
-.profile_signout_btn,
-.profile_link_btn {
+.profile__signout__btn,
+.profile__link__btn {
   border: 0.1rem solid var(--color-black);
   background-color: var(--color-yellow);
 }
-.profile_delete_btn {
+.profile__delete__btn {
   background-color: #ed1a3d;
 }
 /* 
