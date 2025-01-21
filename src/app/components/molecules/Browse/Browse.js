@@ -9,7 +9,7 @@ import styles from "@/app/styles/Pages.module.css";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { DeleteBtn } from "@/app/components/buttons/DeleteBtn";
 import { EditBtn } from "@/app/components/buttons/EditBtn";
-export function Browse(context) {
+export function BrowseComponent(context) {
   const data = context.data;
   const browse = data.singleItem;
 

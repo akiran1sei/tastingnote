@@ -4,7 +4,7 @@ import top from "@/app/styles/Top.module.css";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-export function TopPage() {
+export function TopComponent() {
   const { data: session } = useSession();
   return (
     <>
@@ -38,7 +38,7 @@ export function TopPage() {
             <li className={top.top__list__item}>
               <button type="button" className={top.top__btn}>
                 <Link href={"/api/auth/signin"} passHref>
-                  login
+                  SignIn
                 </Link>
               </button>
             </li>

@@ -13,7 +13,7 @@ import { useSession } from "next-auth/react";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 
-export function Select({ params }) {
+export function SelectComponent({ params }) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();

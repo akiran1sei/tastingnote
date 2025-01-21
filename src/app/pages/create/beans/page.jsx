@@ -1,13 +1,17 @@
-import { BeansCreateTable } from "@/app/components/molecules/Create/Create_ver-2";
-import styles from "@/app/styles/Pages.module.css";
-import { GlobalHeader } from "@/app/components/header/GlobalHeader";
+import { BeansComponent } from "@/app/components/molecules/Create/Create";
+import Head from "next/head";
 const BeansCreatePage = () => {
   return (
     <>
-      <GlobalHeader />
-      <section className={`${styles.create} ${styles.section}`}>
-        <BeansCreateTable />
-      </section>
+      <Head>
+        <title>Createページ</title>
+        <meta
+          name="description"
+          content="焙煎した珈琲豆の品質を記述するページです。"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <BeansComponent />
     </>
   );
 };

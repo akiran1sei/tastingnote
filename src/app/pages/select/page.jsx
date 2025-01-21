@@ -1,26 +1,19 @@
 import Head from "next/head";
-
-import { GlobalHeader } from "@/app/components/header/GlobalHeader";
-import styles from "@/app/styles/Pages.module.css";
-
 import { use } from "react";
-import { Select } from "@/app/components/molecules/Select/Select";
+import { SelectComponent } from "@/app/components/molecules/Select/Select";
 const SelectPage = ({ params }) => {
   const id = use(params);
   return (
     <>
       <Head>
-        <title>セレクションページ</title>
+        <title>Selectページ</title>
         <meta
           name="description"
-          content="コーヒーをテイスティングするときに使用するアプリです。"
+          content="作成したデータを全て閲覧できるページです。"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <GlobalHeader />
-      <section className={`${styles.select} ${styles.section}`}>
-        <Select data={id.user} />
-      </section>
+      <SelectComponent data={id.user} />
     </>
   );
 };

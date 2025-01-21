@@ -2,11 +2,9 @@
 import { use } from "react";
 
 import Head from "next/head";
-import styles from "@/app/styles/Pages.module.css";
-import { Update } from "@/app/components/molecules/Update/Update";
+import { UpdateComponent } from "@/app/components/molecules/Update/Update";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
-import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 import { useSession } from "next-auth/react";
 const UpdatePage = ({ params }) => {
   const id = use(params);
@@ -57,10 +55,7 @@ const UpdatePage = ({ params }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <GlobalHeader />
-      <section className={`${styles.edit} ${styles.section}`}>
-        <Update data={singleData} groups={GroupData} item={singleData} />
-      </section>
+      <UpdateComponent data={singleData} groups={GroupData} item={singleData} />
     </>
   );
 };

@@ -13,7 +13,7 @@ import Image from "next/image";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 
-export function BeansCreateTable(context) {
+export function BeansComponent(context) {
   const ReadGroups = useReadGroups();
 
   const { data: session, status } = useSession();

@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
-export function Update(context) {
+export function UpdateComponent(context) {
   const singleData = context.item;
   const router = useRouter();
   const { data: session, status } = useSession();

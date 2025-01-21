@@ -32,7 +32,7 @@ export function GlobalHeader() {
 
   const headerClass = `${header.header} ${isActive ? header.active : ""}`;
 
-  return (
+  return session ? (
     <header className={headerClass}>
       <div className={header.header_title}>
         <h1 className={header.header_title_txt}>Tasting Note</h1>
@@ -50,50 +50,6 @@ export function GlobalHeader() {
       {isActive && (
         <nav className={header.menu}>
           <ul className={header.menu_list}>
-            {/* {isLoggedIn ? (
-              <>
-                <li className={header.menu_item}>
-                  <button
-                    onClick={() => navigateTo(`/pages/select`)}
-                  >
-                    Select
-                  </button>
-                </li>
-                <li className={header.menu_item}>
-                  <button onClick={() => navigateTo("/pages/create/group")}>
-                    Group
-                  </button>
-                </li>
-                <li className={header.menu_item}>
-                  <button onClick={() => navigateTo("/pages/create/beans")}>
-                    NewPage
-                  </button>
-                </li>
-
-                <li className={header.menu_item}>
-                  <button
-                    type="button"
-                    onClick={() => navigateTo("/pages/user/profile")}
-                  >
-                    User Profile
-                  </button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className={header.menu_item}>
-                  <button onClick={() => navigateTo("/pages/auth/signin")}>
-                    サインイン
-                  </button>
-                </li>
-                <li className={header.menu_item}>
-                  <button onClick={() => navigateTo("/pages/auth/signup")}>
-                    サインアップ
-                  </button>
-                </li>
-              </>
-            )} */}
-
             <li className={header.menu_item}>
               <button onClick={() => navigateTo(`/pages/select`)}>
                 Select
@@ -140,6 +96,12 @@ export function GlobalHeader() {
           </ul>
         </nav>
       )}
+    </header>
+  ) : (
+    <header className={headerClass}>
+      <div className={header.header_title}>
+        <h1 className={header.header_title_txt}>Tasting Note</h1>
+      </div>
     </header>
   );
 }

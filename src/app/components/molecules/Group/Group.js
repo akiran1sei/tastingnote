@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 
-export function GroupCreate(context) {
+export function GroupComponent(context) {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
