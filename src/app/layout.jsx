@@ -1,5 +1,5 @@
 import "./styles/globals.css";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 import { Inter } from "next/font/google";
 
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";

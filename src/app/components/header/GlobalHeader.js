@@ -4,12 +4,12 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 export function GlobalHeader() {
   const [isActive, setIsActive] = useState(false);
   //const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const router = useRouter();
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState(null);
@@ -32,7 +32,7 @@ export function GlobalHeader() {
 
   const headerClass = `${header.header} ${isActive ? header.active : ""}`;
 
-  return (
+  return session ? (
     <header className={headerClass}>
       <div className={header.header_title}>
         <h1 className={header.header_title_txt}>Tasting Note</h1>
@@ -50,50 +50,6 @@ export function GlobalHeader() {
       {isActive && (
         <nav className={header.menu}>
           <ul className={header.menu_list}>
-            {/* {isLoggedIn ? (
-              <>
-                <li className={header.menu_item}>
-                  <button
-                    onClick={() => navigateTo(`/pages/select`)}
-                  >
-                    Select
-                  </button>
-                </li>
-                <li className={header.menu_item}>
-                  <button onClick={() => navigateTo("/pages/create/group")}>
-                    Group
-                  </button>
-                </li>
-                <li className={header.menu_item}>
-                  <button onClick={() => navigateTo("/pages/create/beans")}>
-                    NewPage
-                  </button>
-                </li>
-
-                <li className={header.menu_item}>
-                  <button
-                    type="button"
-                    onClick={() => navigateTo("/pages/user/profile")}
-                  >
-                    User Profile
-                  </button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li className={header.menu_item}>
-                  <button onClick={() => navigateTo("/pages/auth/signin")}>
-                    サインイン
-                  </button>
-                </li>
-                <li className={header.menu_item}>
-                  <button onClick={() => navigateTo("/pages/auth/signup")}>
-                    サインアップ
-                  </button>
-                </li>
-              </>
-            )} */}
-
             <li className={header.menu_item}>
               <button onClick={() => navigateTo(`/pages/select`)}>
                 Select
@@ -118,8 +74,17 @@ export function GlobalHeader() {
                 User Profile
               </button>
             </li>
-
             <li className={header.menu_item}>
+              <button
+                className={header.signout__btn}
+                type="button"
+                onClick={() => signOut({ callbackUrl: "/" })}
+                disabled={isLoggingOut}
+              >
+                {isLoggingOut ? "ログアウト中..." : "SignOut"}
+              </button>
+            </li>
+            {/* <li className={header.menu_item}>
               <button
                 type="button"
                 onClick={reload}
@@ -136,10 +101,16 @@ export function GlobalHeader() {
                 </span>
                 <span className={header.reload_txt}>再読み込み</span>
               </button>
-            </li>
+            </li> */}
           </ul>
         </nav>
       )}
+    </header>
+  ) : (
+    <header className={headerClass}>
+      <div className={header.header_title}>
+        <h1 className={header.header_title_txt}>Tasting Note</h1>
+      </div>
     </header>
   );
 }

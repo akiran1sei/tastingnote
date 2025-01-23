@@ -1,9 +1,8 @@
 "use client";
 import Head from "next/head";
-import { Browse } from "@/app/components/molecules/Browse/Browse";
+import { BrowseComponent } from "@/app/components/molecules/Browse/Browse";
 import useSWR from "swr";
 import { use } from "react";
-import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 const CoffeeSingleItem = ({ params }) => {
   const id = use(params);
 
@@ -27,8 +26,7 @@ const CoffeeSingleItem = ({ params }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <GlobalHeader />
-      <Browse data={data} />
+      <BrowseComponent data={data} />
     </>
   );
 };

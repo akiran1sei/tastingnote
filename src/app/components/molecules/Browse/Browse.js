@@ -5,11 +5,11 @@ import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/Load
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 import Image from "next/image";
 import Head from "next/head";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { DeleteBtn } from "@/app/components/buttons/DeleteBtn";
 import { EditBtn } from "@/app/components/buttons/EditBtn";
-export function Browse(context) {
+export function BrowseComponent(context) {
   const data = context.data;
   const browse = data.singleItem;
 
@@ -45,154 +45,145 @@ export function Browse(context) {
 
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
-        <h1 className={styles.contents_title}>{browse.coffee}</h1>
-        <div className={styles.edit_contents}>
-          <div className={styles.edit_wrap}>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+        <h1 className={styles.contents__title}>{browse.coffee}</h1>
+        <div className={styles.edit__contents}>
+          <div className={styles.edit__wrap}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>1</span>
+                  <span className={styles.edit__item__number}>1</span>
                   日付
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>{browse.date}</div>
+              <div className={styles.edit__data}>{browse.date}</div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>2</span>
+                  <span className={styles.edit__item__number}>2</span>
                   グループ名
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>
-                {" "}
-                {browse.groupname}
-              </div>
+              <div className={styles.edit__data}> {browse.groupname}</div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>3</span>
+                  <span className={styles.edit__item__number}>3</span>
                   ユーザー
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>{browse.username}</div>
+              <div className={styles.edit__data}>{browse.username}</div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>4</span>
+                  <span className={styles.edit__item__number}>4</span>
                   コーヒー豆
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>{browse.coffee}</div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>豆の名前、又は、番号</p>
+              <div className={styles.edit__data}>{browse.coffee}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>豆の名前、又は、番号</p>
               </div>
             </div>
 
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>5</span>
+                  <span className={styles.edit__item__number}>5</span>
                   ロースト
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>
+              <div className={styles.edit__data}>
                 <p className={styles.edit_roast_value}>
                   {browse.roastDegree}：{browse.roast}%
                 </p>
               </div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   焙煎具合、パーセンテージによって焙煎度名が変化するので、
                   <wbr />
                   それに合わせて焙煎度の中から選んでください。
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>6</span>
+                  <span className={styles.edit__item__number}>6</span>
                   アロマ
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>
-                <div border="0" className={styles.edit_contents_aroma}>
-                  <div className={styles.edit_contents_aroma_row}>
-                    <div
-                      className={styles.edit_contents_aroma_data_header}
-                    ></div>
-                    <div className={styles.edit_contents_aroma_data_header}>
-                      強さ
-                    </div>
-                    <div className={styles.edit_contents_aroma_data_header}>
-                      質
-                    </div>
+              <div className={styles.edit__data}>
+                <div border="0" className={styles.edit__aroma}>
+                  <div className={styles.edit__aroma__row}>
+                    <div className={styles.edit__aroma__data__header}></div>
+                    <div className={styles.edit__aroma__data__header}>強さ</div>
+                    <div className={styles.edit__aroma__data__header}>質</div>
                   </div>
 
-                  <div className={styles.edit_contents_aroma_data}>
+                  <div className={styles.edit__aroma__data}>
                     <label>ドライ</label>
 
-                    <div className={styles.edit_contents_aroma_data}>
+                    <div className={styles.edit__aroma__data}>
                       {browse.aromaDryStrength}
                     </div>
-                    <div className={styles.edit_contents_aroma_data}>
+                    <div className={styles.edit__aroma__data}>
                       {browse.aromaDryQuality}
                     </div>
                   </div>
 
-                  <div className={styles.edit_contents_aroma_data}>
+                  <div className={styles.edit__aroma__data}>
                     <label>クラスト</label>
 
-                    <div className={styles.edit_contents_aroma_data}>
+                    <div className={styles.edit__aroma__data}>
                       {browse.aromaCrustStrength}
                     </div>
-                    <div className={styles.edit_contents_aroma_data}>
+                    <div className={styles.edit__aroma__data}>
                       {browse.aromaCrustQuality}
                     </div>
                   </div>
 
-                  <div className={styles.edit_contents_aroma_data}>
+                  <div className={styles.edit__aroma__data}>
                     <label>ブレーク</label>
-                    <div className={styles.edit_contents_aroma_data}>
+                    <div className={styles.edit__aroma__data}>
                       {browse.aromaBreakStrength}
                     </div>
-                    <div className={styles.edit_contents_aroma_data}>
+                    <div className={styles.edit__aroma__data}>
                       {browse.aromaBreakQuality}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className={styles.edit_point_memo}>
-                <ul className={styles.edit_point_txtBox}>
-                  <li className={styles.edit_point_text}>
-                    <span className={styles.edit_yellow}>『dry』</span>
+              <div className={styles.edit__point__memo}>
+                <ul className={styles.edit__point__list}>
+                  <li className={styles.edit__point__text}>
+                    <span className={styles.edit__yellow}>『dry』</span>
                     <br /> 粉の状態からaroma
                   </li>
-                  <li className={styles.edit_point_text}>
-                    <span className={styles.edit_yellow}>『crust』</span>
+                  <li className={styles.edit__point__text}>
+                    <span className={styles.edit__yellow}>『crust』</span>
                     <br />
                     湯を注いだ直後のaroma
                   </li>
-                  <li className={styles.edit_point_text}>
-                    <span className={styles.edit_yellow}>『break』</span>
+                  <li className={styles.edit__point__text}>
+                    <span className={styles.edit__yellow}>『break』</span>
                     <br />
                     混ぜた後のaroma
                   </li>
                 </ul>
-                <p className={styles.edit_point_text}>
+                <p className={styles.edit__point__text}>
                   の３つで香りの強さ（左）と質（右）を評価
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>7</span>
+                  <span className={styles.edit__item__number}>7</span>
                   欠点・瑕疵
-                  <span className={styles.edit_contents_item_mark}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -203,19 +194,19 @@ export function Browse(context) {
                   </span>
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>{browse.defects}</div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__data}>{browse.defects}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   スペシャルティコーヒーなどは、欠点・瑕疵がないことが多く『０』で進めることが多い
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>8</span>
+                  <span className={styles.edit__item__number}>8</span>
                   カップの綺麗さ
-                  <span className={styles.edit_contents_item_mark}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -226,20 +217,17 @@ export function Browse(context) {
                   </span>
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>
-                {" "}
-                {browse.cleancap}
-              </div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>味わいの透明度</p>
+              <div className={styles.edit__data}> {browse.cleancap}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>味わいの透明度</p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>9</span>
+                  <span className={styles.edit__item__number}>9</span>
                   甘さ
-                  <span className={styles.edit_contents_item_mark}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -250,19 +238,19 @@ export function Browse(context) {
                   </span>
                 </label>
               </div>
-              <div className={styles.edit_contents_data}> {browse.sweet}</div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__data}> {browse.sweet}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   味わいに甘味の印象が強ければ強い程よいとされる
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>10</span>
+                  <span className={styles.edit__item__number}>10</span>
                   酸の質
-                  <span className={styles.edit_contents_item_mark}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -273,21 +261,19 @@ export function Browse(context) {
                   </span>
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>{browse.acidity}</div>
+              <div className={styles.edit__data}>{browse.acidity}</div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>10-1</span>
+                  <span className={styles.edit__item__number}>10-1</span>
                   酸の強さ
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>
-                {browse.acidityStrength}
-              </div>
+              <div className={styles.edit__data}>{browse.acidityStrength}</div>
 
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   強い順から、
                   <br />
                   High2→High1→Middle
@@ -298,12 +284,12 @@ export function Browse(context) {
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>11</span>
+                  <span className={styles.edit__item__number}>11</span>
                   口に含んだ質感
-                  <span className={styles.edit_contents_item_mark}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -314,24 +300,19 @@ export function Browse(context) {
                   </span>
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>
-                {" "}
-                {browse.mouthfeel}
-              </div>
+              <div className={styles.edit__data}> {browse.mouthfeel}</div>
             </div>
 
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>11-1</span>
+                  <span className={styles.edit__item__number}>11-1</span>
                   ボディの強さ
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>
-                {browse.bodyStrength}
-              </div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__data}>{browse.bodyStrength}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   舌触りの滑らかさ強い順から,
                   <br />
                   High2→High1→Middle
@@ -340,12 +321,12 @@ export function Browse(context) {
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>12</span>
+                  <span className={styles.edit__item__number}>12</span>
                   フレーバー
-                  <span className={styles.edit_contents_item_mark}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -356,17 +337,17 @@ export function Browse(context) {
                   </span>
                 </label>
               </div>
-              <div className={styles.edit_contents_data}> {browse.flavor}</div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>風味の質を評価する</p>
+              <div className={styles.edit__data}> {browse.flavor}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>風味の質を評価する</p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>13</span>
+                  <span className={styles.edit__item__number}>13</span>
                   後味の印象度
-                  <span className={styles.edit_contents_item_mark}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -377,19 +358,19 @@ export function Browse(context) {
                   </span>
                 </label>
               </div>
-              <div className={styles.edit_contents_data}> {browse.after}</div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__data}> {browse.after}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   後味は心地よいか、そうでないか評価。
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>14</span>
+                  <span className={styles.edit__item__number}>14</span>
                   ハーモニーの均衝性
-                  <span className={styles.edit_contents_item_mark}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -400,21 +381,21 @@ export function Browse(context) {
                   </span>
                 </label>
               </div>
-              <div className={styles.edit_contents_data}> {browse.balance}</div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__data}> {browse.balance}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   「7～13」の要素に悪目立ちしているものがなく、
                   <wbr />
                   全体のバランスが良い程加点。
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>15</span>
+                  <span className={styles.edit__item__number}>15</span>
                   総合評価
-                  <span className={styles.edit_contents_item_mark}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -425,24 +406,24 @@ export function Browse(context) {
                   </span>
                 </label>
               </div>
-              <div className={styles.edit_contents_data}> {browse.overall}</div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__data}> {browse.overall}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   味わいの奥行など項目にない点にも着目し、ここまでの評価に囚われず、主観で付ける。
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>16</span>
+                  <span className={styles.edit__item__number}>16</span>
                   小計
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>{browse.result}</div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
-                  <span className={styles.edit_contents_item_mark}>
+              <div className={styles.edit__data}>{browse.result}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
+                  <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
@@ -455,51 +436,49 @@ export function Browse(context) {
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>17</span>
+                  <span className={styles.edit__item__number}>17</span>
                   TOTAL (+36点)
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>{browse.total}</div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__data}>{browse.total}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   小計項目の得点に定数３６点を足して出た数字。
                   <br />
                   １００点満点で評価。
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>18</span>
+                  <span className={styles.edit__item__number}>18</span>
                   味の印象度
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>
-                {browse.impression}
-              </div>
-              <div className={styles.edit_point_memo}>
-                <p className={styles.edit_point_text}>
+              <div className={styles.edit__data}>{browse.impression}</div>
+              <div className={styles.edit__point__memo}>
+                <p className={styles.edit__point__text}>
                   具体的な味の印象を記入。フレーバーの表現もカッピングの重要な目的。
                   <br />
                   冷めていく過程で、味わいがどのように変化したかも都度メモしておくとよい。
                 </p>
               </div>
             </div>
-            <div className={styles.edit_contents_item}>
-              <div className={styles.edit_contents_data_header}>
+            <div className={styles.edit__item}>
+              <div className={styles.edit__data__header}>
                 <label>
-                  <span className={styles.edit_contents_item_number}>19</span>
+                  <span className={styles.edit__item__number}>19</span>
                   memo
                 </label>
               </div>
-              <div className={styles.edit_contents_data}>{browse.memo}</div>
+              <div className={styles.edit__data}>{browse.memo}</div>
             </div>
 
-            <div className={styles.edit_btn_box}>
+            <div className={styles.edit__btn__box}>
               <HomeBtn email={isUserEmail} />
               <DeleteBtn data={browse._id} email={isUserEmail} />
 

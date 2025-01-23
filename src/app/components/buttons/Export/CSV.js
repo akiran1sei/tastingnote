@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 export default function CSV(context) {
   const [isExporting, setIsExporting] = useState(false);
   const responseData = context.data;
@@ -49,7 +49,7 @@ export default function CSV(context) {
     <button
       onClick={handleExport}
       disabled={isExporting}
-      className={styles.select_menu_btn_white}
+      className={styles.select__menu__btn__white}
     >
       {isExporting ? "エクスポート中..." : "CSV"}
     </button>

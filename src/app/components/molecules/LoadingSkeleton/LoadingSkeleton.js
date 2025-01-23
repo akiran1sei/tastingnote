@@ -1,4 +1,4 @@
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 export function LoadingSkeleton() {
   return (
     <div className={styles.loading_page}>

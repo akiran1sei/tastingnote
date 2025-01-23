@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/app/styles/Contents.module.css";
+import styles from "@/app/styles/Pages.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
@@ -13,7 +13,7 @@ import { useSession } from "next-auth/react";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 
-export function Select({ params }) {
+export function SelectComponent({ params }) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -171,13 +171,13 @@ export function Select({ params }) {
   if (readAllError || groupError) return <div>エラーが発生しました</div>;
   return (
     <>
-      <header className={styles.select_header}>
-        <nav className={styles.select_header_menu}>
-          <ul className={styles.select_menu_list}>
-            <li className={styles.select_header_menu_item}>
+      <header className={styles.select__header}>
+        <nav className={styles.select__header__nav}>
+          <ul className={styles.select__menu_list}>
+            <li className={styles.select__header__nav__item}>
               <button
                 type="button"
-                className={styles.select_header_menu_btn}
+                className={styles.select__header__nav__btn}
                 onClick={handleDeleteClick}
               >
                 <Image
@@ -189,10 +189,10 @@ export function Select({ params }) {
                 />
               </button>
             </li>
-            <li className={styles.select_header_menu_item}>
+            <li className={styles.select__header__nav__item}>
               <button
                 type="button"
-                className={styles.select_header_menu_btn}
+                className={styles.select__header__nav__btn}
                 onClick={handleSearchClick}
               >
                 <Image
@@ -204,10 +204,10 @@ export function Select({ params }) {
                 />
               </button>
             </li>
-            <li className={styles.select_header_menu_item}>
+            <li className={styles.select__header__nav__item}>
               <button
                 type="button"
-                className={styles.select_header_menu_btn}
+                className={styles.select__header__nav__btn}
                 onClick={handleExportClick}
               >
                 <Image
@@ -222,19 +222,19 @@ export function Select({ params }) {
           </ul>
         </nav>
       </header>
-      <h1 className={styles.contents_title}>SELECT</h1>
+      <h1 className={styles.contents__title}>SELECT</h1>
 
-      <div className={styles.select_header_active_contents}>
-        <ul className={styles.select_header_active_menu}>
+      <div className={styles.select__header__active_contents}>
+        <ul className={styles.select__header__active__menu}>
           {showDeleteButton && (
             <li
-              className={styles.select_header_active_menu_item}
+              className={styles.select__header__active__menu__item}
               hidden={!showDeleteButton}
             >
               <button
                 type="submit"
                 onClick={handleDeleteSubmit}
-                className={styles.select_menu_btn_white}
+                className={styles.select__menu__btn__white}
               >
                 Delete
               </button>
@@ -243,7 +243,7 @@ export function Select({ params }) {
           {showExportButton && (
             <>
               <li
-                className={styles.select_header_active_menu_item}
+                className={styles.select__header__active__menu__item}
                 hidden={!showExportButton}
               >
                 <span>
@@ -255,7 +255,7 @@ export function Select({ params }) {
                 <PDF data={checkbox} />
               </li>
               {/* <li
-                className={styles.select_header_active_menu_item}
+                className={styles.select__header__active__menu__item}
                 hidden={!showExportButton}
               >
                 <CSV data={checkbox} />
@@ -264,7 +264,7 @@ export function Select({ params }) {
           )}
           {showSearchButton && (
             <li
-              className={styles.select_header_active_menu_item}
+              className={styles.select__header__active__menu__item}
               hidden={!showSearchButton}
             >
               <div className={styles.searchBarBox}>
@@ -304,104 +304,116 @@ export function Select({ params }) {
         </ul>
       </div>
 
-      <div className={styles.select_list_box}>
-        <div className={styles.select_wrap}>
-          <ul className={styles.select_header_list}>
+      <div className={styles.select__contents}>
+        <div className={styles.select__scroll__container}>
+          <ul className={styles.select__beans__list}>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_index}`}
+              className={`${styles.select__beans__list__item} ${styles.select__index}`}
             >
-              <span className={styles.select_title}>No.</span>
+              <span className={styles.select__beans__list__title}>No.</span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_coffee}`}
+              className={`${styles.select__beans__list__item} ${styles.select__coffee}`}
             >
-              <span className={styles.select_title}>コーヒー豆</span>
+              <span className={styles.select__beans__list__title}>
+                コーヒー豆
+              </span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_roast}`}
+              className={`${styles.select__beans__list__item} ${styles.select__roast}`}
             >
-              <span className={styles.select_title}>ロースト</span>
+              <span className={styles.select__beans__list__title}>
+                ロースト
+              </span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_aroma}`}
+              className={`${styles.select__beans__list__item} ${styles.select__aroma}`}
             >
-              <span className={styles.select_title}>アロマ</span>
+              <span className={styles.select__beans__list__title}>アロマ</span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_defects}`}
+              className={`${styles.select__beans__list__item} ${styles.select__defects}`}
             >
-              <span className={styles.select_title}>欠点・瑕疵</span>
+              <span className={styles.select__beans__list__title}>
+                欠点・瑕疵
+              </span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_cleancap}`}
+              className={`${styles.select__beans__list__item} ${styles.select__cleancap}`}
             >
-              <span className={styles.select_title}>
+              <span className={styles.select__beans__list__title}>
                 カップの
                 <br />
                 綺麗さ
               </span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_sweet}`}
+              className={`${styles.select__beans__list__item} ${styles.select__sweet}`}
             >
-              <span className={styles.select_title}>甘さ</span>
+              <span className={styles.select__beans__list__title}>甘さ</span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_acidity}`}
+              className={`${styles.select__beans__list__item} ${styles.select__acidity}`}
             >
-              <span className={styles.select_title}>酸の質</span>
+              <span className={styles.select__beans__list__title}>酸の質</span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_mouthfeel}`}
+              className={`${styles.select__beans__list__item} ${styles.select__mouthfeel}`}
             >
-              <span className={styles.select_title}>
+              <span className={styles.select__beans__list__title}>
                 口に含んだ
                 <br />
                 質感
               </span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_flavor}`}
+              className={`${styles.select__beans__list__item} ${styles.select__flavor}`}
             >
-              <span className={styles.select_title}>フレーバー</span>
+              <span className={styles.select__beans__list__title}>
+                フレーバー
+              </span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_after}`}
+              className={`${styles.select__beans__list__item} ${styles.select__after}`}
             >
-              <span className={styles.select_title}>
+              <span className={styles.select__beans__list__title}>
                 後味の
                 <br />
                 印象度
               </span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_balance}`}
+              className={`${styles.select__beans__list__item} ${styles.select__balance}`}
             >
-              <span className={styles.select_title}>ハーモニーの均衝性</span>
+              <span className={styles.select__beans__list__title}>
+                ハーモニーの均衝性
+              </span>
             </li>
 
             <li
-              className={`${styles.select_header_list_item} ${styles.select_overall}`}
+              className={`${styles.select__beans__list__item} ${styles.select__overall}`}
             >
-              <span className={styles.select_title}>総合評価</span>
+              <span className={styles.select__beans__list__title}>
+                総合評価
+              </span>
             </li>
             <li
-              className={`${styles.select_header_list_item} ${styles.select_total}`}
+              className={`${styles.select__beans__list__item} ${styles.select__total}`}
             >
-              <span className={styles.select_title}>
+              <span className={styles.select__beans__list__title}>
                 TOTAL
                 <br />
                 +36
               </span>
             </li>
           </ul>
-          <div className={styles.select_beans_box}>
+          <div className={styles.select__beans__value}>
             {readAllData.allItems.map((beans, index) => (
-              <div className={styles.select_beans} key={beans._id}>
+              <div className={styles.select__beans} key={beans._id}>
                 {showDeleteButton || showExportButton ? (
-                  <div className={styles.select_delete_list}>
+                  <div className={styles.select__delete_list}>
                     <ul
-                      className={`${styles.select_list} ${styles.select_checkbox}`}
+                      className={`${styles.select__list} ${styles.select__checkbox}`}
                       onClick={(e) => {
                         // チェックボックスのクリック時
                         if (e.target.type === "checkbox") {
@@ -428,12 +440,12 @@ export function Select({ params }) {
                       }}
                     >
                       <li
-                        className={`${styles.select_list} ${styles.select_index}`}
+                        className={`${styles.select__list} ${styles.select__index}`}
                       >
                         {index + 1}
                         <input
                           type="checkbox"
-                          className={styles.select_checkbox_input}
+                          className={styles.select__checkbox__input}
                           defaultValue={[beans._id]}
                           onChange={handleChange}
                           checked={selectedItems.has([beans._id].toString())}
@@ -442,21 +454,21 @@ export function Select({ params }) {
                       </li>
 
                       <li
-                        className={`${styles.select_list} ${styles.select_coffee}`}
+                        className={`${styles.select__list} ${styles.select__coffee}`}
                       >
-                        <p className={styles.select_value}>
+                        <p className={styles.select__value}>
                           {beans.coffee.slice(0, 20)}
                         </p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_roast}`}
+                        className={`${styles.select__list} ${styles.select__roast}`}
                       >
-                        <p className={styles.select_value}>
+                        <p className={styles.select__value}>
                           {beans.roastDegree} <br />
                           <output>
                             <input
                               type="range"
-                              className={styles.select_input_roast}
+                              className={styles.select__input__roast}
                               value={beans.roast}
                               readOnly
                             />
@@ -466,63 +478,53 @@ export function Select({ params }) {
                         </p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_aroma}`}
+                        className={`${styles.select__list} ${styles.select__aroma}`}
                       >
-                        <div className={styles.select_value}>
-                          <div className={styles.select_aroma_box}>
-                            <div className={styles.select_aroma_header}>
-                              <div className={styles.select_aroma_headerTitle}>
+                        <div className={styles.select__value}>
+                          <div className={styles.aroma__box}>
+                            <div className={styles.aroma__header}>
+                              <div className={styles.aroma__header__title}>
                                 ドライ
                               </div>
-                              <div className={styles.select_aroma_headerTitle}>
+                              <div className={styles.aroma__header__title}>
                                 クラスト
                               </div>
-                              <div className={styles.select_aroma_headerTitle}>
+                              <div className={styles.aroma__header__title}>
                                 ブレーク
                               </div>
                             </div>
-                            <div className={styles.select_aroma_valueHeader}>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
-                              ></div>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
-                              >
+                            <div className={styles.aroma__value}>
+                              <div className={styles.aroma__value__list}></div>
+                              <div className={styles.aroma__value__list}>
                                 強さ：
                               </div>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
-                              >
+                              <div className={styles.aroma__value__list}>
                                 質 :
                               </div>
                             </div>
-                            <div
-                              className={styles.select_aroma_valueListStrength}
-                            >
-                              <div className={styles.select_aroma_valueIItem}>
+                            <div className={styles.aroma__value__strength}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaDryStrength}
                               </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaCrustStrength}
                               </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaBreakStrength}
                               </div>
                             </div>
-                            <div
-                              className={styles.select_aroma_valueListQuality}
-                            >
-                              <div className={styles.select_aroma_valueIItem}>
+                            <div className={styles.aroma_value__Quality}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaDryQuality}
                               </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaCrustQuality}
                               </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaBreakQuality}
                               </div>
                             </div>
@@ -530,62 +532,67 @@ export function Select({ params }) {
                         </div>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_defects}`}
+                        className={`${styles.select__list} ${styles.select__defects}`}
                       >
-                        <p className={styles.select_value}>{beans.defects}</p>
+                        <p className={styles.select__value}>{beans.defects}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_cleancap}`}
+                        className={`${styles.select__list} ${styles.select__cleancap}`}
                       >
-                        <p className={styles.select_value}>{beans.cleancap}</p>
+                        <p className={styles.select__value}>{beans.cleancap}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_sweet}`}
+                        className={`${styles.select__list} ${styles.select__sweet}`}
                       >
-                        <p className={styles.select_value}>{beans.sweet}</p>
+                        <p className={styles.select__value}>{beans.sweet}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_acidity}`}
+                        className={`${styles.select__list} ${styles.select__acidity}`}
                       >
-                        <p className={styles.select_value}>{beans.acidity}</p>
+                        <p className={styles.select__value}>{beans.acidity}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_mouthfeel}`}
+                        className={`${styles.select__list} ${styles.select__mouthfeel}`}
                       >
-                        <p className={styles.select_value}>{beans.mouthfeel}</p>
+                        <p className={styles.select__value}>
+                          {beans.mouthfeel}
+                        </p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_flavor}`}
+                        className={`${styles.select__list} ${styles.select__flavor}`}
                       >
-                        <p className={styles.select_value}>{beans.flavor}</p>
+                        <p className={styles.select__value}>{beans.flavor}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_after}`}
+                        className={`${styles.select__list} ${styles.select__after}`}
                       >
-                        <p className={styles.select_value}>{beans.after}</p>
+                        <p className={styles.select__value}>{beans.after}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_balance}`}
+                        className={`${styles.select__list} ${styles.select__balance}`}
                       >
-                        <p className={styles.select_value}>{beans.balance}</p>
+                        <p className={styles.select__value}>{beans.balance}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_overall}`}
+                        className={`${styles.select__list} ${styles.select__overall}`}
                       >
-                        <p className={styles.select_value}>{beans.overall}</p>
+                        <p className={styles.select__value}>{beans.overall}</p>
                       </li>
 
                       <li
-                        className={`${styles.select_list} ${styles.select_total}`}
+                        className={`${styles.select__list} ${styles.select__total}`}
                       >
-                        <div className={styles.select_total_wrap}>
-                          <p className={styles.select_value}>
-                            <span className={styles.select_resultTxt}>
+                        <div className={styles.select__total__wrap}>
+                          <p className={styles.select__value}>
+                            <span className={styles.select__result__text}>
                               {beans.result}
                             </span>
                           </p>
-                          <p className={styles.select_total_value} colSpan={2}>
-                            <span className={styles.select_totalTxt}>
+                          <p
+                            className={styles.select__total__value}
+                            colSpan={2}
+                          >
+                            <span className={styles.select__total__text}>
                               {beans.total}
                             </span>
                           </p>
@@ -597,31 +604,31 @@ export function Select({ params }) {
                   <Link
                     href={`/pages/${beans._id}`}
                     scroll={false}
-                    className={styles.select_beans_link}
+                    className={styles.select__beans__link}
                     passHref
                   >
-                    <ul className={styles.select_list}>
+                    <ul className={styles.select__list}>
                       <li
-                        className={`${styles.select_list} ${styles.select_index}`}
+                        className={`${styles.select__list} ${styles.select__index}`}
                       >
                         {index + 1}
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_coffee}`}
+                        className={`${styles.select__list} ${styles.select__coffee}`}
                       >
-                        <p className={styles.select_value}>
+                        <p className={styles.select__value}>
                           {beans.coffee.slice(0, 20)}
                         </p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_roast}`}
+                        className={`${styles.select__list} ${styles.select__roast}`}
                       >
-                        <p className={styles.select_value}>
+                        <p className={styles.select__value}>
                           {beans.roastDegree} <br />
                           <output>
                             <input
                               type="range"
-                              className={styles.select_input_roast}
+                              className={styles.select__input__roast}
                               value={beans.roast}
                               readOnly
                             />
@@ -631,63 +638,53 @@ export function Select({ params }) {
                         </p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_aroma}`}
+                        className={`${styles.select__list} ${styles.select__aroma}`}
                       >
-                        <div className={styles.select_value}>
-                          <div className={styles.select_aroma_box}>
-                            <div className={styles.select_aroma_header}>
-                              <div className={styles.select_aroma_headerTitle}>
+                        <div className={styles.select__value}>
+                          <div className={styles.aroma__box}>
+                            <div className={styles.aroma__header}>
+                              <div className={styles.aroma__header__title}>
                                 ドライ
                               </div>
-                              <div className={styles.select_aroma_headerTitle}>
+                              <div className={styles.aroma__header__title}>
                                 クラスト
                               </div>
-                              <div className={styles.select_aroma_headerTitle}>
+                              <div className={styles.aroma__header__title}>
                                 ブレーク
                               </div>
                             </div>
-                            <div className={styles.select_aroma_valueHeader}>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
-                              ></div>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
-                              >
+                            <div className={styles.aroma__value}>
+                              <div className={styles.aroma__value__list}></div>
+                              <div className={styles.aroma__value__list}>
                                 強さ：
                               </div>
-                              <div
-                                className={styles.select_aroma_valueHeader_list}
-                              >
+                              <div className={styles.aroma__value__list}>
                                 質　：
                               </div>
                             </div>
-                            <div
-                              className={styles.select_aroma_valueListStrength}
-                            >
-                              <div className={styles.select_aroma_valueIItem}>
+                            <div className={styles.aroma__value__strength}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaDryStrength}
                               </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaCrustStrength}
                               </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaBreakStrength}
                               </div>
                             </div>
-                            <div
-                              className={styles.select_aroma_valueListQuality}
-                            >
-                              <div className={styles.select_aroma_valueIItem}>
+                            <div className={styles.aroma_value__Quality}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaDryQuality}
                               </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaCrustQuality}
                               </div>
 
-                              <div className={styles.select_aroma_valueIItem}>
+                              <div className={styles.aroma__value__Item}>
                                 {beans.aromaBreakQuality}
                               </div>
                             </div>
@@ -695,62 +692,67 @@ export function Select({ params }) {
                         </div>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_defects}`}
+                        className={`${styles.select__list} ${styles.select__defects}`}
                       >
-                        <p className={styles.select_value}>{beans.defects}</p>
+                        <p className={styles.select__value}>{beans.defects}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_cleancap}`}
+                        className={`${styles.select__list} ${styles.select__cleancap}`}
                       >
-                        <p className={styles.select_value}>{beans.cleancap}</p>
+                        <p className={styles.select__value}>{beans.cleancap}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_sweet}`}
+                        className={`${styles.select__list} ${styles.select__sweet}`}
                       >
-                        <p className={styles.select_value}>{beans.sweet}</p>
+                        <p className={styles.select__value}>{beans.sweet}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_acidity}`}
+                        className={`${styles.select__list} ${styles.select__acidity}`}
                       >
-                        <p className={styles.select_value}>{beans.acidity}</p>
+                        <p className={styles.select__value}>{beans.acidity}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_mouthfeel}`}
+                        className={`${styles.select__list} ${styles.select__mouthfeel}`}
                       >
-                        <p className={styles.select_value}>{beans.mouthfeel}</p>
+                        <p className={styles.select__value}>
+                          {beans.mouthfeel}
+                        </p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_flavor}`}
+                        className={`${styles.select__list} ${styles.select__flavor}`}
                       >
-                        <p className={styles.select_value}>{beans.flavor}</p>
+                        <p className={styles.select__value}>{beans.flavor}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_after}`}
+                        className={`${styles.select__list} ${styles.select__after}`}
                       >
-                        <p className={styles.select_value}>{beans.after}</p>
+                        <p className={styles.select__value}>{beans.after}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_balance}`}
+                        className={`${styles.select__list} ${styles.select__balance}`}
                       >
-                        <p className={styles.select_value}>{beans.balance}</p>
+                        <p className={styles.select__value}>{beans.balance}</p>
                       </li>
                       <li
-                        className={`${styles.select_list} ${styles.select_overall}`}
+                        className={`${styles.select__list} ${styles.select__overall}`}
                       >
-                        <p className={styles.select_value}>{beans.overall}</p>
+                        <p className={styles.select__value}>{beans.overall}</p>
                       </li>
 
                       <li
-                        className={`${styles.select_list} ${styles.select_total}`}
+                        className={`${styles.select__list} ${styles.select__total}`}
                       >
-                        <div className={styles.select_total_wrap}>
-                          <p className={styles.select_value}>
-                            <span className={styles.select_resultTxt}>
+                        <div className={styles.select__total__wrap}>
+                          <p className={styles.select__value}>
+                            <span className={styles.select__result__text}>
                               {beans.result}
                             </span>
                           </p>
-                          <p className={styles.select_total_value} colSpan={2}>
-                            <span className={styles.select_totalTxt}>
+                          <p
+                            className={styles.select__total__value}
+                            colSpan={2}
+                          >
+                            <span className={styles.select__total__text}>
                               {beans.total}
                             </span>
                           </p>

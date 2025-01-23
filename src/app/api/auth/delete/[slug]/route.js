@@ -1,4 +1,9 @@
-import { BeansModel, GroupModel, UserModel } from "@/app/utils/schemaModels";
+import {
+  AccountModel,
+  BeansModel,
+  GroupModel,
+  UserModel,
+} from "@/app/utils/schemaModels";
 import connectDB from "@/app/utils/database";
 
 import { NextResponse } from "next/server";
@@ -10,11 +15,30 @@ export async function DELETE(request) {
     const Beans = await BeansModel.find({ userEmail: body.email });
     const Groups = await GroupModel.find({ email: { $in: body.email } });
 
+    const Users = await UserModel.findOne({ email: body.email });
+
+    const Accounts = await AccountModel.find({
+      // userId: Users._id,
+    });
+
     //ユーザーが存在しない場合のエラーハンドリング;
-    if (!Beans && !Groups) {
+    if (!Users && !Accounts) {
+      // Users と Accounts の両方が false の場合
       return NextResponse.json({
         success: false,
-        message: "ユーザーが見つかりません。",
+        message: "ユーザーとアカウント情報が見つかりません。",
+      });
+    } else if (!Users) {
+      // Users が false の場合
+      return NextResponse.json({
+        success: false,
+        message: "ユーザー情報が見つかりません。",
+      });
+    } else if (!Accounts) {
+      // Accounts が false の場合
+      return NextResponse.json({
+        success: false,
+        message: "アカウント情報が見つかりません。",
       });
     }
 
@@ -37,11 +61,11 @@ export async function DELETE(request) {
         { $pull: { email: body.email } }
       );
 
-      // // emailが空の配列になったグループを削除
+      // emailが空の配列になったグループを削除
       await GroupModel.deleteMany({ email: { $size: 0 } });
 
       await UserModel.deleteOne({ email: body.email });
-
+      await AccountModel.deleteOne({ _id: Accounts._id });
       return NextResponse.json({
         success: true,
         message: "ユーザーとその関連データを正常に削除しました",

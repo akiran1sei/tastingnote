@@ -1,12 +1,14 @@
-import styles from "@/app/styles/Contents.module.css";
-import { HomePage } from "@/app/components/molecules/Home/Home";
+import styles from "@/app/styles/Pages.module.css";
+import { TopComponent } from "@/app/components/molecules/Top/TopPage";
 
-const Home = () => {
+const Top = () => {
   return (
-    <div className={styles.home}>
-      <HomePage />
+    <div className={styles.main_contents}>
+      <section className={styles.section}>
+        <TopComponent />
+      </section>
     </div>
   );
 };
 
-export default Home;
+export default Top;

@@ -1,9 +1,7 @@
 "use client";
-import { GroupCreate } from "@/app/components/molecules/Group/Group";
+import { GroupComponent } from "@/app/components/molecules/Group/Group";
 import Head from "next/head";
 import useSWR from "swr";
-
-import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 
 const GroupPage = () => {
   const { data, error } = useSWR(`/api/group/choice`, fetcher, {
@@ -25,31 +23,9 @@ const GroupPage = () => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <GlobalHeader />
-      <GroupCreate data={data} />
+      <GroupComponent data={data} />
     </>
   );
-  // return isLoggedIn ? (
-  //   <>
-  //     <Head>
-  //       <title>グループ作成ページ</title>
-  //       <meta
-  //         name="description"
-  //         content="グループ作成、または、選択するページです。"
-  //       />
-  //       <meta name="viewport" content="width=device-width, initial-scale=1" />
-  //     </Head>
-  //     <GlobalHeader />
-  //     <GroupCreate data={data} user={isUserId} />
-  //   </>
-  // ) : (
-  //   <>
-  //     <GlobalHeader />
-  //     <div className={styles.sign_off_page}>
-  //       <p className={styles.sign_off_text}>ログインしてください。</p>
-  //     </div>
-  //   </>
-  // );
 };
 
 const fetcher = async (url) => {

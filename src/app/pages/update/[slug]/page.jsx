@@ -2,11 +2,9 @@
 import { use } from "react";
 
 import Head from "next/head";
-import styles from "@/app/styles/Contents.module.css";
-import { Update } from "@/app/components/molecules/Update/Update";
+import { UpdateComponent } from "@/app/components/molecules/Update/Update";
 import useSWR from "swr";
 import { useState, useEffect } from "react";
-import { GlobalHeader } from "@/app/components/header/GlobalHeader";
 import { useSession } from "next-auth/react";
 const UpdatePage = ({ params }) => {
   const id = use(params);
@@ -57,31 +55,9 @@ const UpdatePage = ({ params }) => {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <GlobalHeader />
-      <Update data={singleData} groups={GroupData} item={singleData} />
+      <UpdateComponent data={singleData} groups={GroupData} item={singleData} />
     </>
   );
-  // return isLoggedIn ? (
-  //   <>
-  //     <Head>
-  //       <title>編集ページ</title>
-  //       <meta
-  //         name="description"
-  //         content="コーヒーをテイスティングするときに使用するアプリです。"
-  //       />
-  //       <meta name="viewport" content="width=device-width, initial-scale=1" />
-  //     </Head>
-  //     <GlobalHeader />
-  //     <Update data={singleData} groups={GroupData} item={singleData} />
-  //   </>
-  // ) : (
-  //   <>
-  //     <GlobalHeader />
-  //     <div className={styles.sign_off_page}>
-  //       <p className={styles.sign_off_text}>ログインしてください。</p>
-  //     </div>
-  //   </>
-  // );
 };
 
 const fetcher = async (url) => {

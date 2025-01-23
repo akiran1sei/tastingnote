@@ -5,7 +5,7 @@ import Image from "next/image";
 import React from "react";
 import { useSession } from "next-auth/react";
 
-export function HomeBtn(context) {
+export function HomeBtn() {
   const router = useRouter();
 
   const navigateTo = (path) => {
