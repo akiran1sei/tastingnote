@@ -99,7 +99,7 @@ export function SignInComponent() {
               </button>
             </div>
           </form>
-          <hr className={styles.hr}></hr>
+          {/* <hr className={styles.hr}></hr>
           <div className={styles.sign__btns}>
             <button onClick={signInWithGoogle} className={styles.sign__btn}>
               <Image
@@ -109,7 +109,7 @@ export function SignInComponent() {
                 height={50}
               />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

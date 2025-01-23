@@ -105,7 +105,7 @@ export function ProfileComponent() {
                 <span className={styles.caution__text}>
                   こちらの全データ削除について、
                   <br />
-                  アカウントを含む全データを削除するのは、emailとpasswordを利用したユーザーのみになります。SNS認証のアカウントの方は、ユーザーデータ以外のデータが削除されます。
+                  アカウント削除されるとこのアカウントで作成されたデータが全て削除されます。
                 </span>
                 <button
                   className={`${styles.profile__btn} ${styles.profile__delete__btn}`}
@@ -113,7 +113,7 @@ export function ProfileComponent() {
                   onClick={handleAccountDelete}
                   disabled={isAccountDelete}
                 >
-                  {isLoggingOut ? "データ 削除中.." : "全データ 削除"}
+                  {isLoggingOut ? "アカウント削除中.." : "全データ 削除"}
                 </button>
               </li>
             </ul>
