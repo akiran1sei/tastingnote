@@ -40,11 +40,18 @@ const BeansSchema = new Schema(
   },
   { timestamps: true }
 );
+
 const AccountSchema = new Schema({
-  name: String,
-  email: String,
-  password: String,
+  provider: String,
+  type: String,
+  providerAccountId: String,
+  access_token: String,
+  expires_at: Number,
+  scope: String,
+  token_type: String,
+  id_token: String,
   userId: String,
+  email: String,
 });
 //データーベースをdb変数に代入
 const UserSchema = new Schema({

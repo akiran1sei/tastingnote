@@ -17,11 +17,10 @@ export async function DELETE(request) {
 
     const Users = await UserModel.findOne({ email: body.email });
 
-    console.log("Users", Users._id);
-    const Accounts = await AccountModel.findOne({
-      userId: Users._id,
+    const Accounts = await AccountModel.find({
+      // userId: Users._id,
     });
-    console.log("Accounts", Accounts.userId);
+
     //ユーザーが存在しない場合のエラーハンドリング;
     if (!Users && !Accounts) {
       // Users と Accounts の両方が false の場合
@@ -66,7 +65,7 @@ export async function DELETE(request) {
       await GroupModel.deleteMany({ email: { $size: 0 } });
 
       await UserModel.deleteOne({ email: body.email });
-      await AccountModel.deleteOne({ userId: Users._id });
+      await AccountModel.deleteOne({ _id: Accounts._id });
       return NextResponse.json({
         success: true,
         message: "ユーザーとその関連データを正常に削除しました",
