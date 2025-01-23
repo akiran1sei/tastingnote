@@ -42,14 +42,14 @@ export function SignInComponent() {
       setIsLoading(false);
     }
   };
-  const signInWithGoogle = async () => {
-    try {
-      await signIn("google", { callbackUrl: "/" });
-    } catch (error) {
-      setError("サインインに失敗しました。");
-      return alert(error);
-    }
-  };
+  // const signInWithGoogle = async () => {
+  //   try {
+  //     await signIn("google", { callbackUrl: "/" });
+  //   } catch (error) {
+  //     setError("サインインに失敗しました。");
+  //     return alert(error);
+  //   }
+  // };
 
   return (
     <div className={styles.sign__contents}>
