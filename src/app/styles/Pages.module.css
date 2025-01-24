@@ -85,6 +85,7 @@
 }
 /* .caution__text */
 .caution__text {
+  display: block;
   background: #ed1a3d;
   color: var(--color-white);
   padding: 0 1rem;
@@ -1797,7 +1798,50 @@ input[type="range"].select__input__roast {
   word-wrap: break-word; /* 長い単語やメールアドレスを改行 */
   overflow-wrap: break-word; /* 古いブラウザでのサポート */
 }
-.profile__btn__box {
+.profile__setting {
+  width: 100%;
+  max-width: 500px;
+  margin: 1rem auto;
+}
+.profile__wrap {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+.profile__form {
+  display: contents;
+}
+.profile__setting__item {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.profile__setting__label {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  background: var(--color-yellow);
+  color: var(--color-white);
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px 5px 0 0;
+}
+
+.profile__setting__input {
+  margin-top: 1rem;
+  background-color: var(--color-white);
+}
+
+.profile__btn__group {
   margin-top: 2rem;
 }
 .profile__btn__list {
@@ -1826,6 +1870,9 @@ input[type="range"].select__input__roast {
 }
 
 .profile__delete {
+  width: 100%;
+  max-width: 500px;
+  display: block;
   background: #ed1a3d;
 }
 .profile__delete__btn {
