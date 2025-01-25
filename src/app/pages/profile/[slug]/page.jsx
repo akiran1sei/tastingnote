@@ -1,4 +1,4 @@
-import { ProfileComponent } from "@/app/components/molecules/User/User";
+import { ProfileComponent } from "@/app/components/molecules/Profile/Profile";
 import Head from "next/head";
 const Profile = () => {
   return (

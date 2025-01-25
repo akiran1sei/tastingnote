@@ -1,26 +1,57 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import styles from "@/app/styles/Pages.module.css";
 
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
-import { useSession, signOut } from "next-auth/react";
-import Link from "next/link";
+import { useSession, signOut, signIn } from "next-auth/react";
+
 export function ProfileComponent() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-  const [isAccountDelete, setIsAccountDelete] = useState(false);
+  const [isAccount, setIsAccount] = useState(false);
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [username, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
-  const handleSubmit = async () => {};
+  const [editUserName, setEditUserName] = useState("");
+  const [editUserEmail, setEditUserEmail] = useState("");
+  console.log(userInfo);
+  // async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
+    if (confirm("保存してもよろしいでしょうか？")) {
+      e.preventDefault();
+      setIsAccount(true);
+      try {
+        const response = await fetch(`/api/profile/${[userInfo.id]}`, {
+          method: "PUT",
+          cache: "no-store",
+          body: JSON.stringify({
+            _id: userInfo.id,
+            name: editUserName,
+            email: editUserEmail,
+          }),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Cache-Control": "no-store",
+          },
+        });
+        const jsonData = await response.json();
+        alert(jsonData.message);
+        return signIn();
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setIsAccount(false);
+      }
+    }
+  };
   const handleAccountDelete = async () => {
     if (confirm("Account Delete？")) {
       if (confirm("作成したデータ全て削除しますがよろしいでしょうか？")) {
-        setIsAccountDelete(true);
+        setIsAccount(true);
         try {
           const res = await fetch(`/api/auth/delete/${userEmail}`, {
             method: "DELETE",
@@ -41,7 +72,7 @@ export function ProfileComponent() {
           // ユーザーにエラーメッセージを表示するなど
           alert("アカウント削除中にエラーが発生しました。");
         } finally {
-          setIsAccountDelete(false);
+          setIsAccount(false);
         }
       }
     }
@@ -107,71 +138,87 @@ export function ProfileComponent() {
                     className={`${styles.profile__setting__item} ${styles.profile__item}`}
                   >
                     <label
-                      htmlFor="profile__name"
+                      htmlFor="profile_name"
                       className={`${styles.profile__setting__title} ${styles.profile__title}`}
                     >
                       usernameの編集
                     </label>
-
-                    <input
-                      type="text"
-                      id="profile__name"
-                      className={styles.profile__setting__input}
-                      name="name"
-                      placeholder="username"
-                      value={username}
-                      disabled
-                    />
+                    <span
+                      className={`${styles.profile__setting__value} ${styles.profile__value}`}
+                    >
+                      {username}
+                    </span>
+                    <span
+                      className={`${styles.profile__setting__value} ${styles.profile__value}`}
+                    >
+                      <input
+                        type="text"
+                        id="profile_name"
+                        className={styles.profile__setting__input}
+                        name="profile_name"
+                        placeholder="username"
+                        value={editUserName}
+                        onChange={(e) => setEditUserName(e.target.value)}
+                      />
+                    </span>
                   </div>
                   <div
                     className={`${styles.profile__setting__item} ${styles.profile__item}`}
                   >
                     <label
-                      htmlFor="profile__email"
+                      htmlFor="profile_email"
                       className={`${styles.profile__setting__title} ${styles.profile__title}`}
                     >
                       emailの編集
                     </label>
-
-                    <input
-                      type="email"
-                      id="profile__email"
-                      className={styles.profile__setting__input}
-                      name="email"
-                      placeholder="email"
-                      value={userEmail}
-                      disabled
-                    />
+                    <span
+                      className={`${styles.profile__setting__value} ${styles.profile__value}`}
+                    >
+                      {userEmail}
+                    </span>
+                    <span
+                      className={`${styles.profile__setting__value} ${styles.profile__value}`}
+                    >
+                      <input
+                        type="email"
+                        id="profile_email"
+                        className={styles.profile__setting__input}
+                        name="profile_email"
+                        placeholder="email"
+                        value={editUserEmail}
+                        onChange={(e) => setEditUserEmail(e.target.value)}
+                      />
+                    </span>
+                  </div>
+                  <div className={styles.profile__btn__item}>
+                    <button
+                      type="submit"
+                      className={`${styles.profile__btn} ${styles.profile__save__btn}`}
+                    >
+                      保存
+                    </button>
                   </div>
                 </form>
                 <div className={styles.profile__btn__group}>
-                  <ul className={styles.profile__btn__list}>
-                    <li className={styles.profile__btn__item}>
-                      <button type="submit" className={styles.profile__btn}>
-                        保存
-                      </button>
-                    </li>
-
-                    <li
-                      className={`${styles.profile__btn__item} ${styles.profile__delete}`}
+                  <div
+                    className={`${styles.profile__btn__item} ${styles.profile__delete}`}
+                  >
+                    <span className={styles.caution__text}>
+                      ～こちらの退会について～
+                      <br />
+                      退会されますとこのアカウントで
+                      <br />
+                      作成されたデータが全て削除されます。
+                    </span>
+                    <button
+                      className={`${styles.profile__btn} ${styles.profile__delete__btn}`}
+                      type="button"
+                      onClick={handleAccountDelete}
+                      disabled={isAccount}
                     >
-                      <span className={styles.caution__text}>
-                        ～こちらの退会について～
-                        <br />
-                        退会されますとこのアカウントで
-                        <br />
-                        作成されたデータが全て削除されます。
-                      </span>
-                      <button
-                        className={`${styles.profile__btn} ${styles.profile__delete__btn}`}
-                        type="button"
-                        onClick={handleAccountDelete}
-                        disabled={isAccountDelete}
-                      >
-                        {isLoggingOut ? "アカウント削除中.." : "退会"}
-                      </button>
-                    </li>
-                  </ul>
+                      {isLoggingOut ? "アカウント削除中.." : "退会"}
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
