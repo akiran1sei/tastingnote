@@ -10,12 +10,22 @@ import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
 dotenv.config();
 export function SignInComponent() {
+  const { data: session, status } = useSession();
+  const [userInfo, setUserInfo] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(""); // エラー状態の追加
   const router = useRouter();
+  useEffect(() => {
+    if (status === "authenticated" && session) {
+      setUserInfo(session.user);
 
+      setIsLoading(false);
+    } else if (status === "unauthenticated") {
+      setIsLoading(false);
+    }
+  }, [session, status]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -29,7 +39,7 @@ export function SignInComponent() {
       });
 
       if (sign_in.ok) {
-        return router.push("/");
+        return router.push(`/pages/profile/${userInfo}`);
       }
       await setError("サインインに失敗しました。もう一度お試しください。");
 
