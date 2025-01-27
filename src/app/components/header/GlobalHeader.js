@@ -29,7 +29,6 @@ export function GlobalHeader() {
       setIsActive(false);
     }
   };
-
   const headerClass = `${header.header} ${isActive ? header.active : ""}`;
 
   return session ? (

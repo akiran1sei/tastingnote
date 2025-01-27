@@ -386,7 +386,7 @@ export function SelectComponent({ params }) {
               className={`${styles.select__beans__list__item} ${styles.select__balance}`}
             >
               <span className={styles.select__beans__list__title}>
-                ハーモニーの均衝性
+                バランス
               </span>
             </li>
 

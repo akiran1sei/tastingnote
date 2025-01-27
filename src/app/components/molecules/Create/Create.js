@@ -7,7 +7,7 @@ import useReadGroups from "@/app/utils/useReadGroups";
 import { useRouter } from "next/navigation";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { CreateBtn } from "@/app/components/buttons/CreateBtn";
-
+import { maskEmail } from "@/app/components/items/concealEmail";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
@@ -171,7 +171,7 @@ export function BeansComponent(context) {
       setIsLoading(false);
     }
   }, [session, status]);
-  console.log(status);
+  const concealName = maskEmail(username);
   if (isLoading) {
     return <LoadingSkeleton />;
   } else if (status === "unauthenticated") {
@@ -234,7 +234,7 @@ export function BeansComponent(context) {
                     width={"30"}
                     height={50}
                     placeholder="ユーザーネーム"
-                    value={username}
+                    value={concealName}
                     onChange={(e) => setUserName(e.target.value)}
                     required
                   />
@@ -910,7 +910,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="balance">
                     <span className={styles.edit__item__number}>14</span>
-                    ハーモニーの均衝性
+                    バランス
                     <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"

@@ -6,6 +6,7 @@ import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified"
 import Image from "next/image";
 import Head from "next/head";
 import styles from "@/app/styles/Pages.module.css";
+import { maskEmail } from "@/app/components/items/concealEmail";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { DeleteBtn } from "@/app/components/buttons/DeleteBtn";
 import { EditBtn } from "@/app/components/buttons/EditBtn";
@@ -29,6 +30,8 @@ export function BrowseComponent(context) {
     }
   }, [session, status]);
   console.log(status);
+  console.log();
+  const concealName = maskEmail(browse.username);
   if (isLoading) {
     return <LoadingSkeleton />;
   } else if (status === "unauthenticated") {
@@ -73,7 +76,7 @@ export function BrowseComponent(context) {
                   ユーザー
                 </label>
               </div>
-              <div className={styles.edit__data}>{browse.username}</div>
+              <div className={styles.edit__data}>{concealName}</div>
             </div>
             <div className={styles.edit__item}>
               <div className={styles.edit__data__header}>
@@ -369,7 +372,7 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>14</span>
-                  ハーモニーの均衝性
+                  バランス
                   <span className={styles.edit__item__mark}>
                     <Image
                       src="/images/exclamation_img.svg"

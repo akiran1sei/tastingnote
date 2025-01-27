@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import styles from "@/app/styles/Pages.module.css";
-
+import { maskEmail } from "@/app/components/items/concealEmail";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 import { useSession, signOut, signIn } from "next-auth/react";
@@ -18,6 +18,11 @@ export function ProfileComponent() {
   const [editUserName, setEditUserName] = useState("");
   const [editUserEmail, setEditUserEmail] = useState("");
   console.log(userInfo);
+
+  // 使用例
+  const concealEmail = maskEmail(userEmail);
+  const concealName = maskEmail(username);
+
   // async function handleSubmit(e) {
   const handleSubmit = async (e) => {
     if (confirm("保存してもよろしいでしょうか？")) {
@@ -99,10 +104,10 @@ export function ProfileComponent() {
           <h1 className={styles.contents__title}>Profile</h1>
           {/* {session && ( */}
           <div className={styles.profile__card}>
-            <ul
-              className={`${styles.profile__user__list} ${styles.profile__list}`}
+            <div
+              className={`${styles.profile__card__wrap} ${styles.profile__wrap}`}
             >
-              <li
+              <div
                 className={`${styles.profile__user__item} ${styles.profile__item}`}
               >
                 <span
@@ -113,11 +118,11 @@ export function ProfileComponent() {
                 <span
                   className={`${styles.profile__item__value} ${styles.profile__value}`}
                 >
-                  {username}
+                  {concealName}
                 </span>
-              </li>
-              <li
-                className={`${styles.profile__user__item} ${styles.profile__item}`}
+              </div>
+              <div
+                className={`${styles.profile__user__list} ${styles.profile__list}`}
               >
                 <span
                   className={`${styles.profile__item__title} ${styles.profile__title}`}
@@ -127,12 +132,15 @@ export function ProfileComponent() {
                 <span
                   className={`${styles.profile__item__value} ${styles.profile__value}`}
                 >
-                  {userEmail}
+                  {concealEmail}
                 </span>
-              </li>
-            </ul>
+              </div>
+            </div>
+
             <div className={styles.profile__setting}>
-              <div className={styles.profile__wrap}>
+              <div
+                className={`${styles.profile__setting__wrap} ${styles.profile__wrap}`}
+              >
                 <form onSubmit={handleSubmit} className={styles.profile__form}>
                   <div
                     className={`${styles.profile__setting__item} ${styles.profile__item}`}
@@ -146,7 +154,7 @@ export function ProfileComponent() {
                     <span
                       className={`${styles.profile__setting__value} ${styles.profile__value}`}
                     >
-                      {username}
+                      {concealName}
                     </span>
                     <span
                       className={`${styles.profile__setting__value} ${styles.profile__value}`}
@@ -174,7 +182,7 @@ export function ProfileComponent() {
                     <span
                       className={`${styles.profile__setting__value} ${styles.profile__value}`}
                     >
-                      {userEmail}
+                      {concealEmail}
                     </span>
                     <span
                       className={`${styles.profile__setting__value} ${styles.profile__value}`}

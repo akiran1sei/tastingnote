@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import dotenv from "dotenv";
 export function SignUpComponent() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   dotenv.config();
@@ -19,7 +18,6 @@ export function SignUpComponent() {
           method: "POST",
           headers: { "Cache-Control": "no-store" },
           body: JSON.stringify({
-            username: name,
             email: email,
             password: password,
           }),
@@ -40,19 +38,6 @@ export function SignUpComponent() {
         <div className={styles.sign__card}>
           <form onSubmit={handleSubmit} className={styles.sign__form}>
             <ul className={styles.sign__list}>
-              <li className={styles.sign__item}>
-                <label htmlFor="name">user name</label>
-                <br className={styles.line__break} />
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Name"
-                  required
-                />
-              </li>
               <li className={styles.sign__item}>
                 <label htmlFor="email">user email</label>
                 <br className={styles.line__break} />
