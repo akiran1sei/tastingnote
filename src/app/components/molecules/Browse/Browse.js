@@ -276,15 +276,29 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data}>{browse.acidityStrength}</div>
 
               <div className={styles.edit__point__memo}>
-                <p className={styles.edit__point__text}>
-                  強い順から、
-                  <br />
-                  High2→High1→Middle
-                  <br />
-                  →Light2→Light1、
-                  <br />
-                  酸の強さを計る
-                </p>
+                <div className={styles.edit__strength}>
+                  <div className={styles.edit__strength__img}>
+                    <Image
+                      src={"/images/strength-right.png"}
+                      alt={"Strengthの図"}
+                      width={100}
+                      height={100}
+                      priority
+                    />
+                  </div>
+
+                  <p className={styles.edit__strength__text}>
+                    H1：最も強い
+                    <br />
+                    H2：強い
+                    <br />
+                    M ：標準
+                    <br />
+                    L1：弱い
+                    <br />
+                    L2：最も弱い
+                  </p>
+                </div>
               </div>
             </div>
             <div className={styles.edit__item}>
@@ -315,13 +329,29 @@ export function BrowseComponent(context) {
               </div>
               <div className={styles.edit__data}>{browse.bodyStrength}</div>
               <div className={styles.edit__point__memo}>
-                <p className={styles.edit__point__text}>
-                  舌触りの滑らかさ強い順から,
-                  <br />
-                  High2→High1→Middle
-                  <br />
-                  →Light2→Light1である。
-                </p>
+                <div className={styles.edit__strength}>
+                  <div className={styles.edit__strength__img}>
+                    <Image
+                      src={"/images/strength-right.png"}
+                      alt={"Strengthの図"}
+                      width={100}
+                      height={100}
+                      priority
+                    />
+                  </div>
+
+                  <p className={styles.edit__strength__text}>
+                    H1：最も強い
+                    <br />
+                    H2：強い
+                    <br />
+                    M ：標準
+                    <br />
+                    L1：弱い
+                    <br />
+                    L2：最も弱い
+                  </p>
+                </div>
               </div>
             </div>
             <div className={styles.edit__item}>
