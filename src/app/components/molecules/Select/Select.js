@@ -315,87 +315,69 @@ export function SelectComponent({ params }) {
             <li
               className={`${styles.select__beans__list__item} ${styles.select__coffee}`}
             >
-              <span className={styles.select__beans__list__title}>
-                コーヒー豆
-              </span>
+              <span className={styles.select__beans__list__title}>Beans</span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__roast}`}
             >
-              <span className={styles.select__beans__list__title}>
-                ロースト
-              </span>
+              <span className={styles.select__beans__list__title}>Roast</span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__aroma}`}
             >
-              <span className={styles.select__beans__list__title}>アロマ</span>
+              <span className={styles.select__beans__list__title}>Aroma</span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__defects}`}
             >
-              <span className={styles.select__beans__list__title}>
-                欠点・瑕疵
-              </span>
+              <span className={styles.select__beans__list__title}>Defects</span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__cleancap}`}
             >
               <span className={styles.select__beans__list__title}>
-                カップの
+                Clean
                 <br />
-                綺麗さ
+                Cap
               </span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__sweet}`}
             >
-              <span className={styles.select__beans__list__title}>甘さ</span>
+              <span className={styles.select__beans__list__title}>Sweet</span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__acidity}`}
             >
-              <span className={styles.select__beans__list__title}>酸の質</span>
+              <span className={styles.select__beans__list__title}>Acidity</span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__mouthfeel}`}
             >
               <span className={styles.select__beans__list__title}>
-                口に含んだ
-                <br />
-                質感
+                Mouthfeel
               </span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__flavor}`}
             >
-              <span className={styles.select__beans__list__title}>
-                フレーバー
-              </span>
+              <span className={styles.select__beans__list__title}>Flavor</span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__after}`}
             >
-              <span className={styles.select__beans__list__title}>
-                後味の
-                <br />
-                印象度
-              </span>
+              <span className={styles.select__beans__list__title}>After</span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__balance}`}
             >
-              <span className={styles.select__beans__list__title}>
-                ハーモニーの均衝性
-              </span>
+              <span className={styles.select__beans__list__title}>Balance</span>
             </li>
 
             <li
               className={`${styles.select__beans__list__item} ${styles.select__overall}`}
             >
-              <span className={styles.select__beans__list__title}>
-                総合評価
-              </span>
+              <span className={styles.select__beans__list__title}>OverAll</span>
             </li>
             <li
               className={`${styles.select__beans__list__item} ${styles.select__total}`}
@@ -484,22 +466,22 @@ export function SelectComponent({ params }) {
                           <div className={styles.aroma__box}>
                             <div className={styles.aroma__header}>
                               <div className={styles.aroma__header__title}>
-                                ドライ
+                                Dry
                               </div>
                               <div className={styles.aroma__header__title}>
-                                クラスト
+                                Crust
                               </div>
                               <div className={styles.aroma__header__title}>
-                                ブレーク
+                                Break
                               </div>
                             </div>
                             <div className={styles.aroma__value}>
                               <div className={styles.aroma__value__list}></div>
                               <div className={styles.aroma__value__list}>
-                                強さ：
+                                strong:
                               </div>
                               <div className={styles.aroma__value__list}>
-                                質 :
+                                quality:
                               </div>
                             </div>
                             <div className={styles.aroma__value__strength}>
@@ -644,24 +626,21 @@ export function SelectComponent({ params }) {
                           <div className={styles.aroma__box}>
                             <div className={styles.aroma__header}>
                               <div className={styles.aroma__header__title}>
-                                ドライ
+                                Dry
                               </div>
                               <div className={styles.aroma__header__title}>
-                                クラスト
+                                Crust
                               </div>
                               <div className={styles.aroma__header__title}>
-                                ブレーク
+                                Break
                               </div>
                             </div>
                             <div className={styles.aroma__value}>
-                              <div className={styles.aroma__value__list}></div>
-                              <div className={styles.aroma__value__list}>
-                                強さ：
-                              </div>
-                              <div className={styles.aroma__value__list}>
-                                質　：
-                              </div>
+                              {/* <div className={styles.aroma__value__list}></div> */}
+                              <div className={styles.aroma__value__list}>S</div>
+                              <div className={styles.aroma__value__list}>Q</div>
                             </div>
+
                             <div className={styles.aroma__value__strength}>
                               <div className={styles.aroma__value__Item}>
                                 {beans.aromaDryStrength}
@@ -709,13 +688,19 @@ export function SelectComponent({ params }) {
                       <li
                         className={`${styles.select__list} ${styles.select__acidity}`}
                       >
-                        <p className={styles.select__value}>{beans.acidity}</p>
+                        <p className={styles.select__value}>
+                          {beans.acidity}
+                          <br />
+                          {beans.acidityStrength}
+                        </p>
                       </li>
                       <li
                         className={`${styles.select__list} ${styles.select__mouthfeel}`}
                       >
                         <p className={styles.select__value}>
                           {beans.mouthfeel}
+                          <br />
+                          {beans.bodyStrength}
                         </p>
                       </li>
                       <li

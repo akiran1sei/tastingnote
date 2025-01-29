@@ -29,7 +29,6 @@ export function GlobalHeader() {
       setIsActive(false);
     }
   };
-
   const headerClass = `${header.header} ${isActive ? header.active : ""}`;
 
   return session ? (
@@ -69,9 +68,9 @@ export function GlobalHeader() {
             <li className={header.menu_item}>
               <button
                 type="button"
-                onClick={() => navigateTo("/pages/user/profile")}
+                onClick={() => navigateTo(`/pages/profile/${userInfo.id}`)}
               >
-                User Profile
+                Profile
               </button>
             </li>
             <li className={header.menu_item}>

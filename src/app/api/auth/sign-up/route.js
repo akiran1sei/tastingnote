@@ -6,10 +6,10 @@ import bcrypt from "bcryptjs";
 export async function POST(request) {
   try {
     await connectDB();
-    const { username, email, password } = await request.json();
+    const { email, password } = await request.json();
 
     // 入力チェック
-    if (!username || !email || !password) {
+    if (!email || !password) {
       return NextResponse.json(
         {
           message: "ユーザー名とメールアドレスとパスワードを入力してください",
@@ -21,7 +21,7 @@ export async function POST(request) {
 
     // ユーザー名とメールアドレスの重複チェック
     const existingUser = await UserModel.findOne({
-      $or: [{ username }, { email }],
+      $or: [{ email }],
     });
     if (existingUser) {
       return NextResponse.json(
@@ -39,7 +39,7 @@ export async function POST(request) {
 
     // ユーザー作成
     const newUser = await UserModel.create({
-      name: username,
+      name: email,
       email: email,
       password: hashedPassword,
     });

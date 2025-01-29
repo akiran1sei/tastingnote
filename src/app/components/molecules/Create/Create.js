@@ -7,7 +7,7 @@ import useReadGroups from "@/app/utils/useReadGroups";
 import { useRouter } from "next/navigation";
 import { HomeBtn } from "@/app/components/buttons/HomeBtn";
 import { CreateBtn } from "@/app/components/buttons/CreateBtn";
-
+import { maskEmail } from "@/app/components/items/concealEmail";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
@@ -171,7 +171,7 @@ export function BeansComponent(context) {
       setIsLoading(false);
     }
   }, [session, status]);
-  console.log(status);
+  const concealName = maskEmail(username);
   if (isLoading) {
     return <LoadingSkeleton />;
   } else if (status === "unauthenticated") {
@@ -234,7 +234,7 @@ export function BeansComponent(context) {
                     width={"30"}
                     height={50}
                     placeholder="ユーザーネーム"
-                    value={username}
+                    value={concealName}
                     onChange={(e) => setUserName(e.target.value)}
                     required
                   />
@@ -710,28 +710,42 @@ export function BeansComponent(context) {
                   >
                     <option defaultValue={null}>{null}</option>
                     <optgroup label="High">
-                      <option value={"High２"}>{"High２"}</option>
-                      <option value={"High１"}>{"High１"}</option>
+                      <option value={"H2"}>{"H2"}</option>
+                      <option value={"H1"}>{"H1"}</option>
                     </optgroup>
                     <optgroup label="Middle">
-                      <option value={"Middle"}>{"Middle"}</option>
+                      <option value={"M"}>{"M"}</option>
                     </optgroup>
                     <optgroup label="Light">
-                      <option value={"Light2"}>{"Light2"}</option>
-                      <option value={"Light1"}>{"Light1"}</option>
+                      <option value={"L1"}>{"L1"}</option>
+                      <option value={"L2"}>{"L2"}</option>
                     </optgroup>
                   </select>
                 </div>
                 <div className={styles.edit__point__memo}>
-                  <p className={styles.edit__point__text}>
-                    強い順から、
-                    <br />
-                    High2→High1→Middle
-                    <br />
-                    →Light2→Light1、
-                    <br />
-                    酸の強さを計る
-                  </p>
+                  <div className={styles.edit__strength}>
+                    <div className={styles.edit__strength__img}>
+                      <Image
+                        src={"/images/strength-right.png"}
+                        alt={"Strengthの図"}
+                        width={100}
+                        height={100}
+                        priority
+                      />
+                    </div>
+
+                    <p className={styles.edit__strength__text}>
+                      H1：最も強い
+                      <br />
+                      H2：強い
+                      <br />
+                      M ：標準
+                      <br />
+                      L1：弱い
+                      <br />
+                      L2：最も弱い
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className={styles.edit__item}>
@@ -792,27 +806,43 @@ export function BeansComponent(context) {
                   >
                     <option defaultValue={null}>{null}</option>
                     <optgroup label="High">
-                      <option value={"High２"}>{"High２"}</option>
-                      <option value={"High１"}>{"High１"}</option>
+                      <option value={"H2"}>{"H2"}</option>
+                      <option value={"H1"}>{"H1"}</option>
                     </optgroup>
                     <optgroup label="Middle">
-                      <option value={"Middle"}>{"Middle"}</option>
+                      <option value={"M"}>{"M"}</option>
                     </optgroup>
                     <optgroup label="Light">
-                      <option value={"Light2"}>{"Light2"}</option>
-                      <option value={"Light1"}>{"Light1"}</option>
+                      <option value={"L1"}>{"L1"}</option>
+                      <option value={"L2"}>{"L2"}</option>
                     </optgroup>
                   </select>
                 </div>
 
                 <div className={styles.edit__point__memo}>
-                  <p className={styles.edit__point__text}>
-                    舌触りの滑らかさ強い順から,
-                    <br />
-                    High2→High1→Middle
-                    <br />
-                    →Light2→Light1である。
-                  </p>
+                  <div className={styles.edit__strength}>
+                    <div className={styles.edit__strength__img}>
+                      <Image
+                        src={"/images/strength-right.png"}
+                        alt={"Strengthの図"}
+                        width={100}
+                        height={100}
+                        priority
+                      />
+                    </div>
+
+                    <p className={styles.edit__strength__text}>
+                      H1：最も強い
+                      <br />
+                      H2：強い
+                      <br />
+                      M ：標準
+                      <br />
+                      L1：弱い
+                      <br />
+                      L2：最も弱い
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -910,7 +940,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="balance">
                     <span className={styles.edit__item__number}>14</span>
-                    ハーモニーの均衝性
+                    バランス
                     <span className={styles.edit__item__mark}>
                       <Image
                         src="/images/exclamation_img.svg"
