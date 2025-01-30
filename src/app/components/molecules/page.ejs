@@ -427,25 +427,25 @@
               </div>
               <div class="tasting-data__item tasting-data__roast">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">ロースト</div>
+                  <div class="tasting-data__item-title">Roast</div>
                   <div class="tasting-data__item-value">
                     <span class="roast-data__item-range-box">
 
                       <input type="range" name="range" id="range" class="roast-data__item-range" value="<%= evaluation.roast %>">
 
                     </span>
-                    <span class="roast-data__item-value"><%= evaluation.roast %>％</span>
+                    <span class="roast-data__item-value"><%= evaluation.roast %>%</span>
                     <span class="roast-data__item-value"><%= evaluation.roastDegree %><br /><span class="tasting-data__item-text-yellow">ロースト</span></span>
                   </div>
                 </div>
               </div>
               <div class="tasting-data__item tasting-data__aroma">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">アロマ</div>
+                  <div class="tasting-data__item-title">Aroma</div>
                   <div class="aroma-data-list">
                     <div class="aroma-data-item">
                       <div class="tasting-data__item-wrap">
-                        <div class="aroma-data__item-title">ドライ</div>
+                        <div class="aroma-data__item-title">Dry</div>
                         <div class="tasting-data__item-value">
                           <span class="aroma-data__item-value">
                             <%= evaluation.aromaDryStrength %>
@@ -460,7 +460,7 @@
                     </div>
                     <div class="aroma-data-item">
                       <div class="tasting-data__item-wrap">
-                        <div class="aroma-data__item-title">クラスト</div>
+                        <div class="aroma-data__item-title">Crust</div>
                         <div class="tasting-data__item-value">
                           <span class="aroma-data__item-value">
                             <%= evaluation.aromaCrustStrength %>
@@ -475,7 +475,7 @@
                     </div>
                     <div class="aroma-data-item">
                       <div class="tasting-data__item-wrap">
-                        <div class="aroma-data__item-title">ブレーク</div>
+                        <div class="aroma-data__item-title">Break</div>
                         <div class="tasting-data__item-value">
                           <span class="aroma-data__item-value">
                             <%= evaluation.aromaBreakStrength %>
@@ -493,19 +493,19 @@
               </div>
               <div class="tasting-data__item tasting-data__defects">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">欠点・瑕疵</div>
+                  <div class="tasting-data__item-title">Defects</div>
                   <div class="tasting-data__item-value"><%= evaluation.defects %></div>
                 </div>
               </div>
               <div class="tasting-data__item tasting-data__cleancap">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">カップの<br />綺麗さ</div>
+                  <div class="tasting-data__item-title">Cleancap</div>
                   <div class="tasting-data__item-value"><%= evaluation.cleancap %></div>
                 </div>
               </div>
               <div class="tasting-data__item tasting-data__sweet">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">甘さ</div>
+                  <div class="tasting-data__item-title">Sweet</div>
                   <div class="tasting-data__item-value"><%=
                         evaluation.sweet %></div>
                 </div>
@@ -514,7 +514,7 @@
 
                 <div class="tasting-data__item-wrap">
                   <div class="tasting-data__item-title">
-                    酸の質
+                    Acidity
                   </div>
                   <div class="tasting-data__item-value"><%=
                         evaluation.acidity %></div>
@@ -525,7 +525,7 @@
 
                 <div class="tasting-data__item-wrap">
                   <div class="tasting-data__item-title">
-                    酸の強さ
+                    Strength
                   </div>
                   <div class="tasting-data__item-value"><%=
                         evaluation.acidityStrength %></div>
@@ -535,8 +535,7 @@
               <div class="tasting-data__item tasting-data__mouthfeel">
                 <div class="tasting-data__item-wrap">
                   <div class="tasting-data__item-title">
-                    口に含んだ<br>
-                    質感
+                    Mouthfeel
                   </div>
 
                   <div class="tasting-data__item-value"><%= evaluation.mouthfeel %></div>
@@ -545,7 +544,7 @@
               <div class="tasting-data__item tasting-data__body-strength">
                 <div class="tasting-data__item-wrap">
                   <div class="tasting-data__item-title">
-                    ボディの強さ
+                    Strength
                   </div>
 
 
@@ -554,41 +553,41 @@
               </div>
               <div class="tasting-data__item tasting-data__flavor">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">フレーバー</div>
+                  <div class="tasting-data__item-title">Flavor</div>
                   <div class="tasting-data__item-value"><%=
                         evaluation.flavor %></div>
                 </div>
               </div>
               <div class="tasting-data__item tasting-data__after">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">後味の<br />印象度</div>
+                  <div class="tasting-data__item-title">After</div>
                   <div class="tasting-data__item-value"><%= evaluation.after %></div>
                 </div>
               </div>
               <div class="tasting-data__item tasting-data__balance">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">バランス</div>
+                  <div class="tasting-data__item-title">Balance</div>
                   <div class="tasting-data__item-value"><%=
                         evaluation.balance %></div>
                 </div>
               </div>
               <div class="tasting-data__item tasting-data__overall">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">総合評価</div>
+                  <div class="tasting-data__item-title">Overall</div>
                   <div class="tasting-data__item-value"><%=
                         evaluation.overall %></div>
                 </div>
               </div>
               <div class="tasting-data__item tasting-data__total">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">TOTAL(＋36)</div>
+                  <div class="tasting-data__item-title">TOTAL(+36)</div>
                   <div class="tasting-data__item-value"><span class="result-data__value"><%=
                         evaluation.result %></span><span class="total-data__value"><%= evaluation.total %></span></div>
                 </div>
               </div>
               <div class="tasting-data__item tasting-data__impression">
                 <div class="tasting-data__item-wrap">
-                  <div class="tasting-data__item-title">味の印象</div>
+                  <div class="tasting-data__item-title">Impression</div>
                   <div class="tasting-data__item-value"><%=
                         evaluation.impression %></div>
                 </div>
