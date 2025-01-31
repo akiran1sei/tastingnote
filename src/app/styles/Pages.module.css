@@ -218,16 +218,16 @@
 .select__total {
   min-height: 65px;
 }
-.select__acidity .select__value {
+/* .select__acidity .select__value {
   flex-direction: row;
 }
 .select__mouthfeel .select__value {
   flex-direction: row-reverse;
-}
+} */
 .select__acidity .select__value,
 .select__mouthfeel .select__value {
   display: flex;
-
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 }

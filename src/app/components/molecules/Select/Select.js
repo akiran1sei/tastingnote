@@ -692,8 +692,11 @@ export function SelectComponent({ params }) {
                           <span className={styles.select__value__text}>
                             {beans.acidity}
                           </span>
+                          <span className={styles.select__value__text}>
+                            {beans.acidityStrength}
+                          </span>
 
-                          <span className={styles.select__value__img}>
+                          {/* <span className={styles.select__value__img}>
                             <span className={styles.select__value__img_name}>
                               <Image
                                 src={`/images/strength-name.png`}
@@ -712,7 +715,7 @@ export function SelectComponent({ params }) {
                                 priority
                               />
                             </span>
-                          </span>
+                          </span> */}
                         </p>
                       </li>
                       <li
@@ -722,7 +725,10 @@ export function SelectComponent({ params }) {
                           <span className={styles.select__value__text}>
                             {beans.mouthfeel}
                           </span>
-                          <span className={styles.select__value__img}>
+                          <span className={styles.select__value__text}>
+                            {beans.bodyStrength}
+                          </span>
+                          {/* <span className={styles.select__value__img}>
                             <span className={styles.select__value__img_box}>
                               <Image
                                 src={`/images/strength-${beans.bodyStrength}.png`}
@@ -741,7 +747,7 @@ export function SelectComponent({ params }) {
                                 priority
                               />
                             </span>
-                          </span>
+                          </span> */}
                         </p>
                       </li>
                       <li
