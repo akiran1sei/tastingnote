@@ -6,6 +6,7 @@ import { maskEmail } from "@/app/components/items/concealEmail";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 import { useSession, signOut, signIn } from "next-auth/react";
+import Link from "next/link";
 
 export function ProfileComponent() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -208,6 +209,23 @@ export function ProfileComponent() {
                   </div>
                 </form>
                 <div className={styles.profile__btn__group}>
+                  <div
+                    className={`${styles.profile__btn__item} ${styles.profile__feedback}`}
+                  >
+                    <button
+                      className={`${styles.profile__btn} ${styles.profile__link__btn}`}
+                      type="button"
+                    >
+                      <Link
+                        href={
+                          "https://nakamoriakira-portfolio.vercel.app/pages/contact"
+                        }
+                        passHref
+                      >
+                        お問い合わせページへ
+                      </Link>
+                    </button>
+                  </div>
                   <div
                     className={`${styles.profile__btn__item} ${styles.profile__delete}`}
                   >
