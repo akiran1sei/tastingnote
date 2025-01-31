@@ -697,7 +697,7 @@ export function SelectComponent({ params }) {
                             <span className={styles.select__value__img_name}>
                               <Image
                                 src={`/images/strength-name.png`}
-                                alt={"Strengthの図"}
+                                alt={"Strengthラベルの図"}
                                 width={10}
                                 height={50}
                                 priority
@@ -726,7 +726,7 @@ export function SelectComponent({ params }) {
                             <span className={styles.select__value__img_box}>
                               <Image
                                 src={`/images/strength-${beans.bodyStrength}.png`}
-                                alt={"Strengthの図"}
+                                alt={"Strengthラベルの図"}
                                 width={25}
                                 height={50}
                                 priority

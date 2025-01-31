@@ -218,7 +218,23 @@
 .select__total {
   min-height: 65px;
 }
+.select__acidity .select__value {
+  flex-direction: row;
+}
+.select__mouthfeel .select__value {
+  flex-direction: row-reverse;
+}
+.select__acidity .select__value,
+.select__mouthfeel .select__value {
+  display: flex;
 
+  justify-content: center;
+  align-items: center;
+}
+.select__acidity .select__value__text,
+.select__mouthfeel .select__value__text {
+  width: 50%;
+}
 .select__beans__list__item:nth-child(2n-1),
 .select__list:nth-child(2n-1) {
   background: var(--color-yellow-10);

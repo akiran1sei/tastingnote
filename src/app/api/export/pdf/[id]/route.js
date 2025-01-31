@@ -42,7 +42,7 @@ export async function GET(req, res) {
     return new Response(pdfBuffer, {
       headers: {
         "Content-Type": "application/pdf; text/html;charset=utf-8",
-        "Content-Disposition": 'attachment; filename="your_file_name.pdf"',
+        "Content-Disposition": "attachment;",
       },
     });
   } catch (error) {
