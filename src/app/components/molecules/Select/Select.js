@@ -689,18 +689,59 @@ export function SelectComponent({ params }) {
                         className={`${styles.select__list} ${styles.select__acidity}`}
                       >
                         <p className={styles.select__value}>
-                          {beans.acidity}
-                          <br />
-                          {beans.acidityStrength}
+                          <span className={styles.select__value__text}>
+                            {beans.acidity}
+                          </span>
+
+                          <span className={styles.select__value__img}>
+                            <span className={styles.select__value__img_name}>
+                              <Image
+                                src={`/images/strength-name.png`}
+                                alt={"Strengthラベルの図"}
+                                width={10}
+                                height={50}
+                                priority
+                              />
+                            </span>
+                            <span className={styles.select__value__img_box}>
+                              <Image
+                                src={`/images/strength-${beans.acidityStrength}.png`}
+                                alt={"Strengthの図"}
+                                width={25}
+                                height={50}
+                                priority
+                              />
+                            </span>
+                          </span>
                         </p>
                       </li>
                       <li
                         className={`${styles.select__list} ${styles.select__mouthfeel}`}
                       >
                         <p className={styles.select__value}>
-                          {beans.mouthfeel}
-                          <br />
-                          {beans.bodyStrength}
+                          <span className={styles.select__value__text}>
+                            {beans.mouthfeel}
+                          </span>
+                          <span className={styles.select__value__img}>
+                            <span className={styles.select__value__img_box}>
+                              <Image
+                                src={`/images/strength-${beans.bodyStrength}.png`}
+                                alt={"Strengthラベルの図"}
+                                width={25}
+                                height={50}
+                                priority
+                              />
+                            </span>
+                            <span className={styles.select__value__img_name}>
+                              <Image
+                                src={`/images/strength-name.png`}
+                                alt={"Strengthの図"}
+                                width={10}
+                                height={50}
+                                priority
+                              />
+                            </span>
+                          </span>
                         </p>
                       </li>
                       <li

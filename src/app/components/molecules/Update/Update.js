@@ -738,18 +738,18 @@ export function UpdateComponent(context) {
                   <div className={styles.edit__strength}>
                     <div className={styles.edit__strength__img}>
                       <Image
-                        src={"/images/strength-right.png"}
+                        src={"/images/strength.png"}
                         alt={"Strengthの図"}
-                        width={100}
+                        width={50}
                         height={100}
                         priority
                       />
                     </div>
 
                     <p className={styles.edit__strength__text}>
-                      H1：最も強い
+                      H2：最も強い
                       <br />
-                      H2：強い
+                      H1：強い
                       <br />
                       M ：標準
                       <br />
@@ -834,18 +834,18 @@ export function UpdateComponent(context) {
                   <div className={styles.edit__strength}>
                     <div className={styles.edit__strength__img}>
                       <Image
-                        src={"/images/strength-right.png"}
+                        src={"/images/strength.png"}
                         alt={"Strengthの図"}
-                        width={100}
+                        width={50}
                         height={100}
                         priority
                       />
                     </div>
 
                     <p className={styles.edit__strength__text}>
-                      H1：最も強い
+                      H2：最も強い
                       <br />
-                      H2：強い
+                      H1：強い
                       <br />
                       M ：標準
                       <br />

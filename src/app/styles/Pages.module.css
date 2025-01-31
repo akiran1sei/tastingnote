@@ -181,6 +181,10 @@
   text-align: center;
   padding-top: 1rem;
 }
+.select__index,
+.select__coffee {
+  max-height: fit-content;
+}
 .select__beans__list__item:not(
     .select__roast,
     .select__aroma,
@@ -214,7 +218,23 @@
 .select__total {
   min-height: 65px;
 }
+.select__acidity .select__value {
+  flex-direction: row;
+}
+.select__mouthfeel .select__value {
+  flex-direction: row-reverse;
+}
+.select__acidity .select__value,
+.select__mouthfeel .select__value {
+  display: flex;
 
+  justify-content: center;
+  align-items: center;
+}
+.select__acidity .select__value__text,
+.select__mouthfeel .select__value__text {
+  width: 50%;
+}
 .select__beans__list__item:nth-child(2n-1),
 .select__list:nth-child(2n-1) {
   background: var(--color-yellow-10);
@@ -350,6 +370,26 @@
   overflow: hidden; /* 内容がオーバーフローした場合に隠す */
   text-overflow: ellipsis; /* 切り詰められたテキストの末尾に省略記号 (...) を追加 */
 }
+
+.select__value__text {
+  margin-top: 0;
+}
+.select__value__img {
+  width: 100%;
+  max-width: 35px;
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  margin: 0 auto;
+}
+.select__value__img_box {
+  margin-top: 0;
+}
+.select__value__img_name {
+  margin-top: 0;
+}
 @media screen and (min-width: 1000px) {
   .select__value {
     word-wrap: break-word; /* 長い単語やメールアドレスを改行 */
@@ -470,6 +510,10 @@ input[type="range"].select__input__roast {
 .select__checkbox__input {
 }
 @media screen and (min-width: 1000px) {
+  .select__index,
+  .select__coffee {
+    max-height: unset;
+  }
   .select__beans__list {
     flex-direction: row;
     position: unset;
