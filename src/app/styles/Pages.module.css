@@ -189,6 +189,7 @@
     .select__roast,
     .select__aroma,
     .select__cleancap,
+    .select__acidity,
     .select__mouthfeel,
     .select__after,
     .select__balance,
@@ -198,6 +199,7 @@
     .select__roast,
     .select__aroma,
     .select__cleancap,
+    .select__acidity,
     .select__mouthfeel,
     .select__after,
     .select__balance,
@@ -212,24 +214,38 @@
   min-height: 200px;
 }
 .select__cleancap,
+.select__acidity,
 .select__mouthfeel,
 .select__after,
 .select__balance,
 .select__total {
   min-height: 65px;
 }
-/* .select__acidity .select__value {
+.select__acidity .select__value {
   flex-direction: row;
+}
+.select__acidity_strength,
+.select__body_strength {
+  display: flex;
+  justify-content: space-around;
+}
+.select__acidity_strength {
+  flex-direction: row-reverse;
+}
+.select__body_strength {
+  flex-direction: row-reverse;
 }
 .select__mouthfeel .select__value {
   flex-direction: row-reverse;
-} */
+}
 .select__acidity .select__value,
 .select__mouthfeel .select__value {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 .select__acidity .select__value__text,
 .select__mouthfeel .select__value__text {
@@ -267,8 +283,8 @@
 .select__list {
   width: 100%;
   height: 100%;
+  max-height: fit-content;
   display: flex;
-
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
@@ -608,6 +624,7 @@ input[type="range"].select__input__roast {
     width: 100%;
     max-width: none;
     height: 100%;
+    max-height: unset;
     display: flex;
     justify-content: center;
     flex-wrap: nowrap;
@@ -713,6 +730,18 @@ input[type="range"].select__input__roast {
     max-height: none;
     /* min-width: 24px;
     max-width: 24px; */
+  }
+  .select__acidity .select__value__text,
+  .select__mouthfeel .select__value__text {
+    width: 100%;
+  }
+
+  .select__acidity .select__value,
+  .select__mouthfeel .select__value {
+    flex-direction: column;
+  }
+  .select__body_strength {
+    flex-direction: row;
   }
   .select__smallTxt {
     color: var(--color-yellow);
