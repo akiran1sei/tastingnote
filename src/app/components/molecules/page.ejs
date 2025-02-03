@@ -357,23 +357,16 @@
 
     /*
 
-   acidity & mouthfeel strength
+    acidity & mouthfeel strength
 
-   */
+    */
     .acidity-box,
     .mouthfeel-box {
       display: flex;
+      flex-direction: column;
       flex-wrap: nowrap;
       justify-content: space-around;
       align-items: center;
-    }
-
-    .acidity-box {
-      flex-direction: row;
-    }
-
-    .mouthfeel-box {
-      flex-direction: row-reverse;
     }
 
     .acidity-box .tasting-data__item-value {
