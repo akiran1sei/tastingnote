@@ -436,7 +436,7 @@
       background: #dba52c;
     }
 
-    .L1strength__item--l1 {
+    .L1 .strength__item--l1 {
       background: #dba52c;
     }
 
@@ -695,45 +695,7 @@
     </div>
     </div>
   </main>
-  <!-- <script>
-    // 強度表示用のクラス追加処理
-    document.addEventListener('DOMContentLoaded', function() {
-      // データが定義されていることを確認
-      if (typeof data === 'undefined') {
-        console.error('Data is not defined');
-        return;
-      }
 
-      data.forEach((element, index) => {
-        // インデックスに基づいて要素を特定
-        const acidityBox = document.querySelectorAll('.js-acidity-strength__box')[index];
-        const mouthfeelBox = document.querySelectorAll('.js-mouthfeel-strength__box')[index];
-
-        if (acidityBox && element.acidityStrength) {
-          try {
-            acidityBox.classList.add(element.acidityStrength);
-            console.log(`Added acidity strength class ${element.acidityStrength} to element ${index}`);
-          } catch (error) {
-            console.error(`Error adding acidity strength class to element ${index}:`, error);
-          }
-        }
-
-        if (mouthfeelBox && element.bodyStrength) {
-          try {
-            mouthfeelBox.classList.add(element.bodyStrength);
-            console.log(`Added body strength class ${element.bodyStrength} to element ${index}`);
-          } catch (error) {
-            console.error(`Error adding body strength class to element ${index}:`, error);
-          }
-        }
-      });
-    });
-
-    // Optional: エラーハンドリングのための追加機能
-    window.addEventListener('error', function(event) {
-      console.error('Global error caught:', event.error);
-    });
-  </script> -->
 </body>
 
 </html>
