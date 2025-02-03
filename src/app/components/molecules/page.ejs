@@ -7,17 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
-  <script>
-    data.forEach(element => {
-      const acidity = document.querySelectorAll(".js-acidity-strength__box");
-      const mouthfeel = document.querySelectorAll(".js-mouthfeel-strength__box");
-      console.log("要素が見つかりました:", acidity);
-      console.log("要素が見つかりました:", mouthfeel);
-      acidity.classList.add(element.acidityStrength);
-      mouthfeel.classList.add(element.bodyStrength);
 
-    });
-  </script>
   <style>
     body {
       width: 100%;
@@ -705,6 +695,17 @@
     </div>
     </div>
   </main>
+  <script>
+    data.forEach(element => {
+      const acidity = document.querySelectorAll(".js-acidity-strength__box");
+      const mouthfeel = document.querySelectorAll(".js-mouthfeel-strength__box");
+      console.log("要素が見つかりました:", acidity);
+      console.log("要素が見つかりました:", mouthfeel);
+      acidity.classList.add(element.acidityStrength);
+      mouthfeel.classList.add(element.bodyStrength);
+
+    });
+  </script>
 </body>
 
 </html>
