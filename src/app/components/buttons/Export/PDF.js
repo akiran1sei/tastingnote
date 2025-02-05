@@ -15,6 +15,7 @@ export default function PDF(data) {
         headers: {
           "Cache-Control": "no-store",
         },
+        cache: "no-store",
       });
       if (response.ok) {
         const blob = await response.blob();

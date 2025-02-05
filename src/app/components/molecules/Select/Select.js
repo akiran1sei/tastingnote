@@ -112,6 +112,7 @@ export function SelectComponent({ params }) {
             "Content-Type": "application/json",
             "Cache-Control": "no-store",
           },
+          cache: "no-store",
           method: "DELETE",
 
           body: JSON.stringify([...checkbox]),

@@ -8,7 +8,9 @@ export default function CSV(context) {
     try {
       setIsExporting(true);
 
-      const response = await fetch(`/api/export/csv/${responseData}`);
+      const response = await fetch(`/api/export/csv/${responseData}`, {
+        cache: "no-store",
+      });
 
       if (!response.ok) {
         throw new Error("Export failed");
