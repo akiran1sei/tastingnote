@@ -41,6 +41,7 @@ export default function CSV(context) {
       console.error("Export error:", error);
       alert("エクスポートに失敗しました。");
     } finally {
+      await window.location.reload();
       setIsExporting(false);
     }
   };

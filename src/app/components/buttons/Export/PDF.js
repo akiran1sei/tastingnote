@@ -30,8 +30,6 @@ export default function PDF(data) {
       } else {
         throw new Error("PDFの生成に失敗しました。");
       }
-      await window.location.reload();
-      return setIsLoading(false);
     } catch (error) {
       console.error("PDF生成エラー:", error);
       // エラーの種類に応じて、より具体的なエラーメッセージを返す
@@ -44,6 +42,8 @@ export default function PDF(data) {
           "PDFの生成に失敗しました。詳細については、管理者にお問い合わせください。"
         );
       }
+    } finally {
+      await window.location.reload();
       setIsLoading(false);
     }
   };
