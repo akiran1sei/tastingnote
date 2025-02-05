@@ -401,25 +401,27 @@ export function SelectComponent({ params }) {
                       //   // チェックボックスのクリック時
                       //   if (e.target.type === "checkbox") {
                       //     // 既存の handleChange 関数を呼び出す
-                      //     handleChange(e);
-                      //   } else {
-                      //     // ul 要素内のチェックボックスを全て取得
-                      //     const checkboxes = e.currentTarget.querySelectorAll(
-                      //       'input[type="checkbox"]'
-                      //     );
 
-                      //     // チェック状態を反転する
-                      //     const allChecked = Array.from(checkboxes).every(
-                      //       (checkbox) => checkbox.checked
-                      //     );
-                      //     checkboxes.forEach((checkbox) => {
-                      //       checkbox.checked = !allChecked;
-                      //       // チェック状態が変更されたら handleChange を呼び出す
-                      //       checkbox.dispatchEvent(
-                      //         new Event("change", { bubbles: true })
-                      //       );
-                      //     });
+                      //     handleChange(e);
                       //   }
+                      //   // else {
+                      //   //   // ul 要素内のチェックボックスを全て取得
+                      //   //   const checkboxes = e.currentTarget.querySelectorAll(
+                      //   //     'input[type="checkbox"]'
+                      //   //   );
+
+                      //   //   // チェック状態を反転する
+                      //   //   const allChecked = Array.from(checkboxes).every(
+                      //   //     (checkbox) => checkbox.checked
+                      //   //   );
+                      //   //   checkboxes.forEach((checkbox) => {
+                      //   //     checkbox.checked = !allChecked;
+                      //   //     // チェック状態が変更されたら handleChange を呼び出す
+                      //   //     checkbox.dispatchEvent(
+                      //   //       new Event("change", { bubbles: true })
+                      //   //     );
+                      //   //   });
+                      //   // }
                       // }}
                     >
                       <li
@@ -430,7 +432,7 @@ export function SelectComponent({ params }) {
                           type="checkbox"
                           className={styles.select__checkbox__input}
                           defaultValue={[beans._id]}
-                          onChange={handleChange(e.target)}
+                          onChange={handleChange}
                           checked={selectedItems.has([beans._id].toString())}
                           required
                         />
