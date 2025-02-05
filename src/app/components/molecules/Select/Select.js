@@ -226,17 +226,17 @@ export function SelectComponent({ params }) {
       </header>
       <h1 className={styles.contents__title}>SELECT</h1>
 
-      <div className={styles.select__header__active_contents}>
-        <ul className={styles.select__header__active__menu}>
+      <div className={styles.select__header__active}>
+        <ul className={styles.select__nav__list__active}>
           {showDeleteButton && (
             <li
-              className={styles.select__header__active__menu__item}
+              className={styles.select__nav__item__active}
               hidden={!showDeleteButton}
             >
               <button
                 type="submit"
                 onClick={handleDeleteSubmit}
-                className={styles.select__menu__btn__white}
+                className={`${styles.btn__white} ${styles.nav__btn}`}
               >
                 Delete
               </button>
@@ -245,7 +245,7 @@ export function SelectComponent({ params }) {
           {showExportButton && (
             <>
               <li
-                className={styles.select__header__active__menu__item}
+                className={styles.select__nav__item__active}
                 hidden={!showExportButton}
               >
                 <span>
@@ -257,7 +257,7 @@ export function SelectComponent({ params }) {
                 <PDF data={checkbox} />
               </li>
               <li
-                className={styles.select__header__active__menu__item}
+                className={styles.select__nav__item__active}
                 hidden={!showExportButton}
               >
                 <CSV data={checkbox} />
@@ -266,12 +266,12 @@ export function SelectComponent({ params }) {
           )}
           {showSearchButton && (
             <li
-              className={styles.select__header__active__menu__item}
+              className={styles.select__nav__item__active}
               hidden={!showSearchButton}
             >
-              <div className={styles.searchBarBox}>
-                <div className={styles.searchBar}>
-                  <label htmlFor="search" className={styles.searchBar_label}>
+              <div className={styles.select__search}>
+                <div className={styles.search__box}>
+                  <label htmlFor="search" className={styles.search__box__label}>
                     SEARCH
                   </label>
                   <select
@@ -279,7 +279,7 @@ export function SelectComponent({ params }) {
                     id="search"
                     value={selectedGroup}
                     onChange={(e) => setSelectedGroup(e.target.value)}
-                    className={styles.searchBar_select}
+                    className={styles.search__box__select}
                   >
                     <optgroup label="Group">
                       <option value="">All</option>
@@ -289,7 +289,7 @@ export function SelectComponent({ params }) {
                   <button
                     type="button"
                     onClick={handleSearch}
-                    className={styles.searchBar_button}
+                    className={styles.search__box__button}
                   >
                     <Image
                       src="/images/search_img.svg"
