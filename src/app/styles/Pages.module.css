@@ -120,7 +120,7 @@
   max-width: 320px;
   height: inherit;
 }
-.select__menu_list {
+.select__nav__list {
   width: inherit;
   height: inherit;
   display: flex;
@@ -129,7 +129,7 @@
   justify-content: flex-start;
   align-items: center;
 }
-.select__header__nav__item {
+.select__nav__item {
   width: 48px;
   height: 48px;
   border: 0.5px solid var(--color-yellow);
@@ -256,7 +256,7 @@
   background: var(--color-yellow-10);
 }
 
-.select__header__nav__btn {
+.select__nav__btn {
   margin: 0 auto;
   width: inherit;
   height: inherit;

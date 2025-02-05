@@ -175,11 +175,11 @@ export function SelectComponent({ params }) {
     <>
       <header className={styles.select__header}>
         <nav className={styles.select__header__nav}>
-          <ul className={styles.select__menu_list}>
-            <li className={styles.select__header__nav__item}>
+          <ul className={styles.select__nav__list}>
+            <li className={styles.select__nav__item}>
               <button
                 type="button"
-                className={styles.select__header__nav__btn}
+                className={styles.select__nav__btn}
                 onClick={handleDeleteClick}
               >
                 <Image
@@ -191,10 +191,10 @@ export function SelectComponent({ params }) {
                 />
               </button>
             </li>
-            <li className={styles.select__header__nav__item}>
+            <li className={styles.select__nav__item}>
               <button
                 type="button"
-                className={styles.select__header__nav__btn}
+                className={styles.select__nav__btn}
                 onClick={handleSearchClick}
               >
                 <Image
@@ -206,10 +206,10 @@ export function SelectComponent({ params }) {
                 />
               </button>
             </li>
-            <li className={styles.select__header__nav__item}>
+            <li className={styles.select__nav__item}>
               <button
                 type="button"
-                className={styles.select__header__nav__btn}
+                className={styles.select__nav__btn}
                 onClick={handleExportClick}
               >
                 <Image
