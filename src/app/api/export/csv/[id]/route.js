@@ -66,9 +66,7 @@ export async function GET(request, response) {
       "Content-Disposition",
       'attachment; filename="coffee-tasting-notes.csv"'
     );
-    // console.log("Exported data:", beans); // データの内容を確認
-    // console.log("CSV content:", csvContent); // 生成されたCSVの内容を確認
-    // console.log("Response headers:", headers); // レスポンスヘッダーを確認
+
     // バッファーを直接レスポンスとして返す
     return new NextResponse(csvBuffer, {
       status: 200,
