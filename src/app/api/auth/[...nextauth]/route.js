@@ -2,8 +2,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import GithubProvider from "next-auth/providers/github";
-import DiscordProvider from "next-auth/providers/discord";
+// import GithubProvider from "next-auth/providers/github";
+// import DiscordProvider from "next-auth/providers/discord";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { clientPromise } from "@/app/utils/database";
 import connectDB from "@/app/utils/database";
@@ -47,14 +47,14 @@ const handler = NextAuth({
         },
       },
     }),
-    GithubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    }),
-    DiscordProvider({
-      clientId: process.env.DISCORD_CLIENT_ID,
-      clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    }),
+    // GithubProvider({
+    //   clientId: process.env.GITHUB_CLIENT_ID,
+    //   clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    // }),
+    // DiscordProvider({
+    //   clientId: process.env.DISCORD_CLIENT_ID,
+    //   clientSecret: process.env.DISCORD_CLIENT_SECRET,
+    // }),
   ],
   debug: true,
   session: {

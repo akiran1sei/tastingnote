@@ -47,9 +47,9 @@
   background: var(--color-white);
 }
 
-.sign_btn_nav {
+.sign__btn_nav {
 }
-.sign_btn_list {
+.sign__btn_list {
   width: 100%;
   height: 100%;
   display: flex;
@@ -58,21 +58,21 @@
   justify-content: center;
   align-items: center;
 }
-.sign_btn_item {
+.sign__btn_item {
 }
-.sign_btn_google {
+.sign__btn_google {
   background: #ffffff;
   color: var(--color-black);
 }
-.sign_btn_github {
+.sign__btn_github {
   background: #171515;
   color: var(--color-white);
 }
-.sign_btn_discord {
+.sign__btn_discord {
   background: #5865f2;
   color: var(--color-white);
 }
-.sign_btn_line {
+.sign__btn_line {
   background: #00b900;
   color: var(--color-white);
 }
