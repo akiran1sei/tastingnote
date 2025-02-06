@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merienda:wght@300..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+
   <style>
     body {
       width: 100%;
@@ -133,7 +134,6 @@
       align-items: stretch;
     }
 
-
     .tasting-data__list {
       width: 100%;
       height: 100%;
@@ -145,7 +145,6 @@
       padding-left: 0;
       margin-bottom: 0.15rem;
       background: #f2f2f2;
-
     }
 
     .tasting-data__item {
@@ -176,7 +175,6 @@
     .tasting-data__coffee .tasting-data__item-wrap,
     .tasting-data__impression .tasting-data__item-wrap,
     .tasting-data__memo .tasting-data__item-wrap {
-
       flex-direction: row !important;
       justify-content: flex-start !important;
     }
@@ -210,8 +208,6 @@
       justify-content: center;
       align-items: center;
       grid-area: 1 / 1 / 4 / 2;
-
-
     }
 
     .tasting-data__coffee {
@@ -222,8 +218,6 @@
       grid-area: 2 / 2 / 3 / 3;
     }
 
-
-
     .roast-data__item-value {
       display: flex;
       flex-direction: column;
@@ -231,7 +225,6 @@
       align-items: center;
       text-align: center;
     }
-
 
     .roast-data__item-range {
       display: inline-block;
@@ -243,7 +236,6 @@
       background: linear-gradient(270deg, #734e30 0%, #d9d9d9 100%);
 
       border: 0.1px solid;
-
     }
 
     .roast-data__item-range::-webkit-slider-thumb {
@@ -254,11 +246,9 @@
       border-radius: 5px;
 
       background: #333;
-
     }
 
     .roast-data__item-range-scale-box {
-
       width: 100px;
       display: flex;
       flex-direction: row;
@@ -317,13 +307,9 @@
       grid-area: 2 / 7 / 3 / 9;
     }
 
-
-
     .tasting-data__mouthfeel {
       grid-area: 2 / 9 / 3 / 11;
     }
-
-
 
     .tasting-data__flavor {
       grid-area: 2 / 11 / 3 / 12;
@@ -367,6 +353,88 @@
     .tasting-data__memo {
       grid-area: 1 / 6 / 2 / 16;
       display: inline-block;
+    }
+
+    /*
+
+    acidity & mouthfeel strength
+
+    */
+    .acidity-box,
+    .mouthfeel-box {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .acidity-box .tasting-data__item-value {
+      padding-right: 10px;
+    }
+
+    .mouthfeel-box .tasting-data__item-value {
+      padding-left: 10px;
+    }
+
+    .acidity-strength,
+    .mouthfeel-strength {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .acidity-strength {
+      flex-direction: row-reverse;
+    }
+
+    .mouthfeel-strength {
+      flex-direction: row;
+    }
+
+    .strength__box {
+      width: 25px;
+      padding: 5px 0 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .strength__item {
+      width: 25px;
+      padding: 0;
+      margin: 0;
+      height: 6px;
+      border: 0.2px solid #999;
+    }
+
+    .strength__value--text {
+      font-size: 14px;
+      padding: 0.5em;
+    }
+
+    .H2 .strength__item--h2 {
+      background: #dba52c;
+    }
+
+    .H1 .strength__item--h1 {
+      background: #dba52c;
+    }
+
+    .M .strength__item--m {
+      background: #dba52c;
+    }
+
+    .L1 .strength__item--l1 {
+      background: #dba52c;
+    }
+
+    .L2 .strength__item--l2 {
+      background: #dba52c;
     }
   </style>
 </head>
@@ -521,16 +589,21 @@
                   <div class="tasting-data__item-title">
                     Acidity
                   </div>
-                  <div class="tasting-data__item-value"><%=
+                  <div class="tasting-data__item-box--value acidity-box">
+                    <div class="tasting-data__item-value"><%=
                         evaluation.acidity %></div>
-
-                </div>
-                <div class="tasting-data__item-wrap acidity-strength">
-                  <div class="tasting-data__item--sub-title">
-                    Strength
-                  </div>
-                  <div class="tasting-data__item-value"><%=
+                    <div class="acidity-strength">
+                      <div class="acidity-strength-box strength__box js-acidity-strength__box <%= evaluation.acidityStrength %>">
+                        <div class="js-strength__item--h2 strength__item strength__item--h2"></div>
+                        <div class="js-strength__item--h1 strength__item strength__item--h1"></div>
+                        <div class="js-strength__item--m strength__item strength__item--m"></div>
+                        <div class="js-strength__item--l1 strength__item strength__item--l1"></div>
+                        <div class="js-strength__item--l2 strength__item strength__item--l2"></div>
+                      </div>
+                      <div class="strength__value--text"><%=
                         evaluation.acidityStrength %></div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -540,16 +613,19 @@
                   <div class="tasting-data__item-title">
                     Mouthfeel
                   </div>
-
-                  <div class="tasting-data__item-value"><%= evaluation.mouthfeel %></div>
-                </div>
-                <div class="tasting-data__item-wrap body-strength">
-                  <div class="tasting-data__item--sub-title">
-                    Strength
+                  <div class="tasting-data__item-box--value mouthfeel-box">
+                    <div class="tasting-data__item-value"><%= evaluation.mouthfeel %></div>
+                    <div class="mouthfeel-strength">
+                      <div class="mouthfeel-strength-box strength__box js-mouthfeel-strength__box <%= evaluation.bodyStrength %>">
+                        <div class="js-strength__item--h2 strength__item strength__item--h2"></div>
+                        <div class="js-strength__item--h1 strength__item strength__item--h1"></div>
+                        <div class="js-strength__item--m strength__item strength__item--m"></div>
+                        <div class="js-strength__item--l1 strength__item strength__item--l1"></div>
+                        <div class="js-strength__item--l2 strength__item strength__item--l2"></div>
+                      </div>
+                      <div class="strength__value--text "><%= evaluation.bodyStrength %></div>
+                    </div>
                   </div>
-
-
-                  <div class="tasting-data__item-value"><%= evaluation.bodyStrength %></div>
                 </div>
               </div>
               <div class="tasting-data__item tasting-data__flavor">
@@ -612,6 +688,7 @@
     </div>
     </div>
   </main>
+
 </body>
 
 </html>

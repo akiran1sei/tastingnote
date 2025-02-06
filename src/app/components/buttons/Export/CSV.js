@@ -8,7 +8,9 @@ export default function CSV(context) {
     try {
       setIsExporting(true);
 
-      const response = await fetch(`/api/export/csv/${responseData}`);
+      const response = await fetch(`/api/export/csv/${responseData}`, {
+        cache: "no-store",
+      });
 
       if (!response.ok) {
         throw new Error("Export failed");
@@ -41,6 +43,7 @@ export default function CSV(context) {
       console.error("Export error:", error);
       alert("エクスポートに失敗しました。");
     } finally {
+      await window.location.reload();
       setIsExporting(false);
     }
   };
@@ -49,7 +52,7 @@ export default function CSV(context) {
     <button
       onClick={handleExport}
       disabled={isExporting}
-      className={styles.select__menu__btn__white}
+      className={`${styles.btn__white} ${styles.nav__btn}`}
     >
       {isExporting ? "エクスポート中..." : "CSV"}
     </button>
