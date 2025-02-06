@@ -112,6 +112,7 @@ export function SelectComponent({ params }) {
             "Content-Type": "application/json",
             "Cache-Control": "no-store",
           },
+          cache: "no-store",
           method: "DELETE",
 
           body: JSON.stringify([...checkbox]),
@@ -174,11 +175,11 @@ export function SelectComponent({ params }) {
     <>
       <header className={styles.select__header}>
         <nav className={styles.select__header__nav}>
-          <ul className={styles.select__menu_list}>
-            <li className={styles.select__header__nav__item}>
+          <ul className={styles.select__nav__list}>
+            <li className={styles.select__nav__item}>
               <button
                 type="button"
-                className={styles.select__header__nav__btn}
+                className={styles.select__nav__btn}
                 onClick={handleDeleteClick}
               >
                 <Image
@@ -190,10 +191,10 @@ export function SelectComponent({ params }) {
                 />
               </button>
             </li>
-            <li className={styles.select__header__nav__item}>
+            <li className={styles.select__nav__item}>
               <button
                 type="button"
-                className={styles.select__header__nav__btn}
+                className={styles.select__nav__btn}
                 onClick={handleSearchClick}
               >
                 <Image
@@ -205,10 +206,10 @@ export function SelectComponent({ params }) {
                 />
               </button>
             </li>
-            <li className={styles.select__header__nav__item}>
+            <li className={styles.select__nav__item}>
               <button
                 type="button"
-                className={styles.select__header__nav__btn}
+                className={styles.select__nav__btn}
                 onClick={handleExportClick}
               >
                 <Image
@@ -225,17 +226,17 @@ export function SelectComponent({ params }) {
       </header>
       <h1 className={styles.contents__title}>SELECT</h1>
 
-      <div className={styles.select__header__active_contents}>
-        <ul className={styles.select__header__active__menu}>
+      <div className={styles.select__header__active}>
+        <ul className={styles.select__nav__list__active}>
           {showDeleteButton && (
             <li
-              className={styles.select__header__active__menu__item}
+              className={styles.select__nav__item__active}
               hidden={!showDeleteButton}
             >
               <button
                 type="submit"
                 onClick={handleDeleteSubmit}
-                className={styles.select__menu__btn__white}
+                className={`${styles.btn__white} ${styles.nav__btn}`}
               >
                 Delete
               </button>
@@ -244,7 +245,7 @@ export function SelectComponent({ params }) {
           {showExportButton && (
             <>
               <li
-                className={styles.select__header__active__menu__item}
+                className={styles.select__nav__item__active}
                 hidden={!showExportButton}
               >
                 <span>
@@ -255,22 +256,22 @@ export function SelectComponent({ params }) {
                 <br />
                 <PDF data={checkbox} />
               </li>
-              {/* <li
-                className={styles.select__header__active__menu__item}
+              <li
+                className={styles.select__nav__item__active}
                 hidden={!showExportButton}
               >
                 <CSV data={checkbox} />
-              </li> */}
+              </li>
             </>
           )}
           {showSearchButton && (
             <li
-              className={styles.select__header__active__menu__item}
+              className={styles.select__nav__item__active}
               hidden={!showSearchButton}
             >
-              <div className={styles.searchBarBox}>
-                <div className={styles.searchBar}>
-                  <label htmlFor="search" className={styles.searchBar_label}>
+              <div className={styles.select__search}>
+                <div className={styles.search__box}>
+                  <label htmlFor="search" className={styles.search__box__label}>
                     SEARCH
                   </label>
                   <select
@@ -278,7 +279,7 @@ export function SelectComponent({ params }) {
                     id="search"
                     value={selectedGroup}
                     onChange={(e) => setSelectedGroup(e.target.value)}
-                    className={styles.searchBar_select}
+                    className={styles.search__box__select}
                   >
                     <optgroup label="Group">
                       <option value="">All</option>
@@ -288,7 +289,7 @@ export function SelectComponent({ params }) {
                   <button
                     type="button"
                     onClick={handleSearch}
-                    className={styles.searchBar_button}
+                    className={styles.search__box__button}
                   >
                     <Image
                       src="/images/search_img.svg"
@@ -397,30 +398,6 @@ export function SelectComponent({ params }) {
                   <div className={styles.select__delete_list}>
                     <ul
                       className={`${styles.select__list} ${styles.select__checkbox}`}
-                      onClick={(e) => {
-                        // チェックボックスのクリック時
-                        if (e.target.type === "checkbox") {
-                          // 既存の handleChange 関数を呼び出す
-                          handleChange(e);
-                        } else {
-                          // ul 要素内のチェックボックスを全て取得
-                          const checkboxes = e.currentTarget.querySelectorAll(
-                            'input[type="checkbox"]'
-                          );
-
-                          // チェック状態を反転する
-                          const allChecked = Array.from(checkboxes).every(
-                            (checkbox) => checkbox.checked
-                          );
-                          checkboxes.forEach((checkbox) => {
-                            checkbox.checked = !allChecked;
-                            // チェック状態が変更されたら handleChange を呼び出す
-                            checkbox.dispatchEvent(
-                              new Event("change", { bubbles: true })
-                            );
-                          });
-                        }
-                      }}
                     >
                       <li
                         className={`${styles.select__list} ${styles.select__index}`}
