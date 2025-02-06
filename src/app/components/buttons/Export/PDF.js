@@ -52,7 +52,7 @@ export default function PDF(data) {
     <button
       onClick={handleExport}
       disabled={isLoading}
-      className={styles.select__menu_btn_yellow}
+      className={`${styles.btn__yellow} ${styles.nav__btn}`}
     >
       {isLoading ? "Exporting..." : "PDF"}
     </button>
