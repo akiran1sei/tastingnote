@@ -68,21 +68,21 @@ export function BeansComponent(context) {
   function RoastArticle() {
     const NumberRoast = Number(roast);
     if (NumberRoast >= 0 && NumberRoast <= 15) {
-      return "ライト";
+      return "Light roast(ライト ロースト）";
     } else if (NumberRoast > 15 && NumberRoast <= 30) {
-      return "シナモン";
+      return "Cinnamon roast（シナモン）";
     } else if (NumberRoast > 30 && NumberRoast <= 45) {
-      return "ミディアム";
+      return "Medium roast（ミディアム）";
     } else if (NumberRoast > 45 && NumberRoast <= 60) {
-      return "ハイ";
+      return "High roast（ハイ）";
     } else if (NumberRoast > 60 && NumberRoast <= 75) {
-      return "シティ";
+      return "City roast（シティ）";
     } else if (NumberRoast > 75 && NumberRoast <= 90) {
-      return "フルシティ";
+      return "Full city roast（フルシティ）";
     } else if (NumberRoast > 90 && NumberRoast < 100) {
-      return "フレンチ";
+      return "French roast（フレンチ）";
     } else if (NumberRoast === 100) {
-      return "イタリアン";
+      return "Italian roast（イタリアン）";
     }
   }
 
@@ -299,14 +299,14 @@ export function BeansComponent(context) {
                   </div>
 
                   <datalist id="roast_value">
-                    <option value="0">ライト</option>
-                    <option value="15">シナモン</option>
-                    <option value="30">ミディアム</option>
-                    <option value="45">ハイ</option>
-                    <option value="60">シティ</option>
-                    <option value="75">フルシティ</option>
-                    <option value="90">フレンチ</option>
-                    <option value="100">イタリアン</option>
+                    <option value="0">Light</option>
+                    <option value="15">Cinnamon</option>
+                    <option value="30">Medium</option>
+                    <option value="45">High</option>
+                    <option value="60">City</option>
+                    <option value="75">Full City</option>
+                    <option value="90">French</option>
+                    <option value="100">Italian</option>
                   </datalist>
                   <p className={styles.edit__output__value}>
                     <output>

@@ -589,8 +589,6 @@ input[type="range"].select__input__roast {
     min-height: unset;
   }
   .select__beans__list__item {
-    /* writing-mode: vertical-rl; */
-
     text-orientation: upright;
   }
   .select__beans__list__item,
@@ -1028,6 +1026,7 @@ input[type="range"].select__input__roast {
   background: linear-gradient(to right, #f5d0a9, #8b4513);
   outline: none;
   border-radius: 10px;
+  margin-top: 1rem;
 }
 .edit__input__roast::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -1060,7 +1059,7 @@ input[type="range"].select__input__roast {
   left: 0;
 }
 .tick:first-child::before {
-  content: "ライト";
+  /* content: "Light"; */
   font-size: var(--font-size-small);
   letter-spacing: 0;
   position: absolute;
@@ -1072,7 +1071,7 @@ input[type="range"].select__input__roast {
   left: 16%;
 }
 .tick:nth-child(2)::before {
-  content: "シナモン";
+  /* content: "Cinnamon"; */
   font-size: var(--font-size-small);
   position: absolute;
   top: 10px;
@@ -1084,7 +1083,7 @@ input[type="range"].select__input__roast {
   left: 31%;
 }
 .tick:nth-child(3)::before {
-  content: "ミディアム";
+  /* content: "Medium"; */
   font-size: var(--font-size-small);
   position: absolute;
   top: 10px;
@@ -1096,7 +1095,7 @@ input[type="range"].select__input__roast {
   left: 46%;
 }
 .tick:nth-child(4)::before {
-  content: "ハイ";
+  /* content: "High"; */
   font-size: var(--font-size-small);
   position: absolute;
   top: 10px;
@@ -1108,7 +1107,7 @@ input[type="range"].select__input__roast {
   right: 39%;
 }
 .tick:nth-child(5)::before {
-  content: "シティ";
+  /* content: "City"; */
   font-size: var(--font-size-small);
   position: absolute;
   top: 10px;
@@ -1120,7 +1119,7 @@ input[type="range"].select__input__roast {
   right: 24%;
 }
 .tick:nth-child(6)::before {
-  content: "フルシティ";
+  /* content: "FullCity"; */
   font-size: var(--font-size-small);
   position: absolute;
   top: 10px;
@@ -1132,7 +1131,7 @@ input[type="range"].select__input__roast {
   right: 9%;
 }
 .tick:nth-child(7)::before {
-  content: "フレンチ";
+  /* content: "French"; */
   font-size: var(--font-size-small);
   position: absolute;
   top: 10px;
@@ -1144,11 +1143,14 @@ input[type="range"].select__input__roast {
   right: 0;
 }
 .tick:last-child::before {
-  content: "イタリアン";
+  /* content: "Italian"; */
   font-size: var(--font-size-small);
   position: absolute;
   top: 10px;
   right: 0;
+}
+.tick::before {
+  content: "";
 }
 .labels {
   position: absolute;
@@ -1394,6 +1396,7 @@ input[type="range"].select__input__roast {
   align-items: center;
   line-height: 3rem;
   margin: 2rem 0;
+  padding: 0 1rem;
   border-radius: 10px;
   background: var(--color-white);
 }
@@ -1409,7 +1412,8 @@ input[type="range"].select__input__roast {
 .edit__roast select {
 }
 .edit__roast {
-  height: 300px;
+  /* height: 300px; */
+  height: 200px;
 }
 .edit__aroma {
   width: 100%;
