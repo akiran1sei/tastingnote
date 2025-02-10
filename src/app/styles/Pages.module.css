@@ -589,8 +589,6 @@ input[type="range"].select__input__roast {
     min-height: unset;
   }
   .select__beans__list__item {
-    writing-mode: vertical-rl;
-
     text-orientation: upright;
   }
   .select__beans__list__item,
