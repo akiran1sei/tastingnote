@@ -37,6 +37,15 @@ export function ManualComponent() {
                   >
                     Roast
                   </span>
+                  <span className={manual.manual__select__roast__img}>
+                    <Image
+                      src="/images/Roast_Img.png"
+                      width={600}
+                      height={96}
+                      priority
+                      alt="ローストのイメージ画像"
+                    />
+                  </span>
                   <span className={manual.manual__select__text}>
                     焙煎度によるパーセンテージと焙煎度の名前
                   </span>
