@@ -64,37 +64,71 @@
   text-align: center;
   margin-bottom: 2rem;
 }
-.manual__select {
-  padding: 5rem 0 0 0;
-}
 .manual__img {
   width: 100%;
+}
+
+.manual__list__box {
+}
+.manual__list,
+.manual__item {
+  /* display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center; */
+}
+.manual__list {
+  width: 100%;
+  padding: 0;
+}
+.manual__item {
+  width: 100%;
+  padding: 1rem 0 0 0;
+}
+.manual__text {
+  width: 100%;
+  word-wrap: break-word; /* 長い単語を途中で改行 */
+  white-space: normal; /* 空白を折り返し可能にする */
+}
+.manual__strength {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+/* 
+
+
+----------select manual----------
+
+
+*/
+.manual__select {
+}
+.manual__select__img {
+  margin: 0 auto;
   min-width: 300px;
   max-width: 600px;
-  margin: 0 auto;
 }
 .manual__select__list__box {
 }
 .manual__select__list,
 .manual__select__item {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
 }
 .manual__select__list {
-  width: 100%;
-  padding: 0;
 }
 
 .manual__select__item {
-  width: 100%;
-  padding: 1rem 0 0 0;
 }
 .manual__select__text {
-  width: 100%;
   text-align: center;
+}
+.manual__select__roast__img {
+  margin: 0 auto;
+  max-width: 450px;
 }
 .manual__select__strength {
   width: 100%;
@@ -105,9 +139,63 @@
   align-items: center;
 }
 .manual__select__strength__img {
-  width: 100%;
+  margin: 0 0.5rem 0 0;
   max-width: 50px;
 }
 .manual__select__strength__text {
   width: fit-content;
+}
+/* 
+
+
+----------edit manual----------
+
+
+*/
+.manual__edit {
+}
+.manual__edit__list__box {
+}
+.manual__edit__list {
+}
+.manual__edit__item {
+}
+.manual__edit__number {
+}
+.manual__edit__text {
+}
+.manual__edit__roast__list {
+}
+.manual__edit__roast__item {
+}
+.manual__edit__roast__img {
+  max-width: 450px;
+}
+.manual__edit__aroma__list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.manual__edit__aroma__item {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  padding: 0 0.5rem;
+}
+.manual__edit__strength {
+}
+@media screen and (min-width: 768px) {
+  .manual__edit__aroma__list {
+    flex-direction: row;
+  }
+  .manual__edit__aroma__item {
+    padding: 0 0.5rem;
+  }
 }
