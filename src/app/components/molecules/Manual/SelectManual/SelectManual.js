@@ -4,7 +4,11 @@ export function SelectManualComponent() {
   return (
     <div className={`${manual.manual__select} ${manual.manual__contents}`}>
       <h2 className={manual.manual__sub__title}>
-        <span className={manual.underBar}>selectの使い方・見方マニュアル</span>
+        <span className={manual.underBar}>
+          selectの
+          <br className={manual.line__break} />
+          使い方・見方
+        </span>
       </h2>
       <div className={`${manual.manual__img} ${manual.manual__select__img}`}>
         <Image
