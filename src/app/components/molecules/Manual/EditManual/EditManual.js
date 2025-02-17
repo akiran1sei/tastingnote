@@ -1,8 +1,15 @@
+"use client";
 import Image from "next/image";
 import manual from "@/app/styles/manual.module.css";
 import { Popup } from "@/app/components/items/popup";
+
+import React, { useState } from "react";
 export function EditManualComponent() {
-  const popup_text = () => {
+  const [showDefectPopup, setShowDefectPopup] = useState(false); // Popup の表示状態を管理する state
+  const [showBeansPopup, setShowBeansPopup] = useState(false); // Popup の表示状態を管理する state
+  const [showStrengthPopup, setShowStrengthPopup] = useState(false); // Popup の表示状態を管理する state
+
+  const popup_defect = () => {
     return (
       <div
         className={`${manual.manual__edit__text} ${manual.manual__text}`}
@@ -19,7 +26,9 @@ export function EditManualComponent() {
         <h3 className={`${manual.popup__sub__title} ${manual.manual__text}`}>
           「#」（欠点の数）
         </h3>
-        欠点が発見されたサンプルのカップ数（複数のカップにまたがっている場合、その数をカウント）
+        <p>
+          欠点が発見されたサンプルのカップ数（複数のカップにまたがっている場合、その数をカウント）
+        </p>
         <h3 className={`${manual.popup__sub__title} ${manual.manual__text}`}>
           「i」（欠点の影響度）
         </h3>
@@ -63,20 +72,178 @@ export function EditManualComponent() {
           「4」（定数）
         </h3>
         <p>欠点スコアの標準化のために掛けられる定数</p>
-        この「4」を掛けることで欠点の影響がスコアとして調整される
+        <p>この「4」を掛けることで欠点の影響がスコアとして調整される</p>
       </div>
     );
   };
 
-  const DefectsText = popup_text();
-  const popupComponents = Popup(DefectsText);
+  const popup_beans = () => {
+    return (
+      <>
+        <div
+          className={`${manual.manual__edit__text} ${manual.manual__text}`}
+          role="dialog"
+          aria-labelledby="popup-title"
+          aria-describedby="popup-description"
+        >
+          <h2
+            className={`${manual.popup__title} ${manual.manual__text}`}
+            id="popup-title"
+          >
+            焙煎度とパーセンテージ
+          </h2>
+          <h3 className={`${manual.popup__sub__title} ${manual.manual__text}`}>
+            焙煎度イメージ
+          </h3>
+          <p>このアプリ内での焙煎度の色合いとその名称の画像イメージです。</p>
+          <div
+            className={`${manual.manual__edit__roast__img} ${manual.manual__img}`}
+          >
+            <Image
+              src="/images/Roast_Img-2x.png"
+              width={600}
+              height={372}
+              priority
+              alt="ローストのイメージ画像"
+            />
+          </div>
+          <h3 className={`${manual.popup__sub__title} ${manual.manual__text}`}>
+            パーセンテージ（％）
+          </h3>
+          <p> アプリ内でのパーセンテージによるその焙煎度</p>
+
+          <h4 className={`${manual.popup__detail} ${manual.manual__text}`}>
+            <span className={manual.underBar}>パーセンテージ</span>
+          </h4>
+
+          <div className={manual.popup__table__box}>
+            <table border={1}>
+              <thead>
+                <tr>
+                  <th>焙煎度</th>
+
+                  <th>パーセンテージ（％）</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td> Light roast（ライト ロースト）</td>
+
+                  <td>0～15%</td>
+                </tr>
+                <tr>
+                  <td> Cinnamon roast（シナモン）</td>
+
+                  <td>16%～30%</td>
+                </tr>
+                <tr>
+                  <td>Medium roast（ミディアム）</td>
+
+                  <td>31%～45%</td>
+                </tr>
+                <tr>
+                  <td>High roast（ハイ）</td>
+
+                  <td>46%～60%</td>
+                </tr>
+                <tr>
+                  <td>City roast（シティ）</td>
+
+                  <td>61%～75%</td>
+                </tr>
+                <tr>
+                  <td>Full city roast（フルシティ）</td>
+
+                  <td>76%～90%</td>
+                </tr>
+                <tr>
+                  <td>French roast（フレンチ）</td>
+
+                  <td>90%～99%</td>
+                </tr>
+                <tr>
+                  <td>Italian roast（イタリアン）</td>
+
+                  <td>100%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </>
+    );
+  };
+  const popup_strength = () => {
+    return (
+      <div
+        className={`${manual.manual__edit__text} ${manual.manual__text}`}
+        role="dialog"
+        aria-labelledby="popup-title"
+        aria-describedby="popup-description"
+      >
+        <h2
+          className={`${manual.popup__title} ${manual.manual__text}`}
+          id="popup-title"
+        >
+          酸味とコクの強さについて
+        </h2>
+        <h3 className={`${manual.popup__sub__title} ${manual.manual__text}`}>
+          酸味の強さとコクの強さの評価方法
+        </h3>
+        <div className={manual.manual__edit__strength__box}>
+          <div
+            className={`${manual.manual__edit__strength__img} ${manual.manual__img}`}
+          >
+            <Image
+              src={"/images/strength.png"}
+              alt={"Strengthの図"}
+              width={50}
+              height={100}
+              priority
+            />
+          </div>
+          <div
+            className={`${manual.manual__edit__strength__text} ${manual.manual__text}`}
+          >
+            <p>H2：最も強い</p>
+            <p>H1：強い </p>
+            <p>M ：標準 </p>
+            <p>L1：弱い</p>
+            <p>L2：最も弱い</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  const DefectsText = popup_defect();
+  const BeansText = popup_beans();
+  const StrengthText = popup_strength();
   return (
     <>
-      {popupComponents}
+      {showDefectPopup && (
+        <Popup
+          contexts={DefectsText}
+          onClose={() => setShowDefectPopup(!showDefectPopup)}
+        />
+      )}
+      {showBeansPopup && (
+        <Popup
+          contexts={BeansText}
+          onClose={() => setShowBeansPopup(!showBeansPopup)}
+        />
+      )}
+      {showStrengthPopup && (
+        <Popup
+          contexts={StrengthText}
+          onClose={() => setShowStrengthPopup(!showStrengthPopup)}
+        />
+      )}
+
       <div className={`${manual.manual__edit} ${manual.manual__contents}`}>
         <h2 className={manual.manual__sub__title}>
-          <span className={manual.underBar}>
-            create(update)の使い方・見方マニュアル
+          <span className={manual.fontYellow}>
+            create(update) の<br className={manual.line__break} />
+            使い方・見方
           </span>
         </h2>
         <div
@@ -163,74 +330,14 @@ export function EditManualComponent() {
                 </span>
                 になります
               </span>
-              {/* <ul className={manual.manual__edit__roast__list}>
-                    <li className={manual.manual__edit__roast__item}>
-                      <span
-                        className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
-                      >
-                        Light roast（ライト ロースト）:0～15%
-                      </span>
-                    </li>
-                    <li className={manual.manual__edit__roast__item}>
-                      <span
-                        className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
-                      >
-                        Cinnamon roast（シナモン）:16%～30%
-                      </span>
-                    </li>
-                    <li className={manual.manual__edit__roast__item}>
-                      <span
-                        className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
-                      >
-                        Medium roast（ミディアム）:31%～45%
-                      </span>
-                    </li>
-                    <li className={manual.manual__edit__roast__item}>
-                      <span
-                        className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
-                      >
-                        High roast（ハイ）:46%～60%
-                      </span>
-                    </li>
-                    <li className={manual.manual__edit__roast__item}>
-                      <span
-                        className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
-                      >
-                        City roast（シティ）:61%～75%
-                      </span>
-                    </li>
-                    <li className={manual.manual__edit__roast__item}>
-                      <span
-                        className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
-                      >
-                        Full city roast（フルシティ）:76%～90%
-                      </span>
-                    </li>
-                    <li className={manual.manual__edit__roast__item}>
-                      <span
-                        className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
-                      >
-                        French roast（フレンチ）:90%～99%
-                      </span>
-                    </li>
-                    <li className={manual.manual__edit__roast__item}>
-                      <span
-                        className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
-                      >
-                        Italian roast（イタリアン）:100%
-                      </span>
-                    </li>
-                  </ul> */}
-              <span
-                className={`${manual.manual__edit__roast__img} ${manual.manual__img}`}
-              >
-                <Image
-                  src="/images/Roast_Img-2x.png"
-                  width={600}
-                  height={372}
-                  priority
-                  alt="ローストのイメージ画像"
-                />
+              <span className={manual.popup__box}>
+                <button
+                  className={`${manual.manual__edit__btn} ${manual.popup__open}`}
+                  onClick={() => setShowBeansPopup(!showBeansPopup)}
+                  type="button"
+                >
+                  焙煎度
+                </button>
               </span>
             </li>
             <li
@@ -306,10 +413,16 @@ export function EditManualComponent() {
                 <br />
                 カッピングは通常５～６カップで１ロット（同じコーヒー豆）として考えるので、１カップに欠点・瑕疵があれば１となり６カップ中３カップ発見すれば３計算する（１カップにいくつも欠点・瑕疵を見つけても１とする）
                 発見したカップ（＃）、欠点・瑕疵の影響度レベル［１・２・３］（ｉ）、最後に定数である４を”計算式”に当てはめ算出する。
-                <span
-                  className={`${manual.manual__edit__text} ${manual.highlighting}`}
-                >
-                  計算式：『＃×ｉ× 4（定数）』
+                <span className={manual.manual__edit__text}>
+                  <span className={manual.popup__box}>
+                    <button
+                      className={`${manual.manual__edit__btn} ${manual.popup__open}`}
+                      onClick={() => setShowDefectPopup(!showDefectPopup)}
+                      type="button"
+                    >
+                      計算式：『＃×ｉ× 4（定数）』
+                    </button>
+                  </span>
                 </span>
               </span>
             </li>
@@ -321,6 +434,11 @@ export function EditManualComponent() {
               >
                 ８：Clean Cap
               </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                コーヒーに雑味がなく、クリアでクリーンな味わいであること
+              </span>
             </li>
             <li
               className={`${manual.manual__edit__item} ${manual.manual__item}`}
@@ -329,6 +447,11 @@ export function EditManualComponent() {
                 className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.highlighting} ${manual.manual__edit__text}`}
               >
                 ９：Sweet
+              </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                コーヒーが持つ甘さの質、量、持続性
               </span>
             </li>
             <li
@@ -339,11 +462,30 @@ export function EditManualComponent() {
               >
                 １０：Acidity
               </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                コーヒーの酸味の明るさ、爽やかさ、心地よさ。
+              </span>
               <span className={manual.manual__edit__strength}>
                 <span
-                  className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
+                  className={`${manual.manual__edit__number} ${manual.fontYellow} ${manual.manual__text} ${manual.manual__edit__text}`}
                 >
                   Acidity Strength
+                </span>
+                <span
+                  className={`${manual.manual__edit__text} ${manual.manual__text}`}
+                >
+                  &ensp;酸の強さ
+                  <span className={manual.popup__box}>
+                    <button
+                      className={`${manual.manual__edit__btn} ${manual.popup__open}`}
+                      onClick={() => setShowStrengthPopup(!showStrengthPopup)}
+                      type="button"
+                    >
+                      評価方法
+                    </button>
+                  </span>
                 </span>
               </span>
             </li>
@@ -355,11 +497,30 @@ export function EditManualComponent() {
               >
                 １１：Mouthfeel
               </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                コーヒーの口当たり、舌触り、重さ、滑らかさ。
+              </span>
               <span className={manual.manual__edit__strength}>
                 <span
-                  className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.manual__edit__text}`}
+                  className={`${manual.manual__edit__number} ${manual.fontYellow} ${manual.manual__text} ${manual.manual__edit__text}`}
                 >
                   Body Strength
+                </span>
+                <span
+                  className={`${manual.manual__edit__text} ${manual.manual__text}`}
+                >
+                  &ensp;ボディ（コク）の強さ
+                  <span className={manual.popup__box}>
+                    <button
+                      className={`${manual.manual__edit__btn} ${manual.popup__open}`}
+                      onClick={() => setShowStrengthPopup(!showStrengthPopup)}
+                      type="button"
+                    >
+                      評価方法
+                    </button>
+                  </span>
                 </span>
               </span>
             </li>
@@ -371,6 +532,11 @@ export function EditManualComponent() {
               >
                 １２：Flavor
               </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                コーヒーが持つ香りと味の複雑さ、多様性、心地よさ。
+              </span>
             </li>
             <li
               className={`${manual.manual__edit__item} ${manual.manual__item}`}
@@ -379,6 +545,11 @@ export function EditManualComponent() {
                 className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.highlighting} ${manual.manual__edit__text}`}
               >
                 １３：After
+              </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                コーヒーを飲んだ後に口の中に残る風味の印象。
               </span>
             </li>
             <li
@@ -389,6 +560,11 @@ export function EditManualComponent() {
               >
                 １４：Balance
               </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                フレーバー、酸味、甘さ、口に含んだ質感などが調和していること。
+              </span>
             </li>
             <li
               className={`${manual.manual__edit__item} ${manual.manual__item}`}
@@ -397,6 +573,11 @@ export function EditManualComponent() {
                 className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.highlighting} ${manual.manual__edit__text}`}
               >
                 １５：Overall
+              </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                上記のすべての要素を総合的に評価したコーヒーの完成度。
               </span>
             </li>
             <li
@@ -407,6 +588,12 @@ export function EditManualComponent() {
               >
                 １６：Sub Total
               </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                上記の［Defects、Clean
+                Cap、Sweet、Acidity、Mouthfeel、Flavor、After、Balance、Overall］での点数の合計値
+              </span>
             </li>
             <li
               className={`${manual.manual__edit__item} ${manual.manual__item}`}
@@ -415,6 +602,11 @@ export function EditManualComponent() {
                 className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.highlighting} ${manual.manual__edit__text}`}
               >
                 １７：TOTAL (+36点)
+              </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                ”Sub Total”の合計値に基礎点数である”３６点”を加算した点数
               </span>
             </li>
             <li
@@ -425,6 +617,13 @@ export function EditManualComponent() {
               >
                 １８：Impression
               </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                具体的な味の印象を記入。フレーバーの表現もカッピングの重要な目的。
+                <br />
+                冷めていく過程で、味わいがどのように変化したかも都度メモしておくとよい
+              </span>
             </li>
             <li
               className={`${manual.manual__edit__item} ${manual.manual__item}`}
@@ -433,6 +632,11 @@ export function EditManualComponent() {
                 className={`${manual.manual__edit__number} ${manual.underBar} ${manual.manual__text} ${manual.highlighting} ${manual.manual__edit__text}`}
               >
                 １９：memo
+              </span>
+              <span
+                className={`${manual.manual__edit__text} ${manual.manual__text}`}
+              >
+                その他記入したことなど…
               </span>
             </li>
           </ul>

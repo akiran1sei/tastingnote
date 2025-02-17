@@ -1,6 +1,6 @@
 import Image from "next/image";
 import manual from "@/app/styles/manual.module.css";
-import { EditManualComponent } from "./EditManual/EditManual";
+import { EditManualComponent } from "@/app/components/molecules/Manual/EditManual/EditManual";
 // import { SelectManualComponent } from "./SelectManual/SelectManual";
 export function ManualComponent() {
   return (
