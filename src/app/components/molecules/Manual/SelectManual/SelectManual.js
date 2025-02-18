@@ -1,23 +1,26 @@
 import Image from "next/image";
 import manual from "@/app/styles/manual.module.css";
+import Link from "next/link";
 export function SelectManualComponent() {
   return (
-    <div className={`${manual.manual__select} ${manual.manual__contents}`}>
+    <div className={`${manual.manual__select} ${manual.manual__container}`}>
       <h2 className={manual.manual__sub__title}>
-        <span className={manual.underBar}>
+        <span className={manual.fontYellow}>
           selectの
           <br className={manual.line__break} />
           使い方・見方
         </span>
       </h2>
       <div className={`${manual.manual__img} ${manual.manual__select__img}`}>
-        <Image
-          src="/images/select_manual_1-600.png"
-          width={600}
-          height={96}
-          priority
-          alt="セレクトページのイメージ画像"
-        />
+        <Link href={"/images/png/select-img2.png"} passHref>
+          <Image
+            src="/images/png/select-img2.png"
+            width={600}
+            height={96}
+            priority
+            alt="セレクトページのイメージ画像"
+          />
+        </Link>
       </div>
       <div
         className={`${manual.manual__select__list__box} ${manual.manual__list__box}`}
@@ -49,7 +52,7 @@ export function SelectManualComponent() {
               className={`${manual.manual__select__roast__img} ${manual.manual__img}`}
             >
               <Image
-                src="/images/Roast_Img-2x.png"
+                src="/images/png/roast_Img.png"
                 // width={300}
                 // height={186}
                 width={300}
@@ -148,7 +151,7 @@ export function SelectManualComponent() {
                 className={`${manual.manual__select__strength__img} ${manual.manual__img}`}
               >
                 <Image
-                  src={"/images/strength.png"}
+                  src={"/images/png/strength.png"}
                   alt={"Strengthの図"}
                   width={50}
                   height={100}
@@ -188,7 +191,7 @@ export function SelectManualComponent() {
                 className={`${manual.manual__select__strength__img} ${manual.manual__img}`}
               >
                 <Image
-                  src={"/images/strength.png"}
+                  src={"/images/png/strength.png"}
                   alt={"Strengthの図"}
                   width={50}
                   height={100}
@@ -278,6 +281,61 @@ export function SelectManualComponent() {
               className={`${manual.manual__select__text} ${manual.manual__text}`}
             >
               付けられた点数を合計し、基礎点数である（36点）を加えた点数
+            </span>
+          </li>
+          <li
+            className={`${manual.manual__select__item} ${manual.manual__select__btn__item} ${manual.manual__item}`}
+          >
+            <span
+              className={`${manual.manual__select__text} ${manual.underBar} ${manual.manual__text} ${manual.highlighting}`}
+            >
+              Select専用ボタン
+            </span>
+
+            <span
+              className={`${manual.manual__select__text} ${manual.manual__text}`}
+            >
+              左からデータ削除のボタン・検索ボタン（Group検索）・エクスポートボタン（CSV/PDF）
+            </span>
+            <span
+              className={`${manual.manual__img} ${manual.manual__select__button__img}`}
+            >
+              <Link href={"/images/png/select-img3.png"} passHref>
+                <Image
+                  src="/images/png/select-img3.png"
+                  width={495}
+                  height={195}
+                  priority
+                  alt="セレクトページのイメージ画像"
+                />
+              </Link>
+            </span>
+          </li>
+          <li
+            className={`${manual.manual__select__item} ${manual.manual__item}`}
+          >
+            <span
+              className={`${manual.manual__select__text} ${manual.underBar} ${manual.manual__text} ${manual.highlighting}`}
+            >
+              イメージ画像
+            </span>
+            <span
+              className={`${manual.manual__select__text} ${manual.manual__text}`}
+            >
+              Selectページの全体画像になります。
+            </span>
+            <span
+              className={`${manual.manual__img} ${manual.manual__select__img}`}
+            >
+              <Link href={"/images/png/select-img1.png"} passHref>
+                <Image
+                  src="/images/png/select-img1.png"
+                  width={600}
+                  height={96}
+                  priority
+                  alt="セレクトページのイメージ画像"
+                />
+              </Link>
             </span>
           </li>
         </ol>

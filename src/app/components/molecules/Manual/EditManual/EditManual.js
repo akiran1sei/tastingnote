@@ -4,6 +4,7 @@ import manual from "@/app/styles/manual.module.css";
 import { Popup } from "@/app/components/items/popup";
 
 import React, { useState } from "react";
+import Link from "next/link";
 export function EditManualComponent() {
   const [showDefectPopup, setShowDefectPopup] = useState(false); // Popup の表示状態を管理する state
   const [showBeansPopup, setShowBeansPopup] = useState(false); // Popup の表示状態を管理する state
@@ -100,7 +101,7 @@ export function EditManualComponent() {
             className={`${manual.manual__edit__roast__img} ${manual.manual__img}`}
           >
             <Image
-              src="/images/Roast_Img-2x.png"
+              src="/images/png/roast_Img.png"
               width={600}
               height={372}
               priority
@@ -195,7 +196,7 @@ export function EditManualComponent() {
             className={`${manual.manual__edit__strength__img} ${manual.manual__img}`}
           >
             <Image
-              src={"/images/strength.png"}
+              src={"/images/png/strength.png"}
               alt={"Strengthの図"}
               width={50}
               height={100}
@@ -239,10 +240,11 @@ export function EditManualComponent() {
         />
       )}
 
-      <div className={`${manual.manual__edit} ${manual.manual__contents}`}>
+      <div className={`${manual.manual__edit} ${manual.manual__container}`}>
         <h2 className={manual.manual__sub__title}>
           <span className={manual.fontYellow}>
-            create(update) の<br className={manual.line__break} />
+            Create（Update）の
+            <br className={manual.line__break} />
             使い方・見方
           </span>
         </h2>
@@ -258,6 +260,7 @@ export function EditManualComponent() {
               >
                 １：Date
               </span>
+
               <span
                 className={`${manual.manual__edit__text} ${manual.manual__text}`}
               >

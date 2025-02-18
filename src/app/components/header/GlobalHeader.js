@@ -74,6 +74,11 @@ export function GlobalHeader() {
               </button>
             </li>
             <li className={header.menu_item}>
+              <button type="button" onClick={() => navigateTo(`/pages/manual`)}>
+                Manual
+              </button>
+            </li>
+            <li className={header.menu_item}>
               <button
                 className={header.signout__btn}
                 type="button"
@@ -91,7 +96,7 @@ export function GlobalHeader() {
               >
                 <span className={header.reload_img}>
                   <Image
-                    src="/images/refresh_img.svg"
+                    src="/images/svg/refresh_img.svg"
                     alt="リロードボタン"
                     width={48}
                     height={48}
