@@ -3,6 +3,7 @@
 /* color */
 :root {
   --color-black: #333;
+  --color-gray: #808080;
   --color-white: #fffffe;
   --color-yellow: #dba52c;
   --color-yellow-90: #dba52ce6;
@@ -154,11 +155,11 @@ input[type="checkbox"] {
 }
 input[type="date"]::-webkit-calendar-picker-indicator {
   font-family: "Material Icons";
-  content: url("/images/calendar_month_img.svg");
+  content: url("/images/svg/calendar_month_img.svg");
   z-index: 1;
 }
 input[type="checkbox"]:checked {
-  content: url("/images/checkBox_img.svg");
+  content: url("/images/svg/checkBox_img.svg");
 }
 input[type="number"] {
   width: 50px;

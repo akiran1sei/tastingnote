@@ -518,7 +518,7 @@ export function UpdateComponent(context) {
                     Defects
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -583,7 +583,7 @@ export function UpdateComponent(context) {
                     Clean Cap
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -627,7 +627,7 @@ export function UpdateComponent(context) {
                     甘さ
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -673,7 +673,7 @@ export function UpdateComponent(context) {
                     Acidity
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -739,7 +739,7 @@ export function UpdateComponent(context) {
                   <div className={styles.edit__strength}>
                     <div className={styles.edit__strength__img}>
                       <Image
-                        src={"/images/strength.png"}
+                        src={"/images/png/strength.png"}
                         alt={"Strengthの図"}
                         width={50}
                         height={100}
@@ -768,7 +768,7 @@ export function UpdateComponent(context) {
                     Mouthfeel
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -835,7 +835,7 @@ export function UpdateComponent(context) {
                   <div className={styles.edit__strength}>
                     <div className={styles.edit__strength__img}>
                       <Image
-                        src={"/images/strength.png"}
+                        src={"/images/png/strength.png"}
                         alt={"Strengthの図"}
                         width={50}
                         height={100}
@@ -864,7 +864,7 @@ export function UpdateComponent(context) {
                     Flavor
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -907,7 +907,7 @@ export function UpdateComponent(context) {
                     After
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -953,7 +953,7 @@ export function UpdateComponent(context) {
                     Balance
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -1001,7 +1001,7 @@ export function UpdateComponent(context) {
                     Overall
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -1064,7 +1064,7 @@ export function UpdateComponent(context) {
                   <p className={styles.edit__point__text}>
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
