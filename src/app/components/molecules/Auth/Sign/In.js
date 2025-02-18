@@ -113,7 +113,7 @@ export function SignInComponent() {
           <div className={styles.sign__btns}>
             <button onClick={signInWithGoogle} className={styles.sign__btn}>
               <Image
-                src={"../../images/web_light_sq_SI.svg"}
+                src={"../../images/svg/web_light_sq_SI.svg"}
                 alt="googleでログイン"
                 width={200}
                 height={50}

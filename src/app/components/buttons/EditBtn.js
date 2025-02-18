@@ -18,7 +18,7 @@ export function EditBtn(context) {
       onClick={() => navigateTo(`/pages/update/${context.data}`)}
     >
       <Image
-        src="/images/edit_img.svg"
+        src="/images/svg/edit_img.svg"
         alt="編集ボタン"
         width={48}
         height={48}
