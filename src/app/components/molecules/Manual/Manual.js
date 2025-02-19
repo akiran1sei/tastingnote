@@ -4,16 +4,23 @@ import manual from "@/app/styles/manual.module.css";
 import { useState, useEffect } from "react";
 import { EditManualComponent } from "./EditManual/EditManual";
 import { SelectManualComponent } from "./SelectManual/SelectManual";
+import { NewUserComponent } from "./NewUser/NewUserComponent";
 export function ManualComponent() {
   const [activeTab, setActiveTab] = useState("tab1");
   const content = {
     tab1: (
-      <div className={manual.manual__select__page}>
+      <div className={manual.edit__page}>
+        <NewUserComponent />
+      </div>
+    ),
+
+    tab2: (
+      <div className={manual.select__page}>
         <SelectManualComponent />
       </div>
     ),
-    tab2: (
-      <div className={manual.manual__edit__page}>
+    tab3: (
+      <div className={manual.edit__page}>
         <EditManualComponent />
       </div>
     ),
@@ -21,22 +28,31 @@ export function ManualComponent() {
 
   return (
     <>
-      <div className={manual.manual__container}>
-        <div className={manual.manual__wrap}>
+      <div className={manual.container}>
+        <div className={manual.wrap}>
           <h1 className={manual.contents__title}>Manual</h1>
-          <div className={manual.manual__nav__box}>
-            <ul className={manual.manual__nav__list}>
-              <li className={manual.manual__nav__item}>
-                <button onClick={() => setActiveTab("tab1")}>Select</button>
-              </li>
-              <li className={manual.manual__nav__item}>
-                <button onClick={() => setActiveTab("tab2")}>
-                  Create/Update
-                </button>
-              </li>
-            </ul>
+          <div className={manual.nav__box}>
+            <nav className={manual.nav}>
+              <ul className={manual.nav__list}>
+                <li className={manual.nav__item}>
+                  <span role="button" onClick={() => setActiveTab("tab1")}>
+                    New user
+                  </span>
+                </li>
+                <li className={manual.nav__item}>
+                  <span role="button" onClick={() => setActiveTab("tab2")}>
+                    Select
+                  </span>
+                </li>
+                <li className={manual.nav__item}>
+                  <span role="button" onClick={() => setActiveTab("tab3")}>
+                    Create/Update
+                  </span>
+                </li>
+              </ul>
+            </nav>
           </div>
-          <div className={manual.manual__contents}>{content[activeTab]}</div>
+          <div className={manual.contents}>{content[activeTab]}</div>
         </div>
       </div>
     </>
