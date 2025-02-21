@@ -1,7 +1,7 @@
 "use client";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
-
+import { LoadingAnimation } from "@/app/components/items/loading-animation";
 import top from "@/app/styles/Top.module.css";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
