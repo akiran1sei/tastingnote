@@ -7,6 +7,7 @@ import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/Load
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
 import { useSession, signOut, signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function ProfileComponent() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -18,7 +19,12 @@ export function ProfileComponent() {
   const [userEmail, setUserEmail] = useState("");
   const [editUserName, setEditUserName] = useState("");
   const [editUserEmail, setEditUserEmail] = useState("");
-  console.log(userInfo);
+  const router = useRouter();
+  const navigateTo = (path) => {
+    if (router.pathname !== path) {
+      router.push(path);
+    }
+  };
 
   // 使用例
   const concealEmail = maskEmail(userEmail);
@@ -224,6 +230,21 @@ export function ProfileComponent() {
                       >
                         お問い合わせページへ
                       </Link>
+                    </button>
+                  </div>
+                  <div
+                    className={`${styles.profile__btn__item} ${styles.profile__manual}`}
+                  >
+                    <p className={styles.profile__manualText}>
+                      初めての方は、こちらをご覧ください。
+                      <span className={styles.profile__manualArrow}>↓</span>
+                    </p>
+                    <button
+                      className={`${styles.profile__btn} ${styles.profile__link__btn}`}
+                      type="button"
+                      onClick={() => navigateTo(`/pages/manual`)}
+                    >
+                      Manual
                     </button>
                   </div>
                   <div

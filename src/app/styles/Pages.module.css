@@ -1945,9 +1945,29 @@ input[type="range"].select__input__roast {
   box-shadow: inset 1px 2px var(--color-box-shadow);
   transform: translate(3px);
 }
+.profile__manualText {
+  color: var(--color-gray);
+}
+.profile__manualArrow {
+  display: block;
+  margin-top: 0;
+  animation: arrow 1.5s linear infinite;
+}
+@keyframes arrow {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px); /* 移動距離を調整 */
+    opacity: 0;
+  }
+}
 .profile__signout__btn,
 .profile__link__btn {
-  border: 0.1rem solid var(--color-black);
   background-color: var(--color-yellow);
 }
 
@@ -1979,7 +1999,7 @@ input[type="range"].select__input__roast {
 ----------Loading----------
 */
 .loading_page {
-  background: var(--color-yellow-10);
+  background: var(--color-white);
   width: 100%;
   height: 100%;
   position: absolute;

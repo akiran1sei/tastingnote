@@ -39,7 +39,8 @@ export function SignInComponent() {
       });
 
       if (sign_in.ok) {
-        return router.push(`/pages/profile/${userInfo}`);
+        return router.push(`/`);
+        // return router.push(`/pages/profile/${userInfo}`);
       }
       await setError("サインインに失敗しました。もう一度お試しください。");
 
