@@ -9,22 +9,22 @@ export function Popup({ contexts, onClose }) {
 
   return (
     <div className={manual.popup}>
-      <div className={manual.popup__wrap}>
-        <div className={manual.popup__cover}></div>
-        <div className={manual.popup__contents}>
-          <div className={manual.popup__text}>
+      <div className={manual.popupWrap}>
+        <div className={manual.popupCover}></div>
+        <div className={manual.popupContents}>
+          <div className={manual.popupText}>
             {/* contexts が文字列かどうかで処理を分岐 */}
             {typeof contexts === "string" ? contexts : contexts}
           </div>
-          <div className={manual.popup__button__box}>
+          <div className={manual.popupButtonBox}>
             <button
               type="button"
-              className={manual.popup__close}
+              className={manual.popupClose}
               onClick={toggleClose}
               aria-label="close" // aria-label を追加
             >
-              <span className={manual.popup__menu_bar}></span>
-              <span className={manual.popup__menu_bar}></span>
+              <span className={manual.popupMenuBar}></span>
+              <span className={manual.popupMenuBar}></span>
               <span className={manual.visuallyHidden}>close</span>
             </button>
           </div>

@@ -9,11 +9,9 @@ function NewUserSection({ title, text, imageUrl, imageAlt, imageCaption }) {
         <span className={manual.fontYellow}>{title}</span>
       </h2>
       {text}
-      <figure className={`${manual.imgBox} ${manual.newuser__img}`}>
+      <figure className={`${manual.imgBox} ${manual.newuserImg}`}>
         <Image src={imageUrl} alt={imageAlt} width={500} height={560} />
-        <figcaption className={manual.imgBox__caption}>
-          {imageCaption}
-        </figcaption>
+        <figcaption className={manual.imgBoxCaption}>{imageCaption}</figcaption>
       </figure>
     </section>
   );
@@ -27,7 +25,7 @@ export function NewUserComponent() {
         text={
           <p className={manual.text}>
             新しくテイスティングデータを作るには、
-            <span className={manual.image__popup}>左上にある3本線</span>
+            <span className={manual.imagePopup}>左上にある3本線</span>
             をクリックし、 出てきたメニュー欄の
             <strong className={manual.fontYellow}>”Group”</strong>をクリック。
           </p>

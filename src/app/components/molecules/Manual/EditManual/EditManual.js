@@ -6,15 +6,15 @@ import React, { useState } from "react";
 
 // Defects ポップアップコンポーネント
 const DefectsPopupContent = () => (
-  <div className={`${manual.edit__text} ${manual.text}`}>
-    <h2 className={`${manual.popup__title} ${manual.text}`}>計算式の要素</h2>
-    <h3 className={`${manual.popup__subTitle} ${manual.text}`}>
+  <div className={`${manual.editText} ${manual.text}`}>
+    <h2 className={`${manual.popupTitle} ${manual.text}`}>計算式の要素</h2>
+    <h3 className={`${manual.popupSubTitle} ${manual.text}`}>
       「#」（欠点の数）
     </h3>
     <p>
       欠点が発見されたサンプルのカップ数（複数のカップにまたがっている場合、その数をカウント）
     </p>
-    <h3 className={`${manual.popup__subTitle} ${manual.text}`}>
+    <h3 className={`${manual.popupSubTitle} ${manual.text}`}>
       「i」（欠点の影響度）
     </h3>
     <p>欠点の影響の大きさを示す係数（1～3の範囲で設定されることが多い）</p>
@@ -23,10 +23,10 @@ const DefectsPopupContent = () => (
       <li>2：中程度の欠点（風味に明らかな影響）</li>
       <li>3：重大な欠点（風味を著しく損なう）</li>
     </ul>
-    <h4 className={`${manual.popup__detail} ${manual.text}`}>
+    <h4 className={`${manual.popupDetail} ${manual.text}`}>
       <span className={manual.underBar}>「i」の判定例</span>
     </h4>
-    <div className={manual.popup__table__box}>
+    <div className={manual.popupTableBox}>
       <table border={1}>
         <thead>
           <tr>
@@ -50,9 +50,7 @@ const DefectsPopupContent = () => (
         </tbody>
       </table>
     </div>
-    <h3 className={`${manual.popup__subTitle} ${manual.text}`}>
-      「4」（定数）
-    </h3>
+    <h3 className={`${manual.popupSubTitle} ${manual.text}`}>「4」（定数）</h3>
     <p>欠点スコアの標準化のために掛けられる定数</p>
     <p>この「4」を掛けることで欠点の影響がスコアとして調整される</p>
   </div>
@@ -61,15 +59,15 @@ const DefectsPopupContent = () => (
 // Beans ポップアップコンポーネント
 const BeansPopupContent = () => (
   <>
-    <div className={`${manual.edit__text} ${manual.text}`}>
-      <h2 className={`${manual.popup__title} ${manual.text}`}>
+    <div className={`${manual.editText} ${manual.text}`}>
+      <h2 className={`${manual.popupTitle} ${manual.text}`}>
         焙煎度とパーセンテージ
       </h2>
-      <h3 className={`${manual.popup__subTitle} ${manual.text}`}>
+      <h3 className={`${manual.popupSubTitle} ${manual.text}`}>
         焙煎度イメージ
       </h3>
       <p>このアプリ内での焙煎度の色合いとその名称の画像イメージです。</p>
-      <div className={`${manual.edit__roast__img} ${manual.imgBox}`}>
+      <div className={`${manual.editRoastImg} ${manual.imgBox}`}>
         <Image
           src="/images/png/roast_Img.png"
           width={600}
@@ -78,14 +76,14 @@ const BeansPopupContent = () => (
           alt="ローストのイメージ画像"
         />
       </div>
-      <h3 className={`${manual.popup__subTitle} ${manual.text}`}>
+      <h3 className={`${manual.popupSubTitle} ${manual.text}`}>
         パーセンテージ（％）
       </h3>
       <p>アプリ内でのパーセンテージによるその焙煎度</p>
-      <h4 className={`${manual.popup__detail} ${manual.text}`}>
+      <h4 className={`${manual.popupDetail} ${manual.text}`}>
         <span className={manual.underBar}>パーセンテージ</span>
       </h4>
-      <div className={manual.popup__table__box}>
+      <div className={manual.popupTableBox}>
         <table border={1}>
           <thead>
             <tr>
@@ -135,15 +133,15 @@ const BeansPopupContent = () => (
 
 // Strength ポップアップコンポーネント
 const StrengthPopupContent = () => (
-  <div className={`${manual.edit__text} ${manual.text}`}>
-    <h2 className={`${manual.popup__title} ${manual.text}`}>
+  <div className={`${manual.editText} ${manual.text}`}>
+    <h2 className={`${manual.popupTitle} ${manual.text}`}>
       酸味とコクの強さについて
     </h2>
-    <h3 className={`${manual.popup__subTitle} ${manual.text}`}>
+    <h3 className={`${manual.popupSubTitle} ${manual.text}`}>
       酸味の強さとコクの強さの評価方法
     </h3>
-    <div className={manual.edit__strength__box}>
-      <div className={`${manual.edit__strength__img} ${manual.imgBox}`}>
+    <div className={manual.editStrengthBox}>
+      <div className={`${manual.editStrengthImg} ${manual.imgBox}`}>
         <Image
           src={"/images/png/strength.png"}
           alt={"Strengthの図"}
@@ -152,7 +150,7 @@ const StrengthPopupContent = () => (
           priority
         />
       </div>
-      <div className={`${manual.edit__strength__text} ${manual.text}`}>
+      <div className={`${manual.editStrengthText} ${manual.text}`}>
         <p>H2：最も強い</p>
         <p>H1：強い </p>
         <p>M ：標準 </p>
@@ -171,17 +169,17 @@ const EditListItem = ({
   popupContent,
   setShowPopup,
 }) => (
-  <li className={`${manual.edit__item} ${manual.item}`}>
+  <li className={`${manual.editItem} ${manual.item}`}>
     <span
-      className={`${manual.edit__number} ${manual.underBar} ${manual.text} ${manual.highlighting} ${manual.edit__text}`}
+      className={`${manual.editNumber} ${manual.underBar} ${manual.text} ${manual.highlighting} ${manual.editText}`}
     >
       {number}：{title}
     </span>
-    <span className={`${manual.edit__text} ${manual.text}`}>{description}</span>
+    <span className={`${manual.editText} ${manual.text}`}>{description}</span>
     {popupContent && (
-      <span className={manual.popup__box}>
+      <span className={manual.popupBox}>
         <button
-          className={`${manual.edit__btn} ${manual.popup__open}`}
+          className={`${manual.editBtn} ${manual.popupOpen}`}
           onClick={() => setShowPopup(true)}
           type="button"
         >
@@ -223,8 +221,8 @@ export function EditManualComponent() {
           <h2 className={manual.subTitle}>
             <span className={manual.fontYellow}>Create（Update）</span>
           </h2>
-          <div className={`${manual.edit__listBox} ${manual.listBox}`}>
-            <ul className={`${manual.edit__list} ${manual.list}`}>
+          <div className={`${manual.editListBox} ${manual.listBox}`}>
+            <ul className={`${manual.editList} ${manual.list}`}>
               <EditListItem
                 number="1"
                 title="Date"
@@ -250,7 +248,7 @@ export function EditManualComponent() {
                 title="Roast"
                 description={
                   <>
-                    <span className={`${manual.edit__text} ${manual.text}`}>
+                    <span className={`${manual.editText} ${manual.text}`}>
                       焙煎度の種類で、数字が大きいほど焙煎度が高いです。
                       <br />
                       焙煎度が最も低いのが
@@ -264,9 +262,9 @@ export function EditManualComponent() {
                       </span>
                       になります
                     </span>
-                    <span className={manual.popup__box}>
+                    <span className={manual.popupBox}>
                       <button
-                        className={`${manual.edit__btn} ${manual.popup__open}`}
+                        className={`${manual.editBtn} ${manual.popupOpen}`}
                         onClick={() => setShowBeansPopup(!showBeansPopup)}
                         type="button"
                       >
@@ -281,7 +279,7 @@ export function EditManualComponent() {
                 title="Aroma"
                 description={
                   <>
-                    <span className={`${manual.edit__text} ${manual.text}`}>
+                    <span className={`${manual.editText} ${manual.text}`}>
                       Aromaは、
                       <span className={manual.underBar}>
                         ｛Dry・Crust・Break｝
@@ -293,34 +291,34 @@ export function EditManualComponent() {
                       なお、ここでの点数は Total（Sub
                       Total）の点数には加算されない
                     </span>
-                    <ul className={manual.edit__aroma__list}>
-                      <li className={manual.edit__aroma__item}>
+                    <ul className={manual.editAromaList}>
+                      <li className={manual.editAromaItem}>
                         <span
-                          className={`${manual.edit__number} ${manual.underBar} ${manual.text} ${manual.edit__text}`}
+                          className={`${manual.editNumber} ${manual.underBar} ${manual.text} ${manual.editText}`}
                         >
                           Dry
                         </span>
-                        <span className={`${manual.edit__text} ${manual.text}`}>
+                        <span className={`${manual.editText} ${manual.text}`}>
                           粉の状態
                         </span>
                       </li>
-                      <li className={manual.edit__aroma__item}>
+                      <li className={manual.editAromaItem}>
                         <span
-                          className={`${manual.edit__number} ${manual.underBar} ${manual.text} ${manual.edit__text}`}
+                          className={`${manual.editNumber} ${manual.underBar} ${manual.text} ${manual.editText}`}
                         >
                           Crust
                         </span>
-                        <span className={`${manual.edit__text} ${manual.text}`}>
+                        <span className={`${manual.editText} ${manual.text}`}>
                           湯を注いだ直後
                         </span>
                       </li>
-                      <li className={manual.edit__aroma__item}>
+                      <li className={manual.editAromaItem}>
                         <span
-                          className={`${manual.edit__number} ${manual.underBar} ${manual.text} ${manual.edit__text}`}
+                          className={`${manual.editNumber} ${manual.underBar} ${manual.text} ${manual.editText}`}
                         >
                           Break
                         </span>
-                        <span className={`${manual.edit__text} ${manual.text}`}>
+                        <span className={`${manual.editText} ${manual.text}`}>
                           混ぜた後
                         </span>
                       </li>
@@ -332,15 +330,15 @@ export function EditManualComponent() {
                 number="7"
                 title="Defects"
                 description={
-                  <span className={`${manual.edit__text} ${manual.text}`}>
+                  <span className={`${manual.editText} ${manual.text}`}>
                     欠点・瑕疵があるかどうかを決める項目。
                     <br />
                     カッピングは通常５～６カップで１ロット（同じコーヒー豆）として考えるので、１カップに欠点・瑕疵があれば１となり６カップ中３カップ発見すれば３計算する（１カップにいくつも欠点・瑕疵を見つけても１とする）
                     発見したカップ（＃）、欠点・瑕疵の影響度レベル［１・２・３］（ｉ）、最後に定数である４を”計算式”に当てはめ算出する。
-                    <span className={manual.edit__text}>
-                      <span className={manual.popup__box}>
+                    <span className={manual.editText}>
+                      <span className={manual.popupBox}>
                         <button
-                          className={`${manual.edit__btn} ${manual.popup__open}`}
+                          className={`${manual.editBtn} ${manual.popupOpen}`}
                           onClick={() => setShowDefectPopup(!showDefectPopup)}
                           type="button"
                         >
@@ -367,20 +365,20 @@ export function EditManualComponent() {
                 description={
                   <>
                     {" "}
-                    <span className={`${manual.edit__text} ${manual.text}`}>
+                    <span className={`${manual.editText} ${manual.text}`}>
                       コーヒーの酸味の明るさ、爽やかさ、心地よさ。
                     </span>
-                    <span className={manual.edit__strength}>
+                    <span className={manual.editStrength}>
                       <span
-                        className={`${manual.edit__number} ${manual.fontYellow} ${manual.text} ${manual.edit__text}`}
+                        className={`${manual.editNumber} ${manual.fontYellow} ${manual.text} ${manual.editText}`}
                       >
                         Acidity Strength
                       </span>
-                      <span className={`${manual.edit__text} ${manual.text}`}>
+                      <span className={`${manual.editText} ${manual.text}`}>
                         &ensp;酸の強さ
-                        <span className={manual.popup__box}>
+                        <span className={manual.popupBox}>
                           <button
-                            className={`${manual.edit__btn} ${manual.popup__open}`}
+                            className={`${manual.editBtn} ${manual.popupOpen}`}
                             onClick={() =>
                               setShowStrengthPopup(!showStrengthPopup)
                             }
@@ -399,20 +397,20 @@ export function EditManualComponent() {
                 title="Mouthfeel"
                 description={
                   <>
-                    <span className={`${manual.edit__text} ${manual.text}`}>
+                    <span className={`${manual.editText} ${manual.text}`}>
                       コーヒーの口当たり、舌触り、重さ、滑らかさ。
                     </span>
-                    <span className={manual.edit__strength}>
+                    <span className={manual.editStrength}>
                       <span
-                        className={`${manual.edit__number} ${manual.fontYellow} ${manual.text} ${manual.edit__text}`}
+                        className={`${manual.editNumber} ${manual.fontYellow} ${manual.text} ${manual.editText}`}
                       >
                         Body Strength
                       </span>
-                      <span className={`${manual.edit__text} ${manual.text}`}>
+                      <span className={`${manual.editText} ${manual.text}`}>
                         &ensp;ボディ（コク）の強さ
-                        <span className={manual.popup__box}>
+                        <span className={manual.popupBox}>
                           <button
-                            className={`${manual.edit__btn} ${manual.popup__open}`}
+                            className={`${manual.editBtn} ${manual.popupOpen}`}
                             onClick={() =>
                               setShowStrengthPopup(!showStrengthPopup)
                             }
@@ -462,7 +460,7 @@ export function EditManualComponent() {
                 number="18"
                 title="Impression"
                 description={
-                  <span className={`${manual.edit__text} ${manual.text}`}>
+                  <span className={`${manual.editText} ${manual.text}`}>
                     具体的な味の印象を記入。フレーバーの表現もカッピングの重要な目的。
                     <br />
                     冷めていく過程で、味わいがどのように変化したかも都度メモしておくとよい
