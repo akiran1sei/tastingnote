@@ -183,7 +183,7 @@ export function SelectComponent({ params }) {
                 onClick={handleDeleteClick}
               >
                 <Image
-                  src="/images/delete_img.svg"
+                  src="/images/svg/delete_img.svg"
                   alt="削除"
                   width={48}
                   height={48}
@@ -198,7 +198,7 @@ export function SelectComponent({ params }) {
                 onClick={handleSearchClick}
               >
                 <Image
-                  src="/images/search_img.svg"
+                  src="/images/svg/search_img.svg"
                   alt="検索ボタン"
                   width={24}
                   height={24}
@@ -213,7 +213,7 @@ export function SelectComponent({ params }) {
                 onClick={handleExportClick}
               >
                 <Image
-                  src="/images/export_img.svg"
+                  src="/images/svg/export_img.svg"
                   alt="エクスポートボタン"
                   width={24}
                   height={24}
@@ -292,7 +292,7 @@ export function SelectComponent({ params }) {
                     className={styles.search__box__button}
                   >
                     <Image
-                      src="/images/search_img.svg"
+                      src="/images/svg/search_img.svg"
                       alt="検索ボタン"
                       width={24}
                       height={24}

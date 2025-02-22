@@ -55,7 +55,7 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>1</span>
-                  日付
+                  Date
                 </label>
               </div>
               <div className={styles.edit__data}>{browse.date}</div>
@@ -64,7 +64,7 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>2</span>
-                  グループ名
+                  Group Name
                 </label>
               </div>
               <div className={styles.edit__data}> {browse.groupname}</div>
@@ -73,7 +73,7 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>3</span>
-                  ユーザー
+                  User
                 </label>
               </div>
               <div className={styles.edit__data}>{concealName}</div>
@@ -82,7 +82,7 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>4</span>
-                  コーヒー豆
+                  Coffee
                 </label>
               </div>
               <div className={styles.edit__data}>{browse.coffee}</div>
@@ -95,7 +95,7 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>5</span>
-                  ロースト
+                  Roast
                 </label>
               </div>
               <div className={styles.edit__data}>
@@ -115,19 +115,23 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>6</span>
-                  アロマ
+                  Aroma
                 </label>
               </div>
               <div className={styles.edit__data}>
                 <div border="0" className={styles.edit__aroma}>
                   <div className={styles.edit__aroma__row}>
                     <div className={styles.edit__aroma__data__header}></div>
-                    <div className={styles.edit__aroma__data__header}>強さ</div>
-                    <div className={styles.edit__aroma__data__header}>質</div>
+                    <div className={styles.edit__aroma__data__header}>
+                      Strength
+                    </div>
+                    <div className={styles.edit__aroma__data__header}>
+                      Quality
+                    </div>
                   </div>
 
                   <div className={styles.edit__aroma__data}>
-                    <label>ドライ</label>
+                    <label>Dry</label>
 
                     <div className={styles.edit__aroma__data}>
                       {browse.aromaDryStrength}
@@ -138,7 +142,7 @@ export function BrowseComponent(context) {
                   </div>
 
                   <div className={styles.edit__aroma__data}>
-                    <label>クラスト</label>
+                    <label>Crust</label>
 
                     <div className={styles.edit__aroma__data}>
                       {browse.aromaCrustStrength}
@@ -149,7 +153,7 @@ export function BrowseComponent(context) {
                   </div>
 
                   <div className={styles.edit__aroma__data}>
-                    <label>ブレーク</label>
+                    <label>Break</label>
                     <div className={styles.edit__aroma__data}>
                       {browse.aromaBreakStrength}
                     </div>
@@ -185,10 +189,10 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>7</span>
-                  欠点・瑕疵
+                  Defects
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -208,10 +212,10 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>8</span>
-                  カップの綺麗さ
+                  Clean Cap
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -229,10 +233,10 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>9</span>
-                  甘さ
+                  Sweet
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -252,10 +256,10 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>10</span>
-                  酸の質
+                  Acidity
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -270,7 +274,7 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>10-1</span>
-                  酸の強さ
+                  Acidity Strength
                 </label>
               </div>
               <div className={styles.edit__data}>{browse.acidityStrength}</div>
@@ -279,7 +283,7 @@ export function BrowseComponent(context) {
                 <div className={styles.edit__strength}>
                   <div className={styles.edit__strength__img}>
                     <Image
-                      src={"/images/strength.png"}
+                      src={"/images/png/strength.png"}
                       alt={"Strengthの図"}
                       width={50}
                       height={100}
@@ -305,10 +309,10 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>11</span>
-                  口に含んだ質感
+                  Mouthfeel
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -324,7 +328,7 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>11-1</span>
-                  ボディの強さ
+                  Body Strength
                 </label>
               </div>
               <div className={styles.edit__data}>{browse.bodyStrength}</div>
@@ -332,7 +336,7 @@ export function BrowseComponent(context) {
                 <div className={styles.edit__strength}>
                   <div className={styles.edit__strength__img}>
                     <Image
-                      src={"/images/strength.png"}
+                      src={"/images/png/strength.png"}
                       alt={"Strengthの図"}
                       width={50}
                       height={100}
@@ -358,10 +362,10 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>12</span>
-                  フレーバー
+                  Flavor
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -379,10 +383,10 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>13</span>
-                  後味の印象度
+                  After
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -402,10 +406,10 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>14</span>
-                  バランス
+                  Balance
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -427,10 +431,10 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>15</span>
-                  総合評価
+                  Overall
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -458,7 +462,7 @@ export function BrowseComponent(context) {
                 <p className={styles.edit__point__text}>
                   <span className={styles.edit__item__mark}>
                     <Image
-                      src="/images/exclamation_img.svg"
+                      src="/images/svg/exclamation_img.svg"
                       alt="エクスクラメーションボタン"
                       width={24}
                       height={24}
@@ -489,7 +493,7 @@ export function BrowseComponent(context) {
               <div className={styles.edit__data__header}>
                 <label>
                   <span className={styles.edit__item__number}>18</span>
-                  味の印象度
+                  Impression
                 </label>
               </div>
               <div className={styles.edit__data}>{browse.impression}</div>

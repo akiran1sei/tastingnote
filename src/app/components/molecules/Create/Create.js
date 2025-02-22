@@ -68,21 +68,21 @@ export function BeansComponent(context) {
   function RoastArticle() {
     const NumberRoast = Number(roast);
     if (NumberRoast >= 0 && NumberRoast <= 15) {
-      return "ライト";
+      return "Light roast(ライト ロースト）";
     } else if (NumberRoast > 15 && NumberRoast <= 30) {
-      return "シナモン";
+      return "Cinnamon roast（シナモン）";
     } else if (NumberRoast > 30 && NumberRoast <= 45) {
-      return "ミディアム";
+      return "Medium roast（ミディアム）";
     } else if (NumberRoast > 45 && NumberRoast <= 60) {
-      return "ハイ";
+      return "High roast（ハイ）";
     } else if (NumberRoast > 60 && NumberRoast <= 75) {
-      return "シティ";
+      return "City roast（シティ）";
     } else if (NumberRoast > 75 && NumberRoast <= 90) {
-      return "フルシティ";
+      return "Full city roast（フルシティ）";
     } else if (NumberRoast > 90 && NumberRoast < 100) {
-      return "フレンチ";
+      return "French roast（フレンチ）";
     } else if (NumberRoast === 100) {
-      return "イタリアン";
+      return "Italian roast（イタリアン）";
     }
   }
 
@@ -188,7 +188,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label>
                     <span className={styles.edit__item__number}>1</span>
-                    日付
+                    Date
                   </label>
                 </div>
                 <div className={styles.edit__data}>{date}</div>
@@ -197,7 +197,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="group-name">
                     <span className={styles.edit__item__number}>2</span>
-                    グループ名
+                    Group Name
                   </label>
                 </div>
                 <div className={styles.edit__data}>
@@ -222,7 +222,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="username">
                     <span className={styles.edit__item__number}>3</span>
-                    ユーザー
+                    User
                   </label>
                 </div>
                 <div className={styles.edit__data}>
@@ -244,7 +244,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="coffee">
                     <span className={styles.edit__item__number}>4</span>
-                    コーヒー豆
+                    Coffee
                   </label>
                 </div>
                 <div className={styles.edit__data}>
@@ -271,7 +271,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="roast">
                     <span className={styles.edit__item__number}>5</span>
-                    ロースト
+                    Roast
                   </label>
                 </div>
                 <div className={`${styles.edit__data} ${styles.edit__roast}`}>
@@ -299,14 +299,14 @@ export function BeansComponent(context) {
                   </div>
 
                   <datalist id="roast_value">
-                    <option value="0">ライト</option>
-                    <option value="15">シナモン</option>
-                    <option value="30">ミディアム</option>
-                    <option value="45">ハイ</option>
-                    <option value="60">シティ</option>
-                    <option value="75">フルシティ</option>
-                    <option value="90">フレンチ</option>
-                    <option value="100">イタリアン</option>
+                    <option value="0">Light</option>
+                    <option value="15">Cinnamon</option>
+                    <option value="30">Medium</option>
+                    <option value="45">High</option>
+                    <option value="60">City</option>
+                    <option value="75">Full City</option>
+                    <option value="90">French</option>
+                    <option value="100">Italian</option>
                   </datalist>
                   <p className={styles.edit__output__value}>
                     <output>
@@ -336,7 +336,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label>
                     <span className={styles.edit__item__number}>6</span>
-                    アロマ
+                    Aroma
                   </label>
                 </div>
                 <div className={styles.edit__data}>
@@ -344,13 +344,15 @@ export function BeansComponent(context) {
                     <div className={styles.edit__aroma__row}>
                       <div className={styles.edit__aroma__data__header}></div>
                       <div className={styles.edit__aroma__data__header}>
-                        強さ
+                        Strength
                       </div>
-                      <div className={styles.edit__aroma__data__header}>質</div>
+                      <div className={styles.edit__aroma__data__header}>
+                        Quality
+                      </div>
                     </div>
 
                     <div className={styles.edit__aroma__data}>
-                      <label>ドライ</label>
+                      <label>Dry</label>
 
                       <div className={styles.edit__aroma__data}>
                         <select
@@ -391,7 +393,7 @@ export function BeansComponent(context) {
                     </div>
 
                     <div className={styles.edit__aroma__data}>
-                      <label>クラスト</label>
+                      <label>Crust</label>
 
                       <div className={styles.edit__aroma__data}>
                         <select
@@ -434,7 +436,7 @@ export function BeansComponent(context) {
                     </div>
 
                     <div className={styles.edit__aroma__data}>
-                      <label>ブレーク</label>
+                      <label>Break</label>
                       <div className={styles.edit__aroma__data}>
                         <select
                           name="aroma_break-strength"
@@ -502,10 +504,10 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="defects">
                     <span className={styles.edit__item__number}>7</span>
-                    欠点・瑕疵
+                    Defects
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -567,10 +569,10 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="cleancap">
                     <span className={styles.edit__item__number}>8</span>
-                    カップの綺麗さ
+                    Clean Cap
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -611,10 +613,10 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="sweet">
                     <span className={styles.edit__item__number}>9</span>
-                    甘さ
+                    Sweet
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -657,10 +659,10 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="acidity">
                     <span className={styles.edit__item__number}>10</span>
-                    酸の質
+                    Acidity
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -698,7 +700,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label>
                     <span className={styles.edit__item__number}>10-1</span>
-                    酸の強さ
+                    Acidity Strength
                   </label>
                 </div>
                 <div className={styles.edit__data}>
@@ -726,7 +728,7 @@ export function BeansComponent(context) {
                   <div className={styles.edit__strength}>
                     <div className={styles.edit__strength__img}>
                       <Image
-                        src={"/images/strength.png"}
+                        src={"/images/png/strength.png"}
                         alt={"Strengthの図"}
                         width={50}
                         height={100}
@@ -752,10 +754,10 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="mouthfeel">
                     <span className={styles.edit__item__number}>11</span>
-                    口に含んだ質感
+                    Mouthfeel
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -794,7 +796,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label>
                     <span className={styles.edit__item__number}>11-1</span>
-                    ボディの強さ
+                    Body Strength
                   </label>
                 </div>
                 <div className={styles.edit__data}>
@@ -823,7 +825,7 @@ export function BeansComponent(context) {
                   <div className={styles.edit__strength}>
                     <div className={styles.edit__strength__img}>
                       <Image
-                        src={"/images/strength.png"}
+                        src={"/images/png/strength.png"}
                         alt={"Strengthの図"}
                         width={50}
                         height={100}
@@ -850,10 +852,10 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="flavor">
                     <span className={styles.edit__item__number}>12</span>
-                    フレーバー
+                    Flavor
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -894,10 +896,10 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="after">
                     <span className={styles.edit__item__number}>13</span>
-                    後味の印象度
+                    After
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -940,10 +942,10 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="balance">
                     <span className={styles.edit__item__number}>14</span>
-                    バランス
+                    Balance
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -988,10 +990,10 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="overall">
                     <span className={styles.edit__item__number}>15</span>
-                    総合評価
+                    Overall
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -1034,7 +1036,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label>
                     <span className={styles.edit__item__number}>16</span>
-                    小計
+                    Sub Total
                   </label>
                 </div>
                 <div className={styles.edit__data}>
@@ -1054,7 +1056,7 @@ export function BeansComponent(context) {
                   <p className={styles.edit__point__text}>
                     <span className={styles.edit__item__mark}>
                       <Image
-                        src="/images/exclamation_img.svg"
+                        src="/images/svg/exclamation_img.svg"
                         alt="エクスクラメーションボタン"
                         width={24}
                         height={24}
@@ -1098,7 +1100,7 @@ export function BeansComponent(context) {
                 <div className={styles.edit__data__header}>
                   <label htmlFor="impression">
                     <span className={styles.edit__item__number}>18</span>
-                    味の印象度
+                    Impression
                   </label>
                 </div>
                 <div className={styles.edit__data}>

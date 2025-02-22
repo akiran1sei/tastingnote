@@ -1,7 +1,7 @@
 "use client";
 import { LoadingSkeleton } from "@/app/components/molecules/LoadingSkeleton/LoadingSkeleton";
 import { Uncertified } from "@/app/components/molecules/Uncertified/Uncertified";
-
+import { LoadingAnimation } from "@/app/components/items/loading-animation";
 import top from "@/app/styles/Top.module.css";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
@@ -67,7 +67,7 @@ export function TopComponent() {
         <div className={top.top__bg__wrap}>
           <Image
             className={top.top__img}
-            src="/images/tasting-img1540w.jpg"
+            src="/images/jpg/tasting-img1540w.jpg"
             alt="テイスティング中の画像"
             width={1540}
             height={1027}

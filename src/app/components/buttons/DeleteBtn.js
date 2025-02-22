@@ -32,7 +32,7 @@ export function DeleteBtn(context) {
     <>
       <button type="submit" onClick={handleSubmit} className={Buttons.icon_btn}>
         <Image
-          src="/images/delete_img.svg"
+          src="/images/svg/delete_img.svg"
           alt="削除ボタン"
           width={48}
           height={48}

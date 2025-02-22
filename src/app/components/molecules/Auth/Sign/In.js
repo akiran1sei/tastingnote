@@ -39,7 +39,8 @@ export function SignInComponent() {
       });
 
       if (sign_in.ok) {
-        return router.push(`/pages/profile/${userInfo}`);
+        return router.push(`/`);
+        // return router.push(`/pages/profile/${userInfo}`);
       }
       await setError("サインインに失敗しました。もう一度お試しください。");
 
@@ -113,7 +114,7 @@ export function SignInComponent() {
           <div className={styles.sign__btns}>
             <button onClick={signInWithGoogle} className={styles.sign__btn}>
               <Image
-                src={"../../images/web_light_sq_SI.svg"}
+                src={"../../images/svg/web_light_sq_SI.svg"}
                 alt="googleでログイン"
                 width={200}
                 height={50}

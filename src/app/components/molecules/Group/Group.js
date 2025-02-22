@@ -135,7 +135,7 @@ export function GroupComponent(context) {
                 <li className={styles.group__form__item}>
                   <form onSubmit={handleCreateSubmit}>
                     <h2 className={styles.group__form__title}>
-                      <label htmlFor="group-delete">Group Crate</label>
+                      <label htmlFor="group_create">Group Create</label>
                     </h2>
                     <input
                       name="group_create"

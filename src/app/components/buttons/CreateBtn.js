@@ -6,7 +6,7 @@ export function CreateBtn() {
   return (
     <button type="submit" className={Buttons.icon_btn}>
       <Image
-        src="/images/add_notes_img.svg"
+        src="/images/svg/add_notes_img.svg"
         alt="作成ボタン"
         width={24}
         height={24}

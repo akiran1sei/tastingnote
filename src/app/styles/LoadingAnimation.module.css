@@ -1,0 +1,112 @@
+.coffee {
+  width: 100%;
+  max-width: fit-content;
+  height: auto;
+  position: relative;
+}
+.dripper {
+  width: 100%;
+  max-width: max-content;
+  height: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.dripper__top {
+  width: 0;
+  height: 0;
+  border-left: 80px solid transparent;
+  border-right: 80px solid transparent;
+  border-top: 100px solid var(--color-gray); /* 色は自由に設定 */
+  border-radius: 15px;
+}
+.dripper__bottom {
+  width: 100%;
+  max-width: max-content;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.dripper__bottom_1 {
+  width: 140px;
+  height: 10px;
+  background: var(--color-gray);
+}
+.dripper__bottom_2 {
+  width: 60px;
+  height: 10px;
+  background: var(--color-gray);
+}
+.dripper__bottom_3 {
+  background: var(--color-gray);
+  width: 60px;
+  height: 20px;
+  position: absolute;
+  top: -10px;
+  border-radius: 15px 15px 0 0;
+}
+.drop {
+  width: 100%;
+  max-width: max-content;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, 0%);
+  animation: drip 1.5s linear infinite; /* アニメーションを調整 */
+}
+@keyframes drip {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, 30px); /* 移動距離を調整 */
+    opacity: 0;
+  }
+}
+.drop__top {
+  width: 0;
+  height: 0;
+  border-left: 8.5px solid transparent;
+  border-right: 8.5px solid transparent;
+  border-bottom: 20px solid #8b4513;
+  border-bottom-right-radius: 50%;
+  border-bottom-left-radius: 50%;
+
+  position: relative;
+  overflow: hidden; /* 光沢がはみ出さないように */
+}
+.drop__bottom {
+  width: 14px;
+  height: 8px;
+  border-radius: 50px;
+  background: #8b4513;
+  position: absolute;
+  bottom: -3px;
+}
+.shine {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5); /* 光沢の色と透明度 */
+  border-radius: 50%;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  transform: rotate(-30deg); /* 光沢の角度 */
+}

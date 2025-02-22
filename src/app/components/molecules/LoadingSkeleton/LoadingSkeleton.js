@@ -1,10 +1,9 @@
 import styles from "@/app/styles/Pages.module.css";
+import { LoadingAnimation } from "../../items/loading-animation";
 export function LoadingSkeleton() {
   return (
     <div className={styles.loading_page}>
-      <p className={styles.loading_txt}>
-        Loading<span className={styles.loading_point}>...</span>
-      </p>
+      <LoadingAnimation />
     </div>
   );
 }

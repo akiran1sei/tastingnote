@@ -21,7 +21,7 @@ export function HomeBtn() {
       onClick={() => navigateTo(`/pages/select`)}
     >
       <Image
-        src="/images/home_img.svg"
+        src="/images/svg/home_img.svg"
         alt="Homeボタン"
         width={24}
         height={24}
