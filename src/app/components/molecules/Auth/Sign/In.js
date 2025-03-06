@@ -14,6 +14,11 @@ export function SignInComponent() {
   const [userInfo, setUserInfo] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [guest, setGuest] = useState({
+    user: "guest",
+    email: "akira.application@gmail.com",
+    password: "1111",
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(""); // エラー状態の追加
   const router = useRouter();
@@ -61,7 +66,35 @@ export function SignInComponent() {
   //     return alert(error);
   //   }
   // };
+  const guestText = `ゲストモードで開始いたしますか。ゲストモードでは一部機能をご利用いただけませんので、あらかじめご了承ください。`;
 
+  const handleGuest = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+    try {
+      if (confirm(guestText)) {
+        const guest_in = await signIn("credentials", {
+          redirect: false,
+          email: guest.email,
+          password: guest.password,
+        });
+        if (guest_in.ok) {
+          return router.push(`/`);
+          // return router.push(`/pages/profile/${userInfo}`);
+        }
+        await setError("サインインに失敗しました。もう一度お試しください。");
+
+        return;
+      }
+    } catch (error) {
+      // 認証失敗時の処理
+      console.error("サインインエラー:", error);
+      setError("サインインに失敗しました。もう一度お試しください。");
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <div className={styles.sign__contents}>
       <div className={styles.sign__wrapper}>
@@ -98,6 +131,7 @@ export function SignInComponent() {
                   disabled={isLoading}
                 />
               </li>
+
               <li className={styles.sign__link}>
                 <Link href="/pages/auth/sign-up" className={styles.small__font}>
                   <span>新規登録</span>はこちらをクリック！
@@ -110,6 +144,13 @@ export function SignInComponent() {
               </button>
             </div>
           </form>
+          <div>
+            <div className={styles.sign__item}>
+              <form onSubmit={handleGuest} className={styles.sign__form}>
+                <button type="submit">Guestモードでサインイン！</button>
+              </form>
+            </div>
+          </div>
           {/* <hr className={styles.hr}></hr>
           <div className={styles.sign__btns}>
             <button onClick={signInWithGoogle} className={styles.sign__btn}>
