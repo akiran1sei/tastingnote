@@ -1801,6 +1801,28 @@ input[type="range"].select__input__roast {
   transform: translate(2px, 2px);
   color: var(--color-black);
 }
+.sign__guest {
+  color: var(--color-yellow);
+  border-bottom: 1px solid var(--color-yellow);
+}
+.sign__guest__arrow {
+  display: block;
+  margin-top: 0;
+  animation: arrow 1.5s linear infinite;
+}
+@keyframes arrow {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px); /* 移動距離を調整 */
+    opacity: 0;
+  }
+}
 @media screen and (min-width: 768px) {
   .sign__item {
     width: 100%;
@@ -1984,6 +2006,17 @@ input[type="range"].select__input__roast {
 .profile__save__btn {
   background: var(--color-yellow);
   color: var(--color-white);
+}
+.profile__guestText {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 2em;
+  color: var(--color-yellow);
+  padding: 1rem;
+  border-radius: 10px;
 }
 @media screen and (min-width: 768px) {
   .profile__contents {
