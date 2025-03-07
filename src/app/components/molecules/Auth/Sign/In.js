@@ -147,7 +147,13 @@ export function SignInComponent() {
           <div>
             <div className={styles.sign__item}>
               <form onSubmit={handleGuest} className={styles.sign__form}>
-                <button type="submit">Guestモードでサインイン！</button>
+                <p>
+                  お試しをご希望の場合は、下記をクリックしてください。
+                  <span className={styles.sign__guest__arrow}>↓</span>
+                </p>
+                <button type="submit" className={styles.sign__guest}>
+                  Guestモードでサインイン！
+                </button>
               </form>
             </div>
           </div>
