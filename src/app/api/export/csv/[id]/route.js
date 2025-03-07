@@ -8,9 +8,13 @@ export async function GET(request, response) {
   try {
     await connectDB();
     const idStrings = response.params.id.split(","); // IDをカンマで分割して配列にする
-    const beans = await BeansModel.find({
-      _id: { $in: idStrings },
-    }).lean();
+
+    const beans = await BeansModel.find(
+      {
+        _id: { $in: idStrings },
+      },
+      { userEmail: 0 }
+    ).lean();
     const fields = [
       "username",
       "coffee",
@@ -32,7 +36,6 @@ export async function GET(request, response) {
       "flavor",
       "after",
       "balance",
-      "memo",
       "overall",
       "impression",
       "result",
@@ -40,8 +43,9 @@ export async function GET(request, response) {
       "date",
       "groupname",
       "userEmail",
+      "memo",
     ];
-
+    console.log(beans);
     const opts = {
       fields,
       withBOM: true,

@@ -1985,6 +1985,17 @@ input[type="range"].select__input__roast {
   background: var(--color-yellow);
   color: var(--color-white);
 }
+.profile__guestText {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 2em;
+  color: var(--color-yellow);
+  padding: 1rem;
+  border-radius: 10px;
+}
 @media screen and (min-width: 768px) {
   .profile__contents {
     height: calc(100vh - 100px - 2rem);

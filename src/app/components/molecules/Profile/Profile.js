@@ -60,6 +60,7 @@ export function ProfileComponent() {
       }
     }
   };
+
   const handleAccountDelete = async () => {
     if (confirm("Account Delete？")) {
       if (confirm("作成したデータ全て削除しますがよろしいでしょうか？")) {
@@ -109,168 +110,183 @@ export function ProfileComponent() {
       <>
         <div className={styles.profile__contents}>
           <h1 className={styles.contents__title}>Profile</h1>
-          {/* {session && ( */}
-          <div className={styles.profile__card}>
-            <div
-              className={`${styles.profile__card__wrap} ${styles.profile__wrap}`}
-            >
-              <div
-                className={`${styles.profile__user__item} ${styles.profile__item}`}
-              >
-                <span
-                  className={`${styles.profile__item__title} ${styles.profile__title}`}
-                >
-                  username
-                </span>
-                <span
-                  className={`${styles.profile__item__value} ${styles.profile__value}`}
-                >
-                  {concealName}
-                </span>
-              </div>
-              <div
-                className={`${styles.profile__user__list} ${styles.profile__list}`}
-              >
-                <span
-                  className={`${styles.profile__item__title} ${styles.profile__title}`}
-                >
-                  email
-                </span>
-                <span
-                  className={`${styles.profile__item__value} ${styles.profile__value}`}
-                >
-                  {concealEmail}
-                </span>
+          {session.user.email === "akira.application@gmail.com" ? (
+            <div className={styles.profile__card}>
+              <div className={styles.profile__wrap}>
+                <p className={styles.profile__guestText}>
+                  ゲストモードでは、
+                  <br />
+                  プロフィールページは、
+                  <br />
+                  ご利用できません。
+                </p>
               </div>
             </div>
-
-            <div className={styles.profile__setting}>
+          ) : (
+            <div className={styles.profile__card}>
               <div
-                className={`${styles.profile__setting__wrap} ${styles.profile__wrap}`}
+                className={`${styles.profile__card__wrap} ${styles.profile__wrap}`}
               >
-                <form onSubmit={handleSubmit} className={styles.profile__form}>
-                  <div
-                    className={`${styles.profile__setting__item} ${styles.profile__item}`}
+                <div
+                  className={`${styles.profile__user__item} ${styles.profile__item}`}
+                >
+                  <span
+                    className={`${styles.profile__item__title} ${styles.profile__title}`}
                   >
-                    <label
-                      htmlFor="profile_name"
-                      className={`${styles.profile__setting__title} ${styles.profile__title}`}
-                    >
-                      usernameの編集
-                    </label>
-                    <span
-                      className={`${styles.profile__setting__value} ${styles.profile__value}`}
-                    >
-                      {concealName}
-                    </span>
-                    <span
-                      className={`${styles.profile__setting__value} ${styles.profile__value}`}
-                    >
-                      <input
-                        type="text"
-                        id="profile_name"
-                        className={styles.profile__setting__input}
-                        name="profile_name"
-                        placeholder="username"
-                        value={editUserName}
-                        onChange={(e) => setEditUserName(e.target.value)}
-                      />
-                    </span>
-                  </div>
-                  <div
-                    className={`${styles.profile__setting__item} ${styles.profile__item}`}
+                    username
+                  </span>
+                  <span
+                    className={`${styles.profile__item__value} ${styles.profile__value}`}
                   >
-                    <label
-                      htmlFor="profile_email"
-                      className={`${styles.profile__setting__title} ${styles.profile__title}`}
-                    >
-                      emailの編集
-                    </label>
-                    <span
-                      className={`${styles.profile__setting__value} ${styles.profile__value}`}
-                    >
-                      {concealEmail}
-                    </span>
-                    <span
-                      className={`${styles.profile__setting__value} ${styles.profile__value}`}
-                    >
-                      <input
-                        type="email"
-                        id="profile_email"
-                        className={styles.profile__setting__input}
-                        name="profile_email"
-                        placeholder="email"
-                        value={editUserEmail}
-                        onChange={(e) => setEditUserEmail(e.target.value)}
-                      />
-                    </span>
-                  </div>
-                  <div className={styles.profile__btn__item}>
-                    <button
-                      type="submit"
-                      className={`${styles.profile__btn} ${styles.profile__save__btn}`}
-                    >
-                      保存
-                    </button>
-                  </div>
-                </form>
-                <div className={styles.profile__btn__group}>
-                  <div
-                    className={`${styles.profile__btn__item} ${styles.profile__feedback}`}
+                    {concealName}
+                  </span>
+                </div>
+                <div
+                  className={`${styles.profile__user__list} ${styles.profile__list}`}
+                >
+                  <span
+                    className={`${styles.profile__item__title} ${styles.profile__title}`}
                   >
-                    <button
-                      className={`${styles.profile__btn} ${styles.profile__link__btn}`}
-                      type="button"
+                    email
+                  </span>
+                  <span
+                    className={`${styles.profile__item__value} ${styles.profile__value}`}
+                  >
+                    {concealEmail}
+                  </span>
+                </div>
+              </div>
+
+              <div className={styles.profile__setting}>
+                <div
+                  className={`${styles.profile__setting__wrap} ${styles.profile__wrap}`}
+                >
+                  <form
+                    onSubmit={handleSubmit}
+                    className={styles.profile__form}
+                  >
+                    <div
+                      className={`${styles.profile__setting__item} ${styles.profile__item}`}
                     >
-                      <Link
-                        href={
-                          "https://nakamoriakira-portfolio.vercel.app/pages/contact"
-                        }
-                        passHref
+                      <label
+                        htmlFor="profile_name"
+                        className={`${styles.profile__setting__title} ${styles.profile__title}`}
                       >
-                        お問い合わせページへ
-                      </Link>
-                    </button>
-                  </div>
-                  <div
-                    className={`${styles.profile__btn__item} ${styles.profile__manual}`}
-                  >
-                    <p className={styles.profile__manualText}>
-                      初めての方は、こちらをご覧ください。
-                      <span className={styles.profile__manualArrow}>↓</span>
-                    </p>
-                    <button
-                      className={`${styles.profile__btn} ${styles.profile__link__btn}`}
-                      type="button"
-                      onClick={() => navigateTo(`/pages/manual`)}
+                        usernameの編集
+                      </label>
+                      <span
+                        className={`${styles.profile__setting__value} ${styles.profile__value}`}
+                      >
+                        {concealName}
+                      </span>
+                      <span
+                        className={`${styles.profile__setting__value} ${styles.profile__value}`}
+                      >
+                        <input
+                          type="text"
+                          id="profile_name"
+                          className={styles.profile__setting__input}
+                          name="profile_name"
+                          placeholder="username"
+                          value={editUserName}
+                          onChange={(e) => setEditUserName(e.target.value)}
+                        />
+                      </span>
+                    </div>
+                    <div
+                      className={`${styles.profile__setting__item} ${styles.profile__item}`}
                     >
-                      Manual
-                    </button>
-                  </div>
-                  <div
-                    className={`${styles.profile__btn__item} ${styles.profile__delete}`}
-                  >
-                    <span className={styles.caution__text}>
-                      ～こちらの退会について～
-                      <br />
-                      退会されますとこのアカウントで
-                      <br />
-                      作成されたデータが全て削除されます。
-                    </span>
-                    <button
-                      className={`${styles.profile__btn} ${styles.profile__delete__btn}`}
-                      type="button"
-                      onClick={handleAccountDelete}
-                      disabled={isAccount}
+                      <label
+                        htmlFor="profile_email"
+                        className={`${styles.profile__setting__title} ${styles.profile__title}`}
+                      >
+                        emailの編集
+                      </label>
+                      <span
+                        className={`${styles.profile__setting__value} ${styles.profile__value}`}
+                      >
+                        {concealEmail}
+                      </span>
+                      <span
+                        className={`${styles.profile__setting__value} ${styles.profile__value}`}
+                      >
+                        <input
+                          type="email"
+                          id="profile_email"
+                          className={styles.profile__setting__input}
+                          name="profile_email"
+                          placeholder="email"
+                          value={editUserEmail}
+                          onChange={(e) => setEditUserEmail(e.target.value)}
+                        />
+                      </span>
+                    </div>
+                    <div className={styles.profile__btn__item}>
+                      <button
+                        type="submit"
+                        className={`${styles.profile__btn} ${styles.profile__save__btn}`}
+                      >
+                        保存
+                      </button>
+                    </div>
+                  </form>
+                  <div className={styles.profile__btn__group}>
+                    <div
+                      className={`${styles.profile__btn__item} ${styles.profile__feedback}`}
                     >
-                      {isLoggingOut ? "アカウント削除中.." : "退会"}
-                    </button>
+                      <button
+                        className={`${styles.profile__btn} ${styles.profile__link__btn}`}
+                        type="button"
+                      >
+                        <Link
+                          href={
+                            "https://nakamoriakira-portfolio.vercel.app/pages/contact"
+                          }
+                          passHref
+                        >
+                          お問い合わせページへ
+                        </Link>
+                      </button>
+                    </div>
+                    <div
+                      className={`${styles.profile__btn__item} ${styles.profile__manual}`}
+                    >
+                      <p className={styles.profile__manualText}>
+                        初めての方は、こちらをご覧ください。
+                        <span className={styles.profile__manualArrow}>↓</span>
+                      </p>
+                      <button
+                        className={`${styles.profile__btn} ${styles.profile__link__btn}`}
+                        type="button"
+                        onClick={() => navigateTo(`/pages/manual`)}
+                      >
+                        Manual
+                      </button>
+                    </div>
+                    <div
+                      className={`${styles.profile__btn__item} ${styles.profile__delete}`}
+                    >
+                      <span className={styles.caution__text}>
+                        ～こちらの退会について～
+                        <br />
+                        退会されますとこのアカウントで
+                        <br />
+                        作成されたデータが全て削除されます。
+                      </span>
+                      <button
+                        className={`${styles.profile__btn} ${styles.profile__delete__btn}`}
+                        type="button"
+                        onClick={handleAccountDelete}
+                        disabled={isAccount}
+                      >
+                        {isLoggingOut ? "アカウント削除中.." : "退会"}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          {/* )} */}
+          )}
         </div>
       </>
     );

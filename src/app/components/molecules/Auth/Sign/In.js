@@ -66,7 +66,7 @@ export function SignInComponent() {
   //     return alert(error);
   //   }
   // };
-  const guestText = `ゲストモードで開始いたしますか。ゲストモードでは一部機能をご利用いただけませんので、あらかじめご了承ください。`;
+  const guestText = `ゲストモードで開始いたしますか？ゲストモードでは一部機能をご利用いただけませんので、あらかじめご了承ください。あと、ゲストモードでは、他の人のデータも格納されている場合がありますので、お気を付けください。`;
 
   const handleGuest = async (e) => {
     e.preventDefault();
