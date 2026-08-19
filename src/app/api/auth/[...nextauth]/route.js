@@ -22,18 +22,25 @@ const handler = NextAuth({
         await connectDB();
 
         const user = await UserModel.findOne({ email: credentials.email });
+        if (!user) {
+          return null;
+          // ※必要であれば throw new Error("ユーザーが見つかりません") にすると、
+          // フロントエンド側でエラーメッセージとして表示しやすくなります。
+        }
+
+        // ユーザーが存在することが確定したので、安全にパスワードを比較できる
         const user_boolean = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.password,
         );
 
-        // If no error and we have user data, return it
         if (user_boolean) {
           return user;
         }
-        // Return null if user data could not be retrieved
         return null;
       },
+
+      // If no error and we have user data, return it
     }),
 
     GoogleProvider({

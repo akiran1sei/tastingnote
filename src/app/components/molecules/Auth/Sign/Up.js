@@ -3,34 +3,43 @@ import styles from "@/app/styles/Pages.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import dotenv from "dotenv";
+// ❌ import dotenv from "dotenv"; <- これは削除しました
+
 export function SignUpComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  dotenv.config();
+
+  // ❌ dotenv.config(); <- これも削除しました
   const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/auth/sign-up`,
-        {
-          method: "POST",
-          headers: { "Cache-Control": "no-store" },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
-        }
-      );
+      // 💡 修正: ドメイン部分を消し、相対パス（/api/...）にしました
+      const res = await fetch("/api/auth/sign-up", {
+        method: "POST",
+        headers: { "Cache-Control": "no-store" },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
 
+      // APIからのレスポンスをJSONとして受け取る
       const data = await res.json();
+
+      // レスポンスのステータスが正常(200番台)でない場合はエラーにする
+      if (!res.ok) {
+        throw new Error(data.message || "サインアップに失敗しました");
+      }
+
       alert(data.message);
       router.replace("/");
     } catch (error) {
       alert(error.message);
     }
   };
+
   return (
     <div className={styles.sign__contents}>
       <div className={styles.sign__wrapper}>
@@ -65,11 +74,9 @@ export function SignUpComponent() {
                 />
               </li>
             </ul>
-            {/* <div className={styles.sign__btn}> */}
             <button type="submit" className={styles.sign__submit}>
               Submit
             </button>
-            {/* </div> */}
           </form>
         </div>
         <p className={styles.sign__link}>

@@ -2,14 +2,24 @@ import connectDB from "@/app/utils/database";
 import { BeansModel } from "@/app/utils/schemaModels";
 import { NextResponse } from "next/server";
 
-export async function GET(req, res) {
+// 💡 1. 第2引数を res ではなく { params } で受け取ります
+export async function GET(req, { params }) {
   try {
     await connectDB();
-    const response = res.params.user;
-    console.log(Boolean(response[1]));
-    if (response[1] === "undefined" || !response[1]) {
+
+    // 💡 2. params を await して解決してから中身を取り出します
+    const resolvedParams = await params;
+    const userArgs = resolvedParams.user; // これが配列になります
+
+    // 変数に分けておくと、この後のコードがスッキリしてバグが減ります
+    const email = userArgs[0];
+    const groupName = userArgs[1];
+
+    console.log("groupNameがあるか:", Boolean(groupName));
+
+    if (groupName === "undefined" || !groupName) {
       const allItems = await BeansModel.find({
-        userEmail: response,
+        userEmail: email, // 💡 3. 配列そのものではなく email (userArgs[0]) を渡す
       })
         .sort({ createdAt: 1 })
         .limit(100)
@@ -22,8 +32,8 @@ export async function GET(req, res) {
       });
     } else {
       const allItems = await BeansModel.find({
-        userEmail: response[0],
-        groupname: response[1],
+        userEmail: email,
+        groupname: groupName,
       })
         .sort({ createdAt: 1 })
         .limit(100)
@@ -36,9 +46,13 @@ export async function GET(req, res) {
       });
     }
   } catch (err) {
-    return NextResponse.json({
-      message: "読み取り失敗（オール）",
-      status: 500,
-    });
+    console.error(err); // デバッグ用にエラーを出力しておくと安心です
+    return NextResponse.json(
+      {
+        message: "読み取り失敗（オール）",
+        status: 500,
+      },
+      { status: 500 },
+    ); // ※エラー時はHTTPステータスコードも500にするのがベターです
   }
 }
