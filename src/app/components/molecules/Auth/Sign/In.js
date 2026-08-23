@@ -4,11 +4,13 @@ import styles from "@/app/styles/Pages.module.css";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import dotenv from "dotenv";
+// ❌ import dotenv from "dotenv"; <- 削除しました
 
 import { useSession, signIn } from "next-auth/react";
 import Image from "next/image";
-dotenv.config();
+
+// ❌ dotenv.config(); <- 削除しました
+
 export function SignInComponent() {
   const { data: session, status } = useSession();
   const [userInfo, setUserInfo] = useState(null);
@@ -22,15 +24,16 @@ export function SignInComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(""); // エラー状態の追加
   const router = useRouter();
+
   useEffect(() => {
     if (status === "authenticated" && session) {
       setUserInfo(session.user);
-
       setIsLoading(false);
     } else if (status === "unauthenticated") {
       setIsLoading(false);
     }
   }, [session, status]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -58,14 +61,7 @@ export function SignInComponent() {
       setIsLoading(false);
     }
   };
-  // const signInWithGoogle = async () => {
-  //   try {
-  //     await signIn("google", { callbackUrl: "/" });
-  //   } catch (error) {
-  //     setError("サインインに失敗しました。");
-  //     return alert(error);
-  //   }
-  // };
+
   const guestText = `ゲストモードで開始いたしますか？ゲストモードでは一部機能をご利用いただけませんので、あらかじめご了承ください。あと、ゲストモードでは、他の人のデータも格納されている場合がありますので、お気を付けください。`;
 
   const handleGuest = async (e) => {
@@ -95,6 +91,7 @@ export function SignInComponent() {
       setIsLoading(false);
     }
   };
+
   return (
     <div className={styles.sign__contents}>
       <div className={styles.sign__wrapper}>
@@ -157,17 +154,6 @@ export function SignInComponent() {
               </form>
             </div>
           </div>
-          {/* <hr className={styles.hr}></hr>
-          <div className={styles.sign__btns}>
-            <button onClick={signInWithGoogle} className={styles.sign__btn}>
-              <Image
-                src={"../../images/svg/web_light_sq_SI.svg"}
-                alt="googleでログイン"
-                width={200}
-                height={50}
-              />
-            </button>
-          </div> */}
         </div>
       </div>
     </div>
